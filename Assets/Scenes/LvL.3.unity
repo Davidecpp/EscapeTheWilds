@@ -1470,6 +1470,10 @@ PrefabInstance:
       propertyPath: healthContainer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2554738985227592822, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
+      propertyPath: jumpHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2783944046803227670, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -190.4

@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour
 
                 if (hit.collider.CompareTag("JumpPlatform"))
                 {
-                    _vertSpeed = _playerStats.jumpSpeed * bounceStrenght; 
+                    _vertSpeed = _playerStats.jumpHeight * bounceStrenght; 
                 }
                 else
                 {
@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump") && !hit.collider.CompareTag("JumpPlatform"))
             {
-                _vertSpeed = _playerStats.jumpSpeed;
+                _vertSpeed = _playerStats.jumpHeight;
             }
         }
         else
