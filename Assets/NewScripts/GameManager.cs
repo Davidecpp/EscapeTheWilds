@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         
         if (_playerStats.health <= 0)
         {
+            Cursor.lockState = CursorLockMode.None; 
+            Cursor.visible = true;
             gameOver.SetActive(true);
             Time.timeScale = 0;
         }
@@ -153,6 +155,8 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true; 
         win.SetActive(true);
         //Time.timeScale = 0;
     }
