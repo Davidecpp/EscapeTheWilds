@@ -217,7 +217,7 @@ public class Movement : MonoBehaviour
             _currentMoveSpeed = baseSpeed; 
         }
 
-        Debug.Log(_currentMoveSpeed);
+        //Debug.Log(_currentMoveSpeed); // show speed
     }
     
     void ShootProjectile()
