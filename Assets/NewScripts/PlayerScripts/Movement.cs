@@ -65,6 +65,11 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            Debug.LogError("Target not assigned!");
+            return;
+        }
         bool hitGround = false;
         RaycastHit hit = new RaycastHit(); 
         if (_vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
@@ -119,15 +124,16 @@ public class Movement : MonoBehaviour
         {
             if (_characterController.isGrounded)
             {
-                if (Vector3.Dot(movement, _controllerCollider.normal) < 0)
+                if (_controllerCollider != null && Vector3.Dot(movement, _controllerCollider.normal) < 0)
                 {
                     movement = _controllerCollider.normal * _currentMoveSpeed;
                 }
-                else
+                else if (_controllerCollider != null)
                 {
                     movement += _controllerCollider.normal * _currentMoveSpeed;
                 }
             }
+
             _vertSpeed += _gravity * 5 * Time.deltaTime;
             if (_vertSpeed < _terminalVelocity)
             {
@@ -154,7 +160,6 @@ public class Movement : MonoBehaviour
             StartCoroutine(ResetSpeedAfterDelay(duration)); 
         }
     }
-
 
     private IEnumerator ResetSpeedAfterDelay(float duration)
     {
