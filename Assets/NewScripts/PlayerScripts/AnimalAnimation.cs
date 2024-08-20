@@ -6,41 +6,56 @@ using UnityEngine.InputSystem;
 public class AnimalAnimation : MonoBehaviour
 {
     private Animator _animator;
-    // Start is called before the first frame update
+    private bool isJumping = false;
+    private CharacterController _characterController;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_animator != null)
         {
-            if (Input.GetKey(KeyCode.Space)&& Input.GetKey(KeyCode.W))
+            bool isWalking = Input.GetKey(KeyCode.W);
+            bool isRunning = isWalking && Input.GetKey(KeyCode.LeftShift);
+            bool jumpKeyPressed = Input.GetKeyDown(KeyCode.Space);
+
+            // Salto
+            if (jumpKeyPressed && !isJumping)
             {
-                _animator.SetTrigger("TrFly");
+                _animator.SetTrigger("TrJump");
+                isJumping = true;
                 Debug.Log("Jump");
             }
-            else if (Input.GetKey(KeyCode.Space))
+
+            // Corsa
+            if (isRunning)
             {
-                _animator.SetTrigger("TrFly");
-                Debug.Log("Jump");
+                _animator.SetBool("IsRunning", true);
+                _animator.SetBool("IsWalking", false);
             }
-            else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+            // Camminata
+            else if (isWalking)
             {
-                _animator.SetTrigger("TrRun");
-            }
-            else if (Input.GetKey(KeyCode.W))
-            {
-                _animator.SetTrigger("TrWalk");
+                _animator.SetBool("IsWalking", true);
+                _animator.SetBool("IsRunning", false);
             }
             else
             {
-                _animator.SetTrigger("TrIdle");
-                
+                _animator.SetBool("IsWalking", false);
+                _animator.SetBool("IsRunning", false);
+                _animator.SetBool("IsIdling", true);
             }
+
         }
     }
-    
+
+    // Metodo per gestire la fine del salto (chiama questo metodo dall'animazione)
+    public void OnJumpComplete()
+    {
+        isJumping = false;
+    }
 }
