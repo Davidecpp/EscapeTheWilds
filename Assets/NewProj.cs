@@ -25,7 +25,7 @@ public class NewProj : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject, 2.0f);
+            Destroy(gameObject, 1.5f);
         }
     }
 }
