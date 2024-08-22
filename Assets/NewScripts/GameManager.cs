@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(invincible);
         CheckWin();
         PopUpWindows();
     }
