@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class AnimalAnimation : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
     }
 
-    void Update()
+    /*void Update()
     {
         if (_animator != null)
         {
@@ -36,12 +37,14 @@ public class AnimalAnimation : MonoBehaviour
             {
                 _animator.SetBool("IsRunning", true);
                 _animator.SetBool("IsWalking", false);
+                _animator.SetBool("IsIdling", false);
             }
             // Camminata
             else if (isWalking)
             {
                 _animator.SetBool("IsWalking", true);
                 _animator.SetBool("IsRunning", false);
+                _animator.SetBool("IsIdling", false);
             }
             else
             {
@@ -50,6 +53,36 @@ public class AnimalAnimation : MonoBehaviour
                 _animator.SetBool("IsIdling", true);
             }
 
+        }
+    }*/
+
+    private void Update()
+    {
+        if (_animator != null)
+        {
+            bool isWalking = Input.GetKey(KeyCode.W);
+            bool jumpKeyPressed = Input.GetKeyDown(KeyCode.Space);
+            
+            _animator.SetBool("IsIdling", true);
+            _animator.SetBool("IsWalking", false);
+
+            /*if (isWalking && jumpKeyPressed) //solo questo funziona per saltare camminando
+            {
+                _animator.SetTrigger("TrJump");
+            }*/
+            
+            
+            if (jumpKeyPressed)
+            {
+                _animator.SetBool("IsWalking", false);
+                _animator.SetTrigger("TrJump");
+            }
+            if (isWalking)
+            {
+                _animator.SetBool("IsIdling", false);
+                _animator.SetBool("IsWalking", true);
+            }
+            
         }
     }
 
