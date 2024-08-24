@@ -193,6 +193,10 @@ PrefabInstance:
       value: Snake
       objectReference: {fileID: 0}
     - target: {fileID: 6906273193383734593, guid: 00b846e946ba882469fe5c2c6218fdc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906273193383734593, guid: 00b846e946ba882469fe5c2c6218fdc7, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -911,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &385981925
 Transform:
   m_ObjectHideFlags: 0
@@ -7661,7 +7665,7 @@ PrefabInstance:
     - target: {fileID: 8663665641832168522, guid: 00b846e946ba882469fe5c2c6218fdc7, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1311446827}
+      objectReference: {fileID: 56200613}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

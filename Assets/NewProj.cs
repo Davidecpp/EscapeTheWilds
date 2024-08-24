@@ -8,6 +8,8 @@ public class NewProj : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Projectile hit: " + collision.gameObject.name); 
+        // hit particles
+        Instantiate(hitParticles, transform.position, transform.rotation);
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -17,15 +19,11 @@ public class NewProj : MonoBehaviour
             {
                 enemyHealth.TakeDamage(damage);
             }
-
-            // hit particles
-            Instantiate(hitParticles, transform.position, transform.rotation);
-
             Destroy(gameObject); 
         }
         else
         {
-            Destroy(gameObject, 1.5f);
+            Destroy(gameObject, 1f);
         }
     }
 }
