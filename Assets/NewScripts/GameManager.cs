@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private Inventory _inventory;
 
-    public bool invincible;
+    public bool invincible = false;
 
     private void Awake()
     {
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(invincible);
+        //Debug.Log(invincible);
         CheckWin();
         PopUpWindows();
     }

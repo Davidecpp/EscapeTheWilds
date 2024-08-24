@@ -6,6 +6,7 @@ public class Star : MonoBehaviour, IInteractible
 {
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
+    public float time;
 
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
@@ -13,10 +14,12 @@ public class Star : MonoBehaviour, IInteractible
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Star picked");
-        StartCoroutine(MakeInvincibleForSeconds(3f));
+        StartCoroutine(MakeInvincibleForSeconds(time));
         if (shouldDisappear)
         {
-            Destroy(gameObject);
+            GetComponent<Renderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+            Destroy(gameObject, time + 0.1f);
         }
 
         return true;
@@ -25,7 +28,10 @@ public class Star : MonoBehaviour, IInteractible
     private IEnumerator MakeInvincibleForSeconds(float seconds)
     {
         GameManager.Instance.invincible = true;
+        Debug.Log("Invincibility started");
         yield return new WaitForSeconds(seconds); 
         GameManager.Instance.invincible = false;
+        Debug.Log("Invincibility ended");
     }
+
 }
