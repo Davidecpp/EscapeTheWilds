@@ -6,6 +6,7 @@ public class Star : MonoBehaviour, IInteractible
 {
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
+    [SerializeField] private ParticleSystem particles;
     public float time;
 
     public string InteractionPrompt => prompt;
@@ -17,6 +18,7 @@ public class Star : MonoBehaviour, IInteractible
         StartCoroutine(MakeInvincibleForSeconds(time));
         if (shouldDisappear)
         {
+            particles.gameObject.SetActive(false);
             GetComponent<Renderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
             Destroy(gameObject, time + 0.1f);

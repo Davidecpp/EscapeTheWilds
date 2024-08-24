@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private ParticleSystem sandParticles;
     [SerializeField] private ParticleSystem waterParticles;
+    [SerializeField] private ParticleSystem invincibleParticles;
+    [SerializeField] private ParticleSystem healParticles;
 
     public float _rotSpeed = 15.0f;
     private float _slowSpeed;
@@ -60,6 +62,7 @@ public class Movement : MonoBehaviour
         _slowSpeed = _playerStats.moveSpeed / 2;
         _slowedSprintSpeed = _playerStats.runSpeed / 2;
         sandParticles.Stop();
+        healParticles.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -149,6 +152,32 @@ public class Movement : MonoBehaviour
         movement.y = _vertSpeed;
         movement *= Time.deltaTime;
         _characterController.Move(movement);
+
+        ShowEffects();
+    }
+
+    private void ShowEffects()
+    {
+        if (GameManager.Instance.invincible)
+        {
+            invincibleParticles.gameObject.SetActive(true);
+        }
+        else
+        {
+            invincibleParticles.gameObject.SetActive(false);
+        }
+        if (GameManager.Instance.healing)
+        {
+            StartCoroutine(HealEffect(1f));
+        }
+    }
+
+    private IEnumerator HealEffect(float seconds)
+    {
+        healParticles.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds); 
+        healParticles.gameObject.SetActive(false);
+        GameManager.Instance.healing = false;
     }
     
     public void BoostSpeed(float duration)
