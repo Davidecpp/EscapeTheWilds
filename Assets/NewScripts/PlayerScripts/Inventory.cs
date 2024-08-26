@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
 
     private int _strawberryCount;
     [SerializeField] private TextMeshProUGUI strawberryCounterText;
+    
+    private int _coinCount;
+    [SerializeField] private TextMeshProUGUI coinCounterText;
 
     private void Update()
     {
@@ -36,6 +39,28 @@ public class Inventory : MonoBehaviour
         {
             Debug.LogError("RawImage reference is not set.");
         }
+    }
+
+    public void AddCoin()
+    {
+        _coinCount++;
+        UpdateCoinCounter();
+    }
+
+    private void UpdateCoinCounter()
+    {
+        if (coinCounterText != null)
+        {
+            coinCounterText.text = "x " + _coinCount;
+        }
+        else
+        {
+            Debug.LogError("Coin Counter Text reference is not set.");
+        }
+    }
+    public int GetCoinCount()
+    {
+        return _coinCount;
     }
 
     public void AddStrawberry()

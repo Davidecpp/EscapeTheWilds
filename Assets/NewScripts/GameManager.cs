@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public bool invincible = false;
     public bool healing = false;
+    public int coins = 0;
 
     private void Awake()
     {
@@ -66,8 +67,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(invincible);
-        Debug.Log(healing);
         CheckWin();
         PopUpWindows();
     }
