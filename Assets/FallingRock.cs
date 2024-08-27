@@ -14,7 +14,6 @@ public class FallingRock : MonoBehaviour
 
     void Update()
     {
-        // Puoi usare un trigger o un timer per far cadere il masso.
     }
 
     public void DropRock()
@@ -27,7 +26,6 @@ public class FallingRock : MonoBehaviour
     {
         if (hasFallen)
         {
-            // Aggiungi qui effetti sonori o particelle per l'impatto
             Debug.Log("Il masso ha colpito " + collision.gameObject.name);
             Instantiate(particles, transform.position, transform.rotation);
             if (collision.gameObject.CompareTag("Player"))
