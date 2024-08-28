@@ -2571,7 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   moveSpeed: 6
-  jumpHeight: 5
+  jumpHeight: 10
   runSpeed: 10
 --- !u!114 &6434007115306558789
 MonoBehaviour:
