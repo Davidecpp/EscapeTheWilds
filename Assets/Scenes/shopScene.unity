@@ -1644,6 +1644,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a25279adcb1931b468c00b7ffc017263, type: 2}
   - {fileID: 11400000, guid: 2f11656da821acb47af82386a7b0df6d, type: 2}
   - {fileID: 11400000, guid: 21df13ff37fab964ba633e6c6525c388, type: 2}
+  - {fileID: 11400000, guid: 0fe9eb3388332a844b42eaa4407da5cd, type: 2}
   - {fileID: 11400000, guid: 7864c6a6022fa3b478a6817c38ba5462, type: 2}
   shopPanels:
   - {fileID: 2104760210}
@@ -1670,11 +1671,11 @@ MonoBehaviour:
   - {fileID: 732360545}
   - {fileID: 2126413557}
   - {fileID: 1321738467}
+  - {fileID: 187430068}
   - {fileID: 982791933}
   - {fileID: 1929603092}
   - {fileID: 1597642934}
   - {fileID: 1760879200}
-  - {fileID: 187430068}
 --- !u!1 &1185207897 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1769461799417984366, guid: b0213a48b0df0514f8845dc5a2d96cc1, type: 3}

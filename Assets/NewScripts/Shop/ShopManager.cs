@@ -30,7 +30,6 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     
     // verifica se puoi acquistare gli oggetti
@@ -72,6 +71,7 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopPanels[i].titleTxt.text = shopItems[i].title;
+            shopPanels[i].itemImage.sprite = shopItems[i].itemImage;
             shopPanels[i].descriptionTxt.text = shopItems[i].description;
             shopPanels[i].costTxt.text = "Coins: " + shopItems[i].cost.ToString();
         }
