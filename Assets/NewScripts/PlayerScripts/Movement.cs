@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
@@ -41,7 +42,8 @@ public class Movement : MonoBehaviour
     // projectile
     [SerializeField] private float timer = 5;
     private float _bulletTime;
-    public GameObject enemyBullet;
+    public GameObject bullet;
+    public GameObject fireBullet;
     public Transform spawnPoint;
     public float bulletSpeed = 10.0f;
     private float _slowedSprintSpeed;
@@ -256,7 +258,7 @@ public class Movement : MonoBehaviour
     
     void ShootProjectile()
     {
-        GameObject bullet = Instantiate(enemyBullet, spawnPoint.position, spawnPoint.rotation);
+        GameObject bullet = Instantiate(this.bullet, spawnPoint.position, spawnPoint.rotation);
         Rigidbody bulletRig = bullet.GetComponent<Rigidbody>();
 
         if (bulletRig != null)
@@ -264,10 +266,7 @@ public class Movement : MonoBehaviour
             bulletRig.AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
             bulletRig.angularVelocity = new Vector3(0, 90, 90);
         }
-        else
-        {
-            Debug.LogError("The instantiated bullet does not have a Rigidbody component.");
-        }
+        
         Destroy(bullet, 2.0f);
     }
 
