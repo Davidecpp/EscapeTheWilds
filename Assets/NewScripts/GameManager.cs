@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOver, boost, win, tutorial, skills, canvas;
+    
     public RawImage heartPrefab; 
     public Transform heartsContainer; 
     public static GameManager Instance { get; private set; }
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float flashDuration = 0.1f;
 
     [SerializeField] private int winCondition;
+    public int laps = 0;
+    public int totLaps;
+    public TMP_Text lapsTxt;
     
     private List<RawImage> _hearts = new List<RawImage>();
 
@@ -69,6 +73,12 @@ public class GameManager : MonoBehaviour
     {
         CheckWin();
         PopUpWindows();
+        UpdateLap();
+    }
+
+    private void UpdateLap()
+    {
+        lapsTxt.text = laps + "/" + totLaps;
     }
 
     private void SetStartActivation()
@@ -103,7 +113,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    
+    // inizializza vita personaggio
     private void InitializeHearts()
     {
         for (int i = 0; i < _playerStats.health; i++)
@@ -153,6 +164,11 @@ public class GameManager : MonoBehaviour
         {
             WinGame();
         }
+
+        if (laps == totLaps)
+        {
+            WinGame();
+        }
     }
 
     public void WinGame()
@@ -193,7 +209,8 @@ public class GameManager : MonoBehaviour
             StartCoroutine(ShowBoostCoroutine(duration));
         }
     }
-
+    
+    // effetto boost
     private IEnumerator ShowBoostCoroutine(float duration)
     {
         BoostText.gameObject.SetActive(true);
@@ -206,7 +223,8 @@ public class GameManager : MonoBehaviour
             boost.gameObject.SetActive(false);
         }
     }
-
+    
+    // effetto danno
     private IEnumerator FlashRed()
     {
         if (redFlashImage != null)

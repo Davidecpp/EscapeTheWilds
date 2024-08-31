@@ -7,6 +7,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Transform target;
+    
+    // particelle
     [SerializeField] private ParticleSystem sandParticles;
     [SerializeField] private ParticleSystem waterParticles;
     [SerializeField] private ParticleSystem invincibleParticles;
@@ -228,7 +230,7 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
+    
     void UpdateMovementSpeed()
     {
         float baseSpeed;
@@ -250,8 +252,6 @@ public class Movement : MonoBehaviour
         {
             _currentMoveSpeed = baseSpeed; 
         }
-
-        //Debug.Log(_currentMoveSpeed); // show speed
     }
     
     void ShootProjectile()
@@ -283,12 +283,5 @@ public class Movement : MonoBehaviour
     {
         _controllerCollider = hit;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Goal"))
-        {
-            GameManager.Instance.WinGame();
-        }
-    }
+    
 }
