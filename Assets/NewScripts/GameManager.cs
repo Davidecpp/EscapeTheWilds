@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public bool invincible = false;
     public bool healing = false;
+    public bool heated = false;
     public int coins = 0;
 
     private void Awake()
@@ -74,6 +75,12 @@ public class GameManager : MonoBehaviour
         CheckWin();
         PopUpWindows();
         UpdateLap();
+
+        if (heated)
+        {
+            StartCoroutine(FlameOff(5.0f));
+        }
+        
     }
 
     private void UpdateLap()
@@ -233,5 +240,12 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(flashDuration);
             redFlashImage.gameObject.SetActive(false);
         }
+    }
+
+    public IEnumerator FlameOff(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        heated = false;
+        Debug.Log("Finish");
     }
 }

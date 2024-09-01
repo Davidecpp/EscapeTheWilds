@@ -3,13 +3,21 @@ using UnityEngine;
 public class NewProj : MonoBehaviour
 {
     public float damage = 10.0f; 
-    public GameObject hitParticles; 
+    public GameObject hitParticles;
+    public GameObject fireParticles;
 
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Projectile hit: " + collision.gameObject.name); 
         // hit particles
-        Instantiate(hitParticles, transform.position, transform.rotation);
+        if (GameManager.Instance.heated)
+        {
+            Instantiate(fireParticles, transform.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(hitParticles, transform.position, transform.rotation);
+        }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {

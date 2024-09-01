@@ -122,4 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  hitParticles: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
+  hitParticles: {fileID: 3463157229188906966, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  fireParticles: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
