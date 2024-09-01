@@ -10755,7 +10755,8 @@ MonoBehaviour:
   boostAnimation: {fileID: 0}
   bounceStrenght: 2
   timer: 5
-  enemyBullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
+  bullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
+  fireBullet: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
   spawnPoint: {fileID: 1317159902854110682}
   bulletSpeed: 10
 --- !u!114 &4711488475647268483
