@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float flashDuration = 0.1f;
 
     [SerializeField] private int winCondition;
+    // laps
     public int laps = 0;
     public int totLaps;
     public TMP_Text lapsTxt;

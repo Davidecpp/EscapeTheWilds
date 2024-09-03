@@ -12,16 +12,17 @@ public class Strawberry : MonoBehaviour, IInteractible
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = FindObjectOfType<Inventory>();
-        if (inventory != null)
+        PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+        
+        if (inventory != null && playerStats != null)
         {
             inventory.AddStrawberry();
-            Debug.Log("Strawberry picked");
+            playerStats.AddExperience(50);
 
             if (shouldDisappear)
             {
                 Destroy(gameObject); 
             }
-
             return true;
         }
         else

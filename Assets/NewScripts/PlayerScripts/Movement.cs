@@ -260,7 +260,7 @@ public class Movement : MonoBehaviour
     
     void ShootProjectile()
     {
-
+        // se ha proiettili spara
         if (_inventory != null && _inventory.GetBullets() > 0)
         {
             GameObject bullet = Instantiate(this.bullet, spawnPoint.position, spawnPoint.rotation);
