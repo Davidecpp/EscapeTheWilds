@@ -10705,7 +10705,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.2
-  m_Radius: 0.3
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -10791,6 +10791,9 @@ MonoBehaviour:
   moveSpeed: 10
   jumpHeight: 15
   runSpeed: 15
+  exp: 0
+  nextLevel: 100
+  level: 1
 --- !u!54 &5077482615309559946
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10852,8 +10855,16 @@ MonoBehaviour:
   keyImage: {fileID: 0}
   maxAlphaValue: 1
   minAlphaValue: 0.3
-  strawberryCounterText: {fileID: 0}
-  coinCounterText: {fileID: 0}
+  maxBullets: 3
+  strawberryCounter:
+    count: 0
+    counterText: {fileID: 0}
+  coinCounter:
+    count: 0
+    counterText: {fileID: 0}
+  bulletCounter:
+    count: 10
+    counterText: {fileID: 0}
 --- !u!114 &5379223090252105951
 MonoBehaviour:
   m_ObjectHideFlags: 0
