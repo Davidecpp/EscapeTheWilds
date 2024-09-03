@@ -103,6 +103,12 @@ public class Inventory : MonoBehaviour
         
     }
 
+    public void RemoveCoins(int amount)
+    {
+        coinCounter.count -= amount;
+        coinCounter.counterText.text = "x " + coinCounter.count;
+    }
+
     // Wrapper methods for adding specific resources
     public void AddCoin() => AddResource(ref coinCounter);
     public void AddStrawberry() => AddResource(ref strawberryCounter);

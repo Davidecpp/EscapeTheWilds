@@ -15,14 +15,18 @@ public class ShopManager : MonoBehaviour
     public GameObject[] shopPanelGO;
 
     public Button[] purchaseBtns;
+
+    private Inventory _inventory;
     // Start is called before the first frame update
     void Start()
     {
+        _inventory = FindObjectOfType<Inventory>();
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopPanelGO[i].SetActive(true);
         }
-        coinTxt.text = "Coins: " + coins.ToString();
+        
+        coinTxt.text = "Coins: " + _inventory.GetCoinCount();
         LoadPanels();
         CheckPurchaseable();
     }
@@ -37,7 +41,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopItems.Length; i++)
         {
-            if (coins >= shopItems[i].cost)
+            if (_inventory.GetCoinCount() >= shopItems[i].cost)
             {
                 purchaseBtns[i].interactable = true;
             }
@@ -50,18 +54,31 @@ public class ShopManager : MonoBehaviour
 
     public void PurchaseItem(int btNo)
     {
-        if (coins >= shopItems[btNo].cost)
+        if (_inventory.GetCoinCount() >= shopItems[btNo].cost)
         {
-            coins -= shopItems[btNo].cost;
-            coinTxt.text = "Coins: " + coins.ToString();
+            _inventory.RemoveCoins(shopItems[btNo].cost);
+            coinTxt.text = "Coins: " + _inventory.GetCoinCount();
             CheckPurchaseable();
+
+            if (shopItems[btNo].title == "Ammo")
+            {
+                AddBullets(3);
+            }
         }
     }
 
     public void AddCoins()
     {
-        coins++;
-        coinTxt.text = "Coins: " + coins.ToString();
+        _inventory.AddCoin();
+        coinTxt.text = "Coins: " + _inventory.GetCoinCount();
+        CheckPurchaseable();
+    }
+    public void AddBullets(float amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            _inventory.AddBullet();
+        }
         CheckPurchaseable();
     }
     

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOver, boost, win, tutorial, skills, canvas;
+    public GameObject gameOver, boost, win, tutorial, skills, canvas, shop;
     
     public RawImage heartPrefab; 
     public Transform heartsContainer; 
@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver.SetActive(false);
         win.SetActive(false);
+        shop.SetActive(false);
         BoostText.gameObject.SetActive(false);
         if (redFlashImage != null)
         {
@@ -120,6 +121,32 @@ public class GameManager : MonoBehaviour
                 skills.SetActive(!skills.activeSelf);
             }
         }
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            if (shop != null)
+            {
+                bool isShopOpen = shop.activeSelf;
+
+                // Toggle the shop's active state
+                shop.SetActive(!isShopOpen);
+
+                if (isShopOpen)
+                {
+                    // If the shop was open, close it and resume the game
+                    Cursor.lockState = CursorLockMode.Locked; 
+                    Cursor.visible = false; 
+                    Time.timeScale = 1;
+                }
+                else
+                {
+                    // If the shop was closed, open it and pause the game
+                    Cursor.lockState = CursorLockMode.None; 
+                    Cursor.visible = true; 
+                    Time.timeScale = 0;
+                }
+            }
+        }
+
     }
     
     // inizializza vita personaggio

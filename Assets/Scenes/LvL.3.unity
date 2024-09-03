@@ -1005,6 +1005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &488568961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2328931596687567530, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+  m_PrefabInstance: {fileID: 759005992079878351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &516887967 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694372030331910548, guid: 2c89acf65b477de4585fbea01b0c73b0, type: 3}
@@ -1794,11 +1799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &678246053 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9199433573392931469, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
-  m_PrefabInstance: {fileID: 6600284000899312595}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &680726379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5690,7 +5690,6 @@ Transform:
   - {fileID: 242698879}
   - {fileID: 1221805323}
   - {fileID: 1293074277}
-  - {fileID: 678246053}
   m_Father: {fileID: 1341105894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1753903645
@@ -6950,6 +6949,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 149
       objectReference: {fileID: 0}
+    - target: {fileID: 4517077889883441077, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517077889883441077, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4608511738490717774, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7261,7 +7268,7 @@ PrefabInstance:
       objectReference: {fileID: 1867801216}
     - target: {fileID: 3978137081494109133, guid: 990697e85377204408b62aa7879b1007, type: 3}
       propertyPath: bulletCounter.count
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978137081494109133, guid: 990697e85377204408b62aa7879b1007, type: 3}
       propertyPath: strawberryCounterText
@@ -7872,6 +7879,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5378822805363553965}
     - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
+      propertyPath: shop
+      value: 
+      objectReference: {fileID: 488568961}
+    - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
       propertyPath: boost
       value: 
       objectReference: {fileID: 2601778558263898200}
@@ -8131,7 +8142,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1753903644}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5740066060098629993, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
       propertyPath: m_Name
@@ -8139,15 +8150,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9199433573392931469, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.203049
+      value: -194.5079
       objectReference: {fileID: 0}
     - target: {fileID: 9199433573392931469, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.145706
+      value: 120.05
       objectReference: {fileID: 0}
     - target: {fileID: 9199433573392931469, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.198879
+      value: -49.71
       objectReference: {fileID: 0}
     - target: {fileID: 9199433573392931469, guid: 1436aea07f3da5a4485832b67792964b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8299,6 +8310,7 @@ SceneRoots:
   - {fileID: 1369406595}
   - {fileID: 3459401096674662035}
   - {fileID: 1341105894}
+  - {fileID: 6600284000899312595}
   - {fileID: 913784404227743431}
   - {fileID: 989733771}
   - {fileID: 358905173}
