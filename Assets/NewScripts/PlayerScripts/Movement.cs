@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
 
     private CharacterController _characterController;
     private ControllerColliderHit _controllerCollider;
+    private Inventory _inventory;
 
     private PlayerStats _playerStats;
     private ProvaCamera _camera;
@@ -55,6 +56,7 @@ public class Movement : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _playerStats = GetComponent<PlayerStats>();
         _camera = GetComponent<ProvaCamera>();
+        _inventory = GetComponent<Inventory>();
 
         if (_playerStats == null)
         {
@@ -258,16 +260,22 @@ public class Movement : MonoBehaviour
     
     void ShootProjectile()
     {
-        GameObject bullet = Instantiate(this.bullet, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody bulletRig = bullet.GetComponent<Rigidbody>();
 
-        if (bulletRig != null)
+        if (_inventory != null && _inventory.GetBullets() > 0)
         {
-            bulletRig.AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
-            bulletRig.angularVelocity = new Vector3(0, 90, 90);
-        }
+            GameObject bullet = Instantiate(this.bullet, spawnPoint.position, spawnPoint.rotation);
+            Rigidbody bulletRig = bullet.GetComponent<Rigidbody>();
+            
+            if (bulletRig != null)
+            {
+                bulletRig.AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
+                bulletRig.angularVelocity = new Vector3(0, 90, 90);
+            }
         
-        Destroy(bullet, 2.0f);
+            _inventory.RemoveBullet();
+            
+            Destroy(bullet, 2.0f);
+        }
     }
 
     void ShowParticles(ParticleSystem particles)

@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,22 +11,27 @@ public class Inventory : MonoBehaviour
     public float maxAlphaValue = 1f;
     public float minAlphaValue = 0.3f;
 
-    private int _strawberryCount;
-    [SerializeField] private TextMeshProUGUI strawberryCounterText;
-    
-    private int _coinCount;
-    [SerializeField] private TextMeshProUGUI coinCounterText;
+    public int maxBullets = 3;
+
+    [System.Serializable]
+    public struct ResourceCounter
+    {
+        public int count;
+        public TextMeshProUGUI counterText;
+    }
+
+    [SerializeField] private ResourceCounter strawberryCounter;
+    [SerializeField] private ResourceCounter coinCounter;
+    [SerializeField] private ResourceCounter bulletCounter;
+
+    private void Start()
+    {
+        SetResource(bulletCounter);
+    }
 
     private void Update()
     {
-        if (hasKey)
-        {
-            SetImageAlpha(maxAlphaValue);
-        }
-        else
-        {
-            SetImageAlpha(minAlphaValue);
-        }
+        SetImageAlpha(hasKey ? maxAlphaValue : minAlphaValue);
     }
 
     private void SetImageAlpha(float alphaValue)
@@ -41,48 +48,68 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddCoin()
+    private void SetResource(ResourceCounter resourceCounter)
     {
-        _coinCount++;
-        UpdateCoinCounter();
+        if (resourceCounter.Equals(bulletCounter))
+        {
+            resourceCounter.counterText.text = "x " + resourceCounter.count + "/" + maxBullets;
+        }
     }
 
-    private void UpdateCoinCounter()
+    public void AddResource(ref ResourceCounter resourceCounter)
     {
-        if (coinCounterText != null)
+        if (resourceCounter.Equals(bulletCounter) && resourceCounter.count >= maxBullets)
         {
-            coinCounterText.text = "x " + _coinCount;
+            Debug.Log("MAX AMMO");
         }
         else
         {
-            Debug.LogError("Coin Counter Text reference is not set.");
+            resourceCounter.count++;
+            UpdateResourceCounter(resourceCounter);
         }
-    }
-    public int GetCoinCount()
-    {
-        return _coinCount;
+        
     }
 
-    public void AddStrawberry()
+    private void UpdateResourceCounter(ResourceCounter resourceCounter)
     {
-        _strawberryCount++;
-        UpdateStrawberryCounter();
-    }
-
-    private void UpdateStrawberryCounter()
-    {
-        if (strawberryCounterText != null)
+        if (resourceCounter.counterText != null)
         {
-            strawberryCounterText.text = "x " + _strawberryCount;
+            resourceCounter.counterText.text = "x " + resourceCounter.count;
+            if (resourceCounter.Equals(bulletCounter))
+            {
+                resourceCounter.counterText.text += "/"+maxBullets;
+            }
         }
         else
         {
-            Debug.LogError("Strawberry Counter Text reference is not set.");
+            Debug.LogError("Resource Counter Text reference is not set.");
         }
     }
 
-    public int GetStrawberryCount()
+    public int GetResourceCount(ResourceCounter resourceCounter)
     {
-        return _strawberryCount;
+        return resourceCounter.count;
     }
+
+    public int GetBullets()
+    {
+        return bulletCounter.count;
+    }
+
+    public void RemoveBullet()
+    {
+        bulletCounter.count--;
+        bulletCounter.counterText.text = "x " + bulletCounter.count + "/" + maxBullets;
+        
+    }
+
+    // Wrapper methods for adding specific resources
+    public void AddCoin() => AddResource(ref coinCounter);
+    public void AddStrawberry() => AddResource(ref strawberryCounter);
+    public void AddBullet() => AddResource(ref bulletCounter);
+
+    // Wrapper methods for getting specific resource counts
+    public int GetCoinCount() => GetResourceCount(coinCounter);
+    public int GetStrawberryCount() => GetResourceCount(strawberryCounter);
+    public int GetBulletCount() => GetResourceCount(bulletCounter);
 }
