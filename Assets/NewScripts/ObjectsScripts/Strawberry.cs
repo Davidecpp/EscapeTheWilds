@@ -16,7 +16,7 @@ public class Strawberry : MonoBehaviour, IInteractible
         
         if (inventory != null && playerStats != null)
         {
-            inventory.AddStrawberry();
+            inventory.AddStrawberry(1);
             playerStats.AddExperience(50);
 
             if (shouldDisappear)

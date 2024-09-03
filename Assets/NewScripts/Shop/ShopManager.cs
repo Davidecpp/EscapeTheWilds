@@ -69,16 +69,13 @@ public class ShopManager : MonoBehaviour
 
     public void AddCoins()
     {
-        _inventory.AddCoin();
+        _inventory.AddCoin(1);
         coinTxt.text = "Coins: " + _inventory.GetCoinCount();
         CheckPurchaseable();
     }
-    public void AddBullets(float amount)
+    public void AddBullets(int amount)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            _inventory.AddBullet();
-        }
+        _inventory.AddBullet(amount);
         CheckPurchaseable();
     }
     

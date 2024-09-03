@@ -14,7 +14,7 @@ public class Coin : MonoBehaviour, IInteractible
         Inventory inventory = FindObjectOfType<Inventory>();
         if (inventory != null)
         {
-            inventory.AddCoin();
+            inventory.AddCoin(1);
             Debug.Log("Coin picked");
 
             if (shouldDisappear)

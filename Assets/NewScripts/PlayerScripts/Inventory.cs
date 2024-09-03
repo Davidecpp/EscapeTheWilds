@@ -56,17 +56,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddResource(ref ResourceCounter resourceCounter)
+    public void AddResource(ref ResourceCounter resourceCounter, int amount)
     {
-        if (resourceCounter.Equals(bulletCounter) && resourceCounter.count >= maxBullets)
+        for (int i = 0; i < amount; i++)
         {
-            Debug.Log("MAX AMMO");
+            if (resourceCounter.Equals(bulletCounter) && resourceCounter.count >= maxBullets)
+            {
+                Debug.Log("MAX AMMO");
+            }
+            else
+            {
+                resourceCounter.count++;
+                UpdateResourceCounter(resourceCounter);
+            }
         }
-        else
-        {
-            resourceCounter.count++;
-            UpdateResourceCounter(resourceCounter);
-        }
+        
         
     }
 
@@ -110,9 +114,9 @@ public class Inventory : MonoBehaviour
     }
 
     // Wrapper methods for adding specific resources
-    public void AddCoin() => AddResource(ref coinCounter);
-    public void AddStrawberry() => AddResource(ref strawberryCounter);
-    public void AddBullet() => AddResource(ref bulletCounter);
+    public void AddCoin(int amount) => AddResource(ref coinCounter, amount);
+    public void AddStrawberry(int amount) => AddResource(ref strawberryCounter, amount);
+    public void AddBullet(int amount) => AddResource(ref bulletCounter, amount);
 
     // Wrapper methods for getting specific resource counts
     public int GetCoinCount() => GetResourceCount(coinCounter);

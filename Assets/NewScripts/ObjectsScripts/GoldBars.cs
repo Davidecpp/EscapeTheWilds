@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IInteractible
+public class GoldBars : MonoBehaviour, IInteractible
 {
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
@@ -14,8 +14,8 @@ public class Bullet : MonoBehaviour, IInteractible
         Inventory inventory = FindObjectOfType<Inventory>();
         if (inventory != null)
         {
-            inventory.AddBullet(1);
-            Debug.Log("Bullet picked");
+            inventory.AddCoin(10);
+            Debug.Log("GoldBars picked");
 
             if (shouldDisappear)
             {
