@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     // If the shop was closed, open it and pause the game
-                    Cursor.lockState = CursorLockMode.None; 
+                    Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true; 
                     Time.timeScale = 0;
                 }

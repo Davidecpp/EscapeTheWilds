@@ -9,6 +9,11 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private Slider _slider;
 
+    public GameObject[] itemsToSpawn; // Array di prefab degli oggetti da spawnare
+    public int numberOfItemsToSpawn = 3; // Numero di oggetti da spawnare
+    public float spawnHeightOffset = 1.0f; // Offset verticale per sollevare gli oggetti
+    public float raycastDistance = 10.0f; // Distanza del Raycast per verificare il suolo
+
     void Start()
     {
         _playerStats = FindObjectOfType<PlayerStats>();
@@ -30,8 +35,46 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Enemy died."); 
-        _playerStats.AddExperience(30);
+
+        // Aggiungi esperienza al player
+        if (_playerStats != null)
+        {
+            _playerStats.AddExperience(30);
+        }
+
+        // Spawn degli oggetti alla morte del nemico
+        SpawnItems();
+
+        // Distruggi il nemico
         Destroy(gameObject);
+    }
+
+    private void SpawnItems()
+    {
+        for (int i = 0; i < numberOfItemsToSpawn; i++)
+        {
+            // Scegli un oggetto casuale dall'array
+            GameObject itemToSpawn = itemsToSpawn[Random.Range(0, itemsToSpawn.Length)];
+
+            // Calcola la posizione di spawn con offset
+            Vector3 spawnPosition = transform.position;
+            spawnPosition.y += spawnHeightOffset; // Aggiungi l'offset verticale
+
+            // Usa un Raycast per verificare se il punto di spawn è sopra il terreno
+            if (Physics.Raycast(spawnPosition, Vector3.down, out RaycastHit hit, raycastDistance))
+            {
+                // Se il Raycast colpisce qualcosa, posiziona l'oggetto sopra il terreno
+                spawnPosition.y = hit.point.y + spawnHeightOffset;
+            }
+            else
+            {
+                // Se non colpisce nulla, usa la posizione originale con l'offset
+                spawnPosition.y += spawnHeightOffset;
+            }
+
+            // Istanziamo l'oggetto nella posizione calcolata
+            Instantiate(itemToSpawn, spawnPosition, Quaternion.identity);
+        }
     }
 
     public void UpdateHealthBar()

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -18,10 +17,26 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+
+        // Trova il player automaticamente usando il tag "Player"
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+            else
+            {
+                Debug.LogError("Player not found! Make sure the player object has the 'Player' tag.");
+            }
+        }
     }
 
     void Update()
     {
+        if (player == null) return;
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         if (distanceToPlayer < chaseDistance)
         {
@@ -30,7 +45,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            _agent.isStopped = true; 
+            _agent.isStopped = true;
         }
     }
 
