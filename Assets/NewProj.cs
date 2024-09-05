@@ -8,16 +8,20 @@ public class NewProj : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject particles;
         Debug.Log("Projectile hit: " + collision.gameObject.name); 
         // hit particles
         if (GameManager.Instance.heated)
         {
-            Instantiate(fireParticles, transform.position, transform.rotation);
+            particles = Instantiate(fireParticles, transform.position, transform.rotation);
+            Destroy(particles, 6.5f);
         }
         else
         {
-            Instantiate(hitParticles, transform.position, transform.rotation);
+            particles = Instantiate(hitParticles, transform.position, transform.rotation);
+            Destroy(particles, 1f);
         }
+        
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
