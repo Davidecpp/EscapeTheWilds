@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOver, boost, win, tutorial, skills, canvas, shop;
-    
+    public GameObject gameOver, boost, win;
+    public GameObject menu;
+    public GameObject skills, canvas, shop;
+
     public RawImage heartPrefab; 
     public Transform heartsContainer; 
     public static GameManager Instance { get; private set; }
@@ -99,21 +102,37 @@ public class GameManager : MonoBehaviour
         {
             redFlashImage.gameObject.SetActive(false); 
         }
+
+        /*Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;*/
     }
 
     private void PopUpWindows()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        /*if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (tutorial != null)
+            if (menu != null)
             {
-                tutorial.SetActive(!tutorial.activeSelf);
+                menu.SetActive(!menu.activeSelf);
+                if (menu.activeSelf)
+                {
+                    Time.timeScale = 0;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
             else
             {
                 Debug.Log("Tutorial null");
             }
-        }
+        }*/
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             if (skills != null)

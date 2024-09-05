@@ -26,8 +26,8 @@ public class ProvaCamera : MonoBehaviour
         sprintTimer = sprintDuration;
         initialCameraPosition = playerCamera.localPosition;
         controller = animal.GetComponent<CharacterController>(); 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
