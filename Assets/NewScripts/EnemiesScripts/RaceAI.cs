@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 public class RaceAI : MonoBehaviour
 {
-    public Transform[] goals; // Array di 3 obiettivi
-    public float goalReachedThreshold = 1.0f; // Distanza alla quale consideriamo l'obiettivo raggiunto
+    public Transform[] goals; // Array di obiettivi
+    public float goalReachedThreshold = 1.0f; // Distanza per considerare l'obiettivo raggiunto
     public float jumpForce = 5f;
     public float jumpDistance = 2f;
     public float jumpCooldown = 1f;
@@ -58,36 +58,39 @@ public class RaceAI : MonoBehaviour
         // Controlla se l'agente ha raggiunto l'obiettivo corrente
         if (goals.Length > 0 && Vector3.Distance(transform.position, goals[currentGoalIndex].position) < goalReachedThreshold)
         {
-            SwitchGoal(); // Cambia l'obiettivo quando raggiunto
+            SwitchGoal(); 
         }
 
-        CheckForObstacles();
+        CheckForNavMeshObstacle(); // Controlla se ci sono ostacoli e salta
     }
 
     // Cambia l'obiettivo al prossimo della lista (ciclo tra 3)
     private void SwitchGoal()
     {
-        currentGoalIndex = (currentGoalIndex + 1) % goals.Length; // Cicla tra 0, 1 e 2
+        currentGoalIndex = (currentGoalIndex + 1) % goals.Length; 
         agent.SetDestination(goals[currentGoalIndex].position);
         Debug.Log("Switched goal to: " + goals[currentGoalIndex].name);
     }
 
-    void CheckForObstacles()
+    // Verifica la presenza di ostacoli sul percorso
+    void CheckForNavMeshObstacle()
     {
         if (isJumping || Time.time - lastJumpTime < jumpCooldown)
         {
             return;
         }
 
-        RaycastHit hit;
-        Vector3 origin = transform.position + Vector3.up * 0.7f; 
-
-        if (Physics.Raycast(origin, transform.forward, out hit, jumpDistance))
+        // Controlla se il NavMeshAgent sta cercando di aggirare un NavMeshObstacle
+        if (agent.hasPath)
         {
-            if (hit.collider.CompareTag("JumpObstacle"))
+            NavMeshHit hit;
+            if (NavMesh.Raycast(agent.transform.position, agent.steeringTarget, out hit, NavMesh.AllAreas))
             {
-                Debug.Log("Obstacle detected. Initiating jump.");
-                StartCoroutine(Jump());
+                if (hit.distance <= jumpDistance && hit.normal.y < 0.1f) // Se rileva un ostacolo vicino
+                {
+                    Debug.Log("NavMeshObstacle detected. Initiating jump.");
+                    StartCoroutine(Jump());
+                }
             }
         }
     }
@@ -115,10 +118,6 @@ public class RaceAI : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Disegna il raggio di rilevamento degli ostacoli
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + Vector3.up * 0.5f, transform.position + Vector3.up * 0.5f + transform.forward * jumpDistance);
-
         // Disegna il percorso del NavMeshAgent
         if (agent != null && agent.path != null)
         {
