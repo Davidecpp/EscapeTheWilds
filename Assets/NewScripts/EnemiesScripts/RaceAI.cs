@@ -4,9 +4,10 @@ using UnityEngine.AI;
 
 public class RaceAI : MonoBehaviour
 {
-    public Transform goal; 
-    public float jumpForce = 5f; 
-    public float jumpDistance = 2f; 
+    public Transform[] goals; // Array di 3 obiettivi
+    public float goalReachedThreshold = 1.0f; // Distanza alla quale consideriamo l'obiettivo raggiunto
+    public float jumpForce = 5f;
+    public float jumpDistance = 2f;
     public float jumpCooldown = 1f;
 
     private NavMeshAgent agent;
@@ -14,6 +15,7 @@ public class RaceAI : MonoBehaviour
     private Animator animator;
     private bool isJumping = false;
     private float lastJumpTime;
+    private int currentGoalIndex = 0; // Indice dell'obiettivo corrente
 
     void Start()
     {
@@ -33,16 +35,16 @@ public class RaceAI : MonoBehaviour
             return;
         }
 
-        if (goal != null)
+        if (goals.Length > 0)
         {
-            agent.SetDestination(goal.position);
+            agent.SetDestination(goals[currentGoalIndex].position);
         }
         else
         {
-            Debug.LogError("Goal is not set for RaceAI.");
+            Debug.LogError("No goals set for RaceAI.");
         }
 
-        lastJumpTime = -jumpCooldown; 
+        lastJumpTime = -jumpCooldown;
     }
 
     void Update()
@@ -53,12 +55,21 @@ public class RaceAI : MonoBehaviour
             return;
         }
 
-        if (goal != null)
+        // Controlla se l'agente ha raggiunto l'obiettivo corrente
+        if (goals.Length > 0 && Vector3.Distance(transform.position, goals[currentGoalIndex].position) < goalReachedThreshold)
         {
-            agent.SetDestination(goal.position);
+            SwitchGoal(); // Cambia l'obiettivo quando raggiunto
         }
 
         CheckForObstacles();
+    }
+
+    // Cambia l'obiettivo al prossimo della lista (ciclo tra 3)
+    private void SwitchGoal()
+    {
+        currentGoalIndex = (currentGoalIndex + 1) % goals.Length; // Cicla tra 0, 1 e 2
+        agent.SetDestination(goals[currentGoalIndex].position);
+        Debug.Log("Switched goal to: " + goals[currentGoalIndex].name);
     }
 
     void CheckForObstacles()
@@ -80,7 +91,6 @@ public class RaceAI : MonoBehaviour
             }
         }
     }
-
 
     IEnumerator Jump()
     {
