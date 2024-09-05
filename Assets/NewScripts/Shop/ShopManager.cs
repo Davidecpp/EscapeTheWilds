@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
             shopPanelGO[i].SetActive(true);
         }
         
-        coinTxt.text = "Coins: " + _inventory.GetCoinCount();
+        
         LoadPanels();
         CheckPurchaseable();
     }
@@ -34,6 +34,8 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        coinTxt.text = "Coins: " + _inventory.GetCoinCount();
+        CheckPurchaseable();
     }
     
     // verifica se puoi acquistare gli oggetti
@@ -57,8 +59,8 @@ public class ShopManager : MonoBehaviour
         if (_inventory.GetCoinCount() >= shopItems[btNo].cost)
         {
             _inventory.RemoveCoins(shopItems[btNo].cost);
-            coinTxt.text = "Coins: " + _inventory.GetCoinCount();
-            CheckPurchaseable();
+            //coinTxt.text = "Coins: " + _inventory.GetCoinCount();
+            //CheckPurchaseable();
 
             if (shopItems[btNo].title == "Ammo")
             {
@@ -70,13 +72,13 @@ public class ShopManager : MonoBehaviour
     public void AddCoins()
     {
         _inventory.AddCoin(1);
-        coinTxt.text = "Coins: " + _inventory.GetCoinCount();
-        CheckPurchaseable();
+        //coinTxt.text = "Coins: " + _inventory.GetCoinCount();
+        //CheckPurchaseable();
     }
     public void AddBullets(int amount)
     {
         _inventory.AddBullet(amount);
-        CheckPurchaseable();
+        //CheckPurchaseable();
     }
     
     // carica info oggetti nei pannelli
