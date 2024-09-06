@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     public GameObject menu;
     
     public GameObject[] characters;
+    private int _activeScene;
 
     private void Start()
     {
@@ -137,10 +138,11 @@ public class MenuManager : MonoBehaviour
         buttons.SetActive(true);
     }
 
-    public void OpenCharacterSelection()
+    public void OpenCharacterSelection(int i)
     {
         gameModes.SetActive(false);
         characterSelection.SetActive(true);
+        _activeScene = i;
     }
     private void CloseCharacterSelection()
     {
@@ -154,7 +156,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Selected: " + characterID);
 
         // Cambia la scena dopo aver selezionato il personaggio
-        SceneManager.LoadScene("Arena");
+        SceneManager.LoadScene(_activeScene);
     }
 
 }
