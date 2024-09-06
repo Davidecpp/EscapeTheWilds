@@ -6,6 +6,7 @@ public class BallController : MonoBehaviour
     public float moveForce = 5f;
     public float wallForce = 10f; // Forza con cui la palla si muoverà
     private Rigidbody rb;
+    public GameObject spawn, spawnPlayer, player;
 
     void Start()
     {
@@ -21,6 +22,19 @@ public class BallController : MonoBehaviour
             Debug.Log("Player toccato");
             Vector3 directionAwayFromPlayer = (transform.position - other.transform.position).normalized;
             rb.AddForce(directionAwayFromPlayer * moveForce, ForceMode.Impulse);
+        }
+
+        if (other.CompareTag("Goal"))
+        {
+            Debug.Log("Victory");
+
+            // Fermiamo la palla impostando la velocità del Rigidbody a zero
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            player.GetComponent<Rigidbody>().MovePosition(spawnPlayer.transform.position);
+
+            transform.position = spawn.transform.position;
         }
 
         // Controlliamo se la palla ha toccato un muro con il tag "JumpPlatform"
