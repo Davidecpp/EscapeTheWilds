@@ -47,14 +47,16 @@ public class MenuManager : MonoBehaviour
                 {
                     CloseOptions();
                 }
+                else if (controls.activeSelf)
+                {
+                    CloseControls();
+                }
                 else
                 {
                     menu.SetActive(false);
                     controls.SetActive(false);
                     ResumeGame();
                 }
-
-                
             }
             else
             {
@@ -80,7 +82,7 @@ public class MenuManager : MonoBehaviour
         gameModes.SetActive(true);
     }
 
-    public void CloseGameModes()
+    private void CloseGameModes()
     {
         gameModes.SetActive(false);
         buttons.SetActive(true);
@@ -89,7 +91,14 @@ public class MenuManager : MonoBehaviour
     public void OpenControls()
     {
         controls.SetActive(true);
-        menu.SetActive(false);
+        buttons.SetActive(false);
+        //menu.SetActive(false);
+    }
+
+    private void CloseControls()
+    {
+        controls.SetActive(false);
+        buttons.SetActive(true);
     }
 
     public void OpenOptions()
@@ -98,7 +107,7 @@ public class MenuManager : MonoBehaviour
         options.SetActive(true);
     }
 
-    public void CloseOptions()
+    private void CloseOptions()
     {
         options.SetActive(false);
         buttons.SetActive(true);
