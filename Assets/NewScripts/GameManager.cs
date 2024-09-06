@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public bool heated = false;
     public int coins = 0;
 
+    public GameObject[] characters;
+
     private void Awake()
     {
         if (Instance == null)
@@ -68,11 +70,26 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Inventory not found in the scene.");
         }
+    
+        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter");
+        Debug.Log("ID del personaggio selezionato: " + selectedCharacterID);
+
+        // Disattiva tutti i personaggi
+        foreach (GameObject character in characters)
+        {
+            character.SetActive(false);
+        }
+
+        // Attiva solo il personaggio selezionato
+        GameObject selectedCharacter = characters[selectedCharacterID];
+        selectedCharacter.SetActive(true);
+        Debug.Log("Personaggio selezionato: " + selectedCharacter.name);
 
         InitializeHearts();
         UpdateHearts();
         SetStartActivation();
     }
+
 
     void Update()
     {
@@ -102,37 +119,10 @@ public class GameManager : MonoBehaviour
         {
             redFlashImage.gameObject.SetActive(false); 
         }
-
-        /*Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;*/
     }
 
     private void PopUpWindows()
     {
-        /*if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            if (menu != null)
-            {
-                menu.SetActive(!menu.activeSelf);
-                if (menu.activeSelf)
-                {
-                    Time.timeScale = 0;
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                }
-                else
-                {
-                    Time.timeScale = 1;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-            }
-            else
-            {
-                Debug.Log("Tutorial null");
-            }
-        }*/
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             if (skills != null)

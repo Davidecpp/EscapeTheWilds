@@ -665,19 +665,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3124292318164227851, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3124292318164227851, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3504146761929932035, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
+      propertyPath: characters.Array.data[1]
+      value: 
+      objectReference: {fileID: 1808540890}
     - target: {fileID: 3609939623159826047, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3680040252828395825, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3900217175571315098, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_SizeDelta.x
@@ -713,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6430589425702255191, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7330093577979184604, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: bulletCounter.count
@@ -756,6 +760,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 9035150280074859778, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
   m_PrefabInstance: {fileID: 1496479734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1808540890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4102895078869787243, guid: 990993a2b9024a140b233d08f89ce445, type: 3}
+  m_PrefabInstance: {fileID: 560692056}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886896314
 GameObject:

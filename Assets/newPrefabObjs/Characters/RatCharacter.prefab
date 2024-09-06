@@ -10305,6 +10305,10 @@ PrefabInstance:
       propertyPath: heartsContainer
       value: 
       objectReference: {fileID: 2393158442237453633}
+    - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
+      propertyPath: characters.Array.data[1]
+      value: 
+      objectReference: {fileID: 4102895078869787243}
     - target: {fileID: 2790360815646409059, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
       propertyPath: rawImage
       value: 

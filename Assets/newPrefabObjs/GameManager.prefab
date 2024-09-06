@@ -48,17 +48,26 @@ MonoBehaviour:
   gameOver: {fileID: 0}
   boost: {fileID: 0}
   win: {fileID: 0}
-  tutorial: {fileID: 0}
+  menu: {fileID: 0}
   skills: {fileID: 0}
   canvas: {fileID: 0}
+  shop: {fileID: 0}
   heartPrefab: {fileID: 6317893812336085837, guid: cead9421fa8b6fe4080540027c3fa0ad, type: 3}
   heartsContainer: {fileID: 0}
-  _health: 2
   boostText: {fileID: 0}
   redFlashImage: {fileID: 0}
   flashDuration: 0.2
   winCondition: 2
+  laps: 0
+  totLaps: 0
+  lapsTxt: {fileID: 0}
   invincible: 1
+  healing: 0
+  heated: 0
+  coins: 0
+  characters:
+  - {fileID: 6430589425702255191, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
+  - {fileID: 4102895078869787243, guid: 990993a2b9024a140b233d08f89ce445, type: 3}
 --- !u!114 &2790360815646409059
 MonoBehaviour:
   m_ObjectHideFlags: 0
