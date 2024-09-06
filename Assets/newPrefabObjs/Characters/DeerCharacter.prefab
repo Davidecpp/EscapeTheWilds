@@ -357,6 +357,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1948065353014775593}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayRace
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453930686413732882, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8495839996016697448, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 657.21

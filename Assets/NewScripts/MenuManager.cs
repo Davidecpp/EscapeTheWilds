@@ -63,6 +63,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadSceneAsync(2);
     }
 
+    public void PlayRace()
+    {
+        SceneManager.LoadSceneAsync(3);
+    }
+
     public void OpenGameModes()
     {
         buttons.SetActive(false);
