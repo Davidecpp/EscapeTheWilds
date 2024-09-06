@@ -23,8 +23,10 @@ public class MenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
+        Debug.Log("RESUMEE");
+        menu.SetActive(false);
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -66,6 +68,11 @@ public class MenuManager : MonoBehaviour
                 PauseGame();
             }
         }
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void Play(int i)

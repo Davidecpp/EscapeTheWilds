@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 5156061457931688547}
     - target: {fileID: 7241287512909267190, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenGameModes
+      value: ResumeGame
       objectReference: {fileID: 0}
     - target: {fileID: 7241287512909267190, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
