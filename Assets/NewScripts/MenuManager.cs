@@ -8,18 +8,31 @@ public class MenuManager : MonoBehaviour
     public GameObject buttons;
     public GameObject gameModes;
     public GameObject controls;
+    public GameObject options;
     public GameObject menu;
 
     private void Start()
+    {
+        PauseGame();
+    }
+
+    private void PauseGame()
     {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
+    private void ResumeGame()
+    {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Debug.LogError("ESC");
 
@@ -28,44 +41,37 @@ public class MenuManager : MonoBehaviour
             {
                 if (gameModes.activeSelf)
                 {
-                    OpenMainButtons();
+                    CloseGameModes();
+                }
+                else if (options.activeSelf)
+                {
+                    CloseOptions();
                 }
                 else
                 {
                     menu.SetActive(false);
                     controls.SetActive(false);
-                    Time.timeScale = 1;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
+                    ResumeGame();
                 }
+
                 
             }
             else
             {
+                controls.SetActive(false);
                 menu.SetActive(true);  
-                OpenMainButtons();  
-                Time.timeScale = 0;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                CloseGameModes();  
+                PauseGame();
             }
-
-            
         }
     }
 
-    public void PlayArena(int i)
+    public void Play(int i)
     {
-        SceneManager.LoadSceneAsync(1);
-    }
-    
-    public void PlayFootball(int i)
-    {
-        SceneManager.LoadSceneAsync(2);
-    }
-
-    public void PlayRace()
-    {
-        SceneManager.LoadSceneAsync(3);
+        // 1 ARENA
+        // 2 FOOTBALL
+        // 3 RACE
+        SceneManager.LoadSceneAsync(i);
     }
 
     public void OpenGameModes()
@@ -74,15 +80,27 @@ public class MenuManager : MonoBehaviour
         gameModes.SetActive(true);
     }
 
-    public void OpenMainButtons()
+    public void CloseGameModes()
     {
-        buttons.SetActive(true);
         gameModes.SetActive(false);
+        buttons.SetActive(true);
     }
 
     public void OpenControls()
     {
         controls.SetActive(true);
         menu.SetActive(false);
+    }
+
+    public void OpenOptions()
+    {
+        buttons.SetActive(false);
+        options.SetActive(true);
+    }
+
+    public void CloseOptions()
+    {
+        options.SetActive(false);
+        buttons.SetActive(true);
     }
 }
