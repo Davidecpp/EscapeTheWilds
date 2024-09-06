@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        PauseGame();
+        //PauseGame();
     }
 
     private void PauseGame()

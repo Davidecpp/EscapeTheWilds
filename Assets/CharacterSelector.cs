@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] characterPrefabs;  // Prefab dei personaggi
+    private GameObject selectedCharacter;
+    public GameObject playerSpawn;
+
     void Start()
     {
-        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter");
+        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter", -1); // Valore di default
         Debug.Log("ID del personaggio selezionato: " + selectedCharacterID);
-    }
+        Debug.Log("Posizione di playerSpawn: " + playerSpawn.transform.position);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+        if (selectedCharacterID >= 0 && selectedCharacterID < characterPrefabs.Length)
+        {
+            selectedCharacter = Instantiate(characterPrefabs[selectedCharacterID], playerSpawn.transform.position, playerSpawn.transform.rotation);
+            Debug.Log("Personaggio selezionato istanziato: " + selectedCharacter.name);
+        }
+        else
+        {
+            Debug.LogError("ID del personaggio selezionato non valido o non presente!");
+        }
     }
 }
+

@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public bool heated = false;
     public int coins = 0;
 
-    public GameObject[] characters;
+    
 
     private void Awake()
     {
@@ -70,20 +70,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Inventory not found in the scene.");
         }
-    
-        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter");
-        Debug.Log("ID del personaggio selezionato: " + selectedCharacterID);
-
-        // Disattiva tutti i personaggi
-        foreach (GameObject character in characters)
-        {
-            character.SetActive(false);
-        }
-
-        // Attiva solo il personaggio selezionato
-        GameObject selectedCharacter = characters[selectedCharacterID];
-        selectedCharacter.SetActive(true);
-        Debug.Log("Personaggio selezionato: " + selectedCharacter.name);
 
         InitializeHearts();
         UpdateHearts();
