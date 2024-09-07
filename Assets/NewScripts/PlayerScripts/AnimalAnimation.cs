@@ -62,9 +62,27 @@ public class AnimalAnimation : MonoBehaviour
         {
             bool isWalking = Input.GetKey(KeyCode.W);
             bool jumpKeyPressed = Input.GetKeyDown(KeyCode.Space);
+
+            if (!isJumping)
+            {
+                _animator.SetBool("IsIdling", true);
+                _animator.SetBool("IsWalking", false);
+
+                if (isWalking && !isJumping)
+                {
+                    //Debug.Log("IsWalking");
+                    _animator.SetBool("IsWalking", true);
+                    _animator.SetBool("IsIdling", false);
+                
+                }
+                if (jumpKeyPressed)
+                {
+                    _animator.SetBool("IsIdling", false);
+                    StartCoroutine(JumpAnimation(1f));
+                }
+            }
             
-            _animator.SetBool("IsIdling", true);
-            _animator.SetBool("IsWalking", false);
+            
 
             /*if (isWalking && jumpKeyPressed) //solo questo funziona per saltare camminando
             {
@@ -72,18 +90,31 @@ public class AnimalAnimation : MonoBehaviour
             }*/
             
             
-            if (jumpKeyPressed)
+            /*if (jumpKeyPressed)
             {
-                _animator.SetBool("IsWalking", false);
+                _animator.SetBool("IsWalking", true);
                 _animator.SetTrigger("TrJump");
             }
             if (isWalking)
             {
                 _animator.SetBool("IsIdling", false);
                 _animator.SetBool("IsWalking", true);
-            }
+            }*/
             
         }
+    }
+
+    private IEnumerator JumpAnimation(float seconds)
+    {
+        isJumping = true;
+        Debug.Log("IS jumping");
+        _animator.SetBool("IsWalking", false);
+        _animator.SetTrigger("TrJump");
+        yield return new WaitForSeconds(seconds);
+        _animator.ResetTrigger("TrJump");
+        _animator.SetBool("IsWalking", true);
+        Debug.Log("jump finished");
+        isJumping = false;
     }
 
     // Metodo per gestire la fine del salto (chiama questo metodo dall'animazione)
