@@ -78,7 +78,7 @@ public class AnimalAnimation : MonoBehaviour
                 if (jumpKeyPressed)
                 {
                     _animator.SetBool("IsIdling", false);
-                    StartCoroutine(JumpAnimation(1f));
+                    StartCoroutine(JumpAnimation(0.5f));
                 }
             }
             

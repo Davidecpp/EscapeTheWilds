@@ -3059,7 +3059,7 @@ RectTransform:
   m_GameObject: {fileID: 4660794685641927567}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 0}
+  m_LocalScale: {x: 2.5, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6319047255349263988}
@@ -4170,11 +4170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a30d1d60a163f4bb01b94dbdba265c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esc: {fileID: 0}
   buttons: {fileID: 2877028106837923521}
   gameModes: {fileID: 1045770327169380576}
   controls: {fileID: 1833216423670095860}
   options: {fileID: 7721177233999763936}
+  characterSelection: {fileID: 0}
   menu: {fileID: 8886695387431099463}
+  characters: []
 --- !u!1 &6036104296803140318
 GameObject:
   m_ObjectHideFlags: 0
