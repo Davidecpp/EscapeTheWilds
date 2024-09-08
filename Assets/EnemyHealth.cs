@@ -13,6 +13,8 @@ public class EnemyHealth : MonoBehaviour
     public int numberOfItemsToSpawn = 3; // Numero di oggetti da spawnare
     public float spawnHeightOffset = 1.0f; // Offset verticale per sollevare gli oggetti
     public float raycastDistance = 10.0f; // Distanza del Raycast per verificare il suolo
+    
+    public GameObject hitParticles;
 
     void Start()
     {
@@ -22,8 +24,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentHealth -= amount;
         UpdateHealthBar();
+        Instantiate(hitParticles, pos, transform.rotation);
         
         Debug.Log("Enemy took damage: " + amount + ", current health: " + currentHealth); 
         if (currentHealth <= 0)

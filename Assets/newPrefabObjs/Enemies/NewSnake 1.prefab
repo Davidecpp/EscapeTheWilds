@@ -625,3 +625,4 @@ MonoBehaviour:
   numberOfItemsToSpawn: 1
   spawnHeightOffset: 1
   raycastDistance: 10
+  hitParticles: {fileID: 7728366230342544413, guid: 212ef1a41838ce044a9ac54994866708, type: 3}

@@ -10,6 +10,8 @@ public class AttackArea : MonoBehaviour
     
     private bool _isAttacking = false;
     private Collider enemyInRange;
+    
+    public GameObject hitParticles;
 
     private int count = 0;
     // Start is called before the first frame update
@@ -21,15 +23,7 @@ public class AttackArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyInRange != null && Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Enemy damage");
-            EnemyHealth enemyHealth = enemyInRange.gameObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(_playerStats.damage); 
-            }
-        }
+        StartCoroutine(Attack());
     }
 
     // Quando il nemico entra nel collider
@@ -49,6 +43,20 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("Enemy exited");
             enemyInRange = null; 
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        if (enemyInRange != null && Input.GetMouseButtonDown(0))
+        {
+            yield return new WaitForSeconds(0.3f);
+            Debug.Log("Enemy damage");
+            EnemyHealth enemyHealth = enemyInRange.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(_playerStats.damage); 
+            }
         }
     }
 }

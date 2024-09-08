@@ -750,7 +750,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2306083624955950889, guid: c3e954c817b28f14eb2137e39c3d83ac, type: 3}
   spawnPoints:
   - {fileID: 1475457798}
-  spawnInterval: 10000
+  spawnInterval: 10
 --- !u!4 &1475457798
 Transform:
   m_ObjectHideFlags: 0
@@ -970,6 +970,10 @@ PrefabInstance:
       propertyPath: lastLapTimeText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7574382342774752534, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
+      propertyPath: hitParticles
+      value: 
+      objectReference: {fileID: 7263258662262966278, guid: 1832afaf4ea622749a74a0ba4f020d37, type: 3}
     - target: {fileID: 8181472101480452168, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
