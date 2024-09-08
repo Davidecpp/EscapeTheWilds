@@ -15,10 +15,11 @@ public class EnemyHealth : MonoBehaviour
     public float raycastDistance = 10.0f; // Distanza del Raycast per verificare il suolo
     
     public GameObject hitParticles;
-
+    private AudioSource _audioSource;
     void Start()
     {
         _playerStats = FindObjectOfType<PlayerStats>();
+        _audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
     }
 
@@ -28,6 +29,10 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= amount;
         UpdateHealthBar();
         Instantiate(hitParticles, pos, transform.rotation);
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         
         Debug.Log("Enemy took damage: " + amount + ", current health: " + currentHealth); 
         if (currentHealth <= 0)
