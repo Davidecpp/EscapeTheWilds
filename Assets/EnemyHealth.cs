@@ -35,17 +35,11 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Enemy died."); 
-
-        // Aggiungi esperienza al player
         if (_playerStats != null)
         {
             _playerStats.AddExperience(30);
         }
-
-        // Spawn degli oggetti alla morte del nemico
         SpawnItems();
-
-        // Distruggi il nemico
         Destroy(gameObject);
     }
 

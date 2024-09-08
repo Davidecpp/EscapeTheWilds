@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +13,9 @@ public class ProvaCamera : MonoBehaviour
     public float transitionSpeed = 5f;
     public float sprintDuration = 5f;
     public float sprintRechargeSpeed = 0.5f;
+    public float shakeDuration = 0.1f;  // Durata dello scuotimento
+    public float shakeMagnitude = 0.1f; // Intensità dello scuotimento
+    public float shakeDelay = 0.2f;  
 
     private Vector2 _rotation;
     public bool isSprinting = false;
@@ -21,13 +23,14 @@ public class ProvaCamera : MonoBehaviour
     private Vector3 initialCameraPosition;
     private CharacterController controller;
 
+    private MenuManager menuManager;
+
     void Start()
     {
         sprintTimer = sprintDuration;
         initialCameraPosition = playerCamera.localPosition;
-        controller = animal.GetComponent<CharacterController>(); 
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        controller = animal.GetComponent<CharacterController>();
+        menuManager = FindObjectOfType<MenuManager>();
     }
 
     void Update()
@@ -35,6 +38,15 @@ public class ProvaCamera : MonoBehaviour
         HandleCameraRotation();
         HandleSprint();
         UpdateCameraPosition();
+
+        if (!menuManager.menu.activeSelf)
+        {
+            // Quando il giocatore preme il pulsante sinistro del mouse, scuote la camera
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(CameraShake());
+            }
+        }
     }
 
     private void HandleCameraRotation()
@@ -92,5 +104,25 @@ public class ProvaCamera : MonoBehaviour
         Vector3 targetPosition = animal.position - animal.forward * targetDistance;
         targetPosition.y = animal.position.y + initialCameraPosition.y;
         playerCamera.position = Vector3.Lerp(playerCamera.position, targetPosition, transitionSpeed * Time.deltaTime);
+    }
+
+    // Funzione per scuotere la camera
+    private IEnumerator CameraShake()
+    {
+        yield return new WaitForSeconds(shakeDelay); 
+        
+        Vector3 originalPosition = playerCamera.localPosition; 
+        float elapsed = 0.0f;
+
+        while (elapsed < shakeDuration)
+        {
+            // Genera uno spostamento casuale attorno alla posizione originale
+            Vector3 randomPoint = originalPosition + Random.insideUnitSphere * shakeMagnitude;
+            playerCamera.localPosition = randomPoint;
+
+            elapsed += Time.deltaTime;
+            yield return null; // Attende il prossimo frame
+        }
+        playerCamera.localPosition = originalPosition;
     }
 }
