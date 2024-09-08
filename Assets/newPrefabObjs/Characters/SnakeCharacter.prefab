@@ -1083,6 +1083,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4807929556901506227, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8999338503545881367, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1198,6 +1202,9 @@ MonoBehaviour:
   transitionSpeed: 5
   sprintDuration: 5
   sprintRechargeSpeed: 0.5
+  shakeDuration: 0.1
+  shakeMagnitude: 0.1
+  shakeDelay: 0.2
   isSprinting: 0
 --- !u!143 &8874705489855274429
 CharacterController:
@@ -1255,6 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85023d6755448a24e8d85e12f1e97637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!114 &6078769998211558032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,6 +1374,7 @@ MonoBehaviour:
   moveSpeed: 8
   jumpHeight: 10
   runSpeed: 15
+  damage: 10
   exp: 0
   nextLevel: 100
   level: 1

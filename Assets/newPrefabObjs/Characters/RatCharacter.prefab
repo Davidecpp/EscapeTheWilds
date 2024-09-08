@@ -10554,6 +10554,9 @@ MonoBehaviour:
   transitionSpeed: 5
   sprintDuration: 5
   sprintRechargeSpeed: 0.5
+  shakeDuration: 0.1
+  shakeMagnitude: 0.1
+  shakeDelay: 0.2
   isSprinting: 0
 --- !u!114 &6897450107361349302
 MonoBehaviour:
@@ -10570,8 +10573,8 @@ MonoBehaviour:
   target: {fileID: 3415161505530495311}
   sandParticles: {fileID: 6545769407665680638}
   waterParticles: {fileID: 3734864801623422969}
-  invincibleParticles: {fileID: 0}
-  healParticles: {fileID: 0}
+  invincibleParticles: {fileID: 8846737274113074930, guid: 88efbaeb06fd0e147bb7230ec7674813, type: 3}
+  healParticles: {fileID: 6331275906715107348, guid: 09cb9e39d788c6d478a2c02c65811933, type: 3}
   _rotSpeed: 0
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 2487174386987471698}
@@ -10597,6 +10600,7 @@ MonoBehaviour:
   moveSpeed: 10
   jumpHeight: 25
   runSpeed: 15
+  damage: 10
   exp: 0
   nextLevel: 100
   level: 1
@@ -10667,7 +10671,7 @@ MonoBehaviour:
     counterText: {fileID: 8199372051596583185}
   coinCounter:
     count: 0
-    counterText: {fileID: 318933334865460630}
+    counterText: {fileID: 6056035511049808638}
   bulletCounter:
     count: 0
     counterText: {fileID: 4637671302441304288}
@@ -10683,6 +10687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85023d6755448a24e8d85e12f1e97637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!114 &4540265628453550474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10894,6 +10899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Strawberries
       objectReference: {fileID: 0}
+    - target: {fileID: 7747996359318358149, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: coinTxt
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8057929387691533824, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_Name
       value: StrawberriesTxt
@@ -10987,21 +10996,11 @@ PrefabInstance:
       value: 312
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4600047956779719739, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
---- !u!114 &318933334865460630 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6033492073001969557, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
-  m_PrefabInstance: {fileID: 6329335659316468227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &375238125533454619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5972701270864018200, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
@@ -11130,6 +11129,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1833216423670095860, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
   m_PrefabInstance: {fileID: 6329335659316468227}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6056035511049808638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 278393086193905917, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+  m_PrefabInstance: {fileID: 6329335659316468227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6107644628130168842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 222056623433112073, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}

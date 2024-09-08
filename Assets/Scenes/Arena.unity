@@ -462,7 +462,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7494260267998021176, guid: 990993a2b9024a140b233d08f89ce445, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 990993a2b9024a140b233d08f89ce445, type: 3}
@@ -750,7 +751,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2306083624955950889, guid: c3e954c817b28f14eb2137e39c3d83ac, type: 3}
   spawnPoints:
   - {fileID: 1475457798}
-  spawnInterval: 10
+  spawnInterval: 3
 --- !u!4 &1475457798
 Transform:
   m_ObjectHideFlags: 0
