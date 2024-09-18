@@ -24,7 +24,6 @@ public class PlayerStats : MonoBehaviour
         }
         Debug.Log(GetExperience());
     }
-
     public float GetExperience()
     {
         return exp;

@@ -9,23 +9,26 @@ public class ShopManager : MonoBehaviour
 {
     public int coins;
     public TMP_Text coinTxt;
-
+    
+    // Negozio
     public ShopItem[] shopItems;
     public ShopTemplate[] shopPanels;
     public GameObject[] shopPanelGO;
-
     public Button[] purchaseBtns;
 
     private Inventory _inventory;
+    private PlayerStats _playerStats;
+    
     // Start is called before the first frame update
     void Start()
     {
         _inventory = FindObjectOfType<Inventory>();
+        _playerStats = FindObjectOfType<PlayerStats>();
+        
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopPanelGO[i].SetActive(true);
         }
-        
         
         LoadPanels();
         CheckPurchaseable();
@@ -38,7 +41,7 @@ public class ShopManager : MonoBehaviour
         CheckPurchaseable();
     }
     
-    // verifica se puoi acquistare gli oggetti
+    // Verifica se puoi acquistare gli oggetti 
     public void CheckPurchaseable()
     {
         for (int i = 0; i < shopItems.Length; i++)
@@ -53,35 +56,40 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-
+    // Compra oggetti
     public void PurchaseItem(int btNo)
     {
         if (_inventory.GetCoinCount() >= shopItems[btNo].cost)
         {
             _inventory.RemoveCoins(shopItems[btNo].cost);
-            //coinTxt.text = "Coins: " + _inventory.GetCoinCount();
-            //CheckPurchaseable();
 
             if (shopItems[btNo].title == "Ammo")
             {
                 AddBullets(3);
             }
+            if (shopItems[btNo].title == "Heart")
+            {
+                GameManager.Instance.IncreaseHealth();
+            }
         }
     }
-
+    // Aggiungi monete
     public void AddCoins()
     {
         _inventory.AddCoin(1);
-        //coinTxt.text = "Coins: " + _inventory.GetCoinCount();
-        //CheckPurchaseable();
     }
+    // Aggiungi proiettili
     public void AddBullets(int amount)
     {
         _inventory.AddBullet(amount);
-        //CheckPurchaseable();
+    }
+    // Aggiungi vita
+    public void AddHeart()
+    {
+        _playerStats.health++;
     }
     
-    // carica info oggetti nei pannelli
+    // Carica info oggetti nei pannelli del negozio
     public void LoadPanels()
     {
         for (int i = 0; i < shopItems.Length; i++)

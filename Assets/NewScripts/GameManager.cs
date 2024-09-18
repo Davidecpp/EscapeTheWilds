@@ -12,29 +12,33 @@ public class GameManager : MonoBehaviour
     public GameObject gameOver, boost, win;
     public GameObject menu;
     public GameObject skills, canvas, shop;
-
+    
+    // Vita
     public RawImage heartPrefab; 
-    public Transform heartsContainer; 
+    public Transform heartsContainer;
+    private List<RawImage> _hearts = new List<RawImage>();
+    
     public static GameManager Instance { get; private set; }
     
-    private PlayerStats _playerStats;
-
+    // Effetto boost
     private static TextMeshProUGUI BoostText { get; set; } 
     [SerializeField] private TextMeshProUGUI boostText;
-
+    
+    // Effetto danno
     [SerializeField] private RawImage redFlashImage;
     [SerializeField] private float flashDuration = 0.1f;
 
     [SerializeField] private int winCondition;
-    // laps
+    
+    // Giri
     public int laps = 0;
     public int totLaps;
     public TMP_Text lapsTxt;
     
-    private List<RawImage> _hearts = new List<RawImage>();
-
+    private PlayerStats _playerStats;
     private Inventory _inventory;
-
+    
+    // Condizioni
     public bool invincible = false;
     public bool healing = false;
     public bool heated = false;
@@ -89,12 +93,14 @@ public class GameManager : MonoBehaviour
         }
         
     }
-
+    
+    // Aggiorna giro
     private void UpdateLap()
     {
         lapsTxt.text = laps + "/" + totLaps;
     }
-
+    
+    // Inizializzazioni
     private void SetStartActivation()
     {
         gameOver.SetActive(false);
@@ -106,9 +112,11 @@ public class GameManager : MonoBehaviour
             redFlashImage.gameObject.SetActive(false); 
         }
     }
-
+    
+    // Finestre apribili
     private void PopUpWindows()
     {
+        // TAB per aprire miglioramento skills
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             if (skills != null)
@@ -116,25 +124,23 @@ public class GameManager : MonoBehaviour
                 skills.SetActive(!skills.activeSelf);
             }
         }
+        // M per aprire negozio
         if (Keyboard.current.mKey.wasPressedThisFrame)
         {
             if (shop != null)
             {
                 bool isShopOpen = shop.activeSelf;
-
-                // Toggle the shop's active state
                 shop.SetActive(!isShopOpen);
-
+                
+                // Se negozio aperto, chiudo e riprendi il gioco
                 if (isShopOpen)
                 {
-                    // If the shop was open, close it and resume the game
                     Cursor.lockState = CursorLockMode.Locked; 
                     Cursor.visible = false; 
                     Time.timeScale = 1;
                 }
                 else
                 {
-                    // If the shop was closed, open it and pause the game
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true; 
                     Time.timeScale = 0;
@@ -153,7 +159,8 @@ public class GameManager : MonoBehaviour
             _hearts.Add(heart);
         }
     }
-
+    
+    // Aggiorna vita personaggio
     private void UpdateHearts()
     {
         while (_hearts.Count < _playerStats.health)
@@ -208,7 +215,8 @@ public class GameManager : MonoBehaviour
         win.SetActive(true);
         //Time.timeScale = 0;
     }
-
+    
+    // Diminuisci vita personaggio
     public void DecreaseHealth()
     {
         if (_playerStats.health > 0 && !invincible)
@@ -218,13 +226,15 @@ public class GameManager : MonoBehaviour
             StartCoroutine(FlashRed());
         }
     }
-
+    
+    // Aumenta vita personaggio
     public void IncreaseHealth()
     {
         _playerStats.health++;
         UpdateHearts();
     }
-
+    
+    // Ricomincia partita
     public void RestartGame()
     {
         Time.timeScale = 1;
@@ -240,7 +250,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // effetto boost
+    // Effetto boost
     private IEnumerator ShowBoostCoroutine(float duration)
     {
         BoostText.gameObject.SetActive(true);
@@ -254,7 +264,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // effetto danno
+    // Effetto danno
     private IEnumerator FlashRed()
     {
         if (redFlashImage != null)

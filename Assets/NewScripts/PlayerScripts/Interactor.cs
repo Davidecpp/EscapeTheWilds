@@ -18,9 +18,11 @@ public class Interactor : MonoBehaviour
     {
         Interaction();
     }
-
+    
+    // Interazione con oggetti
     private void Interaction()
     {
+        // Se interaction point tocca un oggetto Interactable avviene Interaction
         int numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, _colliders, interactableMask);
 
         if (numFound > 0)
@@ -81,7 +83,8 @@ public class Interactor : MonoBehaviour
             }
         }
     }
-
+    
+    // Disegna interaction point
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

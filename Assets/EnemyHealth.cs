@@ -3,17 +3,19 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    // Vita nemico
     public float maxHealth = 100.0f;
     private float currentHealth;
     private PlayerStats _playerStats;
-
     [SerializeField] private Slider _slider;
-
+    
+    // Spawn loot
     public GameObject[] itemsToSpawn; // Array di prefab degli oggetti da spawnare
     public int numberOfItemsToSpawn = 3; // Numero di oggetti da spawnare
     public float spawnHeightOffset = 1.0f; // Offset verticale per sollevare gli oggetti
     public float raycastDistance = 10.0f; // Distanza del Raycast per verificare il suolo
     
+    // Effetti danno
     public GameObject hitParticles;
     private AudioSource _audioSource;
     void Start()
@@ -22,13 +24,16 @@ public class EnemyHealth : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
     }
-
+    
+    // Subisce danno
     public void TakeDamage(float amount)
     {
+        GameObject particles;
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentHealth -= amount;
         UpdateHealthBar();
-        Instantiate(hitParticles, pos, transform.rotation);
+        particles = Instantiate(hitParticles, pos, transform.rotation);
+        Destroy(particles, 0.3f);
         if (_audioSource != null)
         {
             _audioSource.Play();
@@ -40,7 +45,8 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-
+    
+    // Muore
     private void Die()
     {
         Debug.Log("Enemy died."); 

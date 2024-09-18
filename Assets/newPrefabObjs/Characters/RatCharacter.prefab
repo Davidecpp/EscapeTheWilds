@@ -10258,6 +10258,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5099730065642853692}
     - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 3208167536468919876}
+    - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
       propertyPath: shop
       value: 
       objectReference: {fileID: 8612104929101459625}
@@ -10573,8 +10577,8 @@ MonoBehaviour:
   target: {fileID: 3415161505530495311}
   sandParticles: {fileID: 6545769407665680638}
   waterParticles: {fileID: 3734864801623422969}
-  invincibleParticles: {fileID: 8846737274113074930, guid: 88efbaeb06fd0e147bb7230ec7674813, type: 3}
-  healParticles: {fileID: 6331275906715107348, guid: 09cb9e39d788c6d478a2c02c65811933, type: 3}
+  invincibleParticles: {fileID: 2010325192313543974}
+  healParticles: {fileID: 7371097107606310035}
   _rotSpeed: 0
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 2487174386987471698}
@@ -10821,6 +10825,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6331275906715107350, guid: 690951f4781b19649bc5c7892414ff37, type: 3}
   m_PrefabInstance: {fileID: 3573131484903951495}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &7371097107606310035 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6331275906715107348, guid: 690951f4781b19649bc5c7892414ff37, type: 3}
+  m_PrefabInstance: {fileID: 3573131484903951495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6329335659316468227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10902,7 +10911,7 @@ PrefabInstance:
     - target: {fileID: 7747996359318358149, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: coinTxt
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6056035511049808638}
     - target: {fileID: 8057929387691533824, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_Name
       value: StrawberriesTxt
@@ -11068,6 +11077,11 @@ GameObject:
 --- !u!224 &2769913667928110617 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8189484697745615898, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+  m_PrefabInstance: {fileID: 6329335659316468227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3208167536468919876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8886695387431099463, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
   m_PrefabInstance: {fileID: 6329335659316468227}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4075940230025996417 stripped
@@ -11254,5 +11268,10 @@ PrefabInstance:
 --- !u!4 &2010325192313543968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+  m_PrefabInstance: {fileID: 6999702892058360788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2010325192313543974 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8846737274113074930, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
   m_PrefabInstance: {fileID: 6999702892058360788}
   m_PrefabAsset: {fileID: 0}

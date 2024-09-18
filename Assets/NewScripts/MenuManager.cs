@@ -18,19 +18,18 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        //PauseGame();
     }
-
+    // Pausa
     private void PauseGame()
     {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-
+    
+    // Riprendi 
     public void ResumeGame()
     {
-        Debug.Log("RESUMEE");
         menu.SetActive(false);
         Time.timeScale = 1;
         Cursor.visible = false;
@@ -41,8 +40,6 @@ public class MenuManager : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Debug.LogError("ESC");
-
             // Alterna lo stato del menu
             if (menu.activeSelf)
             {
@@ -117,7 +114,6 @@ public class MenuManager : MonoBehaviour
     {
         controls.SetActive(true);
         buttons.SetActive(false);
-        //menu.SetActive(false);
     }
 
     private void CloseControls()

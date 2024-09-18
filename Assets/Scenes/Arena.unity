@@ -488,7 +488,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 8865796218170777025, guid: 1eda1fa22f260fd4d994b573b333323c, type: 3}
   spawnPoints:
   - {fileID: 1475457798}
-  spawnInterval: 3
+  spawnInterval: 5
 --- !u!4 &1475457798
 Transform:
   m_ObjectHideFlags: 0

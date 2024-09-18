@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class NewProj : MonoBehaviour
 {
-    public float damage = 10.0f; 
+    public float damage = 10.0f;
+    
+    // Particelle
     public GameObject hitParticles;
     public GameObject fireParticles;
 
@@ -10,7 +12,8 @@ public class NewProj : MonoBehaviour
     {
         GameObject particles;
         Debug.Log("Projectile hit: " + collision.gameObject.name); 
-        // hit particles
+        
+        // Se heated genera particelle infuocate altrimenti base
         if (GameManager.Instance.heated)
         {
             particles = Instantiate(fireParticles, transform.position, transform.rotation);
@@ -22,7 +25,7 @@ public class NewProj : MonoBehaviour
             Destroy(particles, 1f);
         }
         
-
+        // Se colpisce un nemico gli fa danno
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Hit an enemy: " + collision.gameObject.name); 

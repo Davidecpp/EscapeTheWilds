@@ -7,9 +7,11 @@ using UnityEngine.InputSystem;
 public class AnimalAnimation : MonoBehaviour
 {
     private Animator _animator;
+    private CharacterController _characterController;
+    
+    // Condizioni
     private bool isJumping = false;
     public bool isAttacking = false;
-    private CharacterController _characterController;
 
     void Start()
     {
@@ -32,7 +34,6 @@ public class AnimalAnimation : MonoBehaviour
 
                 if (isWalking && !isJumping)
                 {
-                    //Debug.Log("IsWalking");
                     _animator.SetBool("IsWalking", true);
                     _animator.SetBool("IsIdling", false);
                 
@@ -53,7 +54,7 @@ public class AnimalAnimation : MonoBehaviour
         }
         
     }
-
+    // Animazione salto
     private IEnumerator JumpAnimation(float seconds)
     {
         isJumping = true;
@@ -64,6 +65,7 @@ public class AnimalAnimation : MonoBehaviour
         _animator.SetBool("IsWalking", true);
         isJumping = false;
     }
+    // Animazione attacco
     private IEnumerator AttackAnimation(float seconds, float moveSpeed)
     {
         isAttacking = true;
@@ -82,8 +84,6 @@ public class AnimalAnimation : MonoBehaviour
         }
         _animator.ResetTrigger("TrAttack");
         _animator.SetBool("IsWalking", true);
-        //Debug.Log("attack finished");
-
         isAttacking = false;
     }
 

@@ -48,7 +48,8 @@ public class EnemyAI : MonoBehaviour
             _agent.isStopped = true;
         }
     }
-
+    
+    // Spara
     private void Shoot()
     {
         _bulletTime -= Time.deltaTime;
@@ -60,7 +61,8 @@ public class EnemyAI : MonoBehaviour
         bulletRig.AddForce(bulletRig.transform.forward * bulletSpeed);
         Destroy(bullet, 0.5f);
     }
-
+    
+    // Insegui player
     private void ChasePlayer()
     {
         _agent.isStopped = false;
