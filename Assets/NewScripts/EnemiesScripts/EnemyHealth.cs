@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     // Vita nemico
     public float maxHealth = 100.0f;
-    private float currentHealth;
+    public float currentHealth;
     private PlayerStats _playerStats;
     [SerializeField] private Slider _slider;
     
