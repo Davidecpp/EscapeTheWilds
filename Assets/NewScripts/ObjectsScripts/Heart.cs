@@ -7,10 +7,11 @@ public class Heart : MonoBehaviour, IInteractible
     [SerializeField] private bool shouldDisappear;
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Gives +1 health
     public bool Interact(Interactor interactor)
     {
-        // +1 vita
         Debug.Log("Heart picked");
         GameManager.Instance.IncreaseHealth();
         GameManager.Instance.healing = true;
@@ -19,7 +20,6 @@ public class Heart : MonoBehaviour, IInteractible
         {
             Destroy(gameObject); 
         }
-
         return true;
     }
 }

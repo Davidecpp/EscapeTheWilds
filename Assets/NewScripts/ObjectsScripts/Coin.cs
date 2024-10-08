@@ -8,7 +8,9 @@ public class Coin : MonoBehaviour, IInteractible
     
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Gives +1 coin
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = FindObjectOfType<Inventory>();
@@ -21,7 +23,6 @@ public class Coin : MonoBehaviour, IInteractible
             {
                 Destroy(gameObject); 
             }
-
             return true;
         }
         else
@@ -30,5 +31,4 @@ public class Coin : MonoBehaviour, IInteractible
             return false;
         }
     }
-    
 }

@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public GameObject options;
     public GameObject characterSelection;
     public GameObject menu;
+    public GameObject stats;
     
     public GameObject[] characters;
     private int _activeScene;
@@ -132,6 +133,18 @@ public class MenuManager : MonoBehaviour
     {
         options.SetActive(false);
         buttons.SetActive(true);
+    }
+
+    public void OpenStats()
+    {
+        stats.SetActive(true);
+        menu.SetActive(false);
+    }
+
+    public void OpenTab(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+        menu.SetActive(false);
     }
 
     public void OpenCharacterSelection(int i)

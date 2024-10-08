@@ -6,10 +6,11 @@ public class Pepper : MonoBehaviour, IInteractible
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
     
-
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Makes bullets inflammable for a short period of time
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Pepper picked");

@@ -20,7 +20,9 @@ public class Door : MonoBehaviour, IInteractible
         _closedPosition = transform.localPosition;
         _openPosition = _closedPosition - new Vector3(0, openDistance, 0);
     }
-
+    
+    // Object interaction
+    // Opening door with key
     public bool Interact(Interactor interactor)
     {
         var inventory = interactor.GetComponent<Inventory>();

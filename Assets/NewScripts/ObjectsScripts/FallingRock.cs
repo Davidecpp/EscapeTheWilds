@@ -15,13 +15,15 @@ public class FallingRock : MonoBehaviour
     void Update()
     {
     }
-
+    
+    // Let the rock fall
     public void DropRock()
     {
         rb.isKinematic = false; 
         hasFallen = true;
     }
-
+    
+    // Damage the player if hit
     void OnCollisionEnter(Collision collision)
     {
         if (hasFallen)
@@ -35,6 +37,7 @@ public class FallingRock : MonoBehaviour
             //Destroy(gameObject, 2f); 
         }
     }
+    // When the player is in the area it activates
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

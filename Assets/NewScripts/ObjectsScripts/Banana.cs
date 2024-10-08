@@ -7,7 +7,9 @@ public class Banana : MonoBehaviour, IInteractible
 
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true; 
-
+    
+    // Object interaction
+    // Damage the player
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Banana picked");
@@ -22,7 +24,6 @@ public class Banana : MonoBehaviour, IInteractible
         {
             Destroy(gameObject); 
         }
-
         return true;
     }
 }

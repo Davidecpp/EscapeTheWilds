@@ -11,7 +11,9 @@ public class Star : MonoBehaviour, IInteractible
 
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Makes player invincible for a short period of time
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Star picked");

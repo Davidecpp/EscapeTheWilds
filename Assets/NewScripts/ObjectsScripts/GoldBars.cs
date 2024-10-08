@@ -8,7 +8,9 @@ public class GoldBars : MonoBehaviour, IInteractible
     
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Gives +10 coin
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = FindObjectOfType<Inventory>();

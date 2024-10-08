@@ -8,7 +8,9 @@ public class Strawberry : MonoBehaviour, IInteractible
 
     public string InteractionPrompt => prompt;
     public bool bonusObj => _bonusObj;
-
+    
+    // Object interaction
+    // Pick strawberry
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = FindObjectOfType<Inventory>();

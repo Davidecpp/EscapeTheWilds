@@ -10,12 +10,15 @@ public class Key : MonoBehaviour, IInteractible
 
     public string InteractionPrompt => prompt;
     public bool bonusObj => _bonusObj;
-
+    
+    // Object interaction
+    // Pick key
     public bool Interact(Interactor interactor)
     {
         var inventory = interactor.GetComponent<Inventory>();
         inventory.hasKey = true;
         Debug.Log("Key picked");
+        
         if (shouldDisappear)
         {
             Destroy(gameObject); 

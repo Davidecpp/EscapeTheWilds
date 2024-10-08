@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     public float jumpForce = 10f;
-
+    
+    // Player bounces on collision
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

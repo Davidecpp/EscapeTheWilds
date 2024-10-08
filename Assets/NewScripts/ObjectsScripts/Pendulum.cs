@@ -19,13 +19,15 @@ public class Pendulum : MonoBehaviour
             random = UnityEngine.Random.Range(0f, 1f);
         }
     }
-
+    
     private void Update()
     {
+        // Swing
         float angle = limit * Mathf.Sin((Time.time + random) * speed);
         transform.localRotation = Quaternion.Euler(0,0,angle);
     }
     
+    // Damage player if hit
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

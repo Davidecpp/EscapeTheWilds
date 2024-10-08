@@ -8,7 +8,9 @@ public class Bullet : MonoBehaviour, IInteractible
     
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-
+    
+    // Object interaction
+    // Gives +1 ammo
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = FindObjectOfType<Inventory>();

@@ -3,19 +3,20 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    // Vita nemico
+    // Enemy Health
     public float maxHealth = 100.0f;
     public float currentHealth;
+    
     private PlayerStats _playerStats;
     [SerializeField] private Slider _slider;
     
     // Spawn loot
-    public GameObject[] itemsToSpawn; // Array di prefab degli oggetti da spawnare
-    public int numberOfItemsToSpawn = 3; // Numero di oggetti da spawnare
-    public float spawnHeightOffset = 1.0f; // Offset verticale per sollevare gli oggetti
-    public float raycastDistance = 10.0f; // Distanza del Raycast per verificare il suolo
+    public GameObject[] itemsToSpawn; 
+    public int numberOfItemsToSpawn = 3; 
+    public float spawnHeightOffset = 1.0f; // Vertical offset for objs
+    public float raycastDistance = 10.0f; // Raycast distance from the ground
     
-    // Effetti danno
+    // Damage Effects
     public GameObject hitParticles;
     private AudioSource _audioSource;
     void Start()
@@ -25,15 +26,19 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
     
-    // Subisce danno
+    // Take damage
     public void TakeDamage(float amount)
     {
-        GameObject particles;
+        
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentHealth -= amount;
         UpdateHealthBar();
+        
+        // Hit particles
+        GameObject particles;
         particles = Instantiate(hitParticles, pos, transform.rotation);
         Destroy(particles, 0.3f);
+        
         if (_audioSource != null)
         {
             _audioSource.Play();
@@ -46,7 +51,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
     
-    // Muore
+    // Make the enemy disappear and call SpawnItems()
     private void Die()
     {
         Debug.Log("Enemy died."); 
@@ -57,31 +62,28 @@ public class EnemyHealth : MonoBehaviour
         SpawnItems();
         Destroy(gameObject);
     }
-
+    
+    // Spawn items
     private void SpawnItems()
     {
         for (int i = 0; i < numberOfItemsToSpawn; i++)
         {
-            // Scegli un oggetto casuale dall'array
+            // Choose random object from array
             GameObject itemToSpawn = itemsToSpawn[Random.Range(0, itemsToSpawn.Length)];
 
-            // Calcola la posizione di spawn con offset
+            // Obj spawn position
             Vector3 spawnPosition = transform.position;
-            spawnPosition.y += spawnHeightOffset; // Aggiungi l'offset verticale
+            spawnPosition.y += spawnHeightOffset; 
 
-            // Usa un Raycast per verificare se il punto di spawn è sopra il terreno
+            // Raycast to verify the object is above the ground
             if (Physics.Raycast(spawnPosition, Vector3.down, out RaycastHit hit, raycastDistance))
             {
-                // Se il Raycast colpisce qualcosa, posiziona l'oggetto sopra il terreno
                 spawnPosition.y = hit.point.y + spawnHeightOffset;
             }
             else
             {
-                // Se non colpisce nulla, usa la posizione originale con l'offset
                 spawnPosition.y += spawnHeightOffset;
             }
-
-            // Istanziamo l'oggetto nella posizione calcolata
             Instantiate(itemToSpawn, spawnPosition, Quaternion.identity);
         }
     }
