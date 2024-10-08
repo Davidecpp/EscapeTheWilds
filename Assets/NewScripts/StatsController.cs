@@ -16,7 +16,7 @@ public class StatsController : MonoBehaviour
     void Start()
     {
         _stats = FindObjectOfType<PlayerStats>();
-        SetStats();
+        //SetStats();
     }
     
     // Set player stats
@@ -31,6 +31,6 @@ public class StatsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SetStats();
     }
 }
