@@ -5,13 +5,15 @@ using TMPro;
 using Unity.VisualScripting;
 
 public class Inventory : MonoBehaviour
-{
+{   
+    // Key
     public bool hasKey = false;
     [SerializeField] private RawImage keyImage;
+    // Alpha image
     public float maxAlphaValue = 1f;
     public float minAlphaValue = 0.3f;
 
-    public int maxBullets = 3;
+    public int maxBullets = 10;
 
     [System.Serializable]
     public struct ResourceCounter
@@ -19,10 +21,14 @@ public class Inventory : MonoBehaviour
         public int count;
         public TextMeshProUGUI counterText;
     }
-
+    
+    // Resources counters
     [SerializeField] private ResourceCounter strawberryCounter;
     [SerializeField] private ResourceCounter coinCounter;
     [SerializeField] private ResourceCounter bulletCounter;
+    
+    // Obj images
+    [SerializeField] private Image strawberryImg;
 
     private void Start()
     {
@@ -33,7 +39,8 @@ public class Inventory : MonoBehaviour
     {
         SetImageAlpha(hasKey ? maxAlphaValue : minAlphaValue);
     }
-
+    
+    // Change key image aplha
     private void SetImageAlpha(float alphaValue)
     {
         if (keyImage != null)
@@ -70,8 +77,6 @@ public class Inventory : MonoBehaviour
                 UpdateResourceCounter(resourceCounter);
             }
         }
-        
-        
     }
 
     private void UpdateResourceCounter(ResourceCounter resourceCounter)
