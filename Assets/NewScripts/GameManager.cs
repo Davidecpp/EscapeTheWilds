@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -9,50 +10,45 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // Game objects
     public GameObject gameOver, boost, win;
     public GameObject menu;
     public GameObject skills, canvas, shop;
     
-    // Vita
+    // Life
     public RawImage heartPrefab; 
     public Transform heartsContainer;
     private List<RawImage> _hearts = new List<RawImage>();
     
     public static GameManager Instance { get; private set; }
     
-    // Effetto boost
-    private static TextMeshProUGUI BoostText { get; set; } 
-    [SerializeField] private TextMeshProUGUI boostText;
-    
-    // Effetto danno
+    // Damage effect
     [SerializeField] private RawImage redFlashImage;
     [SerializeField] private float flashDuration = 0.1f;
 
     [SerializeField] private int winCondition;
     
-    // Giri
+    // Laps
     public int laps = 0;
     public int totLaps;
     public TMP_Text lapsTxt;
     
     private PlayerStats _playerStats;
     private Inventory _inventory;
+    private CanvasManager _canvasManager;
     
-    // Condizioni
+    // Conditions
     public bool invincible = false;
     public bool healing = false;
     public bool heated = false;
     public int coins = 0;
-
     
-
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            BoostText = boostText; 
         }
         else
         {
@@ -73,96 +69,33 @@ public class GameManager : MonoBehaviour
         if (_inventory == null)
         {
             Debug.LogError("Inventory not found in the scene.");
+            return;
         }
 
-        InitializeHearts();
+        _canvasManager = FindObjectOfType<CanvasManager>();
         UpdateHearts();
-        SetStartActivation();
-    }
-
-
-    void Update()
-    {
-        CheckWin();
-        PopUpWindows();
-        UpdateLap();
-
-        if (heated)
-        {
-            StartCoroutine(FlameOff(5.0f));
-        }
-        
     }
     
-    // Aggiorna giro
-    private void UpdateLap()
+    // Pause the game and makes the pointer visible
+    private void PauseGame()
     {
-        lapsTxt.text = laps + "/" + totLaps;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; 
+        Time.timeScale = 0;
     }
     
-    // Inizializzazioni
-    private void SetStartActivation()
+    // Resume the game and hides the pointer
+    private void ResumeGame()
     {
-        gameOver.SetActive(false);
-        win.SetActive(false);
-        shop.SetActive(false);
-        BoostText.gameObject.SetActive(false);
-        if (redFlashImage != null)
-        {
-            redFlashImage.gameObject.SetActive(false); 
-        }
+        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.visible = false; 
+        Time.timeScale = 1;
     }
     
-    // Finestre apribili
-    private void PopUpWindows()
-    {
-        // TAB per aprire miglioramento skills
-        if (Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            if (skills != null)
-            {
-                skills.SetActive(!skills.activeSelf);
-            }
-        }
-        // M per aprire negozio
-        if (Keyboard.current.mKey.wasPressedThisFrame)
-        {
-            if (shop != null)
-            {
-                bool isShopOpen = shop.activeSelf;
-                shop.SetActive(!isShopOpen);
-                
-                // Se negozio aperto, chiudo e riprendi il gioco
-                if (isShopOpen)
-                {
-                    Cursor.lockState = CursorLockMode.Locked; 
-                    Cursor.visible = false; 
-                    Time.timeScale = 1;
-                }
-                else
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true; 
-                    Time.timeScale = 0;
-                }
-            }
-        }
-
-    }
-    
-    // inizializza vita personaggio
-    private void InitializeHearts()
-    {
-        for (int i = 0; i < _playerStats.health; i++)
-        {
-            RawImage heart = Instantiate(heartPrefab, heartsContainer);
-            _hearts.Add(heart);
-        }
-    }
-    
-    // Aggiorna vita personaggio
+    // Updates player's life
     private void UpdateHearts()
     {
+        // Create an heart image for how much health the player has
         while (_hearts.Count < _playerStats.health)
         {
             RawImage heart = Instantiate(heartPrefab, heartsContainer);
@@ -180,21 +113,68 @@ public class GameManager : MonoBehaviour
         {
             _hearts[i].gameObject.SetActive(i < _playerStats.health);
         }
-        
+        GameOver();
+    }
+    // Game over
+    public void GameOver()
+    {
         if (_playerStats.health <= 0)
         {
-            Cursor.lockState = CursorLockMode.None; 
-            Cursor.visible = true;
+            PauseGame();
             gameOver.SetActive(true);
-            Time.timeScale = 0;
         }
         else
         {
             gameOver.SetActive(false);
-            Time.timeScale = 1;
+            ResumeGame();
         }
     }
 
+    void Update()
+    {
+        CheckWin();
+        TabsOpener();
+        UpdateLap();
+
+        if (heated)
+        {
+            StartCoroutine(FlameOff(5.0f));
+        }
+    }
+    private void UpdateLap()
+    {
+        lapsTxt.text = laps + "/" + totLaps;
+    }
+    
+    // Open tabs pressing keys
+    private void TabsOpener()
+    {
+        bool tabPressed = Keyboard.current.tabKey.wasPressedThisFrame;
+        bool mPressed = Keyboard.current.mKey.wasPressedThisFrame;
+        OpenTab(tabPressed, skills);
+        OpenTab(mPressed, shop);
+    }
+    
+    // General method for opening tabs
+    private void OpenTab(bool key, GameObject go)
+    {
+        if (key)
+        {
+            if (go != null)
+            {
+                go.SetActive(!go.activeSelf);
+                if (go.activeSelf)
+                {
+                    PauseGame();
+                }
+                else
+                {
+                    ResumeGame();
+                }
+            }
+        }
+    }
+    
     private void CheckWin()
     {
         if (_inventory != null && _inventory.GetStrawberryCount() >= winCondition)
@@ -213,21 +193,20 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; 
         Cursor.visible = true; 
         win.SetActive(true);
-        //Time.timeScale = 0;
     }
     
-    // Diminuisci vita personaggio
+    // Decrease player's life
     public void DecreaseHealth()
     {
         if (_playerStats.health > 0 && !invincible)
         {
             _playerStats.health--;
             UpdateHearts();
-            StartCoroutine(FlashRed());
+            StartCoroutine(_canvasManager.FlashRed());
         }
     }
     
-    // Aumenta vita personaggio
+    // Increase player's life
     public void IncreaseHealth()
     {
         _playerStats.health++;
@@ -237,44 +216,12 @@ public class GameManager : MonoBehaviour
     // Ricomincia partita
     public void RestartGame()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Awake();
     }
-
-    public void ShowBoost(float duration)
-    {
-        if (BoostText != null)
-        {
-            StartCoroutine(ShowBoostCoroutine(duration));
-        }
-    }
     
-    // Effetto boost
-    private IEnumerator ShowBoostCoroutine(float duration)
-    {
-        BoostText.gameObject.SetActive(true);
-        boost.gameObject.SetActive(true);
-        yield return new WaitForSeconds(duration);
-
-        if (BoostText != null)
-        {
-            BoostText.gameObject.SetActive(false);
-            boost.gameObject.SetActive(false);
-        }
-    }
+    // Damage effect (makes the screen red)
     
-    // Effetto danno
-    private IEnumerator FlashRed()
-    {
-        if (redFlashImage != null)
-        {
-            redFlashImage.gameObject.SetActive(true);
-            yield return new WaitForSeconds(flashDuration);
-            redFlashImage.gameObject.SetActive(false);
-        }
-    }
-
     public IEnumerator FlameOff(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -282,3 +229,4 @@ public class GameManager : MonoBehaviour
         Debug.Log("Finish");
     }
 }
+//273
