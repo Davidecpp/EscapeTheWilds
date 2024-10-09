@@ -15,11 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject menu;
     public GameObject skills, canvas, shop;
     
-    // Life
-    public RawImage heartPrefab; 
-    public Transform heartsContainer;
-    private List<RawImage> _hearts = new List<RawImage>();
-    
     public static GameManager Instance { get; private set; }
     
     // Damage effect
@@ -72,7 +67,7 @@ public class GameManager : MonoBehaviour
         }
 
         _canvasManager = FindObjectOfType<CanvasManager>();
-        UpdateHearts();
+        ResumeGame();
     }
     
     // Pause the game and makes the pointer visible
@@ -91,29 +86,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
     
-    // Updates player's life
-    private void UpdateHearts()
-    {
-        // Create an heart image for how much health the player has
-        while (_hearts.Count < _playerStats.health)
-        {
-            RawImage heart = Instantiate(heartPrefab, heartsContainer);
-            _hearts.Add(heart);
-        }
-
-        while (_hearts.Count > _playerStats.health)
-        {
-            RawImage heart = _hearts[_hearts.Count - 1];
-            _hearts.Remove(heart);
-            Destroy(heart.gameObject);
-        }
-        
-        for (int i = 0; i < _hearts.Count; i++)
-        {
-            _hearts[i].gameObject.SetActive(i < _playerStats.health);
-        }
-        GameOver();
-    }
     // Game over
     public void GameOver()
     {
@@ -200,7 +172,7 @@ public class GameManager : MonoBehaviour
         if (_playerStats.health > 0 && !invincible)
         {
             _playerStats.health--;
-            UpdateHearts();
+            _canvasManager.UpdateHearts();
             StartCoroutine(_canvasManager.FlashRed());
         }
     }
@@ -209,7 +181,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseHealth()
     {
         _playerStats.health++;
-        UpdateHearts();
+        _canvasManager.UpdateHearts();
     }
     
     // Ricomincia partita

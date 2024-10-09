@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
-
 public class Apple : MonoBehaviour, IInteractible
 {
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
     
-
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
     
@@ -26,8 +24,6 @@ public class Apple : MonoBehaviour, IInteractible
         {
             Destroy(gameObject);
         }
-
         return true;
     }
-
 }

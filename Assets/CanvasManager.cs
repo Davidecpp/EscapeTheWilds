@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    private PlayerStats _playerStats;
+    private GameManager _gameManager;
+    
+    [SerializeField] private RawImage redFlashImage;
+    private float _flashDuration = 0.2f;
+    
     // Life
     public RawImage heartPrefab; 
     public Transform heartsContainer;
     private List<RawImage> _hearts = new List<RawImage>();
     
-    private PlayerStats _playerStats;
-    private GameManager _gameManager;
-    
-    // Damage effect
-    [SerializeField] private RawImage redFlashImage;
-    private float _flashDuration = 0.2f;
-    
     // Start is called before the first frame update
     void Start()
     {
-        
+        _playerStats = FindObjectOfType<PlayerStats>();
+        _gameManager = FindObjectOfType<GameManager>();
+        UpdateHearts();
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class CanvasManager : MonoBehaviour
         
     }
     // Updates player's life
-    private void UpdateHearts()
+    public void UpdateHearts()
     {
         // Create an heart image for how much health the player has
         while (_hearts.Count < _playerStats.health)
@@ -51,6 +52,7 @@ public class CanvasManager : MonoBehaviour
         }
         _gameManager.GameOver();
     }
+    
     // Damage effect (makes the screen red)
     public IEnumerator FlashRed()
     {
