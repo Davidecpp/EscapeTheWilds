@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    public GameObject boost;
-    
     // Life
     public RawImage heartPrefab; 
     public Transform heartsContainer;
@@ -22,7 +20,7 @@ public class CanvasManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateHearts();
+        
     }
 
     // Update is called once per frame
@@ -31,7 +29,7 @@ public class CanvasManager : MonoBehaviour
         
     }
     // Updates player's life
-    public void UpdateHearts()
+    private void UpdateHearts()
     {
         // Create an heart image for how much health the player has
         while (_hearts.Count < _playerStats.health)

@@ -7,14 +7,16 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
+    // Player prefab
     [SerializeField] private Transform target;
     
-    // particelle
+    // Partciles
     [SerializeField] private ParticleSystem sandParticles;
     [SerializeField] private ParticleSystem waterParticles;
     [SerializeField] private ParticleSystem invincibleParticles;
     [SerializeField] private ParticleSystem healParticles;
-
+    
+    // Variables
     public float _rotSpeed = 15.0f;
     private float _slowSpeed;
     private float _gravity = -9.8f;
@@ -23,20 +25,17 @@ public class Movement : MonoBehaviour
     private float _vertSpeed;
     private float _currentMoveSpeed;
     private string _currentTerrainTag;
+    public float bounceStrenght = 2.0f;
     
-    // boost
+    // Boost
     public float boostSpeedMultiplier = 2.0f; 
     private bool isBoosted = false;
     private float boostDuration = 5.0f; 
     public GameObject boostAnimation;
-
     
-    public float bounceStrenght = 2.0f;
-
     private CharacterController _characterController;
     private ControllerColliderHit _controllerCollider;
     private Inventory _inventory;
-
     private PlayerStats _playerStats;
     private ProvaCamera _camera;
     
@@ -161,7 +160,8 @@ public class Movement : MonoBehaviour
 
         ShowEffects();
     }
-
+    
+    // Show particles
     private void ShowEffects()
     {
         if (GameManager.Instance.invincible)
@@ -177,7 +177,8 @@ public class Movement : MonoBehaviour
             StartCoroutine(HealEffect(1f));
         }
     }
-
+    
+    // Show heal particles
     private IEnumerator HealEffect(float seconds)
     {
         healParticles.gameObject.SetActive(true);
@@ -203,6 +204,7 @@ public class Movement : MonoBehaviour
         boostAnimation.SetActive(false);
     }
     
+    // Check terrain tag, apply malus and show effects
     void CheckTerrainAndShowParticles(RaycastHit hit)
     {
         string hitTag = hit.collider.tag;
@@ -234,7 +236,8 @@ public class Movement : MonoBehaviour
             }
         }
     }
-    
+        
+    // Modify player's speed
     void UpdateMovementSpeed()
     {
         float baseSpeed;
@@ -260,7 +263,7 @@ public class Movement : MonoBehaviour
     
     void ShootProjectile()
     {
-        // se ha proiettili spara
+        // If it has bullets can shoot
         if (_inventory != null && _inventory.GetBullets() > 0)
         {
             GameObject bullet = Instantiate(this.bullet, spawnPoint.position, spawnPoint.rotation);
@@ -271,13 +274,13 @@ public class Movement : MonoBehaviour
                 bulletRig.AddForce(spawnPoint.forward * bulletSpeed, ForceMode.Impulse);
                 bulletRig.angularVelocity = new Vector3(0, 90, 90);
             }
-        
-            _inventory.RemoveBullet();
             
+            _inventory.RemoveBullet();
             Destroy(bullet, 2.0f);
         }
     }
-
+    
+    // Generic particle player method
     void ShowParticles(ParticleSystem particles)
     {
         if (!particles.isPlaying && particles != null)

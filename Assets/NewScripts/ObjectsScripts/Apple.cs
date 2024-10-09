@@ -6,11 +6,12 @@ public class Apple : MonoBehaviour, IInteractible
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
     
+
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
     
     // Object interaction
-    // Boost player speed for a limited period of time
+    // Boost player's speed for a short period of time
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Apple picked");
@@ -25,6 +26,8 @@ public class Apple : MonoBehaviour, IInteractible
         {
             Destroy(gameObject);
         }
+
         return true;
     }
+
 }

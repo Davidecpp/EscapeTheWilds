@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
     public bool invincible = false;
     public bool healing = false;
     public bool heated = false;
-    public int coins = 0;
     
     private void Awake()
     {
@@ -219,8 +218,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Awake();
     }
-    
-    // Damage effect (makes the screen red)
     
     public IEnumerator FlameOff(float seconds)
     {

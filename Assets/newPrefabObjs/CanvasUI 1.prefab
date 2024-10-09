@@ -5080,6 +5080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boost: {fileID: 0}
+  boostAnimation: {fileID: 8453932502977071441}
   heartPrefab: {fileID: 6317893812336085837, guid: cead9421fa8b6fe4080540027c3fa0ad, type: 3}
   heartsContainer: {fileID: 8565958448390291266}
   redFlashImage: {fileID: 6834612619789296910}
