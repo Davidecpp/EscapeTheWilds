@@ -2,35 +2,47 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // Enemy spawn
     public GameObject enemyPrefab; 
     public Transform[] spawnPoints; 
     public float spawnInterval = 3f; 
+    private float _timer;
 
-    private float timer;
+    private ArenaManager _arenaManager;
+    
+    private int c = 0;
 
     void Start()
     {
-        timer = spawnInterval; // Inizializza il timer
+        _timer = spawnInterval;
+        _arenaManager = FindObjectOfType<ArenaManager>();
+        SpawnEnemy();
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
-        {
-            SpawnEnemy();
-            timer = spawnInterval; // Resetta il timer
-        }
+        //ResetTimer();
+        _arenaManager.NextRound();
     }
 
-    void SpawnEnemy()
+    
+    
+    // Reset the spawn interval timer
+    private void ResetTimer()
     {
-        // Scegli un punto di spawn casuale tra quelli disponibili
+        _timer -= Time.deltaTime;
+
+        if (_timer <= 0f)
+        {
+            SpawnEnemy();
+            _timer = spawnInterval;
+        }
+    }
+    // Spawn enemy in a random spawn point
+    public void SpawnEnemy()
+    {
         int spawnIndex = Random.Range(0, spawnPoints.Length);
         Transform spawnPoint = spawnPoints[spawnIndex];
-
-        // Istanziamo il nemico nel punto di spawn scelto
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

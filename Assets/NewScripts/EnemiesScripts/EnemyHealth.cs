@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     
     private PlayerStats _playerStats;
     [SerializeField] private Slider _slider;
+    private ArenaManager _arenaManager;
     
     // Spawn loot
     public GameObject[] itemsToSpawn; 
@@ -24,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
         _playerStats = FindObjectOfType<PlayerStats>();
         _audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
+        _arenaManager = FindObjectOfType<ArenaManager>();
     }
     
     // Take damage
@@ -61,6 +63,7 @@ public class EnemyHealth : MonoBehaviour
         }
         SpawnItems();
         Destroy(gameObject);
+        _arenaManager.round++;
     }
     
     // Spawn items

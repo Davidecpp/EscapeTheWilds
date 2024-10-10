@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
     private PlayerStats _playerStats;
     private GameManager _gameManager;
     
+    // Damage
     [SerializeField] private RawImage redFlashImage;
     private float _flashDuration = 0.2f;
     
@@ -23,7 +24,6 @@ public class CanvasManager : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         UpdateHearts();
     }
-
     // Update is called once per frame
     void Update()
     {
