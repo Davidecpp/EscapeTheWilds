@@ -1,22 +1,22 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     // Enemy spawn
-    public GameObject enemyPrefab; 
+    public GameObject enemyPrefab;
     public Transform[] spawnPoints; 
     public float spawnInterval = 3f; 
     private float _timer;
 
     private ArenaManager _arenaManager;
-    
-    private int c = 0;
 
     void Start()
     {
         _timer = spawnInterval;
         _arenaManager = FindObjectOfType<ArenaManager>();
-        SpawnEnemy();
+        SpawnEnemy(1, _arenaManager.snakeEnemy);
     }
 
     void Update()
@@ -24,9 +24,7 @@ public class EnemySpawner : MonoBehaviour
         //ResetTimer();
         _arenaManager.NextRound();
     }
-
-    
-    
+    /*
     // Reset the spawn interval timer
     private void ResetTimer()
     {
@@ -37,12 +35,15 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
             _timer = spawnInterval;
         }
-    }
-    // Spawn enemy in a random spawn point
-    public void SpawnEnemy()
+    }*/
+    // Spawn x enemies in random spawn points
+    public void SpawnEnemy(int x, GameObject enemy)
     {
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[spawnIndex];
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        for (int i = 0; i < x; i++)
+        {
+            int spawnIndex = Random.Range(0, spawnPoints.Length);
+            Transform spawnPoint = spawnPoints[spawnIndex];
+            Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        }
     }
 }

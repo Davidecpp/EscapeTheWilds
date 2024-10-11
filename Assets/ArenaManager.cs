@@ -9,8 +9,12 @@ public class ArenaManager : MonoBehaviour
     public int round = 1;
     private int _currentRound;
     public TextMeshProUGUI roundTxt;
-
+    public int deadCount = 0;
+    private bool _extraEnemySpawned = false; // State variable for extra enemy spawn
+    
     private EnemySpawner _enemySpawner;
+    public GameObject snakeEnemy;
+    public GameObject birdEnemy;
     
     // Start is called before the first frame update
     void Start()
@@ -26,10 +30,36 @@ public class ArenaManager : MonoBehaviour
     }
     public void NextRound()
     {
-        if (_currentRound != round)
+        if (deadCount == 1 && round < 3)
         {
-            _enemySpawner.SpawnEnemy();
-            _currentRound = round;
+            round++;
+            deadCount = 0;
+            _extraEnemySpawned = false;
+            _enemySpawner.SpawnEnemy(1, snakeEnemy);
+        }
+        else if(deadCount == 2 && round >= 3 && round < 7)
+        {
+            round++;
+            deadCount = 0;
+            _extraEnemySpawned = false;
+            _enemySpawner.SpawnEnemy(2, snakeEnemy);
+        }
+        else if (deadCount == 3 && round >= 7 && round < 10)
+        {
+            round++;
+            deadCount = 0;
+            _extraEnemySpawned = false;
+            _enemySpawner.SpawnEnemy(3, snakeEnemy);
+        }
+        if ((round == 3 || round == 7) && !_extraEnemySpawned)
+        {
+            _enemySpawner.SpawnEnemy(1, snakeEnemy);
+            _extraEnemySpawned = true;
+        }
+        if (round == 10 && !_extraEnemySpawned)
+        {
+            _enemySpawner.SpawnEnemy(1,  birdEnemy);
+            _extraEnemySpawned = true;
         }
     }
 }

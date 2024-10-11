@@ -1132,9 +1132,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.26
-  m_Height: 0.66957575
+  m_Height: 0.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.33830807, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!65 &7710693635652046861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1218,6 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
+  currentHealth: 0
   _slider: {fileID: 6647652907083949926}
   itemsToSpawn:
   - {fileID: 1019089635255735485, guid: e1d957ff82d982b4cbc7cd5373da02fb, type: 3}

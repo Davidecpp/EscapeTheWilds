@@ -63,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
         }
         SpawnItems();
         Destroy(gameObject);
-        _arenaManager.round++;
+        _arenaManager.deadCount++;
     }
     
     // Spawn items
