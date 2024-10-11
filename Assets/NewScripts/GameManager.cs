@@ -180,8 +180,11 @@ public class GameManager : MonoBehaviour
     // Increase player's life
     public void IncreaseHealth()
     {
-        _playerStats.health++;
-        _canvasManager.UpdateHearts();
+        if (_playerStats.health < _playerStats.maxHealth)
+        {
+            _playerStats.health++;
+            _canvasManager.UpdateHearts();
+        }
     }
     
     // Ricomincia partita

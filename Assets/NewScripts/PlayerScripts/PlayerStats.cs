@@ -5,6 +5,7 @@ public class PlayerStats : MonoBehaviour
 {
     // Stats
     public int health = 3;
+    public int maxHealth = 5;
     public float moveSpeed = 6.0f;
     public float jumpHeight = 15.0f;
     public float runSpeed = 10.0f;
@@ -36,7 +37,7 @@ public class PlayerStats : MonoBehaviour
     {
         level++;
         damage++;
-        health++;
+        maxHealth++;
         runSpeed++;
         jumpHeight++;
     }

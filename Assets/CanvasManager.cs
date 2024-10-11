@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class CanvasManager : MonoBehaviour
     public RawImage heartPrefab; 
     public Transform heartsContainer;
     private List<RawImage> _hearts = new List<RawImage>();
+    public GameObject maxLifeTxt;
     
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,15 @@ public class CanvasManager : MonoBehaviour
         for (int i = 0; i < _hearts.Count; i++)
         {
             _hearts[i].gameObject.SetActive(i < _playerStats.health);
+        }
+
+        if (_playerStats.health == _playerStats.maxHealth)
+        {
+            maxLifeTxt.SetActive(true);
+        }
+        else
+        {
+            maxLifeTxt.SetActive(false);
         }
         _gameManager.GameOver();
     }

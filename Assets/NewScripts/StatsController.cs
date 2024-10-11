@@ -10,6 +10,7 @@ public class StatsController : MonoBehaviour
     public TextMeshProUGUI healthValueTxt;
     public TextMeshProUGUI speedValueTxt;
     public TextMeshProUGUI jumpValueTxt;
+    public TextMeshProUGUI damageValueTxt;
     
     private PlayerStats _stats;
     // Start is called before the first frame update
@@ -24,8 +25,9 @@ public class StatsController : MonoBehaviour
     {
         speedValueTxt.text = ""+_stats.runSpeed;
         jumpValueTxt.text = ""+ _stats.jumpHeight;
-        healthValueTxt.text = ""+_stats.health;
+        healthValueTxt.text = ""+_stats.health+"/"+_stats.maxHealth;
         levelValueTxt.text = ""+_stats.level;
+        damageValueTxt.text = "" + _stats.damage;
     }
 
     // Update is called once per frame
