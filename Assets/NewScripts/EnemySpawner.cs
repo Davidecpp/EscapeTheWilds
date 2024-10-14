@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         //ResetTimer();
-        _arenaManager.NextRound();
+        _arenaManager.SpawnRoundEnemies();
     }
     /*
     // Reset the spawn interval timer
