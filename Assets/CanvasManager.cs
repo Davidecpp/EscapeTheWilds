@@ -29,7 +29,6 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     // Updates player's life
     public void UpdateHearts()

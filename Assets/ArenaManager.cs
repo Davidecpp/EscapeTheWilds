@@ -26,10 +26,11 @@ public class ArenaManager : MonoBehaviour
     void Update()
     {
         roundTxt.text = "Round " + round;
+        SpawnRoundEnemies();
     }
     
     // Spawn enemies when others are defeated 
-    public void SpawnRoundEnemies()
+    private void SpawnRoundEnemies()
     {
         if (deadCount == 1 && round < 3)
         {
@@ -46,15 +47,21 @@ public class ArenaManager : MonoBehaviour
             NextRound();
             _enemySpawner.SpawnEnemy(3, snakeEnemy);
         }
-        if ((round == 3 || round == 7) && !_extraEnemySpawned)
+        SpawnExtraEnemy();
+    }
+    // Spawn extra enemy
+    private void SpawnExtraEnemy()
+    {
+        switch (round)
         {
-            _enemySpawner.SpawnEnemy(1, snakeEnemy);
-            _extraEnemySpawned = true;
-        }
-        if (round == 10 && !_extraEnemySpawned)
-        {
-            _enemySpawner.SpawnEnemy(1,  birdEnemy);
-            _extraEnemySpawned = true;
+            case 3 or 7 when !_extraEnemySpawned:
+                _enemySpawner.SpawnEnemy(1, snakeEnemy);
+                _extraEnemySpawned = true;
+                break;
+            case 10 when !_extraEnemySpawned:
+                _enemySpawner.SpawnEnemy(1,  birdEnemy);
+                _extraEnemySpawned = true;
+                break;
         }
     }
     // Set variables for next round
