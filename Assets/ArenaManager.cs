@@ -28,27 +28,23 @@ public class ArenaManager : MonoBehaviour
     {
         roundTxt.text = "Round " + round;
     }
+    
+    // Spawn enemies when others are defeated 
     public void NextRound()
     {
         if (deadCount == 1 && round < 3)
         {
-            round++;
-            deadCount = 0;
-            _extraEnemySpawned = false;
+            ResetSpawnVars();
             _enemySpawner.SpawnEnemy(1, snakeEnemy);
         }
         else if(deadCount == 2 && round >= 3 && round < 7)
         {
-            round++;
-            deadCount = 0;
-            _extraEnemySpawned = false;
+            ResetSpawnVars();
             _enemySpawner.SpawnEnemy(2, snakeEnemy);
         }
         else if (deadCount == 3 && round >= 7 && round < 10)
         {
-            round++;
-            deadCount = 0;
-            _extraEnemySpawned = false;
+            ResetSpawnVars();
             _enemySpawner.SpawnEnemy(3, snakeEnemy);
         }
         if ((round == 3 || round == 7) && !_extraEnemySpawned)
@@ -62,4 +58,12 @@ public class ArenaManager : MonoBehaviour
             _extraEnemySpawned = true;
         }
     }
+
+    private void ResetSpawnVars()
+    {
+        round++;
+        deadCount = 0;
+        _extraEnemySpawned = false;
+    }
+    
 }

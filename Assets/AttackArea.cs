@@ -26,7 +26,7 @@ public class AttackArea : MonoBehaviour
         StartCoroutine(Attack());
     }
 
-    // Quando il nemico entra nel collider
+    // When enemy enters the collider
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -36,7 +36,7 @@ public class AttackArea : MonoBehaviour
         }
     }
 
-    // Quando il nemico esce dal collider
+    // When enemy exit the collider
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Enemy"))
