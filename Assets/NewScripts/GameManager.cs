@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
     
     // Pause the game and makes the pointer visible
-    private void PauseGame()
+    public void PauseGame()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true; 
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     }
     
     // Resume the game and hides the pointer
-    private void ResumeGame()
+    public void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked; 
         Cursor.visible = false; 
@@ -120,9 +120,9 @@ public class GameManager : MonoBehaviour
     // Open tabs pressing keys
     private void TabsOpener()
     {
-        bool tabPressed = Keyboard.current.tabKey.wasPressedThisFrame;
+        //bool tabPressed = Keyboard.current.tabKey.wasPressedThisFrame;
         bool mPressed = Keyboard.current.mKey.wasPressedThisFrame;
-        OpenTab(tabPressed, skills);
+        //OpenTab(tabPressed, skills);
         OpenTab(mPressed, shop);
     }
     

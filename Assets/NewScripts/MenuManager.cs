@@ -17,62 +17,36 @@ public class MenuManager : MonoBehaviour
     public GameObject[] characters;
     private int _activeScene;
 
+    private GameManager _gameManager;
+
     private void Start()
     {
-    }
-    // Pausa
-    private void PauseGame()
-    {
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        _gameManager = FindObjectOfType<GameManager>();
     }
     
-    // Riprendi 
     public void ResumeGame()
     {
+        _gameManager.ResumeGame();
         menu.SetActive(false);
-        Time.timeScale = 1;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
-
     private void Update()
     {
+        // If ESC is pressed
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            // Alterna lo stato del menu
+            // Alternate menu state
             if (menu.activeSelf)
             {
-                if (gameModes.activeSelf)
-                {
-                    CloseGameModes();
-                }
-                else if (options.activeSelf)
-                {
-                    CloseOptions();
-                }
-                else if (controls.activeSelf)
-                {
-                    CloseControls();
-                }
-                else if(characterSelection.activeSelf)
-                {
-                    CloseCharacterSelection();
-                }
-                else
-                {
-                    menu.SetActive(false);
-                    controls.SetActive(false);
-                    ResumeGame();
-                }
+                CloseTab(gameModes);
+                CloseTab(options);
+                CloseTab(controls);
+                CloseTab(stats);
+                CloseCharacterSelection();
             }
             else
             {
-                controls.SetActive(false);
                 menu.SetActive(true);  
-                CloseGameModes();  
-                PauseGame();
+                _gameManager.PauseGame();
             }
         }
 
@@ -93,58 +67,25 @@ public class MenuManager : MonoBehaviour
 
     public void Play(int i)
     {
-        // 1 ARENA
-        // 2 FOOTBALL
-        // 3 RACE
+        // 1 ARENA - 2 FOOTBALL - 3 RACE
         SceneManager.LoadSceneAsync(i);
     }
-
-    public void OpenGameModes()
-    {
-        buttons.SetActive(false);
-        gameModes.SetActive(true);
-    }
-
-    private void CloseGameModes()
-    {
-        gameModes.SetActive(false);
-        buttons.SetActive(true);
-    }
-
-    public void OpenControls()
-    {
-        controls.SetActive(true);
-        buttons.SetActive(false);
-    }
-
-    private void CloseControls()
-    {
-        controls.SetActive(false);
-        buttons.SetActive(true);
-    }
-
-    public void OpenOptions()
-    {
-        buttons.SetActive(false);
-        options.SetActive(true);
-    }
-
-    private void CloseOptions()
-    {
-        options.SetActive(false);
-        buttons.SetActive(true);
-    }
-
-    public void OpenStats()
-    {
-        stats.SetActive(true);
-        menu.SetActive(false);
-    }
-
+    
+    // Open tab
     public void OpenTab(GameObject gameObject)
     {
         gameObject.SetActive(true);
-        menu.SetActive(false);
+        buttons.SetActive(false);
+    }
+    
+    // Close tab
+    private void CloseTab(GameObject go)
+    {
+        if (go.activeSelf)
+        {
+            go.SetActive(false);
+            buttons.SetActive(true);
+        }
     }
 
     public void OpenCharacterSelection(int i)
@@ -155,17 +96,22 @@ public class MenuManager : MonoBehaviour
     }
     private void CloseCharacterSelection()
     {
-        gameModes.SetActive(true);
-        characterSelection.SetActive(false);
+        if (characterSelection.activeSelf)
+        {
+            gameModes.SetActive(true);
+            characterSelection.SetActive(false);
+        }
+        
     }
+    
+    // Character selection
     public void SelectCharacter(int characterID)
     {
-        // Salva l'ID del personaggio selezionato
+        // Saves selected character's ID
         PlayerPrefs.SetInt("SelectedCharacter", characterID);
         Debug.Log("Selected: " + characterID);
 
-        // Cambia la scena dopo aver selezionato il personaggio
+        // Change scene after choosing a character
         SceneManager.LoadScene(_activeScene);
     }
-
 }

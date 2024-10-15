@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     // Key
     public bool hasKey = false;
     [SerializeField] private RawImage keyImage;
+    
     // Alpha image
     public float maxAlphaValue = 1f;
     public float minAlphaValue = 0.3f;
