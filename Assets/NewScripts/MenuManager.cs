@@ -76,6 +76,7 @@ public class MenuManager : MonoBehaviour
     {
         gameObject.SetActive(true);
         buttons.SetActive(false);
+        Debug.Log("Opened: "+gameObject.name);
     }
     
     // Close tab
@@ -101,7 +102,6 @@ public class MenuManager : MonoBehaviour
             gameModes.SetActive(true);
             characterSelection.SetActive(false);
         }
-        
     }
     
     // Character selection
