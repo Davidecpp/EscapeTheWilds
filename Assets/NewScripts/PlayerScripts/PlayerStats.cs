@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerStats : MonoBehaviour
 {
     // Stats
-    public int health = 3;
+    private int health;
     public int maxHealth = 5;
     public float moveSpeed = 6.0f;
     public float jumpHeight = 15.0f;
@@ -13,8 +14,18 @@ public class PlayerStats : MonoBehaviour
     public float exp = 0.0f;
     public float nextLevel = 100;
     public float level = 1.0f;
-    
-    
+
+    private CanvasManager _canvas;
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _canvas = FindObjectOfType<CanvasManager>();
+        _gameManager = FindObjectOfType<GameManager>();
+        health = maxHealth;
+        _canvas.UpdateHearts();
+    }
+
     // Add experience to the player
     public void AddExperience(float gained)
     {
@@ -24,12 +35,34 @@ public class PlayerStats : MonoBehaviour
             UpgradeStats();
             exp -= nextLevel;
             nextLevel += 50;
-            Debug.Log("Level: " + level);
+        }
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void ReduceHealth()
+    {
+        if (health > 0)
+        {
+            health--;
         }
     }
     public float GetExperience()
     {
         return exp;
+    }
+    // Add +1 health
+    public void AddHeart()
+    {
+        if (health < maxHealth)
+        {
+            health++;
+            _canvas.UpdateHearts();
+            _gameManager.PauseGame();
+        }
     }
     
     // Upgrade stats

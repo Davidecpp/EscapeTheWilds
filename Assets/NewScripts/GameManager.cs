@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     // Game objects
     public GameObject gameOver, boost, win;
     public GameObject menu;
-    public GameObject skills, canvas, shop;
+    public GameObject skills, canvas;
     
     public static GameManager Instance { get; private set; }
     
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
     // Game over
     public void GameOver()
     {
-        if (_playerStats.health <= 0)
+        if (_playerStats.GetHealth() <= 0)
         {
             PauseGame();
             gameOver.SetActive(true);
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckWin();
-        TabsOpener();
+        
         UpdateLap();
 
         if (heated)
@@ -117,34 +117,9 @@ public class GameManager : MonoBehaviour
         lapsTxt.text = laps + "/" + totLaps;
     }
     
-    // Open tabs pressing keys
-    private void TabsOpener()
-    {
-        //bool tabPressed = Keyboard.current.tabKey.wasPressedThisFrame;
-        bool mPressed = Keyboard.current.mKey.wasPressedThisFrame;
-        //OpenTab(tabPressed, skills);
-        OpenTab(mPressed, shop);
-    }
     
-    // General method for opening tabs
-    private void OpenTab(bool key, GameObject go)
-    {
-        if (key)
-        {
-            if (go != null)
-            {
-                go.SetActive(!go.activeSelf);
-                if (go.activeSelf)
-                {
-                    PauseGame();
-                }
-                else
-                {
-                    ResumeGame();
-                }
-            }
-        }
-    }
+    
+    
     
     private void CheckWin()
     {
@@ -169,9 +144,9 @@ public class GameManager : MonoBehaviour
     // Decrease player's life
     public void DecreaseHealth()
     {
-        if (_playerStats.health > 0 && !invincible)
+        if (_playerStats.GetHealth() > 0 && !invincible)
         {
-            _playerStats.health--;
+            _playerStats.ReduceHealth();
             _canvasManager.UpdateHearts();
             StartCoroutine(_canvasManager.FlashRed());
         }
@@ -180,9 +155,9 @@ public class GameManager : MonoBehaviour
     // Increase player's life
     public void IncreaseHealth()
     {
-        if (_playerStats.health < _playerStats.maxHealth)
+        if (_playerStats.GetHealth() < _playerStats.maxHealth)
         {
-            _playerStats.health++;
+            _playerStats.AddHeart();
             _canvasManager.UpdateHearts();
         }
     }

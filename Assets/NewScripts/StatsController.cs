@@ -25,7 +25,7 @@ public class StatsController : MonoBehaviour
     {
         speedValueTxt.text = ""+_stats.runSpeed;
         jumpValueTxt.text = ""+ _stats.jumpHeight;
-        healthValueTxt.text = ""+_stats.health+"/"+_stats.maxHealth;
+        healthValueTxt.text = ""+_stats.GetHealth()+"/"+_stats.maxHealth;
         levelValueTxt.text = ""+_stats.level;
         damageValueTxt.text = "" + _stats.damage;
     }

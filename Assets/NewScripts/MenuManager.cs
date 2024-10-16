@@ -18,10 +18,12 @@ public class MenuManager : MonoBehaviour
     private int _activeScene;
 
     private GameManager _gameManager;
+    private CanvasManager _canvas;
 
     private void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        _canvas = FindObjectOfType<CanvasManager>();
     }
     
     public void ResumeGame()
@@ -43,23 +45,16 @@ public class MenuManager : MonoBehaviour
                 CloseTab(stats);
                 CloseCharacterSelection();
             }
-            else
+            else if(!_canvas.shop.activeSelf)
             {
                 menu.SetActive(true);  
                 _gameManager.PauseGame();
             }
         }
-
-        if (buttons.activeSelf)
-        {
-            esc.SetActive(false);
-        }
-        else
-        {
-            esc.SetActive(true);
-        }
+        esc.SetActive(!buttons.activeSelf);
     }
-
+    
+    // Load MainMenu scene
     public void ExitGame()
     {
         SceneManager.LoadSceneAsync(0);
@@ -76,7 +71,6 @@ public class MenuManager : MonoBehaviour
     {
         gameObject.SetActive(true);
         buttons.SetActive(false);
-        Debug.Log("Opened: "+gameObject.name);
     }
     
     // Close tab
@@ -88,7 +82,8 @@ public class MenuManager : MonoBehaviour
             buttons.SetActive(true);
         }
     }
-
+    
+    // Character selection menu
     public void OpenCharacterSelection(int i)
     {
         gameModes.SetActive(false);

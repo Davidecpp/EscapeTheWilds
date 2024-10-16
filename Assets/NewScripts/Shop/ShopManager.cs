@@ -7,10 +7,9 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public int coins;
     public TMP_Text coinTxt;
     
-    // Negozio
+    // Shop
     public ShopItem[] shopItems;
     public ShopTemplate[] shopPanels;
     public GameObject[] shopPanelGO;
@@ -41,7 +40,7 @@ public class ShopManager : MonoBehaviour
         CheckPurchaseable();
     }
     
-    // Verifica se puoi acquistare gli oggetti 
+    // Check if you can buy an item
     public void CheckPurchaseable()
     {
         for (int i = 0; i < shopItems.Length; i++)
@@ -56,7 +55,7 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-    // Compra oggetti
+    // Buy items
     public void PurchaseItem(int btNo)
     {
         if (_inventory.GetCoinCount() >= shopItems[btNo].cost)
@@ -69,27 +68,23 @@ public class ShopManager : MonoBehaviour
             }
             if (shopItems[btNo].title == "Heart")
             {
-                GameManager.Instance.IncreaseHealth();
+                _playerStats.AddHeart();
             }
         }
     }
-    // Aggiungi monete
+    // Add +1 coin
     public void AddCoins()
     {
         _inventory.AddCoin(1);
     }
-    // Aggiungi proiettili
+    // Add amount bullets
     public void AddBullets(int amount)
     {
         _inventory.AddBullet(amount);
     }
-    // Aggiungi vita
-    public void AddHeart()
-    {
-        _playerStats.health++;
-    }
+   
     
-    // Carica info oggetti nei pannelli del negozio
+    // Load objects info in the shop panels
     public void LoadPanels()
     {
         for (int i = 0; i < shopItems.Length; i++)
@@ -97,7 +92,7 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].titleTxt.text = shopItems[i].title;
             shopPanels[i].itemImage.sprite = shopItems[i].itemImage;
             shopPanels[i].descriptionTxt.text = shopItems[i].description;
-            shopPanels[i].costTxt.text = "Coins: " + shopItems[i].cost.ToString();
+            shopPanels[i].costTxt.text = "Coins: " + shopItems[i].cost;
         }
     }
 }

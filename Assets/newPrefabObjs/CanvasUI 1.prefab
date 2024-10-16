@@ -7553,6 +7553,7 @@ MonoBehaviour:
   heartPrefab: {fileID: 6317893812336085837, guid: cead9421fa8b6fe4080540027c3fa0ad, type: 3}
   heartsContainer: {fileID: 8565958448390291266}
   maxLifeTxt: {fileID: 426563664888258589}
+  shop: {fileID: 2328931596687567530}
 --- !u!1 &6036104296803140318
 GameObject:
   m_ObjectHideFlags: 0
@@ -10708,6 +10709,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8cddf38fcc9cbe488151f5da050d6e2, type: 3}
+--- !u!1 &2328931596687567530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8427229277320085167, guid: f8cddf38fcc9cbe488151f5da050d6e2, type: 3}
+  m_PrefabInstance: {fileID: 6098312130129400837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8697552391736953828 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3175714228485300193, guid: f8cddf38fcc9cbe488151f5da050d6e2, type: 3}

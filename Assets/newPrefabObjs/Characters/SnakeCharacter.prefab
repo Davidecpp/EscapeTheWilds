@@ -1362,6 +1362,7 @@ MonoBehaviour:
   bulletCounter:
     count: 200
     counterText: {fileID: 633130292198881255}
+  strawberryImg: {fileID: 0}
 --- !u!54 &4869123488305738655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1423,9 +1424,9 @@ MonoBehaviour:
   invincibleParticles: {fileID: 6805972355521171823}
   healParticles: {fileID: 614621005256307186}
   _rotSpeed: 0
+  bounceStrenght: 2
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 7642945234880603221}
-  bounceStrenght: 2
   timer: 5
   bullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
   fireBullet: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
@@ -1443,7 +1444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 0
+  maxHealth: 5
   moveSpeed: 8
   jumpHeight: 10
   runSpeed: 15
