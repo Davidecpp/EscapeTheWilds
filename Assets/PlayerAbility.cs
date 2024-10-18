@@ -12,6 +12,7 @@ public class PlayerAbility : MonoBehaviour
     private bool isDashing = false;
     public TrailRenderer trailRenderer;
     public GameObject dashSparkle;
+    public AudioSource dashSound;
     
     // Venom cloud
     public GameObject venomCloudPrefab;  
@@ -21,6 +22,7 @@ public class PlayerAbility : MonoBehaviour
 
     private void Start()
     {
+        dashSound = GetComponent<AudioSource>();
         trailRenderer.emitting = false;
     }
 
@@ -72,10 +74,10 @@ public class PlayerAbility : MonoBehaviour
                     break; 
                 }
             }
-            
+            dashSound.Play();
             transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime);
             particles = Instantiate(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation);
-            Destroy(particles, 2f);
+            Destroy(particles, 1f);
             yield return null;
         }
         trailRenderer.emitting = false;
