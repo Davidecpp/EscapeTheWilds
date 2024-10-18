@@ -906,9 +906,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047d27f5863495446a9557423a6e6dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Deer
   dashSpeed: 50
   dashDuration: 0.5
   trailRenderer: {fileID: 9188604639354638154}
+  dashSparkle: {fileID: 4033412786151888123, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}
+  venomCloudPrefab: {fileID: 0}
+  venomSpawnPoint: {fileID: 4669082926511580107}
+  sprayCooldown: 5
 --- !u!96 &9188604639354638154
 TrailRenderer:
   serializedVersion: 3
@@ -1013,6 +1018,11 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!4 &4669082926511580107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1317159902854110682, guid: 990697e85377204408b62aa7879b1007, type: 3}
+  m_PrefabInstance: {fileID: 5948296183151705617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9035150280074859778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3454219767596165907, guid: 990697e85377204408b62aa7879b1007, type: 3}

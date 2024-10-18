@@ -1243,6 +1243,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4807929556901506227, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5098300257776574316}
+    - targetCorrespondingSourceObject: {fileID: 4807929556901506227, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7732152337853292416}
   m_SourcePrefab: {fileID: 100100000, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
 --- !u!4 &4734716917486183863 stripped
 Transform:
@@ -1444,7 +1447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   maxHealth: 5
   moveSpeed: 8
   jumpHeight: 10
@@ -1453,6 +1455,25 @@ MonoBehaviour:
   exp: 0
   nextLevel: 100
   level: 1
+--- !u!114 &7732152337853292416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216677343415093779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d27f5863495446a9557423a6e6dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Snake
+  dashSpeed: 20
+  dashDuration: 0.5
+  trailRenderer: {fileID: 0}
+  venomCloudPrefab: {fileID: 5477919197415679433, guid: 0dc2e549c8508764d8216d4a7f479f75, type: 3}
+  venomSpawnPoint: {fileID: 4283529000087192756}
+  sprayCooldown: 5
 --- !u!1001 &5453422111004603105
 PrefabInstance:
   m_ObjectHideFlags: 0
