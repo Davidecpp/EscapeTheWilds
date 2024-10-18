@@ -15,14 +15,18 @@ public class PlayerAbility : MonoBehaviour
     public AudioSource dashSound;
     
     // Venom cloud
+    public GameObject venomSprayPrefab;
     public GameObject venomCloudPrefab;  
     public Transform venomSpawnPoint;   
     public float sprayCooldown = 5f;
+    public float sprayDuration = 0.5f; 
     private bool canSpray = true;
+    public AudioSource spraySound;
 
     private void Start()
     {
         dashSound = GetComponent<AudioSource>();
+        spraySound = GetComponent<AudioSource>();
         trailRenderer.emitting = false;
     }
 
@@ -44,8 +48,15 @@ public class PlayerAbility : MonoBehaviour
     IEnumerator SprayVenom()
     {
         canSpray = false;
-        Instantiate(venomCloudPrefab, venomSpawnPoint.position, venomSpawnPoint.rotation);
-        
+        var position = venomSpawnPoint.position;
+        var rotation = venomSpawnPoint.rotation;
+        GameObject spray = Instantiate(venomSprayPrefab, position, rotation);
+        spraySound.Play();
+        yield return new WaitForSeconds(sprayDuration);
+        Destroy(spray);
+
+        Vector3 cloudSpawnPosition = position + venomSpawnPoint.forward * 8;
+        Instantiate(venomCloudPrefab, cloudSpawnPosition, rotation);
         yield return new WaitForSeconds(sprayCooldown);
         canSpray = true;
     }
