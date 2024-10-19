@@ -116,11 +116,6 @@ public class GameManager : MonoBehaviour
     {
         lapsTxt.text = laps + "/" + totLaps;
     }
-    
-    
-    
-    
-    
     private void CheckWin()
     {
         if (_inventory != null && _inventory.GetStrawberryCount() >= winCondition)

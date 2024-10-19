@@ -19,7 +19,14 @@ public class CanvasManager : MonoBehaviour
     public Transform heartsContainer;
     private List<RawImage> _hearts = new List<RawImage>();
     public GameObject maxLifeTxt;
-
+    
+    // Ability Images
+    
+    public Image currentAbilityImg;
+    private PlayerAbility _ability;
+    public Sprite venomImg;
+    public Sprite dashImg;
+    
     public GameObject shop;
     
     // Start is called before the first frame update
@@ -27,13 +34,31 @@ public class CanvasManager : MonoBehaviour
     {
         _playerStats = FindObjectOfType<PlayerStats>();
         _gameManager = FindObjectOfType<GameManager>();
+        _ability = FindObjectOfType<PlayerAbility>();
         UpdateHearts();
+
     }
     // Update is called once per frame
     void Update()
     {
         TabsOpener();
+        SetAbilityImg();
     }
+    // Ability Images
+    private void SetAbilityImg()
+    {
+        if (_ability.characterName.Equals("Deer"))
+        {
+            currentAbilityImg.sprite = dashImg;
+            Debug.Log("DashImg");
+        }
+        if (_ability.characterName.Equals("Snake"))
+        {
+            currentAbilityImg.sprite = venomImg;
+            Debug.Log("VenomImg");
+        }
+    }
+        
     // Open tabs pressing keys
     private void TabsOpener()
     {

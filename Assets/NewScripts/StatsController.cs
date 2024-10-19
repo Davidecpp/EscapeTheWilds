@@ -17,7 +17,6 @@ public class StatsController : MonoBehaviour
     void Start()
     {
         _stats = FindObjectOfType<PlayerStats>();
-        //SetStats();
     }
     
     // Set player stats

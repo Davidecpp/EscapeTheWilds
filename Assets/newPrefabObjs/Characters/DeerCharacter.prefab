@@ -257,6 +257,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3504146761929932035}
+    - target: {fileID: 6703465924908202342, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_Name
+      value: VenomCloudImg
+      objectReference: {fileID: 0}
+    - target: {fileID: 6703465924908202342, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6859436327608446011, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -915,9 +923,12 @@ MonoBehaviour:
   trailRenderer: {fileID: 9188604639354638154}
   dashSparkle: {fileID: 4033412786151888123, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}
   dashSound: {fileID: 2090566693973021599}
+  venomSprayPrefab: {fileID: 0}
   venomCloudPrefab: {fileID: 0}
   venomSpawnPoint: {fileID: 4669082926511580107}
   sprayCooldown: 5
+  sprayDuration: 0.5
+  spraySound: {fileID: 0}
 --- !u!96 &9188604639354638154
 TrailRenderer:
   serializedVersion: 3

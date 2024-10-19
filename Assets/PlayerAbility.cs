@@ -22,9 +22,13 @@ public class PlayerAbility : MonoBehaviour
     public float sprayDuration = 0.5f; 
     private bool canSpray = true;
     public AudioSource spraySound;
+    
+    
+    private CanvasManager _canvas;
 
     private void Start()
     {
+        _canvas = FindObjectOfType<CanvasManager>();
         dashSound = GetComponent<AudioSource>();
         spraySound = GetComponent<AudioSource>();
         trailRenderer.emitting = false;
