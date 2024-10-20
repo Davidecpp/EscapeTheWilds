@@ -22,14 +22,20 @@ public class PlayerAbility : MonoBehaviour
     public float sprayDuration = 0.5f; 
     private bool canSpray = true;
     public AudioSource spraySound;
-
+    
+    // Mega Jump
+    public float extraJump;
+    
     public float abilityTime = 5.0f;
     public float abilityCooldown = 0;
+    
     private CanvasManager _canvas;
+    private Movement _movement;
 
     private void Start()
     {
         _canvas = FindObjectOfType<CanvasManager>();
+        _movement = FindObjectOfType<Movement>();
         dashSound = GetComponent<AudioSource>();
         spraySound = GetComponent<AudioSource>();
         trailRenderer.emitting = false;
@@ -58,7 +64,20 @@ public class PlayerAbility : MonoBehaviour
             {
                 StartCoroutine(SprayVenom());
             }
+            if (characterName.Equals("Rat"))
+            {
+                StartCoroutine(MegaJump());
+            }
         }
+    }
+
+    IEnumerator MegaJump()
+    {
+        Debug.Log("Jump");
+        _movement.megaJump = true;
+        yield return null;
+        
+        abilityCooldown = abilityTime;
     }
     IEnumerator SprayVenom()
     {
@@ -73,6 +92,7 @@ public class PlayerAbility : MonoBehaviour
         Vector3 cloudSpawnPosition = position + venomSpawnPoint.forward * 8;
         Instantiate(venomCloudPrefab, cloudSpawnPosition, rotation);
         yield return new WaitForSeconds(sprayCooldown);
+        
         canSpray = true;
         abilityCooldown = abilityTime;
     }

@@ -8201,6 +8201,8 @@ MonoBehaviour:
   currentAbilityImg: {fileID: 7284775521781434113}
   venomImg: {fileID: 21300000, guid: 9fb3b2ef41986ed478bc9d2d485cccc8, type: 3}
   dashImg: {fileID: 21300000, guid: 802e2ceb399fda449bb7dd0285e2fa12, type: 3}
+  jumpImg: {fileID: 21300000, guid: 6604b680170cc4e4790cca4e2d020e34, type: 3}
+  isAbiliting: 0
   shop: {fileID: 2328931596687567530}
 --- !u!1 &6036104296803140318
 GameObject:

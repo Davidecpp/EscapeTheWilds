@@ -25,6 +25,7 @@ public class CanvasManager : MonoBehaviour
     private PlayerAbility _ability;
     public Sprite venomImg;
     public Sprite dashImg;
+    public Sprite jumpImg;
     public bool isAbiliting = false;
     
     public GameObject shop;
@@ -36,7 +37,7 @@ public class CanvasManager : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         _ability = FindObjectOfType<PlayerAbility>();
         UpdateHearts();
-
+        _gameManager.ResumeGame();
     }
     // Update is called once per frame
     void Update()
@@ -55,15 +56,12 @@ public class CanvasManager : MonoBehaviour
         {
             currentAbilityImg.sprite = venomImg;
         }
+        if (_ability.characterName.Equals("Rat"))
+        {
+            currentAbilityImg.sprite = jumpImg;
+        }
 
-        if (isAbiliting)
-        {
-            SetImageAlpha(currentAbilityImg, 0.5f);
-        }
-        else
-        {
-            SetImageAlpha(currentAbilityImg, 1f);
-        }
+        SetImageAlpha(currentAbilityImg, isAbiliting ? 0.5f : 1f);
     }
         
     // Open tabs pressing keys

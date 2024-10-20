@@ -48,6 +48,8 @@ public class Movement : MonoBehaviour
     public float bulletSpeed = 10.0f;
     private float _slowedSprintSpeed;
 
+    public bool megaJump;
+
 
     // Start is called before the first frame update
     void Start()
@@ -126,6 +128,11 @@ public class Movement : MonoBehaviour
             if (Input.GetButtonDown("Jump") && !hit.collider.CompareTag("JumpPlatform"))
             {
                 _vertSpeed = _playerStats.jumpHeight;
+                if (megaJump)
+                {
+                    _vertSpeed *= 4;
+                    megaJump = false;
+                }
             }
         }
         else
@@ -280,7 +287,7 @@ public class Movement : MonoBehaviour
         }
     }
     
-    // Generic particle player method
+    // Generic particles player method
     void ShowParticles(ParticleSystem particles)
     {
         if (!particles.isPlaying && particles != null)
@@ -293,5 +300,4 @@ public class Movement : MonoBehaviour
     {
         _controllerCollider = hit;
     }
-    
 }

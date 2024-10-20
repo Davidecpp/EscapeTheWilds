@@ -11,12 +11,16 @@ public class Dialogue : MonoBehaviour
 
     public float textSpeed;
 
+    private GameManager _gameManager;
+
     private int index;
     // Start is called before the first frame update
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         textComponent.text = string.Empty;
         StartDialogue();
+        _gameManager.ResumeGame();
     }
 
     // Update is called once per frame

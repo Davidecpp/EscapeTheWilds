@@ -62,7 +62,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play(int i)
     {
-        // 1 ARENA - 2 FOOTBALL - 3 RACE
+        // 1 ARENA - 2 FOOTBALL - 3 RACE - 4 STORY
         SceneManager.LoadSceneAsync(i);
     }
     
@@ -82,6 +82,8 @@ public class MenuManager : MonoBehaviour
             buttons.SetActive(true);
         }
     }
+    // MAIN MENU
+    // Story Mode
     
     // Character selection menu
     public void OpenCharacterSelection(int i)
