@@ -22,8 +22,9 @@ public class PlayerAbility : MonoBehaviour
     public float sprayDuration = 0.5f; 
     private bool canSpray = true;
     public AudioSource spraySound;
-    
-    
+
+    public float abilityTime = 5.0f;
+    public float abilityCooldown = 0;
     private CanvasManager _canvas;
 
     private void Start()
@@ -37,9 +38,19 @@ public class PlayerAbility : MonoBehaviour
     // Press R for ability
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isDashing)
+        Debug.Log(abilityCooldown + _canvas.isAbiliting.ToString());
+        if (abilityCooldown > 0)
         {
-            if (characterName.Equals("Deer"))
+            abilityCooldown -= Time.deltaTime;
+            _canvas.isAbiliting = true;
+        }
+        else
+        {
+            _canvas.isAbiliting = false;
+        }
+        if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
+        {
+            if (characterName.Equals("Deer") && !isDashing)
             {
                 StartCoroutine(VerticalDash());
             }
@@ -63,6 +74,7 @@ public class PlayerAbility : MonoBehaviour
         Instantiate(venomCloudPrefab, cloudSpawnPosition, rotation);
         yield return new WaitForSeconds(sprayCooldown);
         canSpray = true;
+        abilityCooldown = abilityTime;
     }
     
     IEnumerator VerticalDash()
@@ -97,5 +109,6 @@ public class PlayerAbility : MonoBehaviour
         }
         trailRenderer.emitting = false;
         isDashing = false;
+        abilityCooldown = abilityTime;
     }
 }

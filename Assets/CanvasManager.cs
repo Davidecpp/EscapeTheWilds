@@ -21,11 +21,11 @@ public class CanvasManager : MonoBehaviour
     public GameObject maxLifeTxt;
     
     // Ability Images
-    
     public Image currentAbilityImg;
     private PlayerAbility _ability;
     public Sprite venomImg;
     public Sprite dashImg;
+    public bool isAbiliting = false;
     
     public GameObject shop;
     
@@ -50,12 +50,19 @@ public class CanvasManager : MonoBehaviour
         if (_ability.characterName.Equals("Deer"))
         {
             currentAbilityImg.sprite = dashImg;
-            Debug.Log("DashImg");
         }
         if (_ability.characterName.Equals("Snake"))
         {
             currentAbilityImg.sprite = venomImg;
-            Debug.Log("VenomImg");
+        }
+
+        if (isAbiliting)
+        {
+            SetImageAlpha(currentAbilityImg, 0.5f);
+        }
+        else
+        {
+            SetImageAlpha(currentAbilityImg, 1f);
         }
     }
         
@@ -90,6 +97,13 @@ public class CanvasManager : MonoBehaviour
                 }
             }
         }
+    }
+    // Change image alpha
+    private void SetImageAlpha(Image image, float alpha)
+    {
+        Color color = image.color;
+        color.a = alpha;
+        image.color = color;
     }
     
     // Updates player's life
