@@ -174,14 +174,8 @@ public class Movement : MonoBehaviour
     // Show particles
     private void ShowEffects()
     {
-        if (GameManager.Instance.invincible)
-        {
-            invincibleParticles.gameObject.SetActive(true);
-        }
-        else
-        {
-            invincibleParticles.gameObject.SetActive(false);
-        }
+        invincibleParticles.gameObject.SetActive(GameManager.Instance.invincible);
+        
         if (GameManager.Instance.healing)
         {
             StartCoroutine(HealEffect(1f));
