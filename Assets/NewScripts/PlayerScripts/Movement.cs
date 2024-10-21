@@ -128,11 +128,6 @@ public class Movement : MonoBehaviour
             if (Input.GetButtonDown("Jump") && !hit.collider.CompareTag("JumpPlatform"))
             {
                 _vertSpeed = _playerStats.jumpHeight;
-                if (megaJump)
-                {
-                    _vertSpeed *= 4;
-                    megaJump = false;
-                }
             }
         }
         else
@@ -166,6 +161,14 @@ public class Movement : MonoBehaviour
         _characterController.Move(movement);
 
         ShowEffects();
+    }
+    public void PerformMegaJump()
+    {
+        if (_characterController.isGrounded)
+        {
+            _vertSpeed = _playerStats.jumpHeight * 4; 
+            megaJump = false;
+        }
     }
     
     // Show particles

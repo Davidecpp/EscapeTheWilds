@@ -25,6 +25,7 @@ public class PlayerAbility : MonoBehaviour
     // Mega Jump
     public float extraJump;
     public GameObject megaJumpParticles;
+    public AudioSource jumpSound;
     
     public float abilityTime = 5.0f;
     public float abilityCooldown = 0;
@@ -48,11 +49,6 @@ public class PlayerAbility : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
         {
             ActivateAbility();
-        }
-
-        if (_movement.megaJump)
-        {
-            InstantiateAndDestroy(megaJumpParticles, venomSpawnPoint.position, venomSpawnPoint.rotation, abilityTime);
         }
     }
 
@@ -92,9 +88,12 @@ public class PlayerAbility : MonoBehaviour
     // Mega Jump
     IEnumerator MegaJump()
     {
+        InstantiateAndDestroy(megaJumpParticles, venomSpawnPoint.position, venomSpawnPoint.rotation, abilityTime);
         _movement.megaJump = true; 
         abilityCooldown = abilityTime; 
-        yield return null; 
+        yield return new WaitForSeconds(0.5f); 
+        jumpSound.Play();
+        _movement.PerformMegaJump();
     }
 
     // Spray venom and generate a venom cloud
@@ -112,7 +111,7 @@ public class PlayerAbility : MonoBehaviour
         abilityCooldown = abilityTime;
     }
 
-    // Istant dash
+    // Instant dash
     IEnumerator VerticalDash()
     {
         isDashing = true;
