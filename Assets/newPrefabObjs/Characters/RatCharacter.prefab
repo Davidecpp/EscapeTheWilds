@@ -10748,11 +10748,12 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   venomSprayPrefab: {fileID: 0}
   venomCloudPrefab: {fileID: 0}
-  venomSpawnPoint: {fileID: 0}
+  venomSpawnPoint: {fileID: 8379060929802259837}
   sprayCooldown: 5
   sprayDuration: 0.5
   spraySound: {fileID: 0}
   extraJump: 0
+  megaJumpParticles: {fileID: 3123281158184909799, guid: 077b03ec333b59745b265f75be216105, type: 3}
   abilityTime: 5
   abilityCooldown: 0
 --- !u!1001 &3573131484903951495

@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAbility : MonoBehaviour
 {
-    public String characterName;
+    public string characterName;
     // Dash
     public float dashSpeed = 20f; 
     public float dashDuration = 0.5f; 
@@ -25,6 +24,7 @@ public class PlayerAbility : MonoBehaviour
     
     // Mega Jump
     public float extraJump;
+    public GameObject megaJumpParticles;
     
     public float abilityTime = 5.0f;
     public float abilityCooldown = 0;
@@ -41,10 +41,24 @@ public class PlayerAbility : MonoBehaviour
         trailRenderer.emitting = false;
     }
 
-    // Press R for ability
     void Update()
     {
-        Debug.Log(abilityCooldown + _canvas.isAbiliting.ToString());
+        HandleCooldown();
+
+        if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
+        {
+            ActivateAbility();
+        }
+
+        if (_movement.megaJump)
+        {
+            InstantiateAndDestroy(megaJumpParticles, venomSpawnPoint.position, venomSpawnPoint.rotation, abilityTime);
+        }
+    }
+
+    // Handles the ability cooldown
+    private void HandleCooldown()
+    {
         if (abilityCooldown > 0)
         {
             abilityCooldown -= Time.deltaTime;
@@ -54,81 +68,86 @@ public class PlayerAbility : MonoBehaviour
         {
             _canvas.isAbiliting = false;
         }
-        if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
+    }
+
+    // Activates player's ability based on characters name
+    private void ActivateAbility()
+    {
+        switch (characterName)
         {
-            if (characterName.Equals("Deer") && !isDashing)
-            {
-                StartCoroutine(VerticalDash());
-            }
-            if (characterName.Equals("Snake"))
-            {
-                StartCoroutine(SprayVenom());
-            }
-            if (characterName.Equals("Rat"))
-            {
+            case "Deer":
+                if (!isDashing)
+                    StartCoroutine(VerticalDash());
+                break;
+            case "Snake":
+                if (canSpray)
+                    StartCoroutine(SprayVenom());
+                break;
+            case "Rat":
                 StartCoroutine(MegaJump());
-            }
+                break;
         }
     }
 
+    // Mega Jump
     IEnumerator MegaJump()
     {
-        Debug.Log("Jump");
-        _movement.megaJump = true;
-        yield return null;
-        
-        abilityCooldown = abilityTime;
+        _movement.megaJump = true; 
+        abilityCooldown = abilityTime; 
+        yield return null; 
     }
+
+    // Spray venom and generate a venom cloud
     IEnumerator SprayVenom()
     {
         canSpray = false;
-        var position = venomSpawnPoint.position;
-        var rotation = venomSpawnPoint.rotation;
-        GameObject spray = Instantiate(venomSprayPrefab, position, rotation);
+        InstantiateAndDestroy(venomSprayPrefab, venomSpawnPoint.position, venomSpawnPoint.rotation, sprayDuration);
         spraySound.Play();
-        yield return new WaitForSeconds(sprayDuration);
-        Destroy(spray);
-
-        Vector3 cloudSpawnPosition = position + venomSpawnPoint.forward * 8;
-        Instantiate(venomCloudPrefab, cloudSpawnPosition, rotation);
-        yield return new WaitForSeconds(sprayCooldown);
         
+        Vector3 cloudSpawnPosition = venomSpawnPoint.position + venomSpawnPoint.forward * 8;
+        Instantiate(venomCloudPrefab, cloudSpawnPosition, venomSpawnPoint.rotation);
+
+        yield return new WaitForSeconds(sprayCooldown);
         canSpray = true;
         abilityCooldown = abilityTime;
     }
-    
+
+    // Istant dash
     IEnumerator VerticalDash()
     {
         isDashing = true;
-        float dashTime = 0f;
-        dashSpeed = 1000;
-        dashDuration = 0.05f;
-        GameObject particles;
-        
         trailRenderer.emitting = true;
-        
+        dashSpeed = 1000;
+        float dashTime = 0f;
+
         while (dashTime < dashDuration)
         {
             dashTime += Time.deltaTime;
-
-            // Raycast to find obstacles
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, dashSpeed * Time.deltaTime))
-            {
-                // Interrupt the dash if there is an obstacle
-                if (hit.collider != null)
-                {
-                    break; 
-                }
-            }
+            if (DashInterrupted())
+                break;
+            
             dashSound.Play();
             transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime);
-            particles = Instantiate(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation);
-            Destroy(particles, 1f);
+            InstantiateAndDestroy(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation, 1f);
             yield return null;
         }
+
         trailRenderer.emitting = false;
         isDashing = false;
         abilityCooldown = abilityTime;
+    }
+
+    // Check if the dash is interrupted
+    private bool DashInterrupted()
+    {
+        RaycastHit hit;
+        return Physics.Raycast(transform.position, transform.forward, out hit, dashSpeed * Time.deltaTime) && hit.collider != null;
+    }
+
+    // Create and destroy an object
+    private void InstantiateAndDestroy(GameObject prefab, Vector3 position, Quaternion rotation, float destroyTime)
+    {
+        GameObject instance = Instantiate(prefab, position, rotation);
+        Destroy(instance, destroyTime);
     }
 }
