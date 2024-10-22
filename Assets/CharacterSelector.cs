@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    public GameObject[] characterPrefabs;  // Prefab dei personaggi
+    public GameObject[] characterPrefabs;
     private GameObject selectedCharacter;
     public GameObject playerSpawn;
 

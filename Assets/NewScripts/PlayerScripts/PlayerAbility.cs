@@ -103,10 +103,12 @@ public class PlayerAbility : MonoBehaviour
         InstantiateAndDestroy(venomSprayPrefab, venomSpawnPoint.position, venomSpawnPoint.rotation, sprayDuration);
         spraySound.Play();
         
+        yield return new WaitForSeconds(sprayDuration);
         Vector3 cloudSpawnPosition = venomSpawnPoint.position + venomSpawnPoint.forward * 8;
         Instantiate(venomCloudPrefab, cloudSpawnPosition, venomSpawnPoint.rotation);
-
+        
         yield return new WaitForSeconds(sprayCooldown);
+        
         canSpray = true;
         abilityCooldown = abilityTime;
     }
