@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // Restart game
+    // Restart gamef
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

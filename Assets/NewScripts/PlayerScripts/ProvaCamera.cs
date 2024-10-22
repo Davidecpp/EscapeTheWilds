@@ -7,22 +7,28 @@ public class ProvaCamera : MonoBehaviour
     public Transform playerCamera;
     public Vector2 sensitivities;
     public Transform animal;
+    
+    // Sprint
     public Slider sprintSlider;
     public float normalDistance = 5f;
     public float sprintDistance = 3f;
     public float transitionSpeed = 5f;
     public float sprintDuration = 5f;
     public float sprintRechargeSpeed = 0.5f;
-    public float shakeDuration = 0.1f;  // Durata dello scuotimento
-    public float shakeMagnitude = 0.1f; // Intensità dello scuotimento
-    public float shakeDelay = 0.2f;  
-
-    private Vector2 _rotation;
     public bool isSprinting = false;
     private float sprintTimer;
+    
+    // Camera shake
+    public float shakeDuration = 0.1f;  
+    public float shakeMagnitude = 0.1f;
+    public float shakeDelay = 0.2f;
     private Vector3 initialCameraPosition;
-    private CharacterController controller;
 
+    public bool human = false;
+
+    private Vector2 _rotation;
+    
+    private CharacterController controller;
     private MenuManager menuManager;
 
     void Start()
@@ -39,9 +45,9 @@ public class ProvaCamera : MonoBehaviour
         HandleSprint();
         UpdateCameraPosition();
 
-        if (!menuManager.menu.activeSelf)
+        if (!menuManager.menu.activeSelf && !human)
         {
-            // Quando il giocatore preme il pulsante sinistro del mouse, scuote la camera
+            // Shakes camera when left mouse button pressed
             if (Input.GetMouseButtonDown(0))
             {
                 StartCoroutine(CameraShake());
@@ -65,7 +71,8 @@ public class ProvaCamera : MonoBehaviour
         transform.eulerAngles = new Vector3(0f, _rotation.y, 0f);
         playerCamera.localEulerAngles = new Vector3(_rotation.x, 0f, 0f);
     }
-
+    
+    // Sprint
     private void HandleSprint()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && sprintTimer > 0)
@@ -94,7 +101,6 @@ public class ProvaCamera : MonoBehaviour
                 sprintTimer = Mathf.Clamp(sprintTimer, 0, sprintDuration);
             }
         }
-
         sprintSlider.value = sprintTimer / sprintDuration;
     }
 
@@ -106,7 +112,7 @@ public class ProvaCamera : MonoBehaviour
         playerCamera.position = Vector3.Lerp(playerCamera.position, targetPosition, transitionSpeed * Time.deltaTime);
     }
 
-    // Funzione per scuotere la camera
+    // Makes the camera shake
     private IEnumerator CameraShake()
     {
         yield return new WaitForSeconds(shakeDelay); 
@@ -116,12 +122,12 @@ public class ProvaCamera : MonoBehaviour
 
         while (elapsed < shakeDuration)
         {
-            // Genera uno spostamento casuale attorno alla posizione originale
+            // Random movement around the original position
             Vector3 randomPoint = originalPosition + Random.insideUnitSphere * shakeMagnitude;
             playerCamera.localPosition = randomPoint;
 
             elapsed += Time.deltaTime;
-            yield return null; // Attende il prossimo frame
+            yield return null; 
         }
         playerCamera.localPosition = originalPosition;
     }

@@ -155,7 +155,8 @@ public class Movement : MonoBehaviour
         {
             ShootProjectile();
         }
-
+        
+        // Move
         movement.y = _vertSpeed;
         movement *= Time.deltaTime;
         _characterController.Move(movement);
