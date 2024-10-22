@@ -82,6 +82,7 @@ public class MenuManager : MonoBehaviour
             buttons.SetActive(true);
         }
     }
+    
     // MAIN MENU
     // Story Mode
     

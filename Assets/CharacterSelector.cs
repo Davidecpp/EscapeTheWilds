@@ -10,7 +10,7 @@ public class CharacterSelector : MonoBehaviour
 
     void Start()
     {
-        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter", -1); // Valore di default
+        int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter", -1);
         Debug.Log("ID del personaggio selezionato: " + selectedCharacterID);
         Debug.Log("Posizione di playerSpawn: " + playerSpawn.transform.position);
         

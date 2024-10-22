@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
 
     public int maxBullets = 10;
 
-    [System.Serializable]
+    [System.Serializable] // Makes resource counters serializable
     public struct ResourceCounter
     {
         public int count;

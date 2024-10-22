@@ -15,6 +15,7 @@ public class Dialogue : MonoBehaviour
     private GameManager _gameManager;
 
     private int index;
+    
     // Start is called before the first frame update
     void Start()
     {
