@@ -5,9 +5,10 @@ using UnityEngine;
 public class CharacterSelector : MonoBehaviour
 {
     public GameObject[] characterPrefabs;
-    private GameObject selectedCharacter;
+    private GameObject _selectedCharacter;
     public GameObject playerSpawn;
-
+    
+    // Takes character's id
     void Start()
     {
         int selectedCharacterID = PlayerPrefs.GetInt("SelectedCharacter", -1);
@@ -16,8 +17,8 @@ public class CharacterSelector : MonoBehaviour
         
         if (selectedCharacterID >= 0 && selectedCharacterID < characterPrefabs.Length)
         {
-            selectedCharacter = Instantiate(characterPrefabs[selectedCharacterID], playerSpawn.transform.position, playerSpawn.transform.rotation);
-            Debug.Log("Personaggio selezionato istanziato: " + selectedCharacter.name);
+            _selectedCharacter = Instantiate(characterPrefabs[selectedCharacterID], playerSpawn.transform.position, playerSpawn.transform.rotation);
+            Debug.Log("Personaggio selezionato istanziato: " + _selectedCharacter.name);
         }
         else
         {
