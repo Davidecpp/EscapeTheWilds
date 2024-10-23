@@ -3,9 +3,11 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    // Variables for following the player
     public Transform player;
     public float chaseDistance = 10f;
     private NavMeshAgent _agent;
+    
     // Bullet
     [SerializeField] private float timer = 5;
     private float _bulletTime;

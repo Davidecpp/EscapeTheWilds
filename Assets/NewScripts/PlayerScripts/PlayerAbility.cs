@@ -44,27 +44,32 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(abilityCooldown);
         HandleCooldown();
-
+        
+        // If R is pressed and the cooldown is over activate ability
         if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
         {
             ActivateAbility();
         }
     }
 
-    // Handles the ability cooldown
+    // Handles the ability cooldown and the slider
     private void HandleCooldown()
     {
         if (abilityCooldown > 0)
         {
             abilityCooldown -= Time.deltaTime;
             _canvas.isAbiliting = true;
+            _canvas.UpdateAbilityCooldown(abilityCooldown, abilityTime); 
         }
         else
         {
             _canvas.isAbiliting = false;
+            _canvas.UpdateAbilityCooldown(0, abilityTime);
         }
     }
+
 
     // Activates player's ability based on characters name
     private void ActivateAbility()

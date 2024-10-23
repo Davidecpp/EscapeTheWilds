@@ -83,8 +83,7 @@ public class MenuManager : MonoBehaviour
         }
     }
     
-    // MAIN MENU
-    // Story Mode
+    // MAIN MENU - // Story Mode
     
     // Character selection menu
     public void OpenCharacterSelection(int i)

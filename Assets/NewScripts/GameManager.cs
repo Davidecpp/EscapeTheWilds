@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
         }
 
         _canvasManager = FindObjectOfType<CanvasManager>();
+        if (_canvasManager == null)
+        {
+            Debug.LogError("Canvas not found in the scene.");
+            return;
+        }
         ResumeGame();
     }
     
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
     
-    // Game over
+    // Game over if player's health <= 0
     public void GameOver()
     {
         if (_playerStats.GetHealth() <= 0)
@@ -107,7 +112,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckWin();
-        
         UpdateLap();
 
         if (heated)

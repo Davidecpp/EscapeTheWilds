@@ -27,6 +27,7 @@ public class CanvasManager : MonoBehaviour
     public Sprite dashImg;
     public Sprite jumpImg;
     public bool isAbiliting = false;
+    public Slider abilityCooldownSlider;
     
     public GameObject shop;
     
@@ -45,6 +46,14 @@ public class CanvasManager : MonoBehaviour
         TabsOpener();
         SetAbilityImg();
     }
+    
+    // Update abilty slider
+    public void UpdateAbilityCooldown(float currentCooldown, float maxCooldown)
+    {
+        abilityCooldownSlider.maxValue = maxCooldown;
+        abilityCooldownSlider.value = maxCooldown - currentCooldown;
+    }
+
     // Ability Images
     private void SetAbilityImg()
     {
