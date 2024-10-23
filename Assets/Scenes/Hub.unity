@@ -2264,6 +2264,7 @@ MonoBehaviour:
   prompt: Choose hamster
   shouldDisappear: 0
   _bonusObj: 0
+  animalName: 
 --- !u!1001 &1701008321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2427,6 +2428,7 @@ MonoBehaviour:
   prompt: Choose deer
   shouldDisappear: 0
   _bonusObj: 0
+  animalName: 
 --- !u!4 &1720720935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4202130902894980, guid: 6910e2407cd484a42a0c2598114751a0, type: 3}
@@ -2742,6 +2744,7 @@ MonoBehaviour:
   prompt: Choose monkey
   shouldDisappear: 0
   _bonusObj: 0
+  animalName: monkey
 --- !u!1001 &2039511668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2933,6 +2936,7 @@ MonoBehaviour:
   prompt: Choose snake
   shouldDisappear: 0
   _bonusObj: 0
+  animalName: 
 --- !u!1001 &2111186087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2948,6 +2952,10 @@ PrefabInstance:
     - target: {fileID: 535686899254878101, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581706063797627172, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00024414062
       objectReference: {fileID: 0}
     - target: {fileID: 2803055616230603151, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_AnchorMax.y
