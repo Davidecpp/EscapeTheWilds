@@ -10564,10 +10564,11 @@ MonoBehaviour:
   transitionSpeed: 5
   sprintDuration: 5
   sprintRechargeSpeed: 0.5
+  isSprinting: 0
   shakeDuration: 0.1
   shakeMagnitude: 0.1
   shakeDelay: 0.2
-  isSprinting: 0
+  human: 0
 --- !u!114 &6897450107361349302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10590,7 +10591,7 @@ MonoBehaviour:
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 2487174386987471698}
   timer: 5
-  bullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
+  bullet: {fileID: 269213418192503001, guid: 8e96512310b69c640a21343656a432de, type: 3}
   fireBullet: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
   spawnPoint: {fileID: 8379060929802259837}
   bulletSpeed: 10
