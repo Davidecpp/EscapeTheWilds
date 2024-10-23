@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Reset lighting
+        DynamicGI.UpdateEnvironment();
+
         _playerStats = FindObjectOfType<PlayerStats>();
         if (_playerStats == null)
         {
