@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
 
     private void SetResource(ResourceCounter resourceCounter)
     {
-        if (resourceCounter.Equals(bulletCounter))
+        if (resourceCounter.counterText != null && resourceCounter.Equals(bulletCounter))
         {
             resourceCounter.counterText.text = "x " + resourceCounter.count + "/" + maxBullets;
         }

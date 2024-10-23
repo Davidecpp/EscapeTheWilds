@@ -35,6 +35,11 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
         _playerStats = FindObjectOfType<PlayerStats>();
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats not found in the scene.");
+            return;
+        }
         _gameManager = FindObjectOfType<GameManager>();
         _ability = FindObjectOfType<PlayerAbility>();
         UpdateHearts();
@@ -57,18 +62,25 @@ public class CanvasManager : MonoBehaviour
     // Ability Images
     private void SetAbilityImg()
     {
-        if (_ability.characterName.Equals("Deer"))
+        
+
+        if (_ability != null)
         {
-            currentAbilityImg.sprite = dashImg;
+            if (_ability.characterName.Equals("Deer"))
+            {
+                currentAbilityImg.sprite = dashImg;
+            }
+            if (_ability.characterName.Equals("Snake"))
+            {
+                currentAbilityImg.sprite = venomImg;
+            }
+            if (_ability.characterName.Equals("Rat"))
+            {
+                currentAbilityImg.sprite = jumpImg;
+            }
         }
-        if (_ability.characterName.Equals("Snake"))
-        {
-            currentAbilityImg.sprite = venomImg;
-        }
-        if (_ability.characterName.Equals("Rat"))
-        {
-            currentAbilityImg.sprite = jumpImg;
-        }
+        
+        
 
         SetImageAlpha(currentAbilityImg, isAbiliting ? 0.5f : 1f);
     }
@@ -117,33 +129,28 @@ public class CanvasManager : MonoBehaviour
     public void UpdateHearts()
     {
         // Create an heart image for how much health the player has
-        while (_hearts.Count < _playerStats.GetHealth())
+        if (heartsContainer != null && heartPrefab != null)
         {
-            RawImage heart = Instantiate(heartPrefab, heartsContainer);
-            _hearts.Add(heart);
-        }
+            while (_hearts.Count < _playerStats.GetHealth())
+            {
+                RawImage heart = Instantiate(heartPrefab, heartsContainer);
+                _hearts.Add(heart);
+            }
 
-        while (_hearts.Count > _playerStats.GetHealth())
-        {
-            RawImage heart = _hearts[_hearts.Count - 1];
-            _hearts.Remove(heart);
-            Destroy(heart.gameObject);
-        }
+            while (_hearts.Count > _playerStats.GetHealth())
+            {
+                RawImage heart = _hearts[_hearts.Count - 1];
+                _hearts.Remove(heart);
+                Destroy(heart.gameObject);
+            }
         
-        for (int i = 0; i < _hearts.Count; i++)
-        {
-            _hearts[i].gameObject.SetActive(i < _playerStats.GetHealth());
+            for (int i = 0; i < _hearts.Count; i++)
+            {
+                _hearts[i].gameObject.SetActive(i < _playerStats.GetHealth());
+            }
         }
 
-        if (_playerStats.GetHealth() == _playerStats.maxHealth)
-        {
-            Debug.Log("Max life");
-            maxLifeTxt.SetActive(true);
-        }
-        else
-        {
-            maxLifeTxt.SetActive(false);
-        }
+        maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.maxHealth);
         _gameManager.GameOver();
     }
     

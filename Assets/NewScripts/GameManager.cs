@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Game objects
-    public GameObject gameOver, boost, win;
+    public GameObject gameOver, boost;
     public GameObject menu;
     public GameObject skills, canvas;
     
@@ -97,6 +97,18 @@ public class GameManager : MonoBehaviour
     // Game over if player's health <= 0
     public void GameOver()
     {
+        if (gameOver == null)
+        {
+            Debug.LogError("L'oggetto GameOver non è assegnato nel GameManager.");
+            return; 
+        }
+
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats non è assegnato.");
+            return; 
+        }
+        
         if (_playerStats.GetHealth() <= 0)
         {
             PauseGame();
@@ -109,9 +121,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     void Update()
     {
-        CheckWin();
         UpdateLap();
 
         if (heated)
@@ -121,26 +133,10 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateLap()
     {
-        lapsTxt.text = laps + "/" + totLaps;
-    }
-    private void CheckWin()
-    {
-        if (_inventory != null && _inventory.GetStrawberryCount() >= winCondition)
+        if (lapsTxt != null)
         {
-            WinGame();
+            lapsTxt.text = laps + "/" + totLaps;
         }
-
-        if (laps == totLaps)
-        {
-            WinGame();
-        }
-    }
-
-    public void WinGame()
-    {
-        Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = true; 
-        win.SetActive(true);
     }
     
     // Decrease player's life
