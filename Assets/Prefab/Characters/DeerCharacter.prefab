@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1219827914788623355, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1696168506326571747, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_text
       value: x0
@@ -921,7 +925,7 @@ MonoBehaviour:
   dashSpeed: 50
   dashDuration: 0.5
   trailRenderer: {fileID: 9188604639354638154}
-  dashSparkle: {fileID: 4033412786151888123, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}
+  dashSparkle: {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
   dashSound: {fileID: 2090566693973021599}
   venomSprayPrefab: {fileID: 0}
   venomCloudPrefab: {fileID: 0}
@@ -929,6 +933,11 @@ MonoBehaviour:
   sprayCooldown: 5
   sprayDuration: 0.5
   spraySound: {fileID: 0}
+  extraJump: 0
+  megaJumpParticles: {fileID: 0}
+  jumpSound: {fileID: 0}
+  abilityTime: 5
+  abilityCooldown: 0
 --- !u!96 &9188604639354638154
 TrailRenderer:
   serializedVersion: 3

@@ -9,6 +9,7 @@ public class PlayerAbility : MonoBehaviour
     public float dashSpeed = 20f; 
     public float dashDuration = 0.5f; 
     private bool isDashing = false;
+    private bool dashCompleted = false;
     public TrailRenderer trailRenderer;
     public GameObject dashSparkle;
     public AudioSource dashSound;
@@ -27,7 +28,7 @@ public class PlayerAbility : MonoBehaviour
     public GameObject megaJumpParticles;
     public AudioSource jumpSound;
     
-    public float abilityTime = 5.0f;
+    public float abilityTime = 3.0f;
     public float abilityCooldown = 0;
     
     private CanvasManager _canvas;
@@ -44,7 +45,7 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(abilityCooldown);
+        //Debug.Log(abilityCooldown);
         HandleCooldown();
         
         // If R is pressed and the cooldown is over activate ability
@@ -121,8 +122,17 @@ public class PlayerAbility : MonoBehaviour
     // Instant dash
     IEnumerator VerticalDash()
     {
+        // Check if dash is interrupted
+        if (DashInterrupted())
+        {
+            yield break;
+        }
+        
         isDashing = true;
+        dashCompleted = false;
         trailRenderer.emitting = true;
+        abilityCooldown = abilityTime;
+
         dashSpeed = 1000;
         float dashTime = 0f;
 
@@ -131,7 +141,7 @@ public class PlayerAbility : MonoBehaviour
             dashTime += Time.deltaTime;
             if (DashInterrupted())
                 break;
-            
+
             dashSound.Play();
             transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime);
             InstantiateAndDestroy(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation, 1f);
@@ -140,9 +150,8 @@ public class PlayerAbility : MonoBehaviour
 
         trailRenderer.emitting = false;
         isDashing = false;
-        abilityCooldown = abilityTime;
     }
-
+    
     // Check if the dash is interrupted
     private bool DashInterrupted()
     {

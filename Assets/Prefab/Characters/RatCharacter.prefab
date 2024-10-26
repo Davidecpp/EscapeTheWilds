@@ -10757,7 +10757,7 @@ MonoBehaviour:
   sprayDuration: 0.5
   spraySound: {fileID: 0}
   extraJump: 0
-  megaJumpParticles: {fileID: 3123281158184909799, guid: 077b03ec333b59745b265f75be216105, type: 3}
+  megaJumpParticles: {fileID: 8547867254204328264, guid: cf378989e15716e40a61692dcd97e628, type: 3}
   jumpSound: {fileID: 4828241780196086658}
   abilityTime: 5
   abilityCooldown: 0
@@ -10972,6 +10972,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6672488418611767180}
     m_Modifications:
+    - target: {fileID: 1219827914788623355, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1696168506326571747, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_text
       value: x0
