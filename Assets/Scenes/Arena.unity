@@ -643,6 +643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 5032718202716372532, guid: d38ebf228c5696849904195f057ff367, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5218248656956641018, guid: d38ebf228c5696849904195f057ff367, type: 3}
       propertyPath: m_Size.z
       value: 4

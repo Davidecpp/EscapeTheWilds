@@ -22,12 +22,11 @@ public class Cannon : MonoBehaviour, IInteractible
     private GameObject _player;
     
     // Recoil
-    public float recoilForce = 5000f;
-    public float recoilDuration = 5f;
+    public float recoilForce = 50f;
+    public float recoilDuration = 1f;
     private Vector3 originalPosition;
     private bool isRecoiling = false;
     
-
     private void Start()
     {
         originalPosition = transform.localPosition;
