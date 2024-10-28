@@ -8,17 +8,17 @@ public class Cannon : MonoBehaviour, IInteractible
     [SerializeField] private bool shouldDisappear; 
     [SerializeField] private bool _bonusObj;
     
-
     public string InteractionPrompt => prompt;
     public bool bonusObj => _bonusObj;
     
+    // Projectile
     public GameObject projectilePrefab;
     public ParticleSystem explosionParticles;
     public Transform firePoint;
-    
     public float fireForce = 20f;
+    public AudioSource explosionSound;
+    
     public float rotationSpeed = 50f;
-    public GameObject camera;
     private GameObject _player;
     
     // Recoil
@@ -31,6 +31,7 @@ public class Cannon : MonoBehaviour, IInteractible
     private void Start()
     {
         originalPosition = transform.localPosition;
+        explosionSound = GetComponent<AudioSource>();
     }
     public bool Interact(Interactor interactor)
     {
@@ -38,15 +39,13 @@ public class Cannon : MonoBehaviour, IInteractible
         if (interactor.CompareTag("Player"))
         {
             _player = interactor.gameObject;
-            Debug.Log("Cannon Interacted with Player");
             _player.SetActive(false);
             return true;
         }
 
         return false;
     }
-
-
+    
     private void Update()
     {
         HandleRotation();
@@ -92,6 +91,7 @@ public class Cannon : MonoBehaviour, IInteractible
         
         ApplyRecoil();
         Instantiate(explosionParticles, firePoint.position, firePoint.rotation);
+        explosionSound.Play();
         Destroy(projectile,2f);
     }
 
