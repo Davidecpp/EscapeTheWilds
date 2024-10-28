@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2641945949148330076}
   - component: {fileID: 4417069090783153200}
   - component: {fileID: 3120901021743256644}
+  - component: {fileID: 7473613065622847522}
   m_Layer: 0
   m_Name: CannonBall
   m_TagString: Untagged
@@ -104,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3120901021743256644
 Rigidbody:
@@ -133,3 +134,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7473613065622847522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2804780184218831099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42845402f0f52994ab36580e96aca92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  hitParticles: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
+  fireParticles: {fileID: 2785966358164364051, guid: 7f578492a14e4314baca07aacc004a2d, type: 3}

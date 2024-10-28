@@ -3,6 +3,7 @@ using UnityEngine;
 public class NewProj : MonoBehaviour
 {
     public float damage = 10.0f;
+    public bool cannon;
     
     // Particelle
     public GameObject hitParticles;
@@ -14,7 +15,7 @@ public class NewProj : MonoBehaviour
         Debug.Log("Projectile hit: " + collision.gameObject.name); 
         
         // Se heated genera particelle infuocate altrimenti base
-        if (GameManager.Instance.heated)
+        if (GameManager.Instance.heated || cannon)
         {
             particles = Instantiate(fireParticles, transform.position, transform.rotation);
             Destroy(particles, 6.5f);

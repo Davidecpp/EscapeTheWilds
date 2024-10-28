@@ -13,7 +13,9 @@ public class Cannon : MonoBehaviour, IInteractible
     public bool bonusObj => _bonusObj;
     
     public GameObject projectilePrefab;
+    public ParticleSystem explosionParticles;
     public Transform firePoint;
+    
     public float fireForce = 20f;
     public float rotationSpeed = 50f;
     public GameObject camera;
@@ -89,6 +91,8 @@ public class Cannon : MonoBehaviour, IInteractible
         rb.AddForce(firePoint.forward * fireForce, ForceMode.Impulse);
         
         ApplyRecoil();
+        Instantiate(explosionParticles, firePoint.position, firePoint.rotation);
+        Destroy(projectile,2f);
     }
 
     private void ApplyRecoil()

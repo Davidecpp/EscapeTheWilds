@@ -623,6 +623,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1527632402792221021, guid: d38ebf228c5696849904195f057ff367, type: 3}
+      propertyPath: prompt
+      value: Use Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527632402792221021, guid: d38ebf228c5696849904195f057ff367, type: 3}
+      propertyPath: fireForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527632402792221021, guid: d38ebf228c5696849904195f057ff367, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527632402792221021, guid: d38ebf228c5696849904195f057ff367, type: 3}
+      propertyPath: explosionParticles
+      value: 
+      objectReference: {fileID: 2433282508523890284, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
     - target: {fileID: 3023299787098912928, guid: d38ebf228c5696849904195f057ff367, type: 3}
       propertyPath: m_Name
       value: Cannon
