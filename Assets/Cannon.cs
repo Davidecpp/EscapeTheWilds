@@ -1,23 +1,49 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public class Cannon : MonoBehaviour, IInteractible
 {
+    [SerializeField] private string prompt;
+    [SerializeField] private bool shouldDisappear; 
+    [SerializeField] private bool _bonusObj;
+    
+
+    public string InteractionPrompt => prompt;
+    public bool bonusObj => _bonusObj;
+    
     public GameObject projectilePrefab;
     public Transform firePoint;
     public float fireForce = 20f;
     public float rotationSpeed = 50f;
+    public GameObject camera;
+    private GameObject _player;
     
-    public float recoilForce = 5000f;        // Intensità del rinculo
-    public float recoilDuration = 5f;   // Durata del rinculo
-
-    private Vector3 originalPosition;     // Posizione originale per il ripristino
+    // Recoil
+    public float recoilForce = 5000f;
+    public float recoilDuration = 5f;
+    private Vector3 originalPosition;
     private bool isRecoiling = false;
+    
 
     private void Start()
     {
         originalPosition = transform.localPosition;
     }
+    public bool Interact(Interactor interactor)
+    {
+        // Check if it interacts with player
+        if (interactor.CompareTag("Player"))
+        {
+            _player = interactor.gameObject;
+            Debug.Log("Cannon Interacted with Player");
+            _player.SetActive(false);
+            return true;
+        }
+
+        return false;
+    }
+
 
     private void Update()
     {
@@ -28,7 +54,12 @@ public class Cannon : MonoBehaviour
         {
             Fire();
         }
-        // Ripristina il cannone alla posizione originale se in rinculo
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _player.SetActive(true);
+        }
+        
+        // Reset cannon to original position
         if (isRecoiling)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime / recoilDuration);
@@ -43,7 +74,7 @@ public class Cannon : MonoBehaviour
 
     private void HandleRotation()
     {
-        // SD for rotation
+        // S-D for rotation
         float horizontal = Input.GetAxis("Horizontal");
         
         Vector3 rotation = new Vector3(0, horizontal, 0) * rotationSpeed * Time.deltaTime;
@@ -62,7 +93,7 @@ public class Cannon : MonoBehaviour
 
     private void ApplyRecoil()
     {
-        transform.localPosition += transform.right * recoilForce * Time.deltaTime; // Sposta all'indietro
-        isRecoiling = true; // Attiva il rinculo
+        transform.localPosition += transform.right * recoilForce * Time.deltaTime;
+        isRecoiling = true;
     }
 }

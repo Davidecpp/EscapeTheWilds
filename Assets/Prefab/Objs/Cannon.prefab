@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4819716538724040125}
   - component: {fileID: 7874670615091036191}
   - component: {fileID: 403361770673608511}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -102,7 +102,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5814217605558697442}
   - component: {fileID: 1527632402792221021}
-  m_Layer: 0
+  - component: {fileID: 4097794828197522027}
+  - component: {fileID: 5218248656956641018}
+  m_Layer: 3
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,12 +141,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f98e28627f7f3d44877913eed7c3fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: CANNON
+  shouldDisappear: 0
+  _bonusObj: 0
   projectilePrefab: {fileID: 2804780184218831099, guid: 15fd8d84cf975b946b506c75a10f6d07, type: 3}
   firePoint: {fileID: 8596033175165923596}
   fireForce: 20
   rotationSpeed: 50
+  camera: {fileID: 2089702817660191076}
   recoilForce: 50
-  recoilDuration: 5
+  recoilDuration: 1
+--- !u!114 &4097794828197522027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023299787098912928}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!65 &5218248656956641018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023299787098912928}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7782873433083909335
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8596033175165923596}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,6 +232,94 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
       propertyPath: m_Name
       value: Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100034, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100038, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d1be5cbea130544f6b29523de1f28c65, type: 3}
       propertyPath: m_RootOrder

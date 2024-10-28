@@ -62,8 +62,6 @@ public class CanvasManager : MonoBehaviour
     // Ability Images
     private void SetAbilityImg()
     {
-        
-
         if (_ability != null)
         {
             if (_ability.characterName.Equals("Deer"))
@@ -79,9 +77,6 @@ public class CanvasManager : MonoBehaviour
                 currentAbilityImg.sprite = jumpImg;
             }
         }
-        
-        
-
         SetImageAlpha(currentAbilityImg, isAbiliting ? 0.5f : 1f);
     }
         
