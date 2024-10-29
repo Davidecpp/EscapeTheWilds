@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
     {
         if (_playerStats.GetHealth() > 0 && !invincible)
         {
-            _playerStats.ReduceHealth();
+            _playerStats.ReduceHealth(1);
             _canvasManager.UpdateHearts();
             StartCoroutine(_canvasManager.FlashRed());
         }

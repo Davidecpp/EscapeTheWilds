@@ -43,11 +43,11 @@ public class PlayerStats : MonoBehaviour
         return health;
     }
 
-    public void ReduceHealth()
+    public void ReduceHealth(int amount)
     {
         if (health > 0)
         {
-            health--;
+            health-= amount;
         }
     }
     public float GetExperience()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -25,7 +26,6 @@ public class Projectile : MonoBehaviour
             particles = Instantiate(hitParticles, transform.position, transform.rotation);
             Destroy(particles, 1f);
         }
-        
         // Damage the enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
