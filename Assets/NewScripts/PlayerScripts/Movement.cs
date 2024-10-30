@@ -298,4 +298,13 @@ public class Movement : MonoBehaviour
     {
         _controllerCollider = hit;
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("CannonBall"))
+        {
+            Debug.Log("Cannon ball niga");
+            _playerStats.ReduceHealth(2);
+        }
+    }
 }

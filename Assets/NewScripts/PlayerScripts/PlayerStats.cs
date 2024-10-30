@@ -45,9 +45,11 @@ public class PlayerStats : MonoBehaviour
 
     public void ReduceHealth(int amount)
     {
-        if (health > 0)
+        if (health > 0) 
         {
             health-= amount;
+            _canvas.UpdateHearts();
+            StartCoroutine(_canvas.FlashRed());
         }
     }
     public float GetExperience()
