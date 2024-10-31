@@ -125,7 +125,7 @@ public class CanvasManager : MonoBehaviour
     {
         if (heartsContainer != null && heartPrefab != null)
         {
-            while (_hearts.Count < _playerStats.maxHealth)
+            while (_hearts.Count < _playerStats.GetMaxHealth())
             {
                 RawImage heart = Instantiate(heartPrefab, heartsContainer);
                 _hearts.Add(heart);
@@ -137,7 +137,7 @@ public class CanvasManager : MonoBehaviour
             }
         }
 
-        maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.maxHealth);
+        maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.GetMaxHealth());
         _gameManager.GameOver();
     }
 

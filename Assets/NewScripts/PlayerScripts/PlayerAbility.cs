@@ -40,7 +40,10 @@ public class PlayerAbility : MonoBehaviour
         _movement = FindObjectOfType<Movement>();
         dashSound = GetComponent<AudioSource>();
         spraySound = GetComponent<AudioSource>();
-        trailRenderer.emitting = false;
+        if (trailRenderer != null)
+        {
+            trailRenderer.emitting = false; 
+        }
     }
 
     void Update()

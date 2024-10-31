@@ -22,11 +22,11 @@ public class StatsController : MonoBehaviour
     // Set player stats
     private void SetStats()
     {
-        speedValueTxt.text = ""+_stats.runSpeed;
-        jumpValueTxt.text = ""+ _stats.jumpHeight;
-        healthValueTxt.text = ""+_stats.GetHealth()+"/"+_stats.maxHealth;
-        levelValueTxt.text = ""+_stats.level;
-        damageValueTxt.text = "" + _stats.damage;
+        speedValueTxt.text = ""+_stats.GetRunSpeed();
+        jumpValueTxt.text = ""+ _stats.GetJumpHeight();
+        healthValueTxt.text = ""+_stats.GetHealth()+"/"+_stats.GetMaxHealth();
+        levelValueTxt.text = ""+_stats.GetLevel();
+        damageValueTxt.text = "" + _stats.GetDamage();
     }
 
     // Update is called once per frame

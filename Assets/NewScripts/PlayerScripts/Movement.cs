@@ -65,9 +65,9 @@ public class Movement : MonoBehaviour
             return;
         }
         _vertSpeed = _minFall;
-        _currentMoveSpeed = _playerStats.moveSpeed;
-        _slowSpeed = _playerStats.moveSpeed / 2;
-        _slowedSprintSpeed = _playerStats.runSpeed / 2;
+        _currentMoveSpeed = _playerStats.GetMoveSpeed();
+        _slowSpeed = _playerStats.GetMoveSpeed() / 2;
+        _slowedSprintSpeed = _playerStats.GetMoveSpeed() / 2;
         sandParticles.Stop();
         healParticles.gameObject.SetActive(false);
     }
@@ -93,7 +93,7 @@ public class Movement : MonoBehaviour
 
                 if (hit.collider.CompareTag("JumpPlatform"))
                 {
-                    _vertSpeed = _playerStats.jumpHeight * bounceStrenght; 
+                    _vertSpeed = _playerStats.GetJumpHeight() * bounceStrenght; 
                 }
                 else
                 {
@@ -127,7 +127,7 @@ public class Movement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump") && !hit.collider.CompareTag("JumpPlatform"))
             {
-                _vertSpeed = _playerStats.jumpHeight;
+                _vertSpeed = _playerStats.GetJumpHeight();
             }
         }
         else
@@ -167,7 +167,7 @@ public class Movement : MonoBehaviour
     {
         if (_characterController.isGrounded)
         {
-            _vertSpeed = _playerStats.jumpHeight * 4; 
+            _vertSpeed = _playerStats.GetJumpHeight() * 4; 
             megaJump = false;
         }
     }
@@ -253,7 +253,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            baseSpeed = Input.GetKey(KeyCode.LeftShift) && _camera.isSprinting ? _playerStats.runSpeed : _playerStats.moveSpeed;
+            baseSpeed = Input.GetKey(KeyCode.LeftShift) && _camera.isSprinting ? _playerStats.GetRunSpeed() : _playerStats.GetMoveSpeed();
         }
 
         if (isBoosted)

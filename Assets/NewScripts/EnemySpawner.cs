@@ -13,11 +13,13 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         _arenaManager = FindObjectOfType<ArenaManager>();
+        if (_arenaManager == null || _arenaManager.snakeEnemy == null)
+        {
+            Debug.LogError("ArenaManager or snakeEnemy not found in the scene or not assigned.");
+            return;
+        }
+        
         SpawnEnemy(1, _arenaManager.snakeEnemy);
-    }
-
-    void Update()
-    {
     }
     
     // Spawn x enemies in random spawn points

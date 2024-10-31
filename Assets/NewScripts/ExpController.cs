@@ -20,18 +20,13 @@ public class ExpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _experienceTxt.text = _playerStats.exp + "/" + _playerStats.nextLevel;
+        _experienceTxt.text = _playerStats.GetExperience() + "/" + _playerStats.GetNextLevelExp();
         ExperienceController();
     }
 
     public void ExperienceController()
     {
-        _levelTxt.text = _playerStats.level.ToString();
-        ExpProgressBar.fillAmount = _playerStats.exp / _playerStats.nextLevel;
-
-        /*if (_playerStats.exp >= _playerStats.nextLevel)
-        {
-            _playerStats.exp -= _playerStats.nextLevel;
-        }*/
+        _levelTxt.text = _playerStats.GetLevel().ToString();
+        ExpProgressBar.fillAmount = _playerStats.GetExperience() / _playerStats.GetNextLevelExp();
     }
 }

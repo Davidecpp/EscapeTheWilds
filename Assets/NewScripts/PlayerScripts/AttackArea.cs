@@ -55,7 +55,7 @@ public class AttackArea : MonoBehaviour
             EnemyHealth enemyHealth = enemyInRange.gameObject.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(_playerStats.damage); 
+                enemyHealth.TakeDamage(_playerStats.GetDamage()); 
             }
         }
     }

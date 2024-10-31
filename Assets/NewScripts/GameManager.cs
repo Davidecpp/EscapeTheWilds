@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     // Increase player's life
     public void IncreaseHealth()
     {
-        if (_playerStats.GetHealth() < _playerStats.maxHealth)
+        if (_playerStats.GetHealth() < _playerStats.GetMaxHealth())
         {
             _playerStats.AddHeart();
             _canvasManager.UpdateHearts();

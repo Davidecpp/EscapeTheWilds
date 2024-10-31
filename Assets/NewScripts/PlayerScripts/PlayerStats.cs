@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Stats
-    private int health;
-    public int maxHealth = 5;
-    public float moveSpeed = 6.0f;
-    public float jumpHeight = 15.0f;
-    public float runSpeed = 10.0f;
-    public float damage = 10.0f;
-    public float exp = 0.0f;
-    public float nextLevel = 100;
-    public float level = 1.0f;
+    // Player Stats
+    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private float moveSpeed = 6.0f;
+    [SerializeField] private float jumpHeight = 15.0f;
+    [SerializeField] private float runSpeed = 10.0f;
+    [SerializeField] private float damage = 10.0f;
+    [SerializeField] private float nextLevelExp = 100;
+    
+    private int _health;
+    private float _exp;
+    private int _level = 1;
 
     private CanvasManager _canvas;
     private GameManager _gameManager;
@@ -22,55 +22,59 @@ public class PlayerStats : MonoBehaviour
     {
         _canvas = FindObjectOfType<CanvasManager>();
         _gameManager = FindObjectOfType<GameManager>();
-        health = maxHealth;
-        _canvas.UpdateHearts();
+        _health = maxHealth;
+
+        _canvas?.UpdateHearts();
     }
 
-    // Add experience to the player
-    public void AddExperience(float gained)
+    // Accessor methods (getter) to expose private fields
+    public int GetMaxHealth() => maxHealth;
+    public float GetMoveSpeed() => moveSpeed;
+    public float GetJumpHeight() => jumpHeight;
+    public float GetRunSpeed() => runSpeed;
+    public float GetDamage() => damage;
+    public float GetExperience() => _exp;
+    public float GetNextLevelExp() => nextLevelExp;
+    public float GetLevel() => _level;
+    public int GetHealth() => _health;
+
+    // Adds experience to the player
+    public void AddExperience(float amount)
     {
-        exp += gained;
-        if (exp >= nextLevel)
+        _exp += amount;
+        if (_exp >= nextLevelExp)
         {
-            UpgradeStats();
-            exp -= nextLevel;
-            nextLevel += 50;
+            LevelUp();
+            _exp -= nextLevelExp;
+            nextLevelExp *= 1.5f;
         }
     }
 
-    public int GetHealth()
-    {
-        return health;
-    }
-
+    // Reduces health by a specific amount
     public void ReduceHealth(int amount)
     {
-        if (health > 0) 
-        {
-            health-= amount;
-            _canvas.UpdateHearts();
-            StartCoroutine(_canvas.FlashRed());
-        }
+        if (_health <= 0) return;
+        
+        _health -= amount;
+        _canvas?.UpdateHearts();
+        StartCoroutine(_canvas?.FlashRed());
     }
-    public float GetExperience()
-    {
-        return exp;
-    }
-    // Add +1 health
+
+    // Add one health point, if under maxHealth
     public void AddHeart()
     {
-        if (health < maxHealth)
+        if (_health < maxHealth)
         {
-            health++;
-            _canvas.UpdateHearts();
-            _gameManager.PauseGame();
+            _health++;
+            _canvas?.UpdateHearts();
+            _gameManager?.PauseGame();
         }
     }
-    
-    // Upgrade stats
-    private void UpgradeStats()
+
+    // Upgrade stats on level-up
+    private void LevelUp()
     {
-        level++;
+        _level++;
         damage++;
         maxHealth++;
         runSpeed++;
