@@ -11,10 +11,6 @@ public class FallingRock : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true; 
     }
-
-    void Update()
-    {
-    }
     
     // Let the rock fall
     public void DropRock()
@@ -28,13 +24,12 @@ public class FallingRock : MonoBehaviour
     {
         if (hasFallen)
         {
-            Debug.Log("Il masso ha colpito " + collision.gameObject.name);
+            Debug.Log("Rock hit " + collision.gameObject.name);
             Instantiate(particles, transform.position, transform.rotation);
             if (collision.gameObject.CompareTag("Player"))
             {
-                GameManager.Instance.DecreaseHealth();
+                PlayerStats.Instance.ReduceHealth(2);
             }
-            //Destroy(gameObject, 2f); 
         }
     }
     // When the player is in the area it activates

@@ -16,7 +16,6 @@ public class Banana : MonoBehaviour, IInteractible
 
         if (bonusObj)
         {
-            GameManager.Instance.DecreaseHealth(); 
             Debug.Log("Danno preso");
         }
 

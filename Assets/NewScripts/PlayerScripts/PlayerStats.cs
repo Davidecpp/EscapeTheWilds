@@ -17,13 +17,27 @@ public class PlayerStats : MonoBehaviour
 
     private CanvasManager _canvas;
     private GameManager _gameManager;
+    
+    public static PlayerStats Instance { get; private set; }
+    
+    private void Awake()
+    {
+        // To make it static
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         _canvas = FindObjectOfType<CanvasManager>();
         _gameManager = FindObjectOfType<GameManager>();
         _health = maxHealth;
-
         _canvas?.UpdateHearts();
     }
 
