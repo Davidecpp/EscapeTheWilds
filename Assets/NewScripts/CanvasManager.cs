@@ -123,22 +123,14 @@ public class CanvasManager : MonoBehaviour
     // Updates player's life
     public void UpdateHearts()
     {
-        // Create an heart image for how much health the player has
         if (heartsContainer != null && heartPrefab != null)
         {
-            while (_hearts.Count < _playerStats.GetHealth())
+            while (_hearts.Count < _playerStats.maxHealth)
             {
                 RawImage heart = Instantiate(heartPrefab, heartsContainer);
                 _hearts.Add(heart);
             }
 
-            while (_hearts.Count > _playerStats.GetHealth())
-            {
-                RawImage heart = _hearts[_hearts.Count - 1];
-                _hearts.Remove(heart);
-                Destroy(heart.gameObject);
-            }
-        
             for (int i = 0; i < _hearts.Count; i++)
             {
                 _hearts[i].gameObject.SetActive(i < _playerStats.GetHealth());
@@ -148,6 +140,7 @@ public class CanvasManager : MonoBehaviour
         maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.maxHealth);
         _gameManager.GameOver();
     }
+
     
     // Damage effect (makes the screen red)
     public IEnumerator FlashRed()
