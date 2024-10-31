@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -81,7 +82,7 @@ public class PlayerStats : MonoBehaviour
         {
             _health++;
             _canvas?.UpdateHearts();
-            _gameManager?.PauseGame();
+            //_gameManager?.PauseGame();
         }
     }
 

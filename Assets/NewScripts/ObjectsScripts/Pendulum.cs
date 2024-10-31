@@ -33,7 +33,7 @@ public class Pendulum : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Collision with Player detected.");
-            GameManager.Instance.DecreaseHealth();
+            PlayerStats.Instance.ReduceHealth(1);
         }
     }
 }

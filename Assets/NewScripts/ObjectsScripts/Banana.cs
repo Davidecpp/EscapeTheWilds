@@ -17,6 +17,7 @@ public class Banana : MonoBehaviour, IInteractible
         if (bonusObj)
         {
             Debug.Log("Danno preso");
+            
         }
 
         if (shouldDisappear)

@@ -22,7 +22,7 @@ public class FireEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.DecreaseHealth();
+            PlayerStats.Instance.ReduceHealth(1);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         {

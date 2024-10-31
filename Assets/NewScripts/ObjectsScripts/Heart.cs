@@ -13,7 +13,7 @@ public class Heart : MonoBehaviour, IInteractible
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Heart picked");
-        GameManager.Instance.IncreaseHealth();
+        PlayerStats.Instance.AddHeart();
         GameManager.Instance.healing = true;
 
         if (shouldDisappear)

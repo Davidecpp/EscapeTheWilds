@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     public int totLaps;
     public TMP_Text lapsTxt;
     
-    private PlayerStats _playerStats;
     private Inventory _inventory;
     private CanvasManager _canvasManager;
     
@@ -54,13 +53,6 @@ public class GameManager : MonoBehaviour
     {
         // Reset lighting
         DynamicGI.UpdateEnvironment();
-
-        _playerStats = FindObjectOfType<PlayerStats>();
-        if (_playerStats == null)
-        {
-            Debug.LogError("PlayerStats not found in the scene.");
-            return;
-        }
 
         _inventory = FindObjectOfType<Inventory>();
         if (_inventory == null)
@@ -102,14 +94,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("L'oggetto GameOver non è assegnato nel GameManager.");
             return; 
         }
-
-        if (_playerStats == null)
-        {
-            Debug.LogError("PlayerStats non è assegnato.");
-            return; 
-        }
         
-        if (_playerStats.GetHealth() <= 0)
+        if (PlayerStats.Instance.GetHealth() <= 0)
         {
             PauseGame();
             gameOver.SetActive(true);
@@ -120,8 +106,7 @@ public class GameManager : MonoBehaviour
             ResumeGame();
         }
     }
-
-
+    
     void Update()
     {
         UpdateLap();
@@ -136,27 +121,6 @@ public class GameManager : MonoBehaviour
         if (lapsTxt != null)
         {
             lapsTxt.text = laps + "/" + totLaps;
-        }
-    }
-    
-    // Decrease player's life
-    public void DecreaseHealth()
-    {
-        if (_playerStats.GetHealth() > 0 && !invincible)
-        {
-            _playerStats.ReduceHealth(1);
-            _canvasManager.UpdateHearts();
-            StartCoroutine(_canvasManager.FlashRed());
-        }
-    }
-    
-    // Increase player's life
-    public void IncreaseHealth()
-    {
-        if (_playerStats.GetHealth() < _playerStats.GetMaxHealth())
-        {
-            _playerStats.AddHeart();
-            _canvasManager.UpdateHearts();
         }
     }
     

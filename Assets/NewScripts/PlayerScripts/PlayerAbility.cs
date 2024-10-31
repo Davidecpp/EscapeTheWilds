@@ -48,7 +48,6 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(abilityCooldown);
         HandleCooldown();
         
         // If R is pressed and the cooldown is over activate ability
