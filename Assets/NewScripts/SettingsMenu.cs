@@ -39,7 +39,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float value)
     {
-        audioMixer.SetFloat("volume", value);
+        audioMixer.SetFloat("volume", value / 3);
     }
 
     public void SetQuality(int quality)
@@ -57,5 +57,4 @@ public class SettingsMenu : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         UnityEngine.Device.Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-    
 }
