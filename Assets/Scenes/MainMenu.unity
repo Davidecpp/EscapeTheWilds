@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 93843113799597685, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 280
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 93843113799597685, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
       propertyPath: m_SizeDelta.y
@@ -624,8 +624,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 10dcc0f8170a178958b290ed4590e17c, type: 3}
     - target: {fileID: 4939256436334333995, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939256436334333995, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
       propertyPath: m_SizeDelta.y
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939256436334333995, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 5101893784659788085, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -783,6 +791,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 90cf437ebd78f08b097b5f482b04e6ad, type: 3}
+    - target: {fileID: 7520092388398185484, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520092388398185484, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520092388398185484, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520092388398185484, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567119478327684712, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f25b2901468c6fdb9aeac1f2b006f12, type: 3}
     - target: {fileID: 7840519491322295244, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -924,7 +952,8 @@ PrefabInstance:
       value: -27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8624517018048961096, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 030eae842bd69654abcf31edcae3f8a8, type: 3}
