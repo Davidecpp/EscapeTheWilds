@@ -25,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
             CloseTab(controls);
             CloseTab(options);
             CloseCharacterSelection();
+            CloseControls();
         }
         escBtn.SetActive(!buttons.activeSelf);
     }
@@ -48,6 +49,22 @@ public class MainMenuManager : MonoBehaviour
         {
             go.SetActive(false);
             buttons.SetActive(true);
+        }
+    }
+    
+    // Controls
+    public void OpenControls()
+    {
+        options.SetActive(false);
+        controls.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        if (controls.activeSelf)
+        {
+            controls.SetActive(false);
+            options.SetActive(true);
         }
     }
     // Character selection menu
