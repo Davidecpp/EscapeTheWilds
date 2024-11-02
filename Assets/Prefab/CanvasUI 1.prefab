@@ -8057,15 +8057,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a30d1d60a163f4bb01b94dbdba265c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esc: {fileID: 0}
   buttons: {fileID: 2877028106837923521}
-  gameModes: {fileID: 1045770327169380576}
   controls: {fileID: 1833216423670095860}
   options: {fileID: 7721177233999763936}
-  characterSelection: {fileID: 0}
   menu: {fileID: 8886695387431099463}
   stats: {fileID: 6616540611466973434}
-  characters: []
 --- !u!114 &5359574798186737344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11868,6 +11864,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6397189769969571323, guid: 239c6e604ae9e6e4eae0735785c8ecd7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a9ce4af7a31a706ac9dd9db2a51850a0, type: 3}
     - target: {fileID: 8084421936612873515, guid: 239c6e604ae9e6e4eae0735785c8ecd7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -11995,11 +11995,6 @@ PrefabInstance:
 --- !u!224 &209603837130305944 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8148834288701462940, guid: 239c6e604ae9e6e4eae0735785c8ecd7, type: 3}
-  m_PrefabInstance: {fileID: 8358346692166625284}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1045770327169380576 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9042527226304927972, guid: 239c6e604ae9e6e4eae0735785c8ecd7, type: 3}
   m_PrefabInstance: {fileID: 8358346692166625284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2877028106837923521 stripped
