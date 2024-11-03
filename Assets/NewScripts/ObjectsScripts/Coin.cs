@@ -31,6 +31,8 @@ public class Coin : MonoBehaviour, IInteractible
         if (inventory != null)
         {
             inventory.AddCoin(1);
+            MissionManager missionManager = FindObjectOfType<MissionManager>();
+            missionManager.AddProgress("Tutorial", 1);
             
             audioSource.Play();
             isCollected = true; 
