@@ -52,18 +52,6 @@ public class AnimalCage : MonoBehaviour, IInteractible
                 SelectCharacter(3);
                 break;
         }
-        /*if (animalName.Equals("hamster"))
-        {
-            SelectCharacter(1);
-        }
-        if (animalName.Equals("monkey"))
-        {
-            SelectCharacter(2);
-        }
-        if (animalName.Equals("snake"))
-        {
-            SelectCharacter(3);
-        }*/
     }
 
     private IEnumerator WaitForDialogue()
