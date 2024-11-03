@@ -13,14 +13,11 @@ public class Dialogue : MonoBehaviour
     private string[] lines;
     private int index;
     public bool isActive;
-    private GameManager _gameManager;
 
     void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
         textComponent.text = string.Empty;
         isActive = false;
-        //SetDialogue(new string[] { "Ho bisogno di fare qualche soldo!", "Sfruttiamo un po' di animali.." });
     }
 
     void Update()
@@ -71,7 +68,7 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         isActive = true;
         
-        //_gameManager.PauseGame();
+        GameManager.Instance.PauseGame();
         StartCoroutine(TypeLine());
     }
 
@@ -80,7 +77,7 @@ public class Dialogue : MonoBehaviour
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed); // for ignoring timescale so txt animation doesn't stop
         }
     }
 
@@ -102,6 +99,6 @@ public class Dialogue : MonoBehaviour
     {
         isActive = false;
         textComponent.text = string.Empty;
-        _gameManager.ResumeGame();
+        GameManager.Instance.ResumeGame();
     }
 }

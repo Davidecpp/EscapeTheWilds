@@ -13,13 +13,6 @@ public class AnimalCage : MonoBehaviour, IInteractible
     public bool bonusObj => _bonusObj;
     public String animalName;
 
-    private MenuManager _menu;
-
-    private void Start()
-    {
-        _menu = FindObjectOfType<MenuManager>();
-    }
-
     // Object interaction
     // Choose animal
     public bool Interact(Interactor interactor)
@@ -44,11 +37,22 @@ public class AnimalCage : MonoBehaviour, IInteractible
     }
     private void SelectCharacterAfterDialogue()
     {
-        if (animalName.Equals("deer"))
+        switch (animalName)
         {
-            SelectCharacter(0);
+            case "deer":
+                SelectCharacter(0);
+                break;
+            case "hamster":
+                SelectCharacter(1);
+                break;
+            case "monkey":
+                SelectCharacter(2);
+                break;
+            case "snake":
+                SelectCharacter(3);
+                break;
         }
-        if (animalName.Equals("hamster"))
+        /*if (animalName.Equals("hamster"))
         {
             SelectCharacter(1);
         }
@@ -59,14 +63,14 @@ public class AnimalCage : MonoBehaviour, IInteractible
         if (animalName.Equals("snake"))
         {
             SelectCharacter(3);
-        }
+        }*/
     }
 
     private IEnumerator WaitForDialogue()
     {
         Dialogue dialogue = FindObjectOfType<Dialogue>();
 
-        // Attendi finché il dialogo è attivo
+        // Wait for dialogue to end
         while (dialogue.isActive)
         {
             yield return null;
