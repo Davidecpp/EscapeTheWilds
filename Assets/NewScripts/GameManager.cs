@@ -11,17 +11,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Game objects
-    public GameObject gameOver, boost;
-    public GameObject menu;
-    public GameObject skills, canvas;
+    public GameObject gameOver;
     
     public static GameManager Instance { get; private set; }
     
     // Damage effect
     [SerializeField] private RawImage redFlashImage;
     [SerializeField] private float flashDuration = 0.1f;
-
-    [SerializeField] private int winCondition;
     
     // Laps
     public int laps = 0;
@@ -124,7 +120,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // Restart gamef
+    // Restart game
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

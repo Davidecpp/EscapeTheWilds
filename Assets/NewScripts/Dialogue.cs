@@ -28,6 +28,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Enter or left-mouse-button for next line
         if (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame)
         {
             if (textComponent.text == lines[index])
