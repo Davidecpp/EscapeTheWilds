@@ -1,35 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-
-    public string[] lines;
-
     public float textSpeed;
+    public Image box;
 
+    private string[] lines;
+    private int index;
+    public bool isActive;
     private GameManager _gameManager;
 
-    private int index;
-    
-    // Start is called before the first frame update
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         textComponent.text = string.Empty;
-        StartDialogue();
-        _gameManager.ResumeGame();
+        isActive = false;
+        //SetDialogue(new string[] { "Ho bisogno di fare qualche soldo!", "Sfruttiamo un po' di animali.." });
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Enter or left-mouse-button for next line
-        if (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame)
+        // left-mouse-button or enter for next dialogue line
+        if (isActive && (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame))
         {
             if (textComponent.text == lines[index])
             {
@@ -41,11 +38,40 @@ public class Dialogue : MonoBehaviour
                 textComponent.text = lines[index];
             }
         }
+        HideBox();
     }
-
-    void StartDialogue()
+    
+    // Hide the box when not in use
+    private void HideBox()
     {
+        if (isActive)
+        {
+            SetImageAlpha(box, 1f);
+        }
+        else
+        {
+            SetImageAlpha(box,0f);  
+        }
+    }
+    // Change image alpha
+    private void SetImageAlpha(Image image, float alpha)
+    {
+        Color color = image.color;
+        color.a = alpha;
+        image.color = color;
+    }
+    
+    // Set new dialogue
+    public void SetDialogue(string[] newLines)
+    {
+        if (isActive) return;
+
+        lines = newLines;
         index = 0;
+        textComponent.text = string.Empty;
+        isActive = true;
+        
+        //_gameManager.PauseGame();
         StartCoroutine(TypeLine());
     }
 
@@ -68,7 +94,14 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            EndDialogue();
         }
+    }
+
+    void EndDialogue()
+    {
+        isActive = false;
+        textComponent.text = string.Empty;
+        _gameManager.ResumeGame();
     }
 }

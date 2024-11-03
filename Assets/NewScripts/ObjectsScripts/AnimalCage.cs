@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,26 @@ public class AnimalCage : MonoBehaviour, IInteractible
     // Choose animal
     public bool Interact(Interactor interactor)
     {
+        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Hai scelto " + animalName, "Prossima linea..." });
+        StartCoroutine(WaitForDialogue());
+        
+        if (shouldDisappear)
+        {
+            Destroy(gameObject); 
+        }
+        return true;
+    }
+    public void SelectCharacter(int characterID)
+    {
+        // Saves selected character's ID
+        PlayerPrefs.SetInt("SelectedCharacter", characterID);
+        Debug.Log("Selected: " + characterID);
+
+        // Change scene after choosing a character
+        SceneManager.LoadScene(5);
+    }
+    private void SelectCharacterAfterDialogue()
+    {
         if (animalName.Equals("deer"))
         {
             SelectCharacter(0);
@@ -39,20 +60,17 @@ public class AnimalCage : MonoBehaviour, IInteractible
         {
             SelectCharacter(3);
         }
-        Debug.Log("Cage");
-        if (shouldDisappear)
-        {
-            Destroy(gameObject); 
-        }
-        return true;
     }
-    public void SelectCharacter(int characterID)
-    {
-        // Saves selected character's ID
-        PlayerPrefs.SetInt("SelectedCharacter", characterID);
-        Debug.Log("Selected: " + characterID);
 
-        // Change scene after choosing a character
-        SceneManager.LoadScene(5);
+    private IEnumerator WaitForDialogue()
+    {
+        Dialogue dialogue = FindObjectOfType<Dialogue>();
+
+        // Attendi finché il dialogo è attivo
+        while (dialogue.isActive)
+        {
+            yield return null;
+        }
+        SelectCharacterAfterDialogue();
     }
 }

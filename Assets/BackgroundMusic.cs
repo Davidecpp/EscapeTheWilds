@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
     // Makes music persisten from scene to scene
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     public void SetVolume(float value)
     {
