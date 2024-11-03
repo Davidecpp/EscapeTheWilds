@@ -6,22 +6,42 @@ public class Coin : MonoBehaviour, IInteractible
     [SerializeField] private string prompt;
     [SerializeField] private bool shouldDisappear;
     
+    // Audio
+    [SerializeField] private AudioClip pickupSound;
+    private AudioSource audioSource;
+    private bool isCollected = false; 
+
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-    
-    // Object interaction
-    // Gives +1 coin
+
+    private void Start()
+    {
+        // Adding audio source dinamically
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = pickupSound;
+        audioSource.playOnAwake = false;
+    }
+
     public bool Interact(Interactor interactor)
     {
+        // if it's been collected return
+        if (isCollected) return false;
+
         Inventory inventory = FindObjectOfType<Inventory>();
         if (inventory != null)
         {
             inventory.AddCoin(1);
-            Debug.Log("Coin picked");
-
+            
+            audioSource.Play();
+            isCollected = true; 
+            
+            // Makes object invisible
+            GetComponent<Renderer>().enabled = false;
+            
             if (shouldDisappear)
             {
-                Destroy(gameObject); 
+                // Wait for sound lenght to destroy 
+                Destroy(gameObject, pickupSound.length);
             }
             return true;
         }
