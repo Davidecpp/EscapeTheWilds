@@ -5,7 +5,8 @@ public class MissionManager : MonoBehaviour
 {
     public List<Mission> missions;
     private MissionUI missionUI;
-
+    public int activeMissionIndex = 0;
+    
     private void Start()
     {
         missionUI = FindObjectOfType<MissionUI>();

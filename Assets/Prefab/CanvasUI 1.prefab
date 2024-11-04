@@ -6410,6 +6410,12 @@ MonoBehaviour:
     currentAmount: 0
     reward: 5
     isCompleted: 0
+  - title: Tutorial 2
+    description: Collect key
+    goalAmount: 1
+    currentAmount: 0
+    reward: 5
+    isCompleted: 0
 --- !u!1 &5099641815518444225
 GameObject:
   m_ObjectHideFlags: 0

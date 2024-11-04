@@ -19,6 +19,8 @@ public class Key : MonoBehaviour, IInteractible
         inventory.hasKey = true;
         Debug.Log("Key picked");
         
+        MissionManager.FindObjectOfType<MissionManager>().AddProgress("Tutorial 2",1);
+        
         if (shouldDisappear)
         {
             Destroy(gameObject); 

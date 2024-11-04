@@ -9,6 +9,7 @@ public class Mission
     public int currentAmount; 
     public int reward;
     public bool isCompleted;
+    
 
     public void CheckCompletion()
     {
@@ -21,6 +22,7 @@ public class Mission
     private void CompleteMission()
     {
         isCompleted = true;
+        MissionManager.FindObjectOfType<MissionManager>().activeMissionIndex++;
         Debug.Log("Mission completed: " + title);
         // Puoi aggiungere qui la logica per assegnare la ricompensa
     }
