@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 4339608142472852943}
   - component: {fileID: 2554738985227592822}
   m_Layer: 0
-  m_Name: Scimmia spara
+  m_Name: Monkey
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +409,10 @@ MonoBehaviour:
   sprintDuration: 5
   sprintRechargeSpeed: 0.5
   isSprinting: 0
+  shakeDuration: 0.1
+  shakeMagnitude: 0.1
+  shakeDelay: 0.2
+  human: 0
 --- !u!143 &3458704203118281444
 CharacterController:
   m_ObjectHideFlags: 0
@@ -465,6 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85023d6755448a24e8d85e12f1e97637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!114 &46749575760283637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +486,17 @@ MonoBehaviour:
   keyImage: {fileID: 0}
   maxAlphaValue: 1
   minAlphaValue: 0.4
-  strawberryCounterText: {fileID: 0}
+  maxBullets: 10
+  strawberryCounter:
+    count: 0
+    counterText: {fileID: 0}
+  coinCounter:
+    count: 0
+    counterText: {fileID: 0}
+  bulletCounter:
+    count: 0
+    counterText: {fileID: 0}
+  strawberryImg: {fileID: 0}
 --- !u!54 &7769864583880277480
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -538,16 +553,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2783944046803227670}
+  audioSource: {fileID: 0}
   sandParticles: {fileID: 1149191125320118110}
   waterParticles: {fileID: 8038442286129036954}
+  invincibleParticles: {fileID: 0}
+  healParticles: {fileID: 0}
   _rotSpeed: 0
+  bounceStrenght: 2
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 0}
-  bounceStrenght: 2
   timer: 5
-  enemyBullet: {fileID: 1407451490957870, guid: 3ce32ffa6ccf60e4ab65d9e396f43433, type: 3}
+  bullet: {fileID: 0}
+  fireBullet: {fileID: 0}
   spawnPoint: {fileID: 4681499664552203976}
   bulletSpeed: 50
+  megaJump: 0
 --- !u!114 &2554738985227592822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,10 +580,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  maxHealth: 5
   moveSpeed: 6
   jumpHeight: 50
   runSpeed: 10
+  damage: 10
+  nextLevelExp: 100
 --- !u!1 &1732572238460317488
 GameObject:
   m_ObjectHideFlags: 0

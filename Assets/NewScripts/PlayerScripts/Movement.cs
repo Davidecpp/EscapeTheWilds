@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
 {
     // Player prefab
     [SerializeField] private Transform target;
+
+    public AudioSource walkingSound;
     
     // Partciles
     [SerializeField] private ParticleSystem sandParticles;
@@ -109,6 +111,20 @@ public class Movement : MonoBehaviour
         if (horInput != 0 || vertInput != 0)
         {
             UpdateMovementSpeed();
+            
+            // Modify pitch for running
+            if (Input.GetKey(KeyCode.LeftShift) && _camera.isSprinting)
+            {
+                walkingSound.pitch = 1.5f; 
+            }
+            else
+            {
+                walkingSound.pitch = 1.0f; 
+            }
+            if (!walkingSound.isPlaying)
+            {
+                walkingSound.Play();
+            }
 
             movement.x = horInput * _currentMoveSpeed;
             movement.z = vertInput * _currentMoveSpeed;
@@ -122,6 +138,11 @@ public class Movement : MonoBehaviour
             Quaternion direction = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Lerp(transform.rotation, direction, _rotSpeed * Time.deltaTime);
         }
+        else if (walkingSound.isPlaying)
+        {
+            walkingSound.Stop();
+        }
+
 
         if (hitGround)
         {
@@ -307,4 +328,4 @@ public class Movement : MonoBehaviour
             _playerStats.ReduceHealth(2);
         }
     }
-}
+} //310
