@@ -33,7 +33,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
         Debug.Log("Selected: " + characterID);
 
         // Change scene after choosing a character
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
     private void SelectCharacterAfterDialogue()
     {

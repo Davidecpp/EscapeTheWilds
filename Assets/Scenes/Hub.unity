@@ -1036,11 +1036,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4998326679312090, guid: 2b519101e10d4a74580d4c86ac9e03e6, type: 3}
   m_PrefabInstance: {fileID: 787577765}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &816690485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5379909813197349268, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
-  m_PrefabInstance: {fileID: 2111186087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &941000354 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2746162571629001490, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
@@ -2675,7 +2670,7 @@ PrefabInstance:
     - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
       propertyPath: skills
       value: 
-      objectReference: {fileID: 816690485}
+      objectReference: {fileID: 0}
     - target: {fileID: 344089048624347633, guid: 7a58d14e3d5012b47ab321486c8493a1, type: 3}
       propertyPath: gameOver
       value: 
@@ -3102,6 +3097,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1741951145}
     - target: {fileID: 7955225211425097942, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
+      propertyPath: walkingSound
+      value: 
+      objectReference: {fileID: 6806388133302900750}
+    - target: {fileID: 7955225211425097942, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
       propertyPath: boostAnimation
       value: 
       objectReference: {fileID: 1301344360}
@@ -3114,6 +3113,11 @@ PrefabInstance:
       addedObject: {fileID: 172523940}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
+--- !u!82 &6806388133302900750 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1653265749710278738, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
+  m_PrefabInstance: {fileID: 6806388133302900749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
