@@ -10,7 +10,6 @@ public class Mission
     public int reward;
     public bool isCompleted;
     
-
     public void CheckCompletion()
     {
         if (currentAmount >= goalAmount)
@@ -22,8 +21,12 @@ public class Mission
     private void CompleteMission()
     {
         isCompleted = true;
-        MissionManager.FindObjectOfType<MissionManager>().activeMissionIndex++;
         Debug.Log("Mission completed: " + title);
-        // Puoi aggiungere qui la logica per assegnare la ricompensa
+        
+        MissionUI.FindObjectOfType<MissionUI>().RewardUI();
+        MissionManager.FindObjectOfType<MissionManager>().activeMissionIndex++;
+        
+        // Add reward
+        Inventory.FindObjectOfType<Inventory>().AddCoin(reward);
     }
 }
