@@ -7,6 +7,8 @@ public class MissionUI : MonoBehaviour
     public TextMeshProUGUI missionRewardText;
     public GameObject rewardPanel;
     private MissionManager missionManager;
+    
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -35,6 +37,9 @@ public class MissionUI : MonoBehaviour
     {
         GameManager.Instance.PauseGame();
         rewardPanel.SetActive(true);
+        
+        audioSource.Play();
+        
         missionRewardText.text = "";
         Mission mission = missionManager.missions[missionManager.activeMissionIndex];
         missionRewardText.text += $"x{mission.reward}"; 
