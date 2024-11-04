@@ -8,6 +8,7 @@ public class Mission
     public int goalAmount; 
     public int currentAmount; 
     public int reward;
+    public int expReward;
     public bool isCompleted;
     
     public void CheckCompletion()
@@ -28,5 +29,6 @@ public class Mission
         
         // Add reward
         Inventory.FindObjectOfType<Inventory>().AddCoin(reward);
+        PlayerStats.Instance.AddExperience(expReward);
     }
 }

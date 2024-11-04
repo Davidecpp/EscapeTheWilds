@@ -5,6 +5,7 @@ public class MissionUI : MonoBehaviour
 {
     public TextMeshProUGUI missionText;
     public TextMeshProUGUI missionRewardText;
+    public TextMeshProUGUI expRewardText;
     public GameObject rewardPanel;
     private MissionManager missionManager;
     
@@ -41,8 +42,10 @@ public class MissionUI : MonoBehaviour
         audioSource.Play();
         
         missionRewardText.text = "";
+        expRewardText.text = "";
         Mission mission = missionManager.missions[missionManager.activeMissionIndex];
         missionRewardText.text += $"x{mission.reward}"; 
+        expRewardText.text += $"Exp + {mission.expReward}"; 
     }
 
     public void AcceptReward()
