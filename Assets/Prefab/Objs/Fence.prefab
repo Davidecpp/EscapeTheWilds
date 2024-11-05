@@ -111,7 +111,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2655983, y: 1.8173962, z: 0.29164886}
+  m_Size: {x: 0.2655983, y: 2, z: 0.29164886}
   m_Center: {x: -2.0864544, y: 0.9086981, z: 0.14582443}
 --- !u!65 &1184441055387106189
 BoxCollider:
@@ -193,7 +193,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 4.534485, y: 1.8173962, z: 0.3343315}
   m_Center: {x: -2.015564, y: 0.9086981, z: 0.15481758}

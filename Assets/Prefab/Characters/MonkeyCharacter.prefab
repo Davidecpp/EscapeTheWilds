@@ -387,6 +387,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4339608142472852943, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
+      propertyPath: walkingSound
+      value: 
+      objectReference: {fileID: 4271693112333794965}
+    - target: {fileID: 4339608142472852943, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
       propertyPath: healParticles
       value: 
       objectReference: {fileID: 894711678527787877}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MissionUI : MonoBehaviour
 {
@@ -44,13 +45,14 @@ public class MissionUI : MonoBehaviour
         missionRewardText.text = "";
         expRewardText.text = "";
         Mission mission = missionManager.missions[missionManager.activeMissionIndex];
-        missionRewardText.text += $"x{mission.reward}"; 
-        expRewardText.text += $"Exp + {mission.expReward}"; 
+        missionRewardText.text += $"x{mission.reward}";
+        expRewardText.text += $"Exp + {mission.expReward}";
     }
 
     public void AcceptReward()
     {
         rewardPanel.SetActive(false);
         GameManager.Instance.ResumeGame();
+        SceneManager.LoadScene(7);
     }
 }
