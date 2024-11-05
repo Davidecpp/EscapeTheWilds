@@ -17,7 +17,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
     // Choose animal
     public bool Interact(Interactor interactor)
     {
-        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Hai scelto " + animalName, "Prossima linea..." });
+        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "You choose " + animalName, "Let's see how he behaves..." });
         StartCoroutine(WaitForDialogue());
         
         if (shouldDisappear)
