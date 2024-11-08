@@ -16,30 +16,25 @@ public class PlayerStats : MonoBehaviour
     private int _level = 1;
 
     private CanvasManager _canvas;
-    private GameManager _gameManager;
-    
-    public static PlayerStats Instance { get; private set; }
-    
-    private void Awake()
-    {
-        // To make it static
-        if (Instance == null)
-        {
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {
-        _canvas = FindObjectOfType<CanvasManager>();
-        _gameManager = FindObjectOfType<GameManager>();
-        _health = maxHealth;
-        _canvas?.UpdateHearts();
+        _canvas = CanvasManager.Instance;
+        if (_canvas != null)
+        {
+            _canvas.SetPlayerReference(this);
+            _health = maxHealth;
+            _canvas.UpdateHearts();
+        }
+        else
+        {
+            Debug.LogError("CanvasManager not found.");
+        }
+    }
+    
+    private void Update()
+    {
+        Die();
     }
 
     // Accessor methods (getter) to expose private fields
@@ -83,6 +78,15 @@ public class PlayerStats : MonoBehaviour
             _health++;
             _canvas?.UpdateHearts();
             //_gameManager?.PauseGame();
+        }
+    }
+    
+    // Game over
+    private void Die()
+    {
+        if (_health <= 0)
+        {
+            GameManager.Instance.GameOver();
         }
     }
 

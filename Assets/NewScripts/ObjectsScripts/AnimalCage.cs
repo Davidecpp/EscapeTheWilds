@@ -17,7 +17,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
     // Choose animal
     public bool Interact(Interactor interactor)
     {
-        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Hai scelto " + animalName, "Prossima linea..." });
+        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "You choose " + animalName, "Let's see how he behaves..." });
         StartCoroutine(WaitForDialogue());
         
         if (shouldDisappear)
@@ -33,7 +33,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
         Debug.Log("Selected: " + characterID);
 
         // Change scene after choosing a character
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
     private void SelectCharacterAfterDialogue()
     {

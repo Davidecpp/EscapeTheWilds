@@ -14,8 +14,11 @@ public class LapTimer : MonoBehaviour
     private float lastLapTime = 0f; // Tempo dell'ultimo giro
     private bool isRunning = false; // Indica se il timer è in esecuzione
 
+    private CanvasManager _canvasManager;
+
     private void Start()
     {
+        _canvasManager = FindObjectOfType<CanvasManager>();
         StartTimer();
     }
 
@@ -60,10 +63,10 @@ public class LapTimer : MonoBehaviour
     {
         if (other.CompareTag("Goal"))
         {
-            GameManager.Instance.laps++;
-            Debug.Log(GameManager.Instance.laps + " / " + GameManager.Instance.totLaps);
+            _canvasManager.laps++;
+            Debug.Log(_canvasManager.laps + " / " + _canvasManager.totLaps);
 
-            if (GameManager.Instance.laps >= GameManager.Instance.totLaps)
+            if (_canvasManager.laps >= _canvasManager.totLaps)
             {
                 // Se il numero di giri completati è uguale o maggiore al totale, ferma il timer definitivamente
                 StopTimer();

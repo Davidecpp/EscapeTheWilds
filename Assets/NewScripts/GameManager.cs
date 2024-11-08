@@ -1,36 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
-{
-    // Game objects
-    public GameObject gameOver;
-    
+{ 
     public static GameManager Instance { get; private set; }
-    
-    // Damage effect
-    [SerializeField] private RawImage redFlashImage;
-    [SerializeField] private float flashDuration = 0.1f;
-    
-    // Laps
-    public int laps = 0;
-    public int totLaps;
-    public TMP_Text lapsTxt;
-    
-    private Inventory _inventory;
-    private CanvasManager _canvasManager;
+    public Canvas mainCanvas;
     
     // Conditions
     public bool invincible = false;
     public bool healing = false;
     public bool heated = false;
+
+    public bool inGame;
+    public bool gameEnded;
     
     private void Awake()
     {
@@ -43,27 +27,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
-        // Reset lighting
-        DynamicGI.UpdateEnvironment();
-
-        _inventory = FindObjectOfType<Inventory>();
-        if (_inventory == null)
-        {
-            Debug.LogError("Inventory not found in the scene.");
-            return;
-        }
-
-        _canvasManager = FindObjectOfType<CanvasManager>();
-        if (_canvasManager == null)
-        {
-            Debug.LogError("Canvas not found in the scene.");
-            return;
-        }
-        ResumeGame();
+        mainCanvas.gameObject.SetActive(false);
     }
     
     // Pause the game and makes the pointer visible
@@ -72,6 +36,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true; 
         Time.timeScale = 0;
+        inGame = false;
     }
     
     // Resume the game and hides the pointer
@@ -80,51 +45,46 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; 
         Cursor.visible = false; 
         Time.timeScale = 1;
+        inGame = true;
     }
     
     // Game over if player's health <= 0
     public void GameOver()
     {
-        if (gameOver == null)
-        {
-            Debug.LogError("L'oggetto GameOver non è assegnato nel GameManager.");
-            return; 
-        }
-        
-        if (PlayerStats.Instance.GetHealth() <= 0)
-        {
-            PauseGame();
-            gameOver.SetActive(true);
-        }
-        else
-        {
-            gameOver.SetActive(false);
-            ResumeGame();
-        }
+        PauseGame();
+        gameEnded = true;
     }
     
     void Update()
     {
-        UpdateLap();
-
+        Debug.Log("inGame = "+inGame);
+        Debug.Log("gameEnded = "+gameEnded);
         if (heated)
         {
             StartCoroutine(FlameOff(5.0f));
-        }
-    }
-    private void UpdateLap()
-    {
-        if (lapsTxt != null)
-        {
-            lapsTxt.text = laps + "/" + totLaps;
         }
     }
     
     // Restart game
     public void RestartGame()
     {
+        StartCoroutine(RestartAfterDelay(0.1f));
+    }
+
+    private IEnumerator RestartAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay); 
+        
+        gameEnded = false;
+        inGame = true;
+        Time.timeScale = 1; 
+
+        Debug.Log("Before LoadScene");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Awake();
+
+        Debug.Log("After LoadScene");
+        ResumeGame();
+        Debug.Log("Game restarted");
     }
     
     public IEnumerator FlameOff(float seconds)

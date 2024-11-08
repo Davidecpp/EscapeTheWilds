@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProvaCamera : MonoBehaviour
@@ -9,7 +10,7 @@ public class ProvaCamera : MonoBehaviour
     public Transform animal;
     
     // Sprint
-    public Slider sprintSlider;
+    
     public float normalDistance = 5f;
     public float sprintDistance = 3f;
     public float transitionSpeed = 5f;
@@ -30,6 +31,45 @@ public class ProvaCamera : MonoBehaviour
     
     private CharacterController controller;
     private MenuManager menuManager;
+    private CanvasManager _canvasManager;
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void InitializeReferences()
+    {
+        if (playerCamera == null)
+        {
+            playerCamera = GameObject.FindGameObjectWithTag("MainCamera")?.transform;
+            if (playerCamera != null)
+            {
+                initialCameraPosition = playerCamera.localPosition;
+            }
+        }
+
+        if (animal == null)
+        {
+            animal = GameObject.FindGameObjectWithTag("Player")?.transform;
+            if (animal != null)
+            {
+                controller = animal.GetComponent<CharacterController>();
+            }
+        }
+
+        menuManager = FindObjectOfType<MenuManager>();
+        _canvasManager = FindObjectOfType<CanvasManager>();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Ri-inizializza i riferimenti quando la scena viene caricata
+        InitializeReferences();
+    }
 
     void Start()
     {
@@ -37,14 +77,20 @@ public class ProvaCamera : MonoBehaviour
         initialCameraPosition = playerCamera.localPosition;
         controller = animal.GetComponent<CharacterController>();
         menuManager = FindObjectOfType<MenuManager>();
+        _canvasManager = FindObjectOfType<CanvasManager>();
     }
 
     void Update()
     {
+        if (playerCamera == null || animal == null)
+        {
+            Debug.LogWarning("playerCamera o animal non sono assegnati. Controlla se esistono in scena.");
+            return;
+        }
         HandleCameraRotation();
         HandleSprint();
         UpdateCameraPosition();
-
+        
         if (!menuManager.menu.activeSelf && !human)
         {
             // Shakes camera when left mouse button pressed
@@ -101,7 +147,7 @@ public class ProvaCamera : MonoBehaviour
                 sprintTimer = Mathf.Clamp(sprintTimer, 0, sprintDuration);
             }
         }
-        sprintSlider.value = sprintTimer / sprintDuration;
+        _canvasManager.sprintSlider.value = sprintTimer / sprintDuration;
     }
 
     private void UpdateCameraPosition()

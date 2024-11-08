@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -15,7 +13,7 @@ public class MainMenuManager : MonoBehaviour
     
     public GameObject[] characters;
     private int _activeScene;
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +31,8 @@ public class MainMenuManager : MonoBehaviour
     {
         // 1 ARENA - 2 FOOTBALL - 3 RACE - 4 STORY
         SceneManager.LoadSceneAsync(i);
+        GameManager.Instance.ResumeGame();
+        GameManager.Instance.mainCanvas.gameObject.SetActive(true);
     }
     
     // Open tab
@@ -92,6 +92,8 @@ public class MainMenuManager : MonoBehaviour
 
         // Change scene after choosing a character
         SceneManager.LoadScene(_activeScene);
+        GameManager.Instance.ResumeGame();
+        GameManager.Instance.mainCanvas.gameObject.SetActive(true);
     }
     
     // Quit game
@@ -99,5 +101,4 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
 }

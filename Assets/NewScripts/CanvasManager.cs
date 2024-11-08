@@ -7,8 +7,14 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    // References
     private PlayerStats _playerStats;
-    private GameManager _gameManager;
+    private Inventory _inventory;
+    
+    // Resources counters
+    [SerializeField] public Inventory.ResourceCounter strawberryCounter;
+    [SerializeField] public Inventory.ResourceCounter coinCounter;
+    [SerializeField] public Inventory.ResourceCounter bulletCounter;
     
     // Damage
     [SerializeField] private RawImage redFlashImage;
@@ -20,6 +26,14 @@ public class CanvasManager : MonoBehaviour
     private List<RawImage> _hearts = new List<RawImage>();
     public GameObject maxLifeTxt;
     
+    // Laps
+    public int laps = 0;
+    public int totLaps;
+    public TMP_Text lapsTxt;
+    
+    [SerializeField] private Image keyImage;
+    public Slider sprintSlider;
+    
     // Ability Images
     public Image currentAbilityImg;
     private PlayerAbility _ability;
@@ -30,26 +44,76 @@ public class CanvasManager : MonoBehaviour
     public Slider abilityCooldownSlider;
     
     public GameObject shop;
-    
-    // Start is called before the first frame update
-    void Start()
+    public static CanvasManager Instance { get; private set; }
+
+    private void Awake()
     {
-        _playerStats = FindObjectOfType<PlayerStats>();
-        if (_playerStats == null)
+        if (Instance == null)
         {
-            Debug.LogError("PlayerStats not found in the scene.");
-            return;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        _gameManager = FindObjectOfType<GameManager>();
-        _ability = FindObjectOfType<PlayerAbility>();
-        UpdateHearts();
-        _gameManager.ResumeGame();
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+    
     // Update is called once per frame
     void Update()
     {
+        if (_playerStats == null)
+        {
+            _playerStats = FindObjectOfType<PlayerStats>();
+            if (_playerStats != null)
+            {
+                SetPlayerReference(_playerStats);
+            }
+            else
+            {
+                return;
+            }
+        }
+        if (_inventory == null)
+        {
+            _inventory = FindObjectOfType<Inventory>();
+            if (_inventory != null)
+            {
+                SetInventoryReference(_inventory);
+            }
+            else
+            {
+                return;
+            }
+        }
+        if (_ability == null)
+        {
+            _ability = FindObjectOfType<PlayerAbility>();
+            if (_ability != null)
+            {
+                SetAbilityReference(_ability);
+            }
+            else
+            {
+                return;
+            }
+        }
         TabsOpener();
         SetAbilityImg();
+        UpdateLap();
+        SetImageAlpha(keyImage, _inventory.hasKey ? 1f : 0.3f);
+    }
+    public void SetPlayerReference(PlayerStats player)
+    {
+        _playerStats = player;
+    }
+    public void SetInventoryReference(Inventory inventory)
+    {
+        _inventory = inventory;
+    }
+    public void SetAbilityReference(PlayerAbility playerAbility)
+    {
+        _ability = playerAbility;
     }
     
     // Update abilty slider
@@ -83,11 +147,10 @@ public class CanvasManager : MonoBehaviour
     // Open tabs pressing keys
     private void TabsOpener()
     {
-        //bool tabPressed = Keyboard.current.tabKey.wasPressedThisFrame;
         bool mPressed = Keyboard.current.mKey.wasPressedThisFrame;
-        //OpenTab(tabPressed, skills);
         OpenTab(mPressed, shop);
     }
+    
     // General method for opening tabs
     private void OpenTab(bool key, GameObject go)
     {
@@ -98,20 +161,21 @@ public class CanvasManager : MonoBehaviour
                 go.SetActive(!go.activeSelf);
                 if (go.activeSelf)
                 {
-                    _gameManager.PauseGame();
+                    GameManager.Instance.PauseGame();
                     if (Keyboard.current.escapeKey.wasPressedThisFrame)
                     {
                         go.SetActive(false);
-                        _gameManager.ResumeGame();
+                        GameManager.Instance.ResumeGame();
                     }
                 }
                 else
                 {
-                    _gameManager.ResumeGame();
+                    GameManager.Instance.ResumeGame();
                 }
             }
         }
     }
+    
     // Change image alpha
     private void SetImageAlpha(Image image, float alpha)
     {
@@ -123,6 +187,11 @@ public class CanvasManager : MonoBehaviour
     // Updates player's life
     public void UpdateHearts()
     {
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats not assigned!");
+            return;
+        }
         if (heartsContainer != null && heartPrefab != null)
         {
             while (_hearts.Count < _playerStats.GetMaxHealth())
@@ -136,11 +205,16 @@ public class CanvasManager : MonoBehaviour
                 _hearts[i].gameObject.SetActive(i < _playerStats.GetHealth());
             }
         }
-
         maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.GetMaxHealth());
-        _gameManager.GameOver();
     }
-
+    
+    private void UpdateLap()
+    {
+        if (lapsTxt != null)
+        {
+            lapsTxt.text = laps + "/" + totLaps;
+        }
+    }
     
     // Damage effect (makes the screen red)
     public IEnumerator FlashRed()
@@ -148,7 +222,7 @@ public class CanvasManager : MonoBehaviour
         if (redFlashImage != null)
         {
             redFlashImage.gameObject.SetActive(true);
-            yield return new WaitForSeconds(_flashDuration);
+            yield return new WaitForSecondsRealtime(_flashDuration);
             redFlashImage.gameObject.SetActive(false);
         }
     }

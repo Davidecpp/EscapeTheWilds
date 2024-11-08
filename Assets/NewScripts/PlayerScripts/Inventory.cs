@@ -8,13 +8,8 @@ public class Inventory : MonoBehaviour
 {   
     // Key
     public bool hasKey = false;
-    [SerializeField] private RawImage keyImage;
-    
-    // Alpha image
-    public float maxAlphaValue = 1f;
-    public float minAlphaValue = 0.3f;
-
     public int maxBullets = 10;
+    private CanvasManager _canvasManager;
 
     [System.Serializable] // Makes resource counters serializable
     public struct ResourceCounter
@@ -22,43 +17,16 @@ public class Inventory : MonoBehaviour
         public int count;
         public TextMeshProUGUI counterText;
     }
-    
-    // Resources counters
-    [SerializeField] private ResourceCounter strawberryCounter;
-    [SerializeField] private ResourceCounter coinCounter;
-    [SerializeField] private ResourceCounter bulletCounter;
-    
-    // Obj images
-    [SerializeField] private Image strawberryImg;
 
     private void Start()
     {
-        SetResource(bulletCounter);
-    }
-
-    private void Update()
-    {
-        SetImageAlpha(hasKey ? maxAlphaValue : minAlphaValue);
-    }
-    
-    // Change key image aplha
-    private void SetImageAlpha(float alphaValue)
-    {
-        if (keyImage != null)
-        {
-            Color currentColor = keyImage.color;
-            currentColor.a = alphaValue;
-            keyImage.color = currentColor;
-        }
-        else
-        {
-            Debug.LogError("RawImage reference is not set.");
-        }
+        _canvasManager = FindObjectOfType<CanvasManager>();
+        SetResource(_canvasManager.bulletCounter);
     }
 
     private void SetResource(ResourceCounter resourceCounter)
     {
-        if (resourceCounter.counterText != null && resourceCounter.Equals(bulletCounter))
+        if (resourceCounter.counterText != null && resourceCounter.Equals(_canvasManager.bulletCounter))
         {
             resourceCounter.counterText.text = "x " + resourceCounter.count + "/" + maxBullets;
         }
@@ -68,7 +36,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            if (resourceCounter.Equals(bulletCounter) && resourceCounter.count >= maxBullets)
+            if (resourceCounter.Equals(_canvasManager.bulletCounter) && resourceCounter.count >= maxBullets)
             {
                 Debug.Log("MAX AMMO");
             }
@@ -85,7 +53,7 @@ public class Inventory : MonoBehaviour
         if (resourceCounter.counterText != null)
         {
             resourceCounter.counterText.text = "x " + resourceCounter.count;
-            if (resourceCounter.Equals(bulletCounter))
+            if (resourceCounter.Equals(_canvasManager.bulletCounter))
             {
                 resourceCounter.counterText.text += "/"+maxBullets;
             }
@@ -103,29 +71,29 @@ public class Inventory : MonoBehaviour
 
     public int GetBullets()
     {
-        return bulletCounter.count;
+        return _canvasManager.bulletCounter.count;
     }
 
     public void RemoveBullet()
     {
-        bulletCounter.count--;
-        bulletCounter.counterText.text = "x " + bulletCounter.count + "/" + maxBullets;
+        _canvasManager.bulletCounter.count--;
+        _canvasManager.bulletCounter.counterText.text = "x " + _canvasManager.bulletCounter.count + "/" + maxBullets;
         
     }
 
     public void RemoveCoins(int amount)
     {
-        coinCounter.count -= amount;
-        coinCounter.counterText.text = "x " + coinCounter.count;
+        _canvasManager.coinCounter.count -= amount;
+        _canvasManager.coinCounter.counterText.text = "x " + _canvasManager.coinCounter.count;
     }
 
     // Wrapper methods for adding specific resources
-    public void AddCoin(int amount) => AddResource(ref coinCounter, amount);
-    public void AddStrawberry(int amount) => AddResource(ref strawberryCounter, amount);
-    public void AddBullet(int amount) => AddResource(ref bulletCounter, amount);
+    public void AddCoin(int amount) => AddResource(ref _canvasManager.coinCounter, amount);
+    public void AddStrawberry(int amount) => AddResource(ref _canvasManager.strawberryCounter, amount);
+    public void AddBullet(int amount) => AddResource(ref _canvasManager.bulletCounter, amount);
 
     // Wrapper methods for getting specific resource counts
-    public int GetCoinCount() => GetResourceCount(coinCounter);
-    public int GetStrawberryCount() => GetResourceCount(strawberryCounter);
-    public int GetBulletCount() => GetResourceCount(bulletCounter);
+    public int GetCoinCount() => GetResourceCount(_canvasManager.coinCounter);
+    public int GetStrawberryCount() => GetResourceCount(_canvasManager.strawberryCounter);
+    public int GetBulletCount() => GetResourceCount(_canvasManager.bulletCounter);
 }
