@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6331275906715107348}
   - component: {fileID: 6331275906715107351}
   m_Layer: 0
-  m_Name: Area_heal_green
+  m_Name: HealParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6331275906715107350
 Transform:
   m_ObjectHideFlags: 0

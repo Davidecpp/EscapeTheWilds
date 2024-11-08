@@ -29,6 +29,6 @@ public class Mission
         
         // Add reward
         Inventory.FindObjectOfType<Inventory>().AddCoin(reward);
-        PlayerStats.Instance.AddExperience(expReward);
+        PlayerStats.FindObjectOfType<PlayerStats>().AddExperience(expReward);
     }
 }

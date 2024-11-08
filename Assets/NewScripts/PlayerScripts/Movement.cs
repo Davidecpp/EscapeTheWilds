@@ -18,6 +18,11 @@ public class Movement : MonoBehaviour
     [SerializeField] private ParticleSystem invincibleParticles;
     [SerializeField] private ParticleSystem healParticles;
     
+    private GameObject invincibleParticlesObject;
+    private bool invincibleEffectActive = false;
+    private GameObject healParticlesObject;
+    private bool healEffectActive = false;
+    
     // Variables
     public float _rotSpeed = 15.0f;
     private float _slowSpeed;
@@ -71,7 +76,6 @@ public class Movement : MonoBehaviour
         _slowSpeed = _playerStats.GetMoveSpeed() / 2;
         _slowedSprintSpeed = _playerStats.GetMoveSpeed() / 2;
         sandParticles.Stop();
-        healParticles.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -142,8 +146,7 @@ public class Movement : MonoBehaviour
         {
             walkingSound.Stop();
         }
-
-
+        
         if (hitGround)
         {
             if (Input.GetButtonDown("Jump") && !hit.collider.CompareTag("JumpPlatform"))
@@ -193,24 +196,28 @@ public class Movement : MonoBehaviour
         }
     }
     
-    // Show particles
-    private void ShowEffects()
+    // Instantiate and destroy effects based on conditions
+    private void Effect(bool condition, ref bool active, ref GameObject go, ParticleSystem ps)
     {
-        invincibleParticles.gameObject.SetActive(GameManager.Instance.invincible);
-        
-        if (GameManager.Instance.healing)
+        if (condition && !active)
         {
-            StartCoroutine(HealEffect(1f));
+            go = Instantiate(ps.gameObject, target.position, target.rotation);
+            go.transform.SetParent(target);
+            active = true;
+        }
+
+        if (!condition && active)
+        {
+            Destroy(go);
+            active = false;
         }
     }
     
-    // Show heal particles
-    private IEnumerator HealEffect(float seconds)
+    // Show effects particles
+    private void ShowEffects()
     {
-        healParticles.gameObject.SetActive(true);
-        yield return new WaitForSeconds(seconds); 
-        healParticles.gameObject.SetActive(false);
-        GameManager.Instance.healing = false;
+        Effect(GameManager.Instance.invincible, ref invincibleEffectActive, ref invincibleParticlesObject, invincibleParticles);
+        Effect(GameManager.Instance.healing, ref healEffectActive,ref healParticlesObject, healParticles);
     }
     
     public void BoostSpeed(float duration)
@@ -322,6 +329,7 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        // Cannon ball hit
         if (other.gameObject.CompareTag("CannonBall"))
         {
             Debug.Log("Cannon ball niga");

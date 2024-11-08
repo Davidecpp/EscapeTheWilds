@@ -19639,7 +19639,7 @@ GameObject:
   - component: {fileID: 8846737274113074930}
   - component: {fileID: 8846737274113074933}
   m_Layer: 0
-  m_Name: Area_magic_multicolor
+  m_Name: InvincibleParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -24,7 +24,6 @@ public class PlayerAbility : MonoBehaviour
     public AudioSource spraySound;
     
     // Mega Jump
-    public float extraJump;
     public GameObject megaJumpParticles;
     public AudioSource jumpSound;
     

@@ -1,12 +1,20 @@
+using System;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+    private PlayerStats _playerStats;
+
+    private void Start()
+    {
+        _playerStats = FindObjectOfType<PlayerStats>();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerStats.Instance.ReduceHealth(1);
+            _playerStats.ReduceHealth(1);
             Destroy(gameObject);
         }
     }

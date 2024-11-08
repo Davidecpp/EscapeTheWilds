@@ -11,6 +11,7 @@ public class Pendulum : MonoBehaviour
     public float limit = 75f;
     public bool randomStart = false;
     private float random = 0;
+    private PlayerStats _playerStats;
 
     private void Awake()
     {
@@ -19,7 +20,12 @@ public class Pendulum : MonoBehaviour
             random = UnityEngine.Random.Range(0f, 1f);
         }
     }
-    
+
+    private void Start()
+    {
+        _playerStats = FindObjectOfType<PlayerStats>();
+    }
+
     private void Update()
     {
         // Swing
@@ -33,7 +39,7 @@ public class Pendulum : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Collision with Player detected.");
-            PlayerStats.Instance.ReduceHealth(1);
+            _playerStats.ReduceHealth(1);
         }
     }
 }

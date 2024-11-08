@@ -6301,6 +6301,7 @@ MonoBehaviour:
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
+  _rotationX: 0
 --- !u!1001 &1199017615
 PrefabInstance:
   m_ObjectHideFlags: 0

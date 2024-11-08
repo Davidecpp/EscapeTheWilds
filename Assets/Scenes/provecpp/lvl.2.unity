@@ -5747,6 +5747,22 @@ PrefabInstance:
       propertyPath: playerSpawn
       value: 
       objectReference: {fileID: 599570335}
+    - target: {fileID: 4552075967364772830, guid: aae2479b487d79c4c8bd100834b13a87, type: 3}
+      propertyPath: characterPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6807839344814526279, guid: 990697e85377204408b62aa7879b1007, type: 3}
+    - target: {fileID: 4552075967364772830, guid: aae2479b487d79c4c8bd100834b13a87, type: 3}
+      propertyPath: characterPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 574624791572059178, guid: f85fd309a138ba4409b1432f8b7c6d6f, type: 3}
+    - target: {fileID: 4552075967364772830, guid: aae2479b487d79c4c8bd100834b13a87, type: 3}
+      propertyPath: characterPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1600240776407171071, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
+    - target: {fileID: 4552075967364772830, guid: aae2479b487d79c4c8bd100834b13a87, type: 3}
+      propertyPath: characterPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 7638151948205962469, guid: 8904d385d9d4283418c5a7489add7c2d, type: 3}
     - target: {fileID: 8228955501363853648, guid: aae2479b487d79c4c8bd100834b13a87, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.114872

@@ -5,9 +5,11 @@ public class FallingRock : MonoBehaviour
     private Rigidbody rb;
     private bool hasFallen = false;
     [SerializeField] private ParticleSystem particles;
+    private PlayerStats _playerStats;
 
     void Start()
     {
+        _playerStats = FindObjectOfType<PlayerStats>();
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true; 
     }
@@ -28,7 +30,7 @@ public class FallingRock : MonoBehaviour
             Instantiate(particles, transform.position, transform.rotation);
             if (collision.gameObject.CompareTag("Player"))
             {
-                PlayerStats.Instance.ReduceHealth(2);
+                _playerStats.ReduceHealth(2);
             }
         }
     }
