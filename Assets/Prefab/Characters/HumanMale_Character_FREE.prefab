@@ -2501,13 +2501,15 @@ MonoBehaviour:
   invincibleParticles: {fileID: 556158099039858883}
   healParticles: {fileID: 6022673938146069026}
   _rotSpeed: 0
+  bounceStrenght: 2
   boostSpeedMultiplier: 2
   boostAnimation: {fileID: 0}
-  bounceStrenght: 2
   timer: 5
-  enemyBullet: {fileID: 1825870777587358, guid: 9568f15e6607c70469b5b2657c7cd0b3, type: 3}
+  bullet: {fileID: 0}
+  fireBullet: {fileID: 0}
   spawnPoint: {fileID: 3333209122688085254}
   bulletSpeed: 10
+  megaJump: 0
 --- !u!114 &7871240336334854776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2530,6 +2532,10 @@ MonoBehaviour:
   sprintDuration: 5
   sprintRechargeSpeed: 0.5
   isSprinting: 0
+  shakeDuration: 0.1
+  shakeMagnitude: 0.1
+  shakeDelay: 0.2
+  human: 0
 --- !u!54 &527955915635419679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2569,10 +2575,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  maxHealth: 5
   moveSpeed: 6
   jumpHeight: 10
   runSpeed: 10
+  damage: 10
+  nextLevelExp: 100
 --- !u!114 &6434007115306558789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2585,6 +2593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85023d6755448a24e8d85e12f1e97637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!114 &1578354570451466809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2619,8 +2628,17 @@ MonoBehaviour:
   keyImage: {fileID: 0}
   maxAlphaValue: 1
   minAlphaValue: 0.3
-  strawberryCounterText: {fileID: 0}
-  coinCounterText: {fileID: 0}
+  maxBullets: 10
+  strawberryCounter:
+    count: 0
+    counterText: {fileID: 0}
+  coinCounter:
+    count: 0
+    counterText: {fileID: 0}
+  bulletCounter:
+    count: 0
+    counterText: {fileID: 0}
+  strawberryImg: {fileID: 0}
 --- !u!1 &3318011714559389144
 GameObject:
   m_ObjectHideFlags: 0
