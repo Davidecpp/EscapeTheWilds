@@ -49,6 +49,7 @@ public class MenuManager : MonoBehaviour
     public void ExitGame()
     {
         SceneManager.LoadSceneAsync(0);
+        GameManager.Instance.arenaMode = false;
         menu.SetActive(false);
     }
     

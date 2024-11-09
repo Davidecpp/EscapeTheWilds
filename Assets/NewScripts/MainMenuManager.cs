@@ -73,6 +73,11 @@ public class MainMenuManager : MonoBehaviour
         gameModes.SetActive(false);
         characterSelection.SetActive(true);
         _activeScene = i;
+
+        if (_activeScene == 1)
+        {
+            GameManager.Instance.arenaMode = true;
+        }
     }
     private void CloseCharacterSelection()
     {

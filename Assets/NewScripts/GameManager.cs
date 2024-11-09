@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public bool inGame;
     public bool gameEnded;
     
+    //Modes
+    public bool arenaMode;
+    
     private void Awake()
     {
         if (Instance == null)
