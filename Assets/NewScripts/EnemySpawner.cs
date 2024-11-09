@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -33,7 +32,8 @@ public class EnemySpawner : MonoBehaviour
         }
         spawned += x;
     }
-
+    
+    // If enemies spawned are killed spawn next wave
     private void NextWave()
     {
         if (killed == spawned)

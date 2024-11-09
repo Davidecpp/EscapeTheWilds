@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -73,7 +72,8 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(RestartAfterDelay(0.1f));
     }
-
+    
+    // Delay restart for avoiding problems
     private IEnumerator RestartAfterDelay(float delay)
     {
         yield return new WaitForSecondsRealtime(delay); 

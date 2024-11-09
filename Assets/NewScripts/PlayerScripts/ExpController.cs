@@ -11,20 +11,31 @@ public class ExpController : MonoBehaviour
     [SerializeField] private Image ExpProgressBar;
 
     private PlayerStats _playerStats;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _playerStats = FindObjectOfType<PlayerStats>();
-    }
 
     // Update is called once per frame
     void Update()
     {
+        if (_playerStats == null)
+        {
+            _playerStats = FindObjectOfType<PlayerStats>();
+            if (_playerStats != null)
+            {
+                SetPlayerReference(_playerStats);
+            }
+            else
+            {
+                return;
+            }
+        }
         _experienceTxt.text = _playerStats.GetExperience() + "/" + _playerStats.GetNextLevelExp();
         ExperienceController();
     }
+    private void SetPlayerReference(PlayerStats player)
+    {
+        _playerStats = player;
+    }
 
-    public void ExperienceController()
+    private void ExperienceController()
     {
         _levelTxt.text = _playerStats.GetLevel().ToString();
         ExpProgressBar.fillAmount = _playerStats.GetExperience() / _playerStats.GetNextLevelExp();

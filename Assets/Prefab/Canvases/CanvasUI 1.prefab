@@ -5798,9 +5798,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   round: 1
   roundTxt: {fileID: 1291021624335373999}
-  deadCount: 0
-  snakeEnemy: {fileID: 8865796218170777025, guid: 1eda1fa22f260fd4d994b573b333323c, type: 3}
-  birdEnemy: {fileID: 8860261052107613234, guid: 795a5a10999cef0408c36da176212b47, type: 3}
 --- !u!1 &4590657764727497552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6919,7 +6916,7 @@ MonoBehaviour:
     goalAmount: 3
     currentAmount: 0
     reward: 10
-    expReward: 0
+    expReward: 30
     isCompleted: 0
   activeMissionIndex: 0
 --- !u!1 &5099641815518444225

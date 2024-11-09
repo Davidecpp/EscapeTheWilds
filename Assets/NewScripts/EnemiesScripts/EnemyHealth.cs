@@ -65,6 +65,7 @@ public class EnemyHealth : MonoBehaviour
         }
         SpawnItems();
         _enemySpawner.killed++;
+        FindObjectOfType<MissionManager>().AddProgress("Tutorial 3", 1);
         Destroy(gameObject);
     }
     
