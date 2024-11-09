@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 6430589425702255191, guid: 6f68bcfae9f465f4db85e86738549964, type: 3}
-  - {fileID: 4102895078869787243, guid: 990993a2b9024a140b233d08f89ce445, type: 3}
-  - {fileID: 7985931707081469564, guid: 06219a86b560e1b43bf6659ac120fbca, type: 3}
-  - {fileID: 8214272468374419691, guid: 599bd66dd77f1c64fafe82f13d6e4d7f, type: 3}
+  - {fileID: 6807839344814526279, guid: 990697e85377204408b62aa7879b1007, type: 3}
+  - {fileID: 574624791572059178, guid: f85fd309a138ba4409b1432f8b7c6d6f, type: 3}
+  - {fileID: 1600240776407171071, guid: 0bc7454dfe89dbf4dbef22d65d70e46b, type: 3}
+  - {fileID: 7638151948205962469, guid: 8904d385d9d4283418c5a7489add7c2d, type: 3}
   playerSpawn: {fileID: 0}

@@ -31,5 +31,6 @@ public class EnemySpawner : MonoBehaviour
             Transform spawnPoint = spawnPoints[spawnIndex];
             Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
         }
+        Debug.Log("Spawned " + x + " enemies");
     }
 }

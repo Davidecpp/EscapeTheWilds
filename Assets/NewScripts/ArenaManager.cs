@@ -19,19 +19,42 @@ public class ArenaManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _enemySpawner = FindObjectOfType<EnemySpawner>();
+        roundTxt.gameObject.SetActive(true);
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Arena:\nkills: "+deadCount+"\nround: " + round);
         roundTxt.text = "Round " + round;
+        if (_enemySpawner == null)
+        {
+            _extraEnemySpawned = FindObjectOfType<EnemySpawner>();
+            if (_enemySpawner != null)
+            {
+                SetEnemyReference(_enemySpawner);
+            }
+            else
+            {
+                return;
+            }
+        }
         SpawnRoundEnemies();
+        if (round == 1 && deadCount == 1)
+        {
+            Debug.Log("Daje");
+        }
+    }
+    public void SetEnemyReference(EnemySpawner enemy)
+    {
+        _enemySpawner = enemy;
     }
     
     // Spawn enemies when others are defeated 
     private void SpawnRoundEnemies()
     {
+        Debug.Log("Spawn round enemies");
         if (deadCount == 1 && round < 3)
         {
             NextRound();
@@ -70,5 +93,6 @@ public class ArenaManager : MonoBehaviour
         round++;
         deadCount = 0;
         _extraEnemySpawned = false;
+        Debug.Log("Next round");
     }
 }

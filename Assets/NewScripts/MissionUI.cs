@@ -9,6 +9,7 @@ public class MissionUI : MonoBehaviour
     public TextMeshProUGUI expRewardText;
     public GameObject rewardPanel;
     private MissionManager missionManager;
+    private int _nextScene = 7;
     
     public AudioSource audioSource;
 
@@ -53,6 +54,15 @@ public class MissionUI : MonoBehaviour
     {
         rewardPanel.SetActive(false);
         GameManager.Instance.ResumeGame();
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(_nextScene);
+        if (_nextScene == 7)
+        {
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key." });
+        }
+        if (_nextScene == 8)
+        {
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Defeat all the enemies." });
+        }
+        _nextScene++;
     }
 }
