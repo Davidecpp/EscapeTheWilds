@@ -2745,12 +2745,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088490187177420860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1222733663233060592}
+  m_Father: {fileID: 4866722037588347402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6806,7 +6806,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6416377321184919712}
   m_Father: {fileID: 1222733663233060592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6898,18 +6899,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missions:
   - title: Tutorial
-    description: Collect coins
-    goalAmount: 5
-    currentAmount: 0
-    reward: 5
-    expReward: 10
-    isCompleted: 0
-  - title: Tutorial 2
     description: Collect key
     goalAmount: 1
     currentAmount: 0
     reward: 5
     expReward: 20
+    isCompleted: 0
+  - title: Tutorial 2
+    description: Collect coins
+    goalAmount: 5
+    currentAmount: 0
+    reward: 5
+    expReward: 10
     isCompleted: 0
   - title: Tutorial 3
     description: Defeat enemies
@@ -7207,7 +7208,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4866722037588347402}
-  - {fileID: 6416377321184919712}
   - {fileID: 1750037399570215826}
   m_Father: {fileID: 370688003252005229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7228,6 +7228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e2671b47aa36b428107e16b9d0b13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionPanel: {fileID: 5063018973994230212}
   missionText: {fileID: 1813014481985835029}
   missionRewardText: {fileID: 2987863483360261737}
   expRewardText: {fileID: 4676828343052289089}

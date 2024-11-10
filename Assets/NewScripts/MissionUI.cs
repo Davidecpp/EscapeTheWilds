@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class MissionUI : MonoBehaviour
 {
+    public GameObject missionPanel;
     public TextMeshProUGUI missionText;
     public TextMeshProUGUI missionRewardText;
     public TextMeshProUGUI expRewardText;
     public GameObject rewardPanel;
     private MissionManager missionManager;
-    private int _nextScene = 7;
+    private int _nextScene = 6;
     
     public AudioSource audioSource;
 
@@ -17,6 +19,12 @@ public class MissionUI : MonoBehaviour
     {
         missionManager = FindObjectOfType<MissionManager>();
         UpdateUI();
+        missionPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        Debug.LogError("nextScene");
     }
 
     public void UpdateUIForEachMission()
@@ -55,13 +63,9 @@ public class MissionUI : MonoBehaviour
         rewardPanel.SetActive(false);
         GameManager.Instance.ResumeGame();
         SceneManager.LoadScene(_nextScene);
-        if (_nextScene == 7)
+        if (_nextScene == 6)
         {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key." });
-        }
-        if (_nextScene == 8)
-        {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Defeat all the enemies." });
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Collect coins." });
         }
         _nextScene++;
     }

@@ -26,6 +26,7 @@ public class Mission
         
         MissionUI.FindObjectOfType<MissionUI>().RewardUI();
         MissionManager.FindObjectOfType<MissionManager>().activeMissionIndex++;
+        GameManager.Instance.currentScene++;
         
         // Add reward
         Inventory.FindObjectOfType<Inventory>().AddCoin(reward);

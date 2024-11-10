@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool inGame;
     public bool gameEnded;
+    public int currentScene = 0;
     
     //Modes
     public bool arenaMode;

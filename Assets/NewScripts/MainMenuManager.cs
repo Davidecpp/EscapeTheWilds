@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,11 @@ public class MainMenuManager : MonoBehaviour
     
     public GameObject[] characters;
     private int _activeScene;
+
+    private void Start()
+    {
+        GameManager.Instance.currentScene = 0;
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
     public void Play(int i)
     {
         // 1 ARENA - 2 FOOTBALL - 3 RACE - 4 STORY
+        GameManager.Instance.currentScene = i;
         SceneManager.LoadSceneAsync(i);
         GameManager.Instance.ResumeGame();
         GameManager.Instance.mainCanvas.gameObject.SetActive(true);
@@ -96,6 +103,7 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Selected: " + characterID);
 
         // Change scene after choosing a character
+        GameManager.Instance.currentScene = _activeScene;
         SceneManager.LoadScene(_activeScene);
         GameManager.Instance.ResumeGame();
         GameManager.Instance.mainCanvas.gameObject.SetActive(true);

@@ -336,4 +336,13 @@ public class Movement : MonoBehaviour
             _playerStats.ReduceHealth(2);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("DialogueWall"))
+        {
+            Debug.Log("Dialogue started.");
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Choose an animal.","Press E to interact." });
+        }
+    }
 } //310

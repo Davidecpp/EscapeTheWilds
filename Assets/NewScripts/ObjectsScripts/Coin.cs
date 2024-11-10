@@ -32,7 +32,7 @@ public class Coin : MonoBehaviour, IInteractible
         {
             inventory.AddCoin(1);
             MissionManager missionManager = FindObjectOfType<MissionManager>();
-            missionManager.AddProgress("Tutorial", 1);
+            missionManager.AddProgress("Tutorial 2", 1);
             
             audioSource.Play();
             isCollected = true; 

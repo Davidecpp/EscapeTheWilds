@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -33,6 +34,12 @@ public class PlayerStats : MonoBehaviour
         // Load stats
         _exp = PlayerPrefs.GetFloat("PlayerExp", 0); // 0 if not saved
         _level = PlayerPrefs.GetInt("PlayerLevel", 1);
+
+        if (GameManager.Instance.currentScene == 4)
+        {
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Press WASD to move." });
+        }
+        
     }
     
     private void Update()
