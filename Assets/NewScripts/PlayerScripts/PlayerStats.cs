@@ -29,7 +29,10 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.LogError("CanvasManager not found.");
         }
-        FindObjectOfType<ExpController>().LoadStats(_exp);
+        
+        // Load stats
+        _exp = PlayerPrefs.GetFloat("PlayerExp", 0); // 0 if not saved
+        _level = PlayerPrefs.GetInt("PlayerLevel", 1);
     }
     
     private void Update()
@@ -37,17 +40,6 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("exp:"+_exp);
         Die();
     }
-
-    // Accessor methods (getter) to expose private fields
-    public int GetMaxHealth() => maxHealth;
-    public float GetMoveSpeed() => moveSpeed;
-    public float GetJumpHeight() => jumpHeight;
-    public float GetRunSpeed() => runSpeed;
-    public float GetDamage() => damage;
-    public float GetExperience() => _exp;
-    public float GetNextLevelExp() => nextLevelExp;
-    public float GetLevel() => _level;
-    public int GetHealth() => _health;
 
     // Adds experience to the player
     public void AddExperience(float amount)
@@ -59,6 +51,11 @@ public class PlayerStats : MonoBehaviour
             _exp -= nextLevelExp;
             nextLevelExp *= 1.5f;
         }
+        
+        // Save stats
+        PlayerPrefs.SetFloat("PlayerExp", _exp);
+        PlayerPrefs.SetInt("PlayerLevel", _level);
+        PlayerPrefs.Save();
     }
 
     // Reduces health by a specific amount
@@ -98,10 +95,25 @@ public class PlayerStats : MonoBehaviour
         maxHealth++;
         runSpeed++;
         jumpHeight++;
+        
+        // Save new level
+        PlayerPrefs.SetInt("PlayerLevel", _level);
+        PlayerPrefs.Save();
     }
-
-    public void SaveStats(float exp)
+    public void ResetExperience()
     {
-        exp = GetExperience();
+        PlayerPrefs.DeleteKey("PlayerExp");
+        PlayerPrefs.DeleteKey("PlayerLevel");
     }
+    
+    // Accessor methods (getters) to expose private fields
+    public int GetMaxHealth() => maxHealth;
+    public float GetMoveSpeed() => moveSpeed;
+    public float GetJumpHeight() => jumpHeight;
+    public float GetRunSpeed() => runSpeed;
+    public float GetDamage() => damage;
+    public float GetExperience() => _exp;
+    public float GetNextLevelExp() => nextLevelExp;
+    public float GetLevel() => _level;
+    public int GetHealth() => _health;
 }

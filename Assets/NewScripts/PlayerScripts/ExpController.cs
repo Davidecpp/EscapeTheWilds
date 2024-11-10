@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,13 @@ public class ExpController : MonoBehaviour
     [SerializeField]private TextMeshProUGUI _experienceTxt;
     [SerializeField] private Image ExpProgressBar;
 
-    private float loadedExp;
-
     private PlayerStats _playerStats;
+
+    private void Start()
+    {
+        PlayerPrefs.DeleteKey("PlayerExp");
+        PlayerPrefs.DeleteKey("PlayerLevel");
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,7 +34,6 @@ public class ExpController : MonoBehaviour
         }
         _experienceTxt.text = _playerStats.GetExperience() + "/" + _playerStats.GetNextLevelExp();
         ExperienceController();
-        Debug.Log("LoadedExp"+ loadedExp);
     }
     private void SetPlayerReference(PlayerStats player)
     {
@@ -40,11 +44,6 @@ public class ExpController : MonoBehaviour
     {
         _levelTxt.text = _playerStats.GetLevel().ToString();
         ExpProgressBar.fillAmount = _playerStats.GetExperience() / _playerStats.GetNextLevelExp();
-        loadedExp = _playerStats.GetExperience();
     }
 
-    public void LoadStats(float exp)
-    {
-        exp = loadedExp;
-    }
 }
