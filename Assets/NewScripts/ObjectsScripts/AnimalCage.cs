@@ -36,7 +36,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
         GameManager.Instance.currentScene++;
         SceneManager.LoadScene(5);
         FindObjectOfType<MissionUI>().missionPanel.SetActive(true);
-        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key." });
+        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key.","Press SHIFT to run." });
     }
     private void SelectCharacterAfterDialogue()
     {

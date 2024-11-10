@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
 
         if (GameManager.Instance.currentScene == 4)
         {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Press WASD to move." });
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Enter the house.","Press WASD to move." });
         }
         
     }
