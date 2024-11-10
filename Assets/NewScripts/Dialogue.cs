@@ -10,6 +10,8 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public Image box;
 
+    public GameObject skip;
+
     private string[] lines;
     private int index;
     public bool isActive;
@@ -44,10 +46,12 @@ public class Dialogue : MonoBehaviour
         if (isActive)
         {
             SetImageAlpha(box, 1f);
+            skip.SetActive(true);
         }
         else
         {
             SetImageAlpha(box,0f);  
+            skip.SetActive(false);
         }
     }
     // Change image alpha
