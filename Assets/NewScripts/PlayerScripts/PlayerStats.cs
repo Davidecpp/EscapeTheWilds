@@ -29,10 +29,12 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.LogError("CanvasManager not found.");
         }
+        FindObjectOfType<ExpController>().LoadStats(_exp);
     }
     
     private void Update()
     {
+        Debug.Log("exp:"+_exp);
         Die();
     }
 
@@ -76,7 +78,6 @@ public class PlayerStats : MonoBehaviour
         {
             _health++;
             _canvas?.UpdateHearts();
-            //_gameManager?.PauseGame();
         }
     }
     
@@ -97,5 +98,10 @@ public class PlayerStats : MonoBehaviour
         maxHealth++;
         runSpeed++;
         jumpHeight++;
+    }
+
+    public void SaveStats(float exp)
+    {
+        exp = GetExperience();
     }
 }
