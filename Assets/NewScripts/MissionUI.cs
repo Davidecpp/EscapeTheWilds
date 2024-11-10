@@ -22,11 +22,6 @@ public class MissionUI : MonoBehaviour
         missionPanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        Debug.LogError("nextScene");
-    }
-
     public void UpdateUIForEachMission()
     {
         missionText.text = "";
@@ -65,7 +60,11 @@ public class MissionUI : MonoBehaviour
         SceneManager.LoadScene(_nextScene);
         if (_nextScene == 6)
         {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Collect coins." });
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Collect all the coins.", "Press SPACE to jump." });
+        }
+        if (_nextScene == 7)
+        {
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Kill all the enemies.", "Press LEFT-MOUSE to attack." });
         }
         _nextScene++;
     }
