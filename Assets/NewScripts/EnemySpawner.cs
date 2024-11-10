@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,22 +5,22 @@ public class EnemySpawner : MonoBehaviour
 {
     // Enemy spawn
     public GameObject enemyPrefab;
-    public Transform[] spawnPoints; 
-
-    private ArenaManager _arenaManager;
+    public Transform[] spawnPoints;
+    public int spawned = 0;
+    public int killed = 0;
 
     void Start()
     {
-        _arenaManager = FindObjectOfType<ArenaManager>();
-        if (_arenaManager == null || _arenaManager.snakeEnemy == null)
-        {
-            Debug.LogError("ArenaManager or snakeEnemy not found in the scene or not assigned.");
-            return;
-        }
-        
-        SpawnEnemy(1, _arenaManager.snakeEnemy);
+        SpawnEnemy(3, enemyPrefab);
     }
-    
+
+    private void Update()
+    {
+        Debug.Log("Spawned " + spawned + " enemies");
+        Debug.Log("Killed " + killed + " enemies");
+        NextWave();
+    }
+
     // Spawn x enemies in random spawn points
     public void SpawnEnemy(int x, GameObject enemy)
     {
@@ -30,6 +29,16 @@ public class EnemySpawner : MonoBehaviour
             int spawnIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[spawnIndex];
             Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        }
+        spawned += x;
+    }
+    
+    // If enemies spawned are killed spawn next wave
+    private void NextWave()
+    {
+        if (killed == spawned)
+        {
+            SpawnEnemy(2, enemyPrefab);
         }
     }
 }

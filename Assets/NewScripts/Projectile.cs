@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject particles;
-        Debug.Log("Projectile hit: " + collision.gameObject.name); 
+        //Debug.Log("Projectile hit: " + collision.gameObject.name); 
         
         // if heated generate flames
         if (GameManager.Instance.heated || cannon)

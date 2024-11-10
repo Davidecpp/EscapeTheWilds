@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     private PlayerStats _playerStats;
     [SerializeField] private Slider _slider;
     private ArenaManager _arenaManager;
+    private EnemySpawner _enemySpawner;
     
     // Spawn loot
     public GameObject[] itemsToSpawn; 
@@ -26,12 +27,13 @@ public class EnemyHealth : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         _arenaManager = FindObjectOfType<ArenaManager>();
+        _enemySpawner = FindObjectOfType<EnemySpawner>();
+
     }
     
     // Take damage
     public void TakeDamage(float amount)
     {
-        
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         currentHealth -= amount;
         UpdateHealthBar();
@@ -62,8 +64,9 @@ public class EnemyHealth : MonoBehaviour
             _playerStats.AddExperience(30);
         }
         SpawnItems();
+        _enemySpawner.killed++;
+        FindObjectOfType<MissionManager>().AddProgress("Tutorial 3", 1);
         Destroy(gameObject);
-        _arenaManager.deadCount++;
     }
     
     // Spawn items
@@ -91,7 +94,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void UpdateHealthBar()
+    private void UpdateHealthBar()
     {
         _slider.value = currentHealth / maxHealth;
     }

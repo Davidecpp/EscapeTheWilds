@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +11,6 @@ public class MissionManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         missionUI = FindObjectOfType<MissionUI>();
-        if (activeMissionIndex == 1)
-        {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key." });
-        }
-    }
-
-    private void Update()
-    {
-        
     }
 
     // Add progress to a determined mission
@@ -34,7 +24,8 @@ public class MissionManager : MonoBehaviour
             missionUI.UpdateUI();
         }
     }
-
+    
+    // Display the mission status for each mission
     public void DisplayMissionStatus()
     {
         foreach (Mission mission in missions)

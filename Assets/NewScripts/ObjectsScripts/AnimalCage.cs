@@ -33,7 +33,10 @@ public class AnimalCage : MonoBehaviour, IInteractible
         Debug.Log("Selected: " + characterID);
 
         // Change scene after choosing a character
-        SceneManager.LoadScene(6);
+        GameManager.Instance.currentScene++;
+        SceneManager.LoadScene(5);
+        FindObjectOfType<MissionUI>().missionPanel.SetActive(true);
+        FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Explore the maze and find the key." });
     }
     private void SelectCharacterAfterDialogue()
     {
