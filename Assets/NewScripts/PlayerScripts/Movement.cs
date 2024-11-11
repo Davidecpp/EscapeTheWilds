@@ -341,8 +341,11 @@ public class Movement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("DialogueWall"))
         {
-            Debug.Log("Dialogue started.");
             FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Choose an animal.","Press E to interact." });
+        }
+        if (other.gameObject.CompareTag("MountainTop"))
+        {
+            FindObjectOfType<MissionManager>().AddProgress("Mountain",1);
         }
     }
 } //310

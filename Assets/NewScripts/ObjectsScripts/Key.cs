@@ -19,7 +19,7 @@ public class Key : MonoBehaviour, IInteractible
         inventory.hasKey = true;
         Debug.Log("Key picked");
         
-        MissionManager.FindObjectOfType<MissionManager>().AddProgress("Tutorial",1);
+        FindObjectOfType<MissionManager>().AddProgress("Tutorial",1);
         
         if (shouldDisappear)
         {
