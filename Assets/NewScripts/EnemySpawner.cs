@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        SpawnEnemy(3, enemyPrefab);
+        SpawnEnemy(1, enemyPrefab);
     }
 
     private void Update()
