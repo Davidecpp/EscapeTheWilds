@@ -505,7 +505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: -49}
+  m_AnchoredPosition: {x: 534, y: -108}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4081967537510567774
@@ -1289,7 +1289,6 @@ MonoBehaviour:
   options: {fileID: 2962626247443679863}
   characterSelection: {fileID: 4081967537510567774}
   escBtn: {fileID: 3484334699455823251}
-  mainCanvas: {fileID: 0}
   characters:
   - {fileID: 6807839344814526279, guid: 990697e85377204408b62aa7879b1007, type: 3}
   - {fileID: 574624791572059178, guid: f85fd309a138ba4409b1432f8b7c6d6f, type: 3}
