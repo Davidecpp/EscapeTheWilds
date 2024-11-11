@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33127526743645708}
   - component: {fileID: 23102150001078294}
   m_Layer: 0
-  m_Name: rpgpp_lt_building_05
+  m_Name: WoodBuilding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

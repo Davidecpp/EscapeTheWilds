@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 854210143976851103}
-  audioSource: {fileID: 0}
+  walkingSound: {fileID: 0}
   sandParticles: {fileID: 7834261309612065760}
   waterParticles: {fileID: 3429626198061490437}
   invincibleParticles: {fileID: 556158099039858883}
@@ -2527,7 +2527,6 @@ MonoBehaviour:
   playerCamera: {fileID: 8828648073684847907}
   sensitivities: {x: 2, y: 0}
   animal: {fileID: 854210143976851103}
-  sprintSlider: {fileID: 0}
   normalDistance: 3
   sprintDistance: 3
   transitionSpeed: 5
@@ -2627,20 +2626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasKey: 0
-  keyImage: {fileID: 0}
-  maxAlphaValue: 1
-  minAlphaValue: 0.3
   maxBullets: 10
-  strawberryCounter:
-    count: 0
-    counterText: {fileID: 0}
-  coinCounter:
-    count: 0
-    counterText: {fileID: 0}
-  bulletCounter:
-    count: 0
-    counterText: {fileID: 0}
-  strawberryImg: {fileID: 0}
 --- !u!82 &1653265749710278738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2971,7 +2957,6 @@ GameObject:
   - component: {fileID: 8828648073684847907}
   - component: {fileID: 2074201686872999652}
   - component: {fileID: 397333351405456405}
-  - component: {fileID: 2825449775441203837}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3053,26 +3038,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4212584411607717201}
   m_Enabled: 1
---- !u!114 &2825449775441203837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212584411607717201}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0300204fbefb49143ba192e587eacb15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animal: {fileID: 0}
-  playerCamera: {fileID: 8828648073684847907}
-  sprintSlider: {fileID: 0}
-  normalDistance: 4
-  sprintDistance: 3.7
-  transitionSpeed: 5
-  sprintDuration: 5
-  sprintRechargeSpeed: 2
 --- !u!1 &4255614345355327021
 GameObject:
   m_ObjectHideFlags: 0
