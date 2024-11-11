@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8696863530103427306}
   - component: {fileID: 3202852312356310917}
   - component: {fileID: 1833341727855480658}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106021032986474099}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199667335772473021}
   - component: {fileID: 6647652907083949926}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 1578767852581017439}
   - component: {fileID: 5908297834822353735}
   - component: {fileID: 1528519426621310599}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ RectTransform:
   m_Father: {fileID: 106021032986474099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.73, y: 0}
   m_SizeDelta: {x: 19.47, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -670,13 +670,13 @@ GameObject:
   - component: {fileID: 4255847596127031821}
   - component: {fileID: 4497062756957724866}
   - component: {fileID: 335139116908087203}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2630210641527071795
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 3060786203407252851}
   - component: {fileID: 3998226640744305832}
   - component: {fileID: 5487008326877609016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBird-Run
   m_TagString: Enemy
   m_Icon: {fileID: 0}
