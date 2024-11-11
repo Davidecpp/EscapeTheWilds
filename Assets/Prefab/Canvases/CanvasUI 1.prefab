@@ -2754,7 +2754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20.6338}
+  m_AnchoredPosition: {x: 0, y: 33}
   m_SizeDelta: {x: 200, y: 91.2674}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6653717151663168321
@@ -7127,6 +7127,13 @@ MonoBehaviour:
     currentAmount: 0
     reward: 10
     expReward: 30
+    isCompleted: 0
+  - title: Mountain
+    description: Reach the top of the mountain
+    goalAmount: 1
+    currentAmount: 0
+    reward: 5
+    expReward: 50
     isCompleted: 0
   activeMissionIndex: 0
 --- !u!1 &5099641815518444225
