@@ -2405,7 +2405,7 @@ GameObject:
   - component: {fileID: 389207136531080432}
   - component: {fileID: 1653265749710278738}
   m_Layer: 0
-  m_Name: HumanMale_Character_FREE
+  m_Name: Human
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
