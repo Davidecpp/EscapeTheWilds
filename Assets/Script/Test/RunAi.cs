@@ -16,11 +16,18 @@ public class RunAI : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-
+        if (_target == null)
+        {
+            Debug.LogError("Target is not set");
+        }
     }
 
     void Update()
     {
+        if (_target != null)
+        {
+            _agent.SetDestination(_target.position);
+        }
 
     }
 }
