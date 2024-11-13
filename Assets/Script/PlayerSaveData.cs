@@ -11,4 +11,5 @@ public class PlayerSaveData
     public float runSpeed;
     public float damage;
     public string sceneName;
+    public int coin;
 }

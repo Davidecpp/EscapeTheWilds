@@ -45,28 +45,6 @@ public class PlayerStats : MonoBehaviour
         }
         
     }
-    /*private void Start()
-    {
-        _canvas = CanvasManager.Instance;
-        if (_canvas != null)
-        {
-            _canvas.SetPlayerReference(this);
-            
-            // Carica i dati del giocatore dal file
-            SaveSystem.LoadPlayer(this);  // Passa direttamente il riferimento del PlayerStats per caricare i dati
-            _canvas.UpdateHearts();
-        }
-        else
-        {
-            Debug.LogError("CanvasManager not found.");
-        }
-
-        if (GameManager.Instance.currentScene == 4)
-        {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Enter the house.","Press WASD to move." });
-        }
-    }*/
-
     
     private void Update()
     {
@@ -104,7 +82,7 @@ public class PlayerStats : MonoBehaviour
             nextLevelExp *= 1.5f;
         }
         
-        // Save stats
+        // Save exp and level through scenes
         PlayerPrefs.SetFloat("PlayerExp", _exp);
         PlayerPrefs.SetInt("PlayerLevel", _level);
         PlayerPrefs.Save();
@@ -152,11 +130,7 @@ public class PlayerStats : MonoBehaviour
         PlayerPrefs.SetInt("PlayerLevel", _level);
         PlayerPrefs.Save();
     }
-    public void ResetExperience()
-    {
-        PlayerPrefs.DeleteKey("PlayerExp");
-        PlayerPrefs.DeleteKey("PlayerLevel");
-    }
+    
     public IEnumerator FlameOff(float seconds)
     {
         yield return new WaitForSeconds(seconds);
