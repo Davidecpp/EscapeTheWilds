@@ -57,7 +57,7 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetJumpHeight(saveData.jumpHeight);
             playerStats.SetRunSpeed(saveData.runSpeed);
             playerStats.SetDamage(saveData.damage);
-            FindObjectOfType<Inventory>().AddCoin(saveData.coin);
+            FindObjectOfType<Inventory>().SetCoinCount(saveData.coin);
             
             SceneManager.LoadScene(saveData.sceneName);
             
