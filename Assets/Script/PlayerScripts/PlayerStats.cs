@@ -45,9 +45,41 @@ public class PlayerStats : MonoBehaviour
         }
         
     }
+    /*private void Start()
+    {
+        _canvas = CanvasManager.Instance;
+        if (_canvas != null)
+        {
+            _canvas.SetPlayerReference(this);
+            
+            // Carica i dati del giocatore dal file
+            SaveSystem.LoadPlayer(this);  // Passa direttamente il riferimento del PlayerStats per caricare i dati
+            _canvas.UpdateHearts();
+        }
+        else
+        {
+            Debug.LogError("CanvasManager not found.");
+        }
+
+        if (GameManager.Instance.currentScene == 4)
+        {
+            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Enter the house.","Press WASD to move." });
+        }
+    }*/
+
     
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            SaveSystem.SavePlayer(this);
+            Debug.Log("Saved");
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SaveSystem.LoadPlayer(this);
+        }
+
         Debug.Log("exp:"+_exp);
         Die();
         if (heated)
@@ -137,4 +169,16 @@ public class PlayerStats : MonoBehaviour
     public float GetNextLevelExp() => nextLevelExp;
     public float GetLevel() => _level;
     public int GetHealth() => _health;
+    
+    // Setters
+    public void SetHealth(int health) => _health = health;
+    public void SetMaxHealth(int maxHealth) => this.maxHealth = maxHealth;
+    public void SetLevel(int level) => _level = level;
+    public void SetExperience(float exp) => _exp = exp;
+    public void SetNextLevelExp(float nextLevelExp) => this.nextLevelExp = nextLevelExp;
+    public void SetMoveSpeed(float moveSpeed) => this.moveSpeed = moveSpeed;
+    public void SetJumpHeight(float jumpHeight) => this.jumpHeight = jumpHeight;
+    public void SetRunSpeed(float runSpeed) => this.runSpeed = runSpeed;
+    public void SetDamage(float damage) => this.damage = damage;
+
 }

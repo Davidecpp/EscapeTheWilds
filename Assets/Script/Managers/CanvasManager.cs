@@ -105,6 +105,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void SetPlayerReference(PlayerStats player)
     {
+        //SaveSystem.LoadPlayer(player);
         _playerStats = player;
     }
     public void SetInventoryReference(Inventory inventory)

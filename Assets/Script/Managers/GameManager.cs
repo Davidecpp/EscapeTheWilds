@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        mainCanvas.gameObject.SetActive(false);
+        //mainCanvas.gameObject.SetActive(false);
     }
     
     // Pause the game and makes the pointer visible
