@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
         //Debug.Log("Projectile hit: " + collision.gameObject.name); 
         
         // if heated generate flames
-        if (GameManager.Instance.heated || cannon)
+        if (FindObjectOfType<PlayerStats>().heated || cannon)
         {
             particles = Instantiate(fireParticles, transform.position, transform.rotation);
             Destroy(particles, 6.5f);

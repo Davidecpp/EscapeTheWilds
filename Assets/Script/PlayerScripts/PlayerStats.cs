@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerStats : MonoBehaviour
     private int _health;
     private float _exp;
     private int _level = 1;
+    
+    // Player status
+    public bool heated;
 
     private CanvasManager _canvas;
 
@@ -46,6 +50,10 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("exp:"+_exp);
         Die();
+        if (heated)
+        {
+            StartCoroutine(FlameOff(5.0f));
+        }
     }
 
     // Adds experience to the player
@@ -111,6 +119,12 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("PlayerExp");
         PlayerPrefs.DeleteKey("PlayerLevel");
+    }
+    public IEnumerator FlameOff(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        heated = false;
+        Debug.Log("Finish");
     }
     
     // Accessor methods (getters) to expose private fields

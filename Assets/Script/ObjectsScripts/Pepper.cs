@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,14 @@ public class Pepper : MonoBehaviour, IInteractible
     
     public string InteractionPrompt => prompt;
     public bool bonusObj { get; private set; } = true;
-    
+
+    private PlayerStats _playerStats;
+
+    private void Start()
+    {
+        _playerStats = FindObjectOfType<PlayerStats>();
+    }
+
     // Object interaction
     // Makes bullets inflammable for a short period of time
     public bool Interact(Interactor interactor)
@@ -26,9 +34,9 @@ public class Pepper : MonoBehaviour, IInteractible
     public IEnumerator FlameOn(float seconds)
     {
         Debug.Log("Heated");
-        GameManager.Instance.heated = true;
+        _playerStats.heated = true;
         yield return new WaitForSeconds(seconds);
-        GameManager.Instance.heated = false;
+        _playerStats.heated = false;
     }
     
 

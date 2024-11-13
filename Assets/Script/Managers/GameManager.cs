@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     // Conditions
     public bool invincible = false;
     public bool healing = false;
-    public bool heated = false;
 
     public bool inGame;
     public bool gameEnded;
@@ -62,10 +61,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("inGame = "+inGame);
         Debug.Log("gameEnded = "+gameEnded);
-        if (heated)
-        {
-            StartCoroutine(FlameOff(5.0f));
-        }
     }
     
     // Restart game
@@ -89,13 +84,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("After LoadScene");
         ResumeGame();
         Debug.Log("Game restarted");
-    }
-    
-    public IEnumerator FlameOff(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        heated = false;
-        Debug.Log("Finish");
     }
 }
 //273
