@@ -88,6 +88,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void LoadStats()
+    {
+        SaveSystem.LoadPlayer(this);
+    }
+
     // Adds experience to the player
     public void AddExperience(float amount)
     {

@@ -57,6 +57,12 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetDamage(saveData.damage);
             
             SceneManager.LoadScene(saveData.sceneName);
+            
+            string scenePath = "/" + saveData.sceneName;
+
+            // Obtain scene index
+            int sceneIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
+            GameManager.Instance.currentScene = sceneIndex;
 
             Debug.Log("Giocatore caricato.");
         }

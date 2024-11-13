@@ -69,4 +69,9 @@ public class MenuManager : MonoBehaviour
             buttons.SetActive(true);
         }
     }
+
+    public void Load()
+    {
+        FindObjectOfType<PlayerStats>().LoadStats();
+    }
 }
