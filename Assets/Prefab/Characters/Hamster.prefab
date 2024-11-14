@@ -206,6 +206,7 @@ MonoBehaviour:
   runSpeed: 15
   damage: 10
   nextLevelExp: 100
+  heated: 0
 --- !u!54 &4504642418175658806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574624791572059178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 852086459afc3e04cb046c5369dadb38, type: 3}
   m_Name: 
@@ -317,7 +318,6 @@ MonoBehaviour:
   sprayCooldown: 5
   sprayDuration: 0.5
   spraySound: {fileID: 0}
-  extraJump: 0
   megaJumpParticles: {fileID: 8547867254204328264, guid: cf378989e15716e40a61692dcd97e628, type: 3}
   jumpSound: {fileID: 2871477435519793548}
   abilityTime: 5
