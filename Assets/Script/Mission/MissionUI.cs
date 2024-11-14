@@ -10,7 +10,7 @@ public class MissionUI : MonoBehaviour
     public TextMeshProUGUI expRewardText;
     public GameObject rewardPanel;
     private MissionManager missionManager;
-    private int _nextScene = 6;
+    public int _nextScene = 6;
     
     public AudioSource audioSource;
 

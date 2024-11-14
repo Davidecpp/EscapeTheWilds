@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MissionManager : MonoBehaviour
 {
@@ -11,6 +13,16 @@ public class MissionManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         missionUI = FindObjectOfType<MissionUI>();
+    }
+
+    private void Update()
+    {
+        activeMissionIndex = SceneManager.GetActiveScene().buildIndex - 5;
+        if (activeMissionIndex >= 0)
+        {
+            missionUI.UpdateUI();
+        }
+        
     }
 
     // Add progress to a determined mission
@@ -26,11 +38,13 @@ public class MissionManager : MonoBehaviour
     }
     
     // Display the mission status for each mission
-    public void DisplayMissionStatus()
+    public void ResetMissionStatus()
     {
         foreach (Mission mission in missions)
         {
-            Debug.Log($"{mission.title}: {mission.currentAmount}/{mission.goalAmount} - Completed: {mission.isCompleted}");
+            mission.currentAmount = 0;
+            mission.isCompleted = false;
+            missionUI._nextScene = 6;
         }
     }
 }
