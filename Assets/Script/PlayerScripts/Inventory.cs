@@ -17,14 +17,18 @@ public class Inventory : MonoBehaviour
         public int count;
         public TextMeshProUGUI counterText;
     }
-
     private void Start()
     {
         _canvasManager = FindObjectOfType<CanvasManager>();
-        SetResource(_canvasManager.bulletCounter);
+        SetBullets(_canvasManager.bulletCounter);
+
+        if (GameManager.Instance.currentScene == 4)
+        {
+            SetCoinCount(0);
+        }
     }
 
-    private void SetResource(ResourceCounter resourceCounter)
+    private void SetBullets(ResourceCounter resourceCounter)
     {
         if (resourceCounter.counterText != null && resourceCounter.Equals(_canvasManager.bulletCounter))
         {
@@ -85,6 +89,13 @@ public class Inventory : MonoBehaviour
     {
         _canvasManager.coinCounter.count -= amount;
         _canvasManager.coinCounter.counterText.text = "x " + _canvasManager.coinCounter.count;
+    }
+
+    public void SetCoinCount(int amount)
+    {
+        Debug.Log("Coin set to "+ amount);
+        _canvasManager.coinCounter.count = amount;
+        UpdateResourceCounter(_canvasManager.coinCounter);
     }
 
     // Wrapper methods for adding specific resources

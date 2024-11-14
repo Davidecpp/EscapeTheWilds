@@ -22,6 +22,8 @@ public class SaveSystem : MonoBehaviour
             jumpHeight = playerStats.GetJumpHeight(),
             runSpeed = playerStats.GetRunSpeed(),
             damage = playerStats.GetDamage(),
+            coin = FindObjectOfType<Inventory>().GetCoinCount(),
+            
             sceneName = SceneManager.GetActiveScene().name
         };
 
@@ -55,6 +57,7 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetJumpHeight(saveData.jumpHeight);
             playerStats.SetRunSpeed(saveData.runSpeed);
             playerStats.SetDamage(saveData.damage);
+            FindObjectOfType<Inventory>().SetCoinCount(saveData.coin);
             
             SceneManager.LoadScene(saveData.sceneName);
             
