@@ -5,21 +5,25 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 { 
     public static GameManager Instance { get; private set; }
+    
+    // Reference to the main canvas for UI elements
     public Canvas mainCanvas;
     
     // Conditions
     public bool invincible = false;
     public bool healing = false;
-
-    public bool inGame;
-    public bool gameEnded;
-    public int currentScene = 0;
+    
+    // Game state variables
+    public bool inGame; // Tracks if the game is currently in progress
+    public bool gameEnded;  // Tracks if the game has ended 
+    public int currentScene = 0;  // Stores the current scene index
     
     //Modes
     public bool arenaMode;
     
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance of GameManager exists
         if (Instance == null)
         {
             Instance = this;
@@ -37,7 +41,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true; 
         Time.timeScale = 0;
-        inGame = false;
+        inGame = false; // Update the game state to indicate it's paused
     }
     
     // Resume the game and hides the pointer
@@ -46,20 +50,14 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; 
         Cursor.visible = false; 
         Time.timeScale = 1;
-        inGame = true;
+        inGame = true;  // Update the game state to indicate it's active
     }
     
-    // Game over if player's health <= 0
+    // Triggered when player's health <= 0
     public void GameOver()
     {
         PauseGame();
-        gameEnded = true;
-    }
-    
-    void Update()
-    {
-        Debug.Log("inGame = "+inGame);
-        Debug.Log("gameEnded = "+gameEnded);
+        gameEnded = true; // Set the flag to indicate that the game has ended
     }
     
     // Restart game
@@ -68,20 +66,19 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RestartAfterDelay(0.1f));
     }
     
-    // Delay restart for avoiding problems
+    // Restarts the game after a short delay to avoid potential issues
     private IEnumerator RestartAfterDelay(float delay)
     {
+        // Wait for a short period of time before restarting to ensure no conflicts
         yield return new WaitForSecondsRealtime(delay); 
         
-        gameEnded = false;
-        inGame = true;
-        Time.timeScale = 1; 
-
-        Debug.Log("Before LoadScene");
+        gameEnded = false; // Reset gameEnded flag
+        inGame = true; // Set the game back to active state
+        Time.timeScale = 1; // Ensure time flows normally
+        
+        // Reload the current scene to restart the game
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-        Debug.Log("After LoadScene");
+        
         ResumeGame();
-        Debug.Log("Game restarted");
     }
 }

@@ -70,7 +70,7 @@ public class RunAI : MonoBehaviour
         bool hitObstacle = hitForward.hit && hitForward.distance < raycastDistance;
         if (hitObstacle && IsOutsideNavMesh(hitForward.position)) 
         {
-            addObstaleTo(hitForward.collider.gameObject);
+            //addObstaleTo(hitForward.collider.gameObject);
         }
         
         

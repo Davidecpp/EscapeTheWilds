@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Shooting Settings")]
     [SerializeField] private GameObject enemyBullet;       // Bullet prefab that the enemy will shoot
     [SerializeField] private Transform spawnPoint;         // Position from which the bullet will be instantiated
-    [SerializeField] private float bulletSpeed = 20f;      // Speed of the bullet when fired
+    [SerializeField] private float bulletSpeed = 5f;      // Speed of the bullet when fired
     [SerializeField] private float shootInterval = 5f;     // Interval between consecutive shots
     private float _shootCooldown;                          // Timer for managing shooting intervals
 

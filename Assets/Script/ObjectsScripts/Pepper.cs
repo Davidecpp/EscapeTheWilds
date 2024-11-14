@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,18 +13,33 @@ public class Pepper : MonoBehaviour, IInteractible
 
     private void Start()
     {
+        // Find the PlayerStats component in the scene and assign it to _playerStats
         _playerStats = FindObjectOfType<PlayerStats>();
+        
+        // Check if _playerStats is null and log an error if it is
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats component not found in the scene!");
+        }
     }
 
     // Object interaction
     // Makes bullets inflammable for a short period of time
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("Pepper picked");
-        
-        StartCoroutine(FlameOn(5.0f));
+        // Check if _playerStats is not null before starting the coroutine
+        if (_playerStats != null)
+        {
+            StartCoroutine(FlameOn(5.0f));
+        }
+        else
+        {
+            Debug.LogError("Cannot start FlameOn coroutine because PlayerStats is not assigned!");
+        }
+
         if (shouldDisappear)
         {
+            // Destroy the game object if shouldDisappear is true
             Destroy(gameObject);
         }
         return true;
@@ -33,11 +47,17 @@ public class Pepper : MonoBehaviour, IInteractible
 
     public IEnumerator FlameOn(float seconds)
     {
-        Debug.Log("Heated");
-        _playerStats.heated = true;
-        yield return new WaitForSeconds(seconds);
-        _playerStats.heated = false;
+        // Check if _playerStats is not null before accessing it
+        if (_playerStats != null)
+        {
+            // Makes player heated for seconds time
+            _playerStats.heated = true;
+            yield return new WaitForSeconds(seconds);
+            _playerStats.heated = false;
+        }
+        else
+        {
+            Debug.LogError("PlayerStats not assigned!");
+        }
     }
-    
-
 }

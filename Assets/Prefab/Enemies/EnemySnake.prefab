@@ -567,7 +567,7 @@ MonoBehaviour:
   chaseDistance: 40
   enemyBullet: {fileID: 4011057969295677575, guid: b18ff667a6c498b418970af6939de0db, type: 3}
   spawnPoint: {fileID: 5205140072650912998}
-  bulletSpeed: 500
+  bulletSpeed: 20
   shootInterval: 5
 --- !u!65 &2885491629317819785
 BoxCollider:
