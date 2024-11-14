@@ -11,30 +11,29 @@ public class MissionUI : MonoBehaviour
     public GameObject rewardPanel;
     private MissionManager missionManager;
     public int _nextScene = 6;
-    
+
     public AudioSource audioSource;
 
     private void Start()
     {
         missionManager = FindObjectOfType<MissionManager>();
         UpdateUI();
-        //missionPanel.SetActive(false);
     }
     
-    public void UpdateUIForEachMission()
-    {
-        missionText.text = "";
-        foreach (Mission mission in missionManager.missions)
-        {
-            missionText.text += $"{mission.title}:\n{mission.description}\n {mission.currentAmount}/{mission.goalAmount}\n";
-        }
-    }
     // Update UI mission progress
     public void UpdateUI()
     {
         missionText.text = "";
-        Mission mission = missionManager.missions[missionManager.activeMissionIndex];
-        missionText.text += $"{mission.title}:\n{mission.description}\n {mission.currentAmount}/{mission.goalAmount}\n";
+        
+        if (missionManager.activeMissionIndex >= 0 && missionManager.activeMissionIndex < missionManager.missions.Count)
+        {
+            Mission mission = missionManager.missions[missionManager.activeMissionIndex];
+            missionText.text += $"{mission.title}:\n{mission.description}\n {mission.currentAmount}/{mission.goalAmount}\n";
+        }
+        else
+        {
+            Debug.LogWarning("Active mission index is out of range.");
+        }
     }
     
     // Show reward panel
@@ -42,14 +41,18 @@ public class MissionUI : MonoBehaviour
     {
         GameManager.Instance.PauseGame();
         rewardPanel.SetActive(true);
-        
+
         audioSource.Play();
-        
+
         missionRewardText.text = "";
         expRewardText.text = "";
-        Mission mission = missionManager.missions[missionManager.activeMissionIndex];
-        missionRewardText.text += $"x{mission.reward}";
-        expRewardText.text += $"Exp + {mission.expReward}";
+        
+        if (missionManager.activeMissionIndex >= 0 && missionManager.activeMissionIndex < missionManager.missions.Count)
+        {
+            Mission mission = missionManager.missions[missionManager.activeMissionIndex];
+            missionRewardText.text += $"x{mission.reward}";
+            expRewardText.text += $"Exp + {mission.expReward}";
+        }
     }
 
     public void AcceptReward()
@@ -57,6 +60,8 @@ public class MissionUI : MonoBehaviour
         rewardPanel.SetActive(false);
         GameManager.Instance.ResumeGame();
         SceneManager.LoadScene(_nextScene);
+
+        // Display specific dialogues based on the next scene
         if (_nextScene == 6)
         {
             FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Collect all the coins.", "Press SPACE to jump." });
