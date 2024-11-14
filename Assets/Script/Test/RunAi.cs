@@ -28,27 +28,20 @@ public class RunAI : MonoBehaviour
             _goal = targetObject.transform;
         }
 
-
-        if (_goal == null)
+         if (_goal == null)
         {
             Debug.LogError("Goal is null");
         }
         else
         {
-            Debug.Log("Goal found: " + _goal.name);
             _agent.SetDestination(_goal.position);
         }
-
         
     }
 
     void Update()
-    {
-        // if (_target != null)
-        // {
-        //     _agent.SetDestination(_target.position);
-        // }
 
+    {
     }
 
 }
