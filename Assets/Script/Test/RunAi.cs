@@ -35,6 +35,7 @@ public class RunAI : MonoBehaviour
         }
         else
         {
+            Debug.Log("Goal found: " + _goal.name);
             _agent.SetDestination(_goal.position);
         }
 
