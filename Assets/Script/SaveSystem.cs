@@ -67,6 +67,8 @@ public class SaveSystem : MonoBehaviour
             int sceneIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
             GameManager.Instance.currentScene = sceneIndex;
             FindObjectOfType<MissionManager>().ResetMissionAmount(saveData.sceneIndex - 5);
+            FindObjectOfType<MissionManager>().ResetMissionStatus();
+            FindObjectOfType<MissionUI>()._nextScene = saveData.sceneIndex + 1;
 
             Debug.Log("Giocatore caricato.");
         }

@@ -18,9 +18,9 @@ public class MissionUI : MonoBehaviour
     {
         missionManager = FindObjectOfType<MissionManager>();
         UpdateUI();
-        missionPanel.SetActive(false);
+        //missionPanel.SetActive(false);
     }
-
+    
     public void UpdateUIForEachMission()
     {
         missionText.text = "";

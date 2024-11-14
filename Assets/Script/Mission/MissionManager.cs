@@ -20,8 +20,15 @@ public class MissionManager : MonoBehaviour
         activeMissionIndex = SceneManager.GetActiveScene().buildIndex - 5;
         if (activeMissionIndex >= 0)
         {
+            missionUI.missionPanel.SetActive(true);
             missionUI.UpdateUI();
         }
+        else
+        {
+            missionUI.missionPanel.SetActive(false);
+        }
+        Debug.Log("nextscene "+missionUI._nextScene);
+        
         
     }
 
@@ -44,7 +51,7 @@ public class MissionManager : MonoBehaviour
         {
             mission.currentAmount = 0;
             mission.isCompleted = false;
-            missionUI._nextScene = 6;
+            //missionUI._nextScene = 6;
         }
     }
 

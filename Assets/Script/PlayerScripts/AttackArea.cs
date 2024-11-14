@@ -53,7 +53,7 @@ public class AttackArea : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             Debug.Log("Enemy damage");
             EnemyHealth enemyHealth = enemyInRange.gameObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            if (enemyHealth != null && enemyInRange)
             {
                 enemyHealth.TakeDamage(_playerStats.GetDamage()); 
             }

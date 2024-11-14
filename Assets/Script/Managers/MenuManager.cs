@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.arenaMode = false;
         menu.SetActive(false);
         FindObjectOfType<MissionManager>().ResetMissionStatus();
+        FindObjectOfType<MissionUI>()._nextScene = 6;
     }
     
     // Open tab
