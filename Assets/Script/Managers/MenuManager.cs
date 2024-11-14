@@ -5,73 +5,100 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject buttons;
-    public GameObject controls;
-    public GameObject options;
-    public GameObject menu;
-    public GameObject stats;
-    
+    // UI References
+    [Header("UI References")]
+    [SerializeField] private GameObject buttons;
+    [SerializeField] private GameObject controls;
+    [SerializeField] private GameObject options;
+    [SerializeField] public GameObject menu;
+    [SerializeField] private GameObject stats;
+
     private GameManager _gameManager;
     private CanvasManager _canvas;
+    private MissionManager _missionManager;
+    private MissionUI _missionUI;
+
+    private bool isMenuActive;
 
     private void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager = GameManager.Instance;  // Direct reference to singleton instance
         _canvas = FindObjectOfType<CanvasManager>();
+        _missionManager = FindObjectOfType<MissionManager>();
+        _missionUI = FindObjectOfType<MissionUI>();
     }
-    
-    public void ResumeGame()
-    {
-        _gameManager.ResumeGame();
-        menu.SetActive(false);
-    }
+
     private void Update()
     {
-        // If ESC is pressed
+        // Handle ESC key for toggling the menu
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            // Alternate menu state
-            if (menu.activeSelf)
-            {
-                CloseTab(options);
-                CloseTab(controls);
-                CloseTab(stats);
-            }
-            else if(!_canvas.shop.activeSelf)
-            {
-                menu.SetActive(true);  
-                _gameManager.PauseGame();
-            }
+            ToggleMenu();
         }
     }
-    
-    // Load MainMenu scene
-    public void ExitGame()
+
+    private void ToggleMenu()
     {
-        SceneManager.LoadSceneAsync(0);
-        GameManager.Instance.arenaMode = false;
-        menu.SetActive(false);
-        FindObjectOfType<MissionManager>().ResetMissionStatus();
-        FindObjectOfType<MissionUI>()._nextScene = 6;
+        if (isMenuActive)
+        {
+            CloseAllTabs();
+        }
+        else if (!_canvas.shop.activeSelf)
+        {
+            menu.SetActive(true);  // Show the menu
+            _gameManager.PauseGame();  // Pause the game
+            isMenuActive = true;
+        }
     }
-    
-    // Open tab
-    public void OpenTab(GameObject gameObject)
+
+    // Close all open tabs and hide the menu
+    private void CloseAllTabs()
     {
-        gameObject.SetActive(true);
+        CloseTab(options);
+        CloseTab(controls);
+        CloseTab(stats);
+        menu.SetActive(false); // Hide menu
+        _gameManager.ResumeGame(); // Resume game
+        isMenuActive = false;
+    }
+
+    // Open a specific tab and hide the main buttons
+    public void OpenTab(GameObject tab)
+    {
+        tab.SetActive(true);
         buttons.SetActive(false);
     }
-    
-    // Close tab
-    private void CloseTab(GameObject go)
+
+    // Close a specific tab and show the main buttons
+    private void CloseTab(GameObject tab)
     {
-        if (go.activeSelf)
+        if (tab.activeSelf)
         {
-            go.SetActive(false);
+            tab.SetActive(false);
             buttons.SetActive(true);
         }
     }
 
+    // Resume the game by hiding the menu
+    public void ResumeGame()
+    {
+        _gameManager.ResumeGame();
+        menu.SetActive(false);
+        isMenuActive = false;
+    }
+
+    // Exit the game and load the main menu scene
+    public void ExitGame()
+    {
+        // Reset mission data and change the scene
+        SceneManager.LoadSceneAsync(0);
+        _gameManager.arenaMode = false;
+        menu.SetActive(false);
+        _missionManager.ResetMissionStatus();
+        _missionUI._nextScene = 6;
+    }
+
+    // Load player stats
     public void Load()
     {
         FindObjectOfType<PlayerStats>().LoadStats();
