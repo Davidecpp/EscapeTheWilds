@@ -23,7 +23,6 @@ public class EnemyHealth : MonoBehaviour
 
     // References to other game components
     private PlayerStats _playerStats;
-    private ArenaManager _arenaManager;
     private EnemySpawner _enemySpawner;
     private MissionManager _missionManager;
 
@@ -32,7 +31,6 @@ public class EnemyHealth : MonoBehaviour
         // Initialize component and object references
         _audioSource = GetComponent<AudioSource>();
         _playerStats = FindObjectOfType<PlayerStats>();
-        _arenaManager = FindObjectOfType<ArenaManager>();
         _enemySpawner = FindObjectOfType<EnemySpawner>();
         _missionManager = FindObjectOfType<MissionManager>();
     }

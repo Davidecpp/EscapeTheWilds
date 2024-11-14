@@ -17,37 +17,39 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] public Inventory.ResourceCounter bulletCounter;
     
     // Damage
-    [SerializeField] private RawImage redFlashImage;
-    private float _flashDuration = 0.2f;
+    [SerializeField] private RawImage redFlashImage; // damage image
+    private float _flashDuration = 0.2f; // damage effect duration
     
-    // Life
-    public RawImage heartPrefab; 
-    public Transform heartsContainer;
+    [Header("Health")]
+    [SerializeField] private RawImage heartPrefab;  // heart object
+    [SerializeField] private Transform heartsContainer; // hearts container
     private List<RawImage> _hearts = new List<RawImage>();
-    public GameObject maxLifeTxt;
+    [SerializeField] private GameObject maxLifeTxt;
     
     // Laps
     public int laps = 0;
     public int totLaps;
-    public TMP_Text lapsTxt;
+    [SerializeField] private TMP_Text lapsTxt;
     
     [SerializeField] private Image keyImage;
-    public Slider sprintSlider;
+    [SerializeField] public Slider sprintSlider;
     
-    // Ability Images
-    public Image currentAbilityImg;
+    [Header("Ability Images")]
+    [SerializeField] private Sprite venomImg;
+    [SerializeField] private Sprite dashImg;
+    [SerializeField] private Sprite jumpImg;
+    [SerializeField] private Image currentAbilityImg; // Current ability image based on character
     private PlayerAbility _ability;
-    public Sprite venomImg;
-    public Sprite dashImg;
-    public Sprite jumpImg;
-    public bool isAbiliting = false;
-    public Slider abilityCooldownSlider;
+    public bool isAbiliting;
+    [SerializeField] private Slider abilityCooldownSlider;
     
-    public GameObject shop;
+    // Shop UI
+    [SerializeField] public GameObject shop;
     public static CanvasManager Instance { get; private set; }
 
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance of CanvasManager exists
         if (Instance == null)
         {
             Instance = this;
@@ -59,132 +61,99 @@ public class CanvasManager : MonoBehaviour
         }
     }
     
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_playerStats == null)
+        // Assign references if they are null
+        _playerStats ??= FindObjectOfType<PlayerStats>();
+        _inventory ??= FindObjectOfType<Inventory>();
+        _ability ??= FindObjectOfType<PlayerAbility>();
+        
+        // Return if any reference is still null
+        if (_playerStats == null || _inventory == null || _ability == null)
         {
-            _playerStats = FindObjectOfType<PlayerStats>();
-            if (_playerStats != null)
-            {
-                SetPlayerReference(_playerStats);
-            }
-            else
-            {
-                return;
-            }
+            return;
         }
-        if (_inventory == null)
-        {
-            _inventory = FindObjectOfType<Inventory>();
-            if (_inventory != null)
-            {
-                SetInventoryReference(_inventory);
-            }
-            else
-            {
-                return;
-            }
-        }
-        if (_ability == null)
-        {
-            _ability = FindObjectOfType<PlayerAbility>();
-            if (_ability != null)
-            {
-                SetAbilityReference(_ability);
-            }
-            else
-            {
-                return;
-            }
-        }
+        
+        // Update UI elements
         TabsOpener();
         SetAbilityImg();
         UpdateLap();
         SetImageAlpha(keyImage, _inventory.hasKey ? 1f : 0.3f);
     }
+    
+    // Set PlayerStats reference
     public void SetPlayerReference(PlayerStats player)
     {
         _playerStats = player;
     }
-    public void SetInventoryReference(Inventory inventory)
-    {
-        _inventory = inventory;
-    }
-    public void SetAbilityReference(PlayerAbility playerAbility)
-    {
-        _ability = playerAbility;
-    }
-    
-    // Update abilty slider
+    // Update the ability cooldown UI
     public void UpdateAbilityCooldown(float currentCooldown, float maxCooldown)
     {
         abilityCooldownSlider.maxValue = maxCooldown;
         abilityCooldownSlider.value = maxCooldown - currentCooldown;
     }
 
-    // Ability Images
     private void SetAbilityImg()
     {
+        // Set the ability image based on the character's name
         if (_ability != null)
         {
-            if (_ability.characterName.Equals("Deer"))
+            switch (_ability.characterName)
             {
-                currentAbilityImg.sprite = dashImg;
-            }
-            if (_ability.characterName.Equals("Snake"))
-            {
-                currentAbilityImg.sprite = venomImg;
-            }
-            if (_ability.characterName.Equals("Rat"))
-            {
-                currentAbilityImg.sprite = jumpImg;
+                case "Deer":
+                    currentAbilityImg.sprite = dashImg;
+                    break;
+                case "Snake":
+                    currentAbilityImg.sprite = venomImg;
+                    break;
+                case "Rat":
+                    currentAbilityImg.sprite = jumpImg;
+                    break;
             }
         }
+        // Adjust the image alpha based on whether the ability is being used
         SetImageAlpha(currentAbilityImg, isAbiliting ? 0.5f : 1f);
     }
         
-    // Open tabs pressing keys
     private void TabsOpener()
     {
-        bool mPressed = Keyboard.current.mKey.wasPressedThisFrame;
-        OpenTab(mPressed, shop);
+        // Open the shop tab when the 'M' key is pressed
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            OpenTab(shop);
+        }
     }
     
-    // General method for opening tabs
-    private void OpenTab(bool key, GameObject go)
+    private void OpenTab(GameObject go)
     {
-        if (key)
+        // Toggle the active state of the tab and pause/resume the game accordingly if ESC is pressed
+        if (go != null)
         {
-            if (go != null)
+            go.SetActive(!go.activeSelf);
+            if (go.activeSelf)
             {
-                go.SetActive(!go.activeSelf);
-                if (go.activeSelf)
+                GameManager.Instance.PauseGame();
+                if (Keyboard.current.escapeKey.wasPressedThisFrame)
                 {
-                    GameManager.Instance.PauseGame();
-                    if (Keyboard.current.escapeKey.wasPressedThisFrame)
-                    {
-                        go.SetActive(false);
-                        GameManager.Instance.ResumeGame();
-                    }
-                }
-                else
-                {
+                    go.SetActive(false);
                     GameManager.Instance.ResumeGame();
                 }
+            }
+            else
+            {
+                GameManager.Instance.ResumeGame();
             }
         }
     }
     
-    // Change image alpha
     private void SetImageAlpha(Image image, float alpha)
     {
+        // Set the alpha value of the image
         Color color = image.color;
         color.a = alpha;
         image.color = color;
     }
     
-    // Updates player's life
     public void UpdateHearts()
     {
         if (_playerStats == null)
@@ -192,33 +161,37 @@ public class CanvasManager : MonoBehaviour
             Debug.LogError("PlayerStats not assigned!");
             return;
         }
+        // Update the heart icons based on the player's health
         if (heartsContainer != null && heartPrefab != null)
         {
+            // Instantiate hearts up to the max health
             while (_hearts.Count < _playerStats.GetMaxHealth())
             {
                 RawImage heart = Instantiate(heartPrefab, heartsContainer);
                 _hearts.Add(heart);
             }
-
+            // Update heart visibility based on current health
             for (int i = 0; i < _hearts.Count; i++)
             {
                 _hearts[i].gameObject.SetActive(i < _playerStats.GetHealth());
             }
         }
+        // Show max life text if at full health
         maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.GetMaxHealth());
     }
     
     private void UpdateLap()
     {
+        // Update the lap text
         if (lapsTxt != null)
         {
             lapsTxt.text = laps + "/" + totLaps;
         }
     }
     
-    // Damage effect (makes the screen red)
     public IEnumerator FlashRed()
     {
+        // Flash the screen red to indicate damage
         if (redFlashImage != null)
         {
             redFlashImage.gameObject.SetActive(true);

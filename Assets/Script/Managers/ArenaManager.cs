@@ -10,6 +10,7 @@ public class ArenaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update round txt
         roundTxt.gameObject.SetActive(GameManager.Instance.arenaMode);
         roundTxt.text = "Round " + round;
     }
