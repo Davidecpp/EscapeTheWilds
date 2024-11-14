@@ -57,8 +57,7 @@ public class PlayerStats : MonoBehaviour
         {
             SaveSystem.LoadPlayer(this);
         }
-
-        Debug.Log("exp:"+_exp);
+        
         Die();
         if (heated)
         {

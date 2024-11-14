@@ -57,6 +57,9 @@ public class MissionManager : MonoBehaviour
 
     public void ResetMissionAmount(int index)
     {
-        missions[index].currentAmount = 0;
+        if (index >= 0)
+        {
+            missions[index].currentAmount = 0;
+        }
     }
 }
