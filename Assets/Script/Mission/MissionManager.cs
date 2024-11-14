@@ -47,4 +47,9 @@ public class MissionManager : MonoBehaviour
             missionUI._nextScene = 6;
         }
     }
+
+    public void ResetMissionAmount(int index)
+    {
+        missions[index].currentAmount = 0;
+    }
 }
