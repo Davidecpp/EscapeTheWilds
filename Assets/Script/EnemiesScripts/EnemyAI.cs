@@ -3,25 +3,54 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    // Variables for following the player
-    public Transform player;
-    public float chaseDistance = 10f;
-    private NavMeshAgent _agent;
-    
-    // Bullet
-    [SerializeField] private float timer = 5;
-    private float _bulletTime;
-    public GameObject enemyBullet;
-    public Transform spawnPoint;
-    public float bulletSpeed;
+    // Variables related to chasing the player
+    [Header("Chase Settings")]
+    [SerializeField] private Transform player;             // Reference to the player’s position
+    [SerializeField] private float chaseDistance = 10f;    // Distance within which the enemy will chase the player
+    private NavMeshAgent _agent;                           // NavMeshAgent component for enemy navigation
 
-    void Start()
+    // Variables related to shooting
+    [Header("Shooting Settings")]
+    [SerializeField] private GameObject enemyBullet;       // Bullet prefab that the enemy will shoot
+    [SerializeField] private Transform spawnPoint;         // Position from which the bullet will be instantiated
+    [SerializeField] private float bulletSpeed = 20f;      // Speed of the bullet when fired
+    [SerializeField] private float shootInterval = 5f;     // Interval between consecutive shots
+    private float _shootCooldown;                          // Timer for managing shooting intervals
+
+    private void Start()
     {
+        // Get the NavMeshAgent component and assign the player if not set
         _agent = GetComponent<NavMeshAgent>();
+        AssignPlayer();
+    }
 
-        // Find player with tag "Player"
+    private void Update()
+    {
+        // Exit if no player is assigned
+        if (player == null) return;
+        
+        // Check the distance between the enemy and the player
+        float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+        
+        // If player is within chase distance, chase and try to shoot
+        if (distanceToPlayer < chaseDistance)
+        {
+            ChasePlayer();
+            TryShoot();
+        }
+        else
+        {
+            // Stop the agent if the player is out of range
+            _agent.isStopped = true;
+        }
+    }
+
+    // Assign player if it has not been set in the Inspector
+    private void AssignPlayer()
+    {
         if (player == null)
         {
+            // Find player by tag if not already assigned
             GameObject playerObject = GameObject.FindWithTag("Player");
             if (playerObject != null)
             {
@@ -34,42 +63,51 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Update()
+    // Chase the player using the NavMeshAgent component
+    private void ChasePlayer()
     {
-        if (player == null) return;
-        
-        // If distanceToPlayer < chaseDistance it follows the player
-        float distanceToPlayer = Vector3.Distance(player.position, transform.position);
-        if (distanceToPlayer < chaseDistance)
+        if (!_agent.isStopped)
         {
-            ChasePlayer();
-            Shoot();
+            // Set the destination to the player's position
+            _agent.SetDestination(player.position);
         }
         else
         {
-            _agent.isStopped = true;
+            // Resume movement if the agent is stopped
+            _agent.isStopped = false;
         }
     }
-    
-    // Shoot projectile
+
+    // Attempt to shoot if cooldown period has elapsed
+    private void TryShoot()
+    {
+        // Decrease the cooldown timer over time
+        _shootCooldown -= Time.deltaTime;
+        
+        // If the cooldown timer reaches zero, shoot and reset the timer
+        if (_shootCooldown <= 0f)
+        {
+            Shoot();
+            _shootCooldown = shootInterval;
+        }
+    }
+
+    // Shoot a projectile in the direction the enemy is facing
     private void Shoot()
     {
-        _bulletTime -= Time.deltaTime;
-        if (_bulletTime > 0) return;
-        _bulletTime = timer;
+        // Check if bullet and spawn point are assigned
+        if (enemyBullet == null || spawnPoint == null) return;
+
+        // Instantiate the bullet at the spawn point
+        GameObject bullet = Instantiate(enemyBullet, spawnPoint.position, spawnPoint.rotation);
+
+        // Apply velocity to the bullet if it has a Rigidbody component
+        if (bullet.TryGetComponent(out Rigidbody bulletRb))
+        {
+            bulletRb.velocity = spawnPoint.forward * bulletSpeed;
+        }
         
-        // Generate the bullet and add the force to it
-        GameObject bullet = Instantiate(enemyBullet, spawnPoint.transform.position, spawnPoint.transform.rotation);
-        Rigidbody bulletRig = bullet.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * bulletSpeed);
-        
-        Destroy(bullet, 0.5f);
-    }
-    
-    // Follow player with NevMash agent
-    private void ChasePlayer()
-    {
-        _agent.isStopped = false;
-        _agent.SetDestination(player.position);
+        // Destroy the bullet after 2 seconds to avoid clutter
+        Destroy(bullet, 2f);
     }
 }

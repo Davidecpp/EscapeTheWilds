@@ -149,4 +149,4 @@ MonoBehaviour:
   damage: 50
   cannon: 0
   hitParticles: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}
-  fireParticles: {fileID: 2785966358164364051, guid: 7f578492a14e4314baca07aacc004a2d, type: 3}
+  fireParticles: {fileID: 168262, guid: 062893e7007e39441aea009115b6cefa, type: 3}

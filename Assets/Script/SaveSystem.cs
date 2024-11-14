@@ -4,14 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
-    private static string saveFilePath = Application.persistentDataPath + "/playerSave.json";
+    // Define the path where the save file will be stored
+    private static readonly string saveFilePath = Application.persistentDataPath + "/playerSave.json";
 
-    // Salva i dati del giocatore
+    // Saves the player's data to a JSON file
     public static void SavePlayer(PlayerStats playerStats)
     {
-        Debug.Log("Salvataggio file su: " + saveFilePath); 
-        // Crea un oggetto con i dati del giocatore da salvare
-        PlayerSaveData saveData = new PlayerSaveData
+        Debug.Log("Saving file at: " + saveFilePath);
+        
+        var inventory = FindObjectOfType<Inventory>();
+        
+        // Create a PlayerSaveData object containing the player's stats
+        var saveData = new PlayerSaveData
         {
             health = playerStats.GetHealth(),
             maxHealth = playerStats.GetMaxHealth(),
@@ -22,32 +26,27 @@ public class SaveSystem : MonoBehaviour
             jumpHeight = playerStats.GetJumpHeight(),
             runSpeed = playerStats.GetRunSpeed(),
             damage = playerStats.GetDamage(),
-            coin = FindObjectOfType<Inventory>().GetCoinCount(),
-            sceneName = SceneManager.GetActiveScene().name,
-            sceneIndex = GameManager.Instance.currentScene
+            coin = inventory?.GetCoinCount() ?? 0, // Get coins from inventory or set to 0 if inventory is null
+            sceneName = SceneManager.GetActiveScene().name, // Current scene name
+            sceneIndex = GameManager.Instance.currentScene // Current scene index from GameManager
         };
 
-        // Serializza l'oggetto in una stringa JSON
-        string json = JsonUtility.ToJson(saveData, true);
-
-        // Salva la stringa JSON su un file
-        File.WriteAllText(saveFilePath, json);
-        Debug.Log("Giocatore salvato.");
+        // Convert the saveData object to a JSON string
+        File.WriteAllText(saveFilePath, JsonUtility.ToJson(saveData, true));
+        Debug.Log("Player saved.");
     }
 
-    // Carica i dati del giocatore
+    // Loads the player's data from a JSON file
     public static void LoadPlayer(PlayerStats playerStats)
     {
-        Debug.Log("Loaded");
+        // Check if the save file exists
         if (File.Exists(saveFilePath))
         {
-            // Leggi la stringa JSON dal file
-            string json = File.ReadAllText(saveFilePath);
+            // Read JSON data from the file
+            var json = File.ReadAllText(saveFilePath);
+            var saveData = JsonUtility.FromJson<PlayerSaveData>(json);
 
-            // Deserializza la stringa in un oggetto PlayerSaveData
-            PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(json);
-
-            // Imposta i valori del giocatore con i dati caricati
+            // Set the player's stats using the loaded data
             playerStats.SetHealth(saveData.health);
             playerStats.SetMaxHealth(saveData.maxHealth);
             playerStats.SetLevel(saveData.level);
@@ -57,24 +56,29 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetJumpHeight(saveData.jumpHeight);
             playerStats.SetRunSpeed(saveData.runSpeed);
             playerStats.SetDamage(saveData.damage);
-            FindObjectOfType<Inventory>().SetCoinCount(saveData.coin);
-            
+
+            // Load Inventory and Mission data if the objects are found
+            var inventory = FindObjectOfType<Inventory>();
+            inventory?.SetCoinCount(saveData.coin);
+
+            var missionManager = FindObjectOfType<MissionManager>();
+            missionManager?.ResetMissionAmount(saveData.sceneIndex - 5); // Adjust mission count based on scene
+            missionManager?.ResetMissionStatus();
+
+            var missionUI = FindObjectOfType<MissionUI>();
+            if (missionUI != null) missionUI._nextScene = saveData.sceneIndex + 1; // Prepare the next scene in MissionUI
+
+            // Load the saved scene
             SceneManager.LoadScene(saveData.sceneName);
-            
-            string scenePath = "/" + saveData.sceneName;
 
-            // Obtain scene index
-            int sceneIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
-            GameManager.Instance.currentScene = sceneIndex;
-            FindObjectOfType<MissionManager>().ResetMissionAmount(saveData.sceneIndex - 5);
-            FindObjectOfType<MissionManager>().ResetMissionStatus();
-            FindObjectOfType<MissionUI>()._nextScene = saveData.sceneIndex + 1;
+            // Update the current scene in GameManager
+            GameManager.Instance.currentScene = saveData.sceneIndex;
 
-            Debug.Log("Giocatore caricato.");
+            Debug.Log("Player loaded.");
         }
         else
         {
-            Debug.LogError("File di salvataggio non trovato!");
+            Debug.LogError("Save file not found!");
         }
     }
 }

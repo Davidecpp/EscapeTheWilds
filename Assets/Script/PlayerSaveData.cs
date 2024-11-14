@@ -1,6 +1,7 @@
 [System.Serializable]
 public class PlayerSaveData
 {
+    // Save data
     public int health;
     public int maxHealth;
     public int level;
