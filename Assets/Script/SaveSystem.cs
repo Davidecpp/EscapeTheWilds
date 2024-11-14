@@ -23,8 +23,8 @@ public class SaveSystem : MonoBehaviour
             runSpeed = playerStats.GetRunSpeed(),
             damage = playerStats.GetDamage(),
             coin = FindObjectOfType<Inventory>().GetCoinCount(),
-            
-            sceneName = SceneManager.GetActiveScene().name
+            sceneName = SceneManager.GetActiveScene().name,
+            sceneIndex = GameManager.Instance.currentScene
         };
 
         // Serializza l'oggetto in una stringa JSON
@@ -66,6 +66,7 @@ public class SaveSystem : MonoBehaviour
             // Obtain scene index
             int sceneIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
             GameManager.Instance.currentScene = sceneIndex;
+            FindObjectOfType<MissionManager>().ResetMissionAmount(saveData.sceneIndex - 5);
 
             Debug.Log("Giocatore caricato.");
         }
