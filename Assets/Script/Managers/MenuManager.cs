@@ -51,6 +51,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadSceneAsync(0);
         GameManager.Instance.arenaMode = false;
         menu.SetActive(false);
+        FindObjectOfType<MissionManager>().ResetMissionStatus();
     }
     
     // Open tab
