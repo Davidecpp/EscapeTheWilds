@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
 
     // Status flags
     public bool heated;        // Indicates if the player is in a "heated" state (e.g., fire effect)
+    public bool healing;       // Indicates if the player is in a "healing" state
 
     // Reference to the CanvasManager for updating the UI
     private CanvasManager _canvas;
@@ -147,3 +148,5 @@ public class PlayerStats : MonoBehaviour
     public void SetRunSpeed(float runSpeed) => this.runSpeed = runSpeed;
     public void SetDamage(float damage) => this.damage = damage;
 }
+
+

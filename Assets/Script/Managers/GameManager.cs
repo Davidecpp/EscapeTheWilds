@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     
     // Conditions
     public bool invincible = false;
-    public bool healing = false;
     
     // Game state variables
     public bool inGame; // Tracks if the game is currently in progress

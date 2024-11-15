@@ -29,7 +29,6 @@ public class Heart : MonoBehaviour, IInteractible
     // Interaction with the heart: increases health
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("Heart picked");
         // Add a heart to the player's health
         _playerStats.AddHeart();
         
@@ -50,10 +49,10 @@ public class Heart : MonoBehaviour, IInteractible
     // Coroutine for healing over a set duration
     private IEnumerator HealForSeconds(float seconds)
     {
-        GameManager.Instance.healing = true; // Set healing true to activate particles
+        _playerStats.healing = true; // Set healing true to activate particles
         
         // Wait for the specified amount of time and deactivate particles
         yield return new WaitForSeconds(seconds); 
-        GameManager.Instance.healing = false;
+        _playerStats.healing = false;
     }
 }

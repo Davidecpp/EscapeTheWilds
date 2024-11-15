@@ -248,7 +248,7 @@ public class Movement : MonoBehaviour
     private void ShowEffects()
     {
         Effect(GameManager.Instance.invincible, ref invincibleEffectActive, ref invincibleParticlesObject, invincibleParticles);
-        Effect(GameManager.Instance.healing, ref healEffectActive,ref healParticlesObject, healParticles);
+        Effect(_playerStats.healing, ref healEffectActive,ref healParticlesObject, healParticles);
     }
         
     // Check the terrain type (sand, water, etc.) and show corresponding particles
