@@ -19,7 +19,7 @@ public class Pepper : MonoBehaviour, IInteractible
         // Check if _playerStats is null and log an error if it is
         if (_playerStats == null)
         {
-            Debug.LogError("PlayerStats component not found in the scene!");
+            return;
         }
     }
 
