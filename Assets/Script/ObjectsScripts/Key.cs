@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Key : MonoBehaviour, IInteractible
 {
@@ -27,8 +28,12 @@ public class Key : MonoBehaviour, IInteractible
         // Mark the key as acquired by setting hasKey to true in the player's inventory
         inventory.hasKey = true;
         
-        // Update mission progress, for example, completing a tutorial task
-        FindObjectOfType<MissionManager>().AddProgress("Tutorial", 1);
+        // Update mission progress, for example, completing a tutorial task if in a certain scene
+        if (SceneManager.GetActiveScene().name.Equals("lvl.1"))
+        {
+            FindObjectOfType<MissionManager>().AddProgress("Tutorial", 1);
+        }
+        
         
         // If the flag shouldDisappear is true, destroy the key object (make it disappear from the scene)
         if (shouldDisappear)

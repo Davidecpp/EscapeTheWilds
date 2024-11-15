@@ -33,7 +33,7 @@ public class MissionManager : MonoBehaviour
         else
         {
             _missionUI.missionPanel.SetActive(false); // Hide the mission panel if the index is out of range
-            Debug.LogWarning("Active mission index is out of range."); // Log a warning if the index is invalid
+            //Debug.LogWarning("Active mission index is out of range."); // Log a warning if the index is invalid
         }
     }
 
