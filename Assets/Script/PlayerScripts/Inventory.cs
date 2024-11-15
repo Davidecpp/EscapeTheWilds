@@ -115,6 +115,12 @@ public class Inventory : MonoBehaviour
         _canvasManager.coinCounter.count = amount;
         UpdateResourceCounter(_canvasManager.coinCounter);
     }
+    // Set the strawberry count to a specific amount and update the UI
+    public void SetStrawberryCount(int amount)
+    {
+        _canvasManager.strawberryCounter.count = amount;
+        UpdateResourceCounter(_canvasManager.strawberryCounter);
+    }
 
     // Wrapper methods for adding specific resources
     public void AddCoin(int amount) => AddResource(ref _canvasManager.coinCounter, amount);

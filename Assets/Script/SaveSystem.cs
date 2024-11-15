@@ -28,6 +28,7 @@ public class SaveSystem : MonoBehaviour
             runSpeed = playerStats.GetRunSpeed(), // Running speed of the player
             damage = playerStats.GetDamage(), // Damage dealt by the player
             coin = inventory?.GetCoinCount() ?? 0, // Get the coin count from inventory, or set to 0 if inventory is null
+            strawberries = inventory?.GetStrawberryCount() ?? 0, // Get the strawberry count from inventory, or set to 0 if inventory is null
             sceneName = SceneManager.GetActiveScene().name, // Store the name of the current scene
             sceneIndex = GameManager.Instance.currentScene // Store the index of the current scene from GameManager
         };
@@ -60,9 +61,10 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetRunSpeed(saveData.runSpeed); // Set the player's running speed
             playerStats.SetDamage(saveData.damage); // Set the player's damage
 
-            // If the Inventory object is found, restore the coin count
+            // If the Inventory object is found, restore the coin and the strawberry count
             var inventory = FindObjectOfType<Inventory>();
             inventory?.SetCoinCount(saveData.coin);
+            inventory?.SetStrawberryCount(saveData.strawberries);
 
             // Reset mission-related data using the saved scene index
             var missionManager = FindObjectOfType<MissionManager>();

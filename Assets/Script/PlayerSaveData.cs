@@ -13,5 +13,6 @@ public class PlayerSaveData
     public float damage;
     public string sceneName;
     public int coin;
+    public int strawberries;
     public int sceneIndex;
 }

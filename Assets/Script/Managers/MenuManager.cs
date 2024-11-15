@@ -111,6 +111,14 @@ public class MenuManager : MonoBehaviour
     // Reset mission status and next scene index
     private void ResetMissionsAfterExit()
     {
+        // Search for inventory in the scene
+        var _inventory = FindObjectOfType<Inventory>();
+        if (_inventory != null)
+        {
+            _inventory.SetCoinCount(0); // Set coin amount to 0
+            _inventory.SetStrawberryCount(0);  // Set strawberry amount to 0
+        }
+        
         _missionManager.ResetMissionStatus();  // Reset the mission status
         _missionUI._nextScene = 6;  // Set the next scene 
     }

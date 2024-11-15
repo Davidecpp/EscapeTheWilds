@@ -383,5 +383,4 @@ public class Movement : MonoBehaviour
             FindObjectOfType<MissionManager>().AddProgress("Mountain", 1);
         }
     }
-
 }

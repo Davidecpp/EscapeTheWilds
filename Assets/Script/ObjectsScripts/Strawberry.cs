@@ -2,34 +2,45 @@ using UnityEngine;
 
 public class Strawberry : MonoBehaviour, IInteractible
 {
-    [SerializeField] private string prompt;
-    [SerializeField] private bool shouldDisappear; 
-    [SerializeField] private bool _bonusObj;
+    // Serialized fields allow customization in the Unity Inspector
+    [SerializeField] private string prompt;          // Interaction prompt displayed to the player
+    [SerializeField] private bool shouldDisappear;   // Determines if the strawberry should disappear after being collected
+    [SerializeField] private bool _bonusObj;         // Indicates if this strawberry is a bonus object
 
-    public string InteractionPrompt => prompt;
-    public bool bonusObj => _bonusObj;
-    
-    // Object interaction
-    // Pick strawberry
+    // Public properties for accessing interaction details
+    public string InteractionPrompt => prompt;       // Returns the interaction prompt
+    public bool bonusObj => _bonusObj;               // Returns whether this is a bonus object
+
+    // Handles interaction with the strawberry object
+    // Called when the player interacts with the strawberry
     public bool Interact(Interactor interactor)
     {
+        // Find the Inventory and PlayerStats components in the scene
         Inventory inventory = FindObjectOfType<Inventory>();
         PlayerStats playerStats = FindObjectOfType<PlayerStats>();
-        
+
+        // Ensure both Inventory and PlayerStats exist before proceeding
         if (inventory != null && playerStats != null)
         {
+            // Add one strawberry to the inventory
             inventory.AddStrawberry(1);
+
+            // Grant the player 50 experience points
             playerStats.AddExperience(50);
 
+            // If the strawberry is set to disappear, destroy it from the scene
             if (shouldDisappear)
             {
-                Destroy(gameObject); 
+                Destroy(gameObject);
             }
+
+            // Interaction was successful
             return true;
         }
         else
         {
-            Debug.LogError("Inventory not found in the scene.");
+            // Log an error if the necessary components are missing
+            Debug.LogError("Inventory or PlayerStats not found in the scene.");
             return false;
         }
     }
