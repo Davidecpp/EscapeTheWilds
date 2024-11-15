@@ -118,7 +118,12 @@ public class MenuManager : MonoBehaviour
     // Load player stats from PlayerPrefs or another system
     public void Load()
     {
-        // Find PlayerStats in the scene and load the stats
-        FindObjectOfType<PlayerStats>().LoadStats();
+        var playerStats = FindObjectOfType<PlayerStats>();
+        SaveSystem.LoadPlayer(playerStats);
+    }
+    public void Save()
+    {
+        var playerStats = FindObjectOfType<PlayerStats>();
+        SaveSystem.SavePlayer(playerStats);
     }
 }

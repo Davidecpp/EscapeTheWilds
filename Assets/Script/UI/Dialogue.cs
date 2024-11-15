@@ -105,4 +105,11 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         GameManager.Instance.ResumeGame();
     }
+    public void CheckInitialDialogue()
+    {
+        if (GameManager.Instance.currentScene == 4)
+        {
+            SetDialogue(new[] { "Enter the house.", "Press WASD to move." });
+        }
+    }
 }

@@ -3,140 +3,129 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Player Stats
-    [SerializeField] private int maxHealth = 5;
-    [SerializeField] private float moveSpeed = 6.0f;
-    [SerializeField] private float jumpHeight = 15.0f;
-    [SerializeField] private float runSpeed = 10.0f;
-    [SerializeField] private float damage = 10.0f;
-    [SerializeField] private float nextLevelExp = 100;
-    
-    private int _health;
-    private float _exp;
-    private int _level = 1;
-    
-    // Player status
-    public bool heated;
+    // Player attributes that can be set in the Unity Inspector
+    [SerializeField] private int maxHealth = 5;       // Maximum health of the player
+    [SerializeField] private float moveSpeed = 6.0f;  // Base movement speed
+    [SerializeField] private float jumpHeight = 15.0f; // Jump height
+    [SerializeField] private float runSpeed = 10.0f;  // Running speed
+    [SerializeField] private float damage = 10.0f;    // Damage dealt by the player
+    [SerializeField] private float nextLevelExp = 100; // Experience required for the next level
 
+    // Private variables for managing player stats
+    private int _health;       // Current health
+    private float _exp;        // Current experience points
+    private int _level = 1;    // Current level of the player
+
+    // Status flags
+    public bool heated;        // Indicates if the player is in a "heated" state (e.g., fire effect)
+
+    // Reference to the CanvasManager for updating the UI
     private CanvasManager _canvas;
 
     private void Start()
     {
+        // Initialize the CanvasManager and set up player references
         _canvas = CanvasManager.Instance;
         if (_canvas != null)
         {
             _canvas.SetPlayerReference(this);
-            _health = maxHealth;
-            _canvas.UpdateHearts();
+            _health = maxHealth;       // Set current health to the maximum
+            _canvas.UpdateHearts();    // Update the UI hearts display
         }
         else
         {
-            Debug.LogError("CanvasManager not found.");
+            Debug.LogError("CanvasManager not found."); // Log an error if CanvasManager is not found
         }
         
-        // Load stats
-        _exp = PlayerPrefs.GetFloat("PlayerExp", 0); // 0 if not saved
+        // Load saved experience and level from PlayerPrefs
+        _exp = PlayerPrefs.GetFloat("PlayerExp", 0); // Default to 0 if no saved data
         _level = PlayerPrefs.GetInt("PlayerLevel", 1);
 
-        if (GameManager.Instance.currentScene == 4)
-        {
-            FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Enter the house.","Press WASD to move." });
-        }
-        
+        // Check for any initial dialogues to display
+        var dialogue = FindObjectOfType<Dialogue>();
+        dialogue.CheckInitialDialogue();
     }
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            SaveSystem.SavePlayer(this);
-            Debug.Log("Saved");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SaveSystem.LoadPlayer(this);
-        }
-        
+        // Check if the player has died
         Die();
+        
+        // Handle the "heated" state and turn it off after a delay
         if (heated)
         {
             StartCoroutine(FlameOff(5.0f));
         }
     }
 
-    public void LoadStats()
-    {
-        SaveSystem.LoadPlayer(this);
-    }
-
-    // Adds experience to the player
+    // Add experience points to the player
     public void AddExperience(float amount)
     {
-        _exp += amount;
-        if (_exp >= nextLevelExp)
+        _exp += amount; // Increase current experience
+        if (_exp >= nextLevelExp) // Check if enough experience is gained for a level-up
         {
             LevelUp();
-            _exp -= nextLevelExp;
-            nextLevelExp *= 1.5f;
+            _exp -= nextLevelExp;        // Subtract the experience used for leveling up
+            nextLevelExp *= 1.5f;        // Increase the experience required for the next level
         }
         
-        // Save exp and level through scenes
+        // Save the updated experience and level
         PlayerPrefs.SetFloat("PlayerExp", _exp);
         PlayerPrefs.SetInt("PlayerLevel", _level);
         PlayerPrefs.Save();
     }
 
-    // Reduces health by a specific amount
+    // Decrease health by a specified amount
     public void ReduceHealth(int amount)
     {
-        if (_health <= 0) return;
+        if (_health <= 0) return; // Ignore if health is already 0
         
-        _health -= amount;
-        _canvas?.UpdateHearts();
-        StartCoroutine(_canvas?.FlashRed());
+        _health -= amount;       // Subtract health
+        _canvas?.UpdateHearts(); // Update the hearts UI
+        StartCoroutine(_canvas?.FlashRed()); // Flash red effect on damage
     }
 
-    // Add one health point, if under maxHealth
+    // Add one health point, if under the maximum
     public void AddHeart()
     {
         if (_health < maxHealth)
         {
             _health++;
-            _canvas?.UpdateHearts();
+            _canvas?.UpdateHearts(); // Update the hearts UI
         }
     }
     
-    // Game over
+    // Handle player death
     private void Die()
     {
         if (_health <= 0)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(); // Trigger GameOver sequence
         }
     }
 
-    // Upgrade stats on level-up
+    // Level up the player and improve stats
     private void LevelUp()
     {
-        _level++;
-        damage++;
-        maxHealth++;
-        runSpeed++;
-        jumpHeight++;
+        _level++;           // Increase level
+        damage++;           // Increase damage
+        maxHealth++;        // Increase maximum health
+        runSpeed++;         // Increase running speed
+        jumpHeight++;       // Increase jump height
         
-        // Save new level
+        // Save the updated level
         PlayerPrefs.SetInt("PlayerLevel", _level);
         PlayerPrefs.Save();
     }
     
+    // Turn off the "heated" state after a delay
     public IEnumerator FlameOff(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        heated = false;
-        Debug.Log("Finish");
+        heated = false; // Reset heated state
     }
     
-    // Accessor methods (getters) to expose private fields
+    // Getter methods to access private fields
     public int GetMaxHealth() => maxHealth;
     public float GetMoveSpeed() => moveSpeed;
     public float GetJumpHeight() => jumpHeight;
@@ -147,7 +136,7 @@ public class PlayerStats : MonoBehaviour
     public float GetLevel() => _level;
     public int GetHealth() => _health;
     
-    // Setters
+    // Setter methods to modify private fields
     public void SetHealth(int health) => _health = health;
     public void SetMaxHealth(int maxHealth) => this.maxHealth = maxHealth;
     public void SetLevel(int level) => _level = level;
@@ -157,5 +146,4 @@ public class PlayerStats : MonoBehaviour
     public void SetJumpHeight(float jumpHeight) => this.jumpHeight = jumpHeight;
     public void SetRunSpeed(float runSpeed) => this.runSpeed = runSpeed;
     public void SetDamage(float damage) => this.damage = damage;
-
 }

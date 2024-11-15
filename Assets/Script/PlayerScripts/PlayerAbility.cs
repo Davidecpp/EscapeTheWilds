@@ -144,7 +144,7 @@ public class PlayerAbility : MonoBehaviour
         jumpSound.Play();
         _movement.megaJump = true; // Enable mega jump in movement script
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); // Retard the jump
 
         // Execute the mega jump
         _movement.PerformMegaJump();
@@ -160,7 +160,7 @@ public class PlayerAbility : MonoBehaviour
     // Helper method to instantiate and destroy temporary objects
     private void InstantiateAndDestroy(GameObject prefab, Vector3 position, Quaternion rotation, float destroyTime)
     {
-        GameObject instance = Instantiate(prefab, position, rotation);
+        GameObject instance = Instantiate(prefab, position, rotation); // Instantiate the object
         Destroy(instance, destroyTime); // Destroy after specified time
     }
 }
