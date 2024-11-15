@@ -1,36 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class FireEffect : MonoBehaviour
 {
-    public float damage = 15.0f;
-    private PlayerStats _playerStats;
-    // Start is called before the first frame update
+    public float damage = 15.0f; // Damage dealt to enemies
+    private PlayerStats _playerStats; // Reference to the player's stats for applying damage
+
     void Start()
     {
+        // Find and assign the PlayerStats component in the scene
         _playerStats = FindObjectOfType<PlayerStats>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Destroy this object after 5.5 seconds
         Destroy(gameObject, 5.5f);
     }
 
+    // Apply effects when colliding with other objects
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // Apply damage to the player
             _playerStats.ReduceHealth(1);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         {
+            // Apply damage to an enemy if hit
             EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                Debug.Log("Enemy flamed");
                 enemyHealth.TakeDamage(damage);
             }
         }

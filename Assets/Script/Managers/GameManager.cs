@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Pause the game and makes the pointer visible
     public void PauseGame()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None; // Unlock cursor
         Cursor.visible = true; 
         Time.timeScale = 0;
         inGame = false; // Update the game state to indicate it's paused
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     // Resume the game and hides the pointer
     public void ResumeGame()
     {
-        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.lockState = CursorLockMode.Locked; // Lock cursor
         Cursor.visible = false; 
         Time.timeScale = 1;
         inGame = true;  // Update the game state to indicate it's active

@@ -16,7 +16,6 @@ public class Star : MonoBehaviour, IInteractible
     // Makes player invincible for a short period of time
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("Star picked");
         StartCoroutine(MakeInvincibleForSeconds(time));
         if (shouldDisappear)
         {

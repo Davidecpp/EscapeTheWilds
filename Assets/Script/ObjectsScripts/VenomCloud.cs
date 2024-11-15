@@ -1,52 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class VenomCloud : MonoBehaviour
 {
-    public float damagePerSecond = 10f;  // Quantità di danno inflitta al secondo
-    public float slowAmount = 0.5f;      // Percentuale di rallentamento (es. 0.5 = 50%)
-    public float duration = 5f;          // Durata totale della nube
-    public ParticleSystem venomParticles; // Assegna il Particle System della nube
+    public float damagePerSecond = 10f;  // Amount of damage dealt to enemies per second
+    public float slowAmount = 0.5f;      // Percentage to slow enemies (e.g., 0.5 = 50% slower)
+    public float duration = 5f;          // Total duration of the venom cloud
+    public ParticleSystem venomParticles; // Particle system to visualize the cloud effect
 
     private void Start()
     {
-        // Distruggi l'oggetto dopo che la nube ha esaurito la sua durata
+        // Destroy the venom cloud after its duration expires
         Destroy(gameObject, duration);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Verifica se il nemico è nella nube
-        if (other.CompareTag("Enemy")) // Assicurati che i nemici abbiano il tag "Enemy"
+        // Check if an enemy is within the cloud
+        if (other.CompareTag("Enemy")) // Ensure the object has the "Enemy" tag
         {
-            // Applica danno continuo
+            // Continuously apply damage to the enemy
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime);
+                enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime); // Damage scaled by frame time
             }
-
-            /*// Rallenta il nemico
-            EnemyMovement enemyMovement = other.GetComponent<EnemyMovement>();
-            if (enemyMovement != null)
-            {
-                enemyMovement.speed *= slowAmount; // Riduce la velocità
-            }*/
         }
     }
-
-    /*private void OnTriggerExit(Collider other)
-    {
-        // Ripristina la velocità del nemico quando esce dalla nube
-        if (other.CompareTag("Enemy"))
-        {
-            EnemyMovement enemyMovement = other.GetComponent<EnemyMovement>();
-            if (enemyMovement != null)
-            {
-                enemyMovement.speed /= slowAmount; // Ripristina la velocità originale
-            }
-        }
-    }*/
 }
-
