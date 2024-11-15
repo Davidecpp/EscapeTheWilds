@@ -4,78 +4,84 @@ using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
-    // Define the path where the save file will be stored
+    // Define the path where the save file will be stored (persistent data path)
     private static readonly string saveFilePath = Application.persistentDataPath + "/playerSave.json";
 
-    // Saves the player's data to a JSON file
+    // Method to save the player's data to a JSON file
     public static void SavePlayer(PlayerStats playerStats)
     {
         Debug.Log("Saving file at: " + saveFilePath);
         
+        // Find the Inventory object to get the coin count
         var inventory = FindObjectOfType<Inventory>();
         
-        // Create a PlayerSaveData object containing the player's stats
+        // Create a PlayerSaveData object, which holds all necessary player stats
         var saveData = new PlayerSaveData
         {
-            health = playerStats.GetHealth(),
-            maxHealth = playerStats.GetMaxHealth(),
-            level = (int)playerStats.GetLevel(),
-            experience = playerStats.GetExperience(),
-            nextLevelExp = playerStats.GetNextLevelExp(),
-            moveSpeed = playerStats.GetMoveSpeed(),
-            jumpHeight = playerStats.GetJumpHeight(),
-            runSpeed = playerStats.GetRunSpeed(),
-            damage = playerStats.GetDamage(),
-            coin = inventory?.GetCoinCount() ?? 0, // Get coins from inventory or set to 0 if inventory is null
-            sceneName = SceneManager.GetActiveScene().name, // Current scene name
-            sceneIndex = GameManager.Instance.currentScene // Current scene index from GameManager
+            health = playerStats.GetHealth(), // Current health of the player
+            maxHealth = playerStats.GetMaxHealth(), // Maximum health of the player
+            level = (int)playerStats.GetLevel(), // Current level of the player
+            experience = playerStats.GetExperience(), // Experience points of the player
+            nextLevelExp = playerStats.GetNextLevelExp(), // Experience required for the next level
+            moveSpeed = playerStats.GetMoveSpeed(), // Movement speed of the player
+            jumpHeight = playerStats.GetJumpHeight(), // Jump height of the player
+            runSpeed = playerStats.GetRunSpeed(), // Running speed of the player
+            damage = playerStats.GetDamage(), // Damage dealt by the player
+            coin = inventory?.GetCoinCount() ?? 0, // Get the coin count from inventory, or set to 0 if inventory is null
+            sceneName = SceneManager.GetActiveScene().name, // Store the name of the current scene
+            sceneIndex = GameManager.Instance.currentScene // Store the index of the current scene from GameManager
         };
 
-        // Convert the saveData object to a JSON string
+        // Convert the PlayerSaveData object into a JSON string, with indentation for readability
         File.WriteAllText(saveFilePath, JsonUtility.ToJson(saveData, true));
         Debug.Log("Player saved.");
     }
 
-    // Loads the player's data from a JSON file
+    // Method to load the player's data from a JSON file
     public static void LoadPlayer(PlayerStats playerStats)
     {
-        // Check if the save file exists
+        // Check if the save file exists at the specified path
         if (File.Exists(saveFilePath))
         {
-            // Read JSON data from the file
+            // Read the content of the save file into a JSON string
             var json = File.ReadAllText(saveFilePath);
+
+            // Deserialize the JSON string into a PlayerSaveData object
             var saveData = JsonUtility.FromJson<PlayerSaveData>(json);
 
-            // Set the player's stats using the loaded data
-            playerStats.SetHealth(saveData.health);
-            playerStats.SetMaxHealth(saveData.maxHealth);
-            playerStats.SetLevel(saveData.level);
-            playerStats.SetExperience(saveData.experience);
-            playerStats.SetNextLevelExp(saveData.nextLevelExp);
-            playerStats.SetMoveSpeed(saveData.moveSpeed);
-            playerStats.SetJumpHeight(saveData.jumpHeight);
-            playerStats.SetRunSpeed(saveData.runSpeed);
-            playerStats.SetDamage(saveData.damage);
+            // Restore the player's stats using the data from the save file
+            playerStats.SetHealth(saveData.health); // Set the player's health
+            playerStats.SetMaxHealth(saveData.maxHealth); // Set the player's max health
+            playerStats.SetLevel(saveData.level); // Set the player's level
+            playerStats.SetExperience(saveData.experience); // Set the player's experience
+            playerStats.SetNextLevelExp(saveData.nextLevelExp); // Set the experience required for the next level
+            playerStats.SetMoveSpeed(saveData.moveSpeed); // Set the player's movement speed
+            playerStats.SetJumpHeight(saveData.jumpHeight); // Set the player's jump height
+            playerStats.SetRunSpeed(saveData.runSpeed); // Set the player's running speed
+            playerStats.SetDamage(saveData.damage); // Set the player's damage
 
-            // Load Inventory and Mission data if the objects are found
+            // If the Inventory object is found, restore the coin count
             var inventory = FindObjectOfType<Inventory>();
             inventory?.SetCoinCount(saveData.coin);
 
+            // Reset mission-related data using the saved scene index
             var missionManager = FindObjectOfType<MissionManager>();
             missionManager?.ResetMissionAmount(saveData.sceneIndex - 5); // Adjust mission count based on scene
-            missionManager?.ResetMissionStatus();
+            missionManager?.ResetMissionStatus(); // Reset the mission status
 
+            // If the MissionUI object is found, prepare the next scene for mission tracking
             var missionUI = FindObjectOfType<MissionUI>();
-            if (missionUI != null) missionUI._nextScene = saveData.sceneIndex + 1; // Prepare the next scene in MissionUI
+            if (missionUI != null) missionUI._nextScene = saveData.sceneIndex + 1;
 
-            // Load the saved scene
+            // Load the scene that was saved in the file
             SceneManager.LoadScene(saveData.sceneName);
 
-            // Update the current scene in GameManager
+            // Update the GameManager with the current scene index
             GameManager.Instance.currentScene = saveData.sceneIndex;
         }
         else
         {
+            // Log an error if the save file is not found at the specified path
             Debug.LogError("Save file not found!");
         }
     }

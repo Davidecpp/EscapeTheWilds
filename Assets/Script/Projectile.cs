@@ -25,12 +25,12 @@ public class Projectile : MonoBehaviour
         // Check if projectile is heated or cannon-based to determine the particle effect
         if (playerStats.heated || cannon)
         {
-            particles = Instantiate(fireParticles, transform.position, transform.rotation);
+            particles = Instantiate(fireParticles, transform.position, transform.rotation); // Instantiate fire particles
             Destroy(particles, 6.5f);  // Set this time to be adjustable in the inspector
         }
         else
         {
-            particles = Instantiate(hitParticles, transform.position, transform.rotation);
+            particles = Instantiate(hitParticles, transform.position, transform.rotation); // Instantiate normal particles
             Destroy(particles, 1f);  // Set this time to be adjustable in the inspector
         }
 

@@ -1,37 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 // Class to manage the missions in the game
 public class MissionManager : MonoBehaviour
 {
     public List<Mission> missions; // List of all missions
-    private MissionUI missionUI; // Reference to the MissionUI to update the mission interface
+    private MissionUI _missionUI; // Reference to the MissionUI to update the mission interface
     public int activeMissionIndex = 0; // Index of the currently active mission
-    private int _indexOffset = 5; // Offset to calculate the correct mission index based on the scene index
+    public int indexOffset = 5; // Offset to calculate the correct mission index based on the scene index
 
     // Initialize the MissionManager and find necessary UI components
     private void Start()
     {
         DontDestroyOnLoad(gameObject); // Ensure this object persists across scenes
-        missionUI = FindObjectOfType<MissionUI>(); // Find the MissionUI in the scene
+        _missionUI = FindObjectOfType<MissionUI>(); // Find the MissionUI in the scene
     }
 
     // Update is called once per frame
     private void Update()
     {
         // Calculate the active mission index based on the current scene build index
-        activeMissionIndex = SceneManager.GetActiveScene().buildIndex - _indexOffset;
+        activeMissionIndex = SceneManager.GetActiveScene().buildIndex - indexOffset;
 
         // If the mission index is valid, display the mission UI
         if (activeMissionIndex >= 0 && activeMissionIndex < missions.Count)
         {
-            missionUI.missionPanel.SetActive(true); // Show the mission panel
-            missionUI.UpdateUI(); // Update the UI with the current mission data
+            _missionUI.missionPanel.SetActive(true); // Show the mission panel
+            _missionUI.UpdateUI(); // Update the UI with the current mission data
         }
         else
         {
-            missionUI.missionPanel.SetActive(false); // Hide the mission panel if the index is out of range
+            _missionUI.missionPanel.SetActive(false); // Hide the mission panel if the index is out of range
             Debug.LogWarning("Active mission index is out of range."); // Log a warning if the index is invalid
         }
     }
@@ -51,12 +52,12 @@ public class MissionManager : MonoBehaviour
             // If the mission is completed, reward the player and move to the next mission
             if (mission.isCompleted)
             {
-                missionUI.RewardUI(); // Show reward UI
+                _missionUI.RewardUI(); // Show reward UI
                 activeMissionIndex++; // Move to the next mission
                 GameManager.Instance.currentScene++; // Increment the scene index for game progression
             }
 
-            missionUI.UpdateUI(); // Update the mission UI
+            _missionUI.UpdateUI(); // Update the mission UI
         }
         else
         {
