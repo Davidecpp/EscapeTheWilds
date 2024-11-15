@@ -7270,6 +7270,7 @@ MonoBehaviour:
     expReward: 50
     isCompleted: 0
   activeMissionIndex: 0
+  indexOffset: 5
 --- !u!1 &5099641815518444225
 GameObject:
   m_ObjectHideFlags: 0
@@ -8098,6 +8099,7 @@ MonoBehaviour:
     count: 5
     counterText: {fileID: 1696168506326571747}
   redFlashImage: {fileID: 6834612619789296910}
+  boostAnimation: {fileID: 8453932502977071441}
   heartPrefab: {fileID: 6317893812336085837, guid: cead9421fa8b6fe4080540027c3fa0ad, type: 3}
   heartsContainer: {fileID: 8565958448390291266}
   maxLifeTxt: {fileID: 426563664888258589}

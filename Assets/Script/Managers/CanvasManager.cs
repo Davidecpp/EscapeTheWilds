@@ -19,6 +19,8 @@ public class CanvasManager : MonoBehaviour
     // Damage effect setup
     [SerializeField] private RawImage redFlashImage; // Image for the damage flash effect
     private float _flashDuration = 0.2f; // Duration of the damage effect
+
+    public GameObject boostAnimation;
     
     [Header("Health")]
     [SerializeField] private RawImage heartPrefab;  // Heart object used for health display
@@ -259,5 +261,25 @@ public class CanvasManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(_flashDuration); // Wait for the flash duration
             redFlashImage.gameObject.SetActive(false); // Hide red flash
         }
+    }
+    // Boosts the player's speed for a specified duration
+    public void BoostSpeed(float duration)
+    {
+        var movement = FindObjectOfType<Movement>();
+        if (!movement.isBoosted) 
+        {
+            // Set the player as boosted and activate the boost animation
+            movement.isBoosted = true;
+            boostAnimation.SetActive(true);
+            
+            // Start a coroutine to reset the speed after the specified duration
+            StartCoroutine(ResetSpeedAfterDelay(duration, movement)); 
+        }
+    }
+    private IEnumerator ResetSpeedAfterDelay(float duration, Movement movement)
+    {
+        yield return new WaitForSeconds(duration); // Wait for the specified duration
+        movement.isBoosted = false; // Reset the boosted status
+        boostAnimation.SetActive(false); // Deactivate the boost animation
     }
 }

@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     
     // Boost variables
     public float boostSpeedMultiplier = 2.0f; // Multiplier for movement speed when boosted
-    private bool isBoosted = false; // Flag to check if the player is boosted
+    public bool isBoosted = false; // Flag to check if the player is boosted
     private float boostDuration = 5.0f; // Duration of the speed boost
     public GameObject boostAnimation; // Animation to play when boosted
     
@@ -251,27 +251,10 @@ public class Movement : MonoBehaviour
         Effect(GameManager.Instance.healing, ref healEffectActive,ref healParticlesObject, healParticles);
     }
     
-    // Boosts the player's speed for a specified duration
-    public void BoostSpeed(float duration)
-    {
-        if (!isBoosted) 
-        {
-            // Set the player as boosted and activate the boost animation
-            isBoosted = true;
-            boostAnimation.SetActive(true);
-            
-            // Start a coroutine to reset the speed after the specified duration
-            StartCoroutine(ResetSpeedAfterDelay(duration)); 
-        }
-    }
+    
 
     // Coroutine to reset the speed after the boost duration ends
-    private IEnumerator ResetSpeedAfterDelay(float duration)
-    {
-        yield return new WaitForSeconds(duration); // Wait for the specified duration
-        isBoosted = false; // Reset the boosted status
-        boostAnimation.SetActive(false); // Deactivate the boost animation
-    }
+    
         
     // Check the terrain type (sand, water, etc.) and show corresponding particles
     void CheckTerrainAndShowParticles(RaycastHit hit)
