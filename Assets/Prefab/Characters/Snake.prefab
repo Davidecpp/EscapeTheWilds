@@ -1218,6 +1218,7 @@ MonoBehaviour:
   runSpeed: 20
   damage: 10
   nextLevelExp: 100
+  heated: 0
 --- !u!114 &9125984005539258742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,7 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047d27f5863495446a9557423a6e6dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Snake
+  characterType: 1
   dashSpeed: 20
   dashDuration: 0.5
   trailRenderer: {fileID: 0}
@@ -1239,14 +1240,12 @@ MonoBehaviour:
   venomSprayPrefab: {fileID: 4062656040369040969, guid: ea22b0269158ae54cb270c385cf59b82, type: 3}
   venomCloudPrefab: {fileID: 5477919197415679433, guid: 0dc2e549c8508764d8216d4a7f479f75, type: 3}
   venomSpawnPoint: {fileID: 3358061766023838274}
-  sprayCooldown: 5
   sprayDuration: 0.5
+  sprayCooldown: 5
   spraySound: {fileID: 2331833295348907385}
-  extraJump: 0
   megaJumpParticles: {fileID: 0}
   jumpSound: {fileID: 0}
   abilityTime: 3
-  abilityCooldown: 0
 --- !u!82 &2331833295348907385
 AudioSource:
   m_ObjectHideFlags: 0

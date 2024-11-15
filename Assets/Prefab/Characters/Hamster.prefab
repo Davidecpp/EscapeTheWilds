@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047d27f5863495446a9557423a6e6dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Rat
+  characterType: 2
   dashSpeed: 20
   dashDuration: 0.5
   trailRenderer: {fileID: 0}
@@ -315,13 +315,12 @@ MonoBehaviour:
   venomSprayPrefab: {fileID: 0}
   venomCloudPrefab: {fileID: 0}
   venomSpawnPoint: {fileID: 1193649989776746355}
-  sprayCooldown: 5
   sprayDuration: 0.5
+  sprayCooldown: 5
   spraySound: {fileID: 0}
   megaJumpParticles: {fileID: 8547867254204328264, guid: cf378989e15716e40a61692dcd97e628, type: 3}
   jumpSound: {fileID: 2871477435519793548}
   abilityTime: 5
-  abilityCooldown: 0
 --- !u!82 &2871477435519793548
 AudioSource:
   m_ObjectHideFlags: 0

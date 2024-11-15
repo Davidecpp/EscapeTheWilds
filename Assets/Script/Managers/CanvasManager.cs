@@ -159,15 +159,15 @@ public class CanvasManager : MonoBehaviour
         // Set the ability image based on the character's name
         if (_ability != null)
         {
-            switch (_ability.characterName)
+            switch (_ability.characterType)
             {
-                case "Deer":
+                case PlayerAbility.CharacterType.Deer:
                     currentAbilityImg.sprite = dashImg; // Set dash ability image for Deer
                     break;
-                case "Snake":
+                case PlayerAbility.CharacterType.Snake:
                     currentAbilityImg.sprite = venomImg; // Set venom ability image for Snake
                     break;
-                case "Rat":
+                case PlayerAbility.CharacterType.Rat:
                     currentAbilityImg.sprite = jumpImg; // Set jump ability image for Rat
                     break;
             }
