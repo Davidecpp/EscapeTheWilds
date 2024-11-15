@@ -34,7 +34,7 @@ public class Pepper : MonoBehaviour, IInteractible
         }
         else
         {
-            Debug.LogError("Cannot start FlameOn coroutine because PlayerStats is not assigned!");
+            _playerStats = FindObjectOfType<PlayerStats>();
         }
 
         if (shouldDisappear)
