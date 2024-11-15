@@ -10784,6 +10784,7 @@ MonoBehaviour:
   runSpeed: 15
   damage: 10
   nextLevelExp: 100
+  heated: 0
 --- !u!54 &5077482615309559946
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10965,7 +10966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Deer
-  dashSpeed: 50
+  dashSpeed: 100
   dashDuration: 0.5
   trailRenderer: {fileID: 3245103980512866651}
   dashSparkle: {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
@@ -10974,13 +10975,10 @@ MonoBehaviour:
   venomCloudPrefab: {fileID: 0}
   venomSpawnPoint: {fileID: 1317159902854110682}
   sprayCooldown: 5
-  sprayDuration: 0.5
   spraySound: {fileID: 0}
-  extraJump: 0
   megaJumpParticles: {fileID: 0}
   jumpSound: {fileID: 0}
   abilityTime: 5
-  abilityCooldown: 0
 --- !u!82 &5733003744956116366
 AudioSource:
   m_ObjectHideFlags: 0
