@@ -10,8 +10,6 @@ public class SaveSystem : MonoBehaviour
     // Method to save the player's data to a JSON file
     public static void SavePlayer(PlayerStats playerStats)
     {
-        Debug.Log("Saving file at: " + saveFilePath);
-        
         // Find the Inventory object to get the coin count
         var inventory = FindObjectOfType<Inventory>();
         
@@ -35,7 +33,6 @@ public class SaveSystem : MonoBehaviour
 
         // Convert the PlayerSaveData object into a JSON string, with indentation for readability
         File.WriteAllText(saveFilePath, JsonUtility.ToJson(saveData, true));
-        Debug.Log("Player saved.");
     }
 
     // Method to load the player's data from a JSON file
@@ -60,6 +57,7 @@ public class SaveSystem : MonoBehaviour
             playerStats.SetJumpHeight(saveData.jumpHeight); // Set the player's jump height
             playerStats.SetRunSpeed(saveData.runSpeed); // Set the player's running speed
             playerStats.SetDamage(saveData.damage); // Set the player's damage
+            playerStats.SetStamina(saveData.stamina); // Set the player's stamina
 
             // If the Inventory object is found, restore the coin and the strawberry count
             var inventory = FindObjectOfType<Inventory>();

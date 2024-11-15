@@ -10759,6 +10759,7 @@ MonoBehaviour:
   _rotSpeed: 0
   bounceStrenght: 2
   boostSpeedMultiplier: 2
+  isBoosted: 0
   boostAnimation: {fileID: 0}
   timer: 5
   bullet: {fileID: 269213418192503001, guid: 8e96512310b69c640a21343656a432de, type: 3}
@@ -10784,7 +10785,10 @@ MonoBehaviour:
   runSpeed: 15
   damage: 10
   nextLevelExp: 100
+  stamina: 50
   heated: 0
+  healing: 0
+  invincible: 0
 --- !u!54 &5077482615309559946
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10965,7 +10969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047d27f5863495446a9557423a6e6dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Deer
+  characterType: 0
   dashSpeed: 100
   dashDuration: 0.5
   trailRenderer: {fileID: 3245103980512866651}
@@ -10974,6 +10978,7 @@ MonoBehaviour:
   venomSprayPrefab: {fileID: 0}
   venomCloudPrefab: {fileID: 0}
   venomSpawnPoint: {fileID: 1317159902854110682}
+  sprayDuration: 0.5
   sprayCooldown: 5
   spraySound: {fileID: 0}
   megaJumpParticles: {fileID: 0}

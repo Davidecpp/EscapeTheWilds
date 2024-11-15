@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float runSpeed = 10.0f;  // Running speed
     [SerializeField] private float damage = 10.0f;    // Damage dealt by the player
     [SerializeField] private float nextLevelExp = 100; // Experience required for the next level
+    [SerializeField] private float stamina = 5.0f; // Stamina for sprinting
 
     // Private variables for managing player stats
     private int _health;       // Current health
@@ -118,6 +119,7 @@ public class PlayerStats : MonoBehaviour
         maxHealth++;        // Increase maximum health
         runSpeed++;         // Increase running speed
         jumpHeight++;       // Increase jump height
+        stamina++;          // Increase stamina
         
         // Save the updated level
         PlayerPrefs.SetInt("PlayerLevel", _level);
@@ -141,6 +143,7 @@ public class PlayerStats : MonoBehaviour
     public float GetNextLevelExp() => nextLevelExp;
     public float GetLevel() => _level;
     public int GetHealth() => _health;
+    public float GetStamina() => stamina;
     
     // Setter methods to modify private fields
     public void SetHealth(int health) => _health = health;
@@ -152,6 +155,7 @@ public class PlayerStats : MonoBehaviour
     public void SetJumpHeight(float jumpHeight) => this.jumpHeight = jumpHeight;
     public void SetRunSpeed(float runSpeed) => this.runSpeed = runSpeed;
     public void SetDamage(float damage) => this.damage = damage;
+    public void SetStamina(float stamina) => this.stamina = stamina;
 }
 
 

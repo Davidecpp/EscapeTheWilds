@@ -11,6 +11,7 @@ public class PlayerSaveData
     public float jumpHeight;
     public float runSpeed;
     public float damage;
+    public float stamina;
     public string sceneName;
     public int coin;
     public int strawberries;

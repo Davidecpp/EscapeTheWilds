@@ -13,7 +13,7 @@ public class Camera : MonoBehaviour
     public float normalDistance = 5f; // Normal distance of the camera from the player
     public float sprintDistance = 3f; // Distance of the camera when sprinting
     public float transitionSpeed = 5f; // Speed of camera transition when changing distances
-    public float sprintDuration = 5f; // Duration for how long the player can sprint
+    public float sprintDuration; // Duration for how long the player can sprint
     public float sprintRechargeSpeed = 0.5f; // Speed at which sprint duration recharges
     public bool isSprinting = false; // Boolean to check if the player is currently sprinting
     private float sprintTimer; // Timer to track the remaining sprint duration
@@ -79,10 +79,15 @@ public class Camera : MonoBehaviour
 
     void Start()
     {
+        // Set sprint duration to player's stamina
+        var player = FindObjectOfType<PlayerStats>();
+        sprintDuration = player.GetStamina();
+        
         // Initialize sprint timer and camera position
         sprintTimer = sprintDuration;
         initialCameraPosition = playerCamera.localPosition;
-        controller = animal.GetComponent<CharacterController>();
+        
+        controller = animal.GetComponent<CharacterController>(); // Get Controller component
         menuManager = FindObjectOfType<MenuManager>();
         _canvasManager = FindObjectOfType<CanvasManager>();
     }

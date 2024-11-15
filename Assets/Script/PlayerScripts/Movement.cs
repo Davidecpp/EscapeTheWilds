@@ -73,7 +73,6 @@ public class Movement : MonoBehaviour
         _currentMoveSpeed = _playerStats.GetMoveSpeed();
         _slowSpeed = _playerStats.GetMoveSpeed() / 2;
         _slowedSprintSpeed = _playerStats.GetMoveSpeed() / 2;
-        sandParticles.Stop();
     }
 
     // Update is called once per frame

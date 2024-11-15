@@ -9,6 +9,7 @@ public class StatsController : MonoBehaviour
     public TextMeshProUGUI speedValueTxt;   // Text displaying the player's run speed
     public TextMeshProUGUI jumpValueTxt;    // Text displaying the player's jump height
     public TextMeshProUGUI damageValueTxt;  // Text displaying the player's damage
+    public TextMeshProUGUI staminaValueTxt;  // Text displaying the player's stamina
 
     private PlayerStats _stats;  // Reference to the PlayerStats script to get player data
 
@@ -28,6 +29,7 @@ public class StatsController : MonoBehaviour
         healthValueTxt.text = "" + _stats.GetHealth() + "/" + _stats.GetMaxHealth(); // Display current health / max health
         levelValueTxt.text = "" + _stats.GetLevel(); // Display player level
         damageValueTxt.text = "" + _stats.GetDamage(); // Display damage stat
+        staminaValueTxt.text = "" + _stats.GetStamina(); // Display stamina stat
     }
 
     // Update is called once per frame
