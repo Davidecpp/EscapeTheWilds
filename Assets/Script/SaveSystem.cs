@@ -73,8 +73,6 @@ public class SaveSystem : MonoBehaviour
 
             // Update the current scene in GameManager
             GameManager.Instance.currentScene = saveData.sceneIndex;
-
-            Debug.Log("Player loaded.");
         }
         else
         {
