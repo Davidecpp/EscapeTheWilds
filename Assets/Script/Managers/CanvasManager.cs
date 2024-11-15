@@ -20,7 +20,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private RawImage redFlashImage; // Image for the damage flash effect
     private float _flashDuration = 0.2f; // Duration of the damage effect
 
-    public GameObject boostAnimation;
+    public GameObject boostAnimation; // Animation for speed boost
     
     [Header("Health")]
     [SerializeField] private RawImage heartPrefab;  // Heart object used for health display
@@ -29,8 +29,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject maxLifeTxt; // Text to display when health is full
     
     // Lap tracking
-    public int laps = 0;
-    public int totLaps;
+    public int laps = 0; // Current lap count
+    public int totLaps; // Total laps
     [SerializeField] private TMP_Text lapsTxt; // Lap text display
     
     [SerializeField] private Image keyImage; // Image for the key display
@@ -46,7 +46,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Slider abilityCooldownSlider; // Slider to display ability cooldown
     
     // Shop UI setup
-    [SerializeField] public GameObject shop;
+    [SerializeField] public GameObject shop; // Shop UI object
     public static CanvasManager Instance { get; private set; } // Singleton instance
 
     private void Awake()
@@ -86,10 +86,12 @@ public class CanvasManager : MonoBehaviour
     {
         _playerStats = player;
     }
+    
     private void SetInventoryReference(Inventory inventory)
     {
         _inventory = inventory;
     }
+
     private void SetAbilityReference(PlayerAbility playerAbility)
     {
         _ability = playerAbility;
@@ -152,8 +154,8 @@ public class CanvasManager : MonoBehaviour
     // Update the ability cooldown UI
     public void UpdateAbilityCooldown(float currentCooldown, float maxCooldown)
     {
-        abilityCooldownSlider.maxValue = maxCooldown;
-        abilityCooldownSlider.value = maxCooldown - currentCooldown;
+        abilityCooldownSlider.maxValue = maxCooldown; // Set maximum value for the cooldown slider
+        abilityCooldownSlider.value = maxCooldown - currentCooldown; // Set current cooldown value
     }
 
     private void SetAbilityImg()
@@ -216,7 +218,7 @@ public class CanvasManager : MonoBehaviour
         color.a = alpha;
         image.color = color;
     }
-    
+
     public void UpdateHearts()
     {
         if (_playerStats == null)
@@ -242,7 +244,7 @@ public class CanvasManager : MonoBehaviour
         // Show max life text if at full health
         maxLifeTxt.SetActive(_playerStats.GetHealth() == _playerStats.GetMaxHealth());
     }
-    
+
     private void UpdateLap()
     {
         // Update the lap text
@@ -251,7 +253,7 @@ public class CanvasManager : MonoBehaviour
             lapsTxt.text = laps + "/" + totLaps; // Display current lap / total laps
         }
     }
-    
+
     public IEnumerator FlashRed()
     {
         // Flash the screen red to indicate damage
@@ -262,6 +264,7 @@ public class CanvasManager : MonoBehaviour
             redFlashImage.gameObject.SetActive(false); // Hide red flash
         }
     }
+    
     // Boosts the player's speed for a specified duration
     public void BoostSpeed(float duration)
     {
@@ -276,10 +279,11 @@ public class CanvasManager : MonoBehaviour
             StartCoroutine(ResetSpeedAfterDelay(duration, movement)); 
         }
     }
+
     private IEnumerator ResetSpeedAfterDelay(float duration, Movement movement)
     {
         yield return new WaitForSeconds(duration); // Wait for the specified duration
-        movement.isBoosted = false; // Reset the boosted status
-        boostAnimation.SetActive(false); // Deactivate the boost animation
+        movement.isBoosted = false; // Reset boosted state
+        boostAnimation.SetActive(false); // Hide the boost animation
     }
 }

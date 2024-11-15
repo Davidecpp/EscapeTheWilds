@@ -250,11 +250,6 @@ public class Movement : MonoBehaviour
         Effect(GameManager.Instance.invincible, ref invincibleEffectActive, ref invincibleParticlesObject, invincibleParticles);
         Effect(GameManager.Instance.healing, ref healEffectActive,ref healParticlesObject, healParticles);
     }
-    
-    
-
-    // Coroutine to reset the speed after the boost duration ends
-    
         
     // Check the terrain type (sand, water, etc.) and show corresponding particles
     void CheckTerrainAndShowParticles(RaycastHit hit)
