@@ -181,6 +181,7 @@ MonoBehaviour:
   _rotSpeed: 0
   bounceStrenght: 2
   boostSpeedMultiplier: 2
+  isBoosted: 0
   boostAnimation: {fileID: 0}
   timer: 5
   bullet: {fileID: 269213418192503001, guid: 8e96512310b69c640a21343656a432de, type: 3}
@@ -200,13 +201,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  moveSpeed: 10
+  maxHealth: 2
+  moveSpeed: 12
   jumpHeight: 25
-  runSpeed: 15
+  runSpeed: 16
   damage: 10
   nextLevelExp: 100
+  stamina: 3
   heated: 0
+  healing: 0
+  invincible: 0
 --- !u!54 &4504642418175658806
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10779,13 +10779,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c263bde75ee50745987559cec9adee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 4
   moveSpeed: 10
   jumpHeight: 15
   runSpeed: 15
   damage: 10
   nextLevelExp: 100
-  stamina: 50
+  stamina: 5
   heated: 0
   healing: 0
   invincible: 0
