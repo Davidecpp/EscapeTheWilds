@@ -20,14 +20,14 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 targetDirection;
     private Vector2 input;
     private Quaternion freeRotation;
-    private Camera mainCamera;
+    private UnityEngine.Camera mainCamera;
     private float velocity;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    anim = GetComponent<Animator>();
-	    mainCamera = Camera.main;
+	    mainCamera = UnityEngine.Camera.main;
 	}
 
 	// Update is called once per frame

@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class InteractionPromptUI : MonoBehaviour
 {
-    private Camera mainCamera;
+    private UnityEngine.Camera mainCamera;
     [SerializeField] private GameObject uiPanel;
     [SerializeField] private TextMeshProUGUI promptText;
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        mainCamera = UnityEngine.Camera.main;
         uiPanel.SetActive(false);
     }
 

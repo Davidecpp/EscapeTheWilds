@@ -18,7 +18,7 @@ namespace Cinemachine.Examples
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             if (input.magnitude > 0)
             {
-                input = Camera.main.transform.rotation * input;
+                input = UnityEngine.Camera.main.transform.rotation * input;
                 if (input.magnitude > 0.001f)
                 {
                     transform.position += input * (speed * Time.deltaTime);

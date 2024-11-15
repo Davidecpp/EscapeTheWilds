@@ -15,7 +15,7 @@ public class ActivateCameraWithDistance : MonoBehaviour
 
     void Start()
     {
-        brain = Camera.main.GetComponent<CinemachineBrain>();
+        brain = UnityEngine.Camera.main.GetComponent<CinemachineBrain>();
         SwitchCam(initialActiveCam);
     }
 

@@ -7,7 +7,7 @@ namespace DigitalRuby.PyroParticles
     {
         public GameObject[] Prefabs;
         public Light Sun;
-        public Camera SideCamera;
+        public UnityEngine.Camera SideCamera;
         public UnityEngine.UI.Slider TimeOfDaySlider;
         public UnityEngine.UI.Toggle MouseLookToggle;
         public UnityEngine.UI.Text CurrentItemText;
@@ -66,11 +66,11 @@ namespace DigitalRuby.PyroParticles
             {
                 if (SideCamera.enabled = !SideCamera.enabled)
                 {
-                    Camera.main.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+                    UnityEngine.Camera.main.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
                 }
                 else
                 {
-                    Camera.main.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+                    UnityEngine.Camera.main.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
                 }                
             }
         }

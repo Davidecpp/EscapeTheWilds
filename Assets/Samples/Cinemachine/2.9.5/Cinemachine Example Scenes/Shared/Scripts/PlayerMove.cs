@@ -54,7 +54,7 @@ namespace Cinemachine.Examples
             switch (InputForward)
             {
                 case ForwardMode.Camera:
-                    fwd = Camera.main.transform.forward;
+                    fwd = UnityEngine.Camera.main.transform.forward;
                     break;
                 case ForwardMode.Player:
                     fwd = transform.forward;

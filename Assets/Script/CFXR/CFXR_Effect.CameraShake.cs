@@ -25,7 +25,7 @@ namespace CartoonFX
 			public bool enabled = false;
 			[Space]
 			public bool useMainCamera = true;
-			public List<Camera> cameras = new List<Camera>();
+			public List<UnityEngine.Camera> cameras = new List<UnityEngine.Camera>();
 			[Space]
 			public float delay = 0.0f;
 			public float duration = 1.0f;
@@ -36,7 +36,7 @@ namespace CartoonFX
 			[Range(0, 0.1f)] public float shakesDelay = 0;
 
 			[System.NonSerialized] public bool isShaking;
-			Dictionary<Camera, Vector3> camerasPreRenderPosition = new Dictionary<Camera, Vector3>();
+			Dictionary<UnityEngine.Camera, Vector3> camerasPreRenderPosition = new Dictionary<UnityEngine.Camera, Vector3>();
 			Vector3 shakeVector;
 			float delaysTimer;
 
@@ -50,17 +50,17 @@ namespace CartoonFX
 			static List<CameraShake> s_CameraShakes = new List<CameraShake>();
 
 #if UNITY_2019_1_OR_NEWER
-			static void OnPreRenderCamera_Static_URP(ScriptableRenderContext context, Camera cam)
+			static void OnPreRenderCamera_Static_URP(ScriptableRenderContext context, UnityEngine.Camera cam)
 			{
 				OnPreRenderCamera_Static(cam);
 			}
-			static void OnPostRenderCamera_Static_URP(ScriptableRenderContext context, Camera cam)
+			static void OnPostRenderCamera_Static_URP(ScriptableRenderContext context, UnityEngine.Camera cam)
 			{
 				OnPostRenderCamera_Static(cam);
 			}
 #endif
 
-			static void OnPreRenderCamera_Static(Camera cam)
+			static void OnPreRenderCamera_Static(UnityEngine.Camera cam)
 			{
 				int count = s_CameraShakes.Count;
 				for (int i = 0; i < count; i++)
@@ -70,7 +70,7 @@ namespace CartoonFX
 				}
 			}
 
-			static void OnPostRenderCamera_Static(Camera cam)
+			static void OnPostRenderCamera_Static(UnityEngine.Camera cam)
 			{
 				int count = s_CameraShakes.Count;
 				for (int i = count-1; i >= 0; i--)
@@ -94,8 +94,8 @@ namespace CartoonFX
 	#endif
 					{
 						// Built-in Render Pipeline
-						Camera.onPreRender += OnPreRenderCamera_Static;
-						Camera.onPostRender += OnPostRenderCamera_Static;
+						UnityEngine.Camera.onPreRender += OnPreRenderCamera_Static;
+						UnityEngine.Camera.onPostRender += OnPostRenderCamera_Static;
 					}
 					else
 					{
@@ -126,8 +126,8 @@ namespace CartoonFX
 	#endif
 					{
 						// Built-in Render Pipeline
-						Camera.onPreRender -= OnPreRenderCamera_Static;
-						Camera.onPostRender -= OnPostRenderCamera_Static;
+						UnityEngine.Camera.onPreRender -= OnPreRenderCamera_Static;
+						UnityEngine.Camera.onPostRender -= OnPostRenderCamera_Static;
 					}
 					else
 					{
@@ -146,7 +146,7 @@ namespace CartoonFX
 
 			//--------------------------------------------------------------------------------------------------------------------------------
 
-			void onPreRenderCamera(Camera cam)
+			void onPreRenderCamera(UnityEngine.Camera cam)
 			{
 #if UNITY_EDITOR
 				//add scene view camera if necessary
@@ -170,7 +170,7 @@ namespace CartoonFX
 				}
 			}
 
-			void onPostRenderCamera(Camera cam)
+			void onPostRenderCamera(UnityEngine.Camera cam)
 			{
 				if (camerasPreRenderPosition.ContainsKey(cam))
 				{
@@ -196,9 +196,9 @@ namespace CartoonFX
 
 				cameras.Clear();
 
-				if (useMainCamera && Camera.main != null)
+				if (useMainCamera && UnityEngine.Camera.main != null)
 				{
-					cameras.Add(Camera.main);
+					cameras.Add(UnityEngine.Camera.main);
 				}
 
 				foreach (var cam in cameras)

@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
     private ControllerColliderHit _controllerCollider;
     private Inventory _inventory;
     private PlayerStats _playerStats;
-    private ProvaCamera _camera;
+    private Camera _camera;
     
     // Projectile variables
     [SerializeField] private float timer = 5; // Timer for projectile lifespan
@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>(); // Get the CharacterController component
         _playerStats = GetComponent<PlayerStats>(); // Get the PlayerStats component
-        _camera = GetComponent<ProvaCamera>(); // Get the camera controller component
+        _camera = GetComponent<Camera>(); // Get the camera controller component
         _inventory = GetComponent<Inventory>(); // Get the Inventory component
 
         if (_playerStats == null)
