@@ -112,20 +112,7 @@ public class Movement : MonoBehaviour
         if (horInput != 0 || vertInput != 0)
         {
             UpdateMovementSpeed();
-            
-            // Modify pitch for running
-            if (Input.GetKey(KeyCode.LeftShift) && _camera.isSprinting)
-            {
-                walkingSound.pitch = 1.5f; 
-            }
-            else
-            {
-                walkingSound.pitch = 1.0f; 
-            }
-            if (!walkingSound.isPlaying)
-            {
-                walkingSound.Play();
-            }
+            ChangeWalkingSound();
 
             movement.x = horInput * _currentMoveSpeed;
             movement.z = vertInput * _currentMoveSpeed;
@@ -184,12 +171,31 @@ public class Movement : MonoBehaviour
 
         ShowEffects();
     }
+    
     public void PerformMegaJump()
     {
         if (_characterController.isGrounded)
         {
             _vertSpeed = _playerStats.GetJumpHeight() * 4; 
             megaJump = false;
+        }
+    }
+    
+    // Modify pitch for running
+    private void ChangeWalkingSound()
+    {
+        // If is running sound is sped up
+        if (Input.GetKey(KeyCode.LeftShift) && _camera.isSprinting)
+        {
+            walkingSound.pitch = 1.5f; 
+        }
+        else
+        {
+            walkingSound.pitch = 1.0f; 
+        }
+        if (!walkingSound.isPlaying)
+        {
+            walkingSound.Play();
         }
     }
     
