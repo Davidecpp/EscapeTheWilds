@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAbility : MonoBehaviour
 {
     // Enum to define character type
-    public enum CharacterType { Deer, Snake, Rat } 
+    public enum CharacterType { Deer, Snake, Rat, Monkey } 
     public CharacterType characterType; // Selected character type
 
     // Dash ability variables
@@ -29,6 +29,13 @@ public class PlayerAbility : MonoBehaviour
     [Header("Mega Jump")]
     public GameObject megaJumpParticles; // Particle effect for mega jump
     public AudioSource jumpSound; // Sound effect for mega jump
+    
+    [Header("Banana Spam")]
+    public GameObject bananaPrefab; // Banana prefab
+    public Transform bananaSpawnPoint; // Banana spawn point
+    public int bananaCount = 10; // Banana bullets avalaible
+    public float bananaInterval = 0.2f; // Shoot interval
+    public AudioSource bananaSound; // Sound effect for BananaSpam
 
     // Ability cooldown variables
     public float abilityTime = 3.0f; // General cooldown time for abilities
@@ -90,6 +97,11 @@ public class PlayerAbility : MonoBehaviour
                 if (abilityCooldown <= 0)
                     StartCoroutine(PerformMegaJump()); // MegaJump if Rat
                 break;
+            
+            case CharacterType.Monkey:
+                if (abilityCooldown <= 0)
+                    StartCoroutine(BananaSpam()); // BananaSpam if Monkey
+                break;
         }
     }
 
@@ -148,6 +160,35 @@ public class PlayerAbility : MonoBehaviour
 
         // Execute the mega jump
         _movement.PerformMegaJump();
+    }
+    
+    // Perform the banana spam ability
+    private IEnumerator BananaSpam()
+    {
+        abilityCooldown = abilityTime;
+
+        for (int i = 0; i < bananaCount; i++)
+        {
+            // Spawn a banana and apply forward force
+            GameObject banana = Instantiate(bananaPrefab, bananaSpawnPoint.position, bananaSpawnPoint.rotation);
+            Rigidbody rb = banana.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(bananaSpawnPoint.forward * 15f, ForceMode.Impulse);
+            }
+
+            // Play sound effect
+            bananaSound.Play();
+
+            // Destroy banana after a few seconds
+            Destroy(banana, 3f);
+
+            // Wait for the interval before spawning the next banana
+            yield return new WaitForSeconds(bananaInterval);
+            
+            // Stop sound effect
+            bananaSound.Stop();
+        }
     }
 
     // Helper method to toggle the trail renderer state

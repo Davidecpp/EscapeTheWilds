@@ -40,7 +40,9 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Sprite venomImg; // Sprite for venom ability
     [SerializeField] private Sprite dashImg; // Sprite for dash ability
     [SerializeField] private Sprite jumpImg; // Sprite for jump ability
+    [SerializeField] private Sprite bananaImg; // Sprite for banana ability
     [SerializeField] private Image currentAbilityImg; // Image to display current ability
+    
     private PlayerAbility _ability; // Reference to player abilities
     public bool isAbiliting; // Flag to track if the ability is active
     [SerializeField] private Slider abilityCooldownSlider; // Slider to display ability cooldown
@@ -173,6 +175,9 @@ public class CanvasManager : MonoBehaviour
                     break;
                 case PlayerAbility.CharacterType.Rat:
                     currentAbilityImg.sprite = jumpImg; // Set jump ability image for Rat
+                    break;
+                case PlayerAbility.CharacterType.Monkey:
+                    currentAbilityImg.sprite = bananaImg; // Set bananaa ability image for Monkey
                     break;
             }
         }

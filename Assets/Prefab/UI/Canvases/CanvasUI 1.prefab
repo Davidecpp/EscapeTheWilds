@@ -8388,6 +8388,7 @@ MonoBehaviour:
   venomImg: {fileID: 21300000, guid: 9fb3b2ef41986ed478bc9d2d485cccc8, type: 3}
   dashImg: {fileID: 21300000, guid: 802e2ceb399fda449bb7dd0285e2fa12, type: 3}
   jumpImg: {fileID: 21300000, guid: 6604b680170cc4e4790cca4e2d020e34, type: 3}
+  bananaImg: {fileID: 21300000, guid: 13408c35a430ed645b378c9ac39de2ea, type: 3}
   currentAbilityImg: {fileID: 7284775521781434113}
   isAbiliting: 0
   abilityCooldownSlider: {fileID: 2752794980781098769}
