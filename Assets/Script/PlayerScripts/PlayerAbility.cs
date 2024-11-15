@@ -3,144 +3,164 @@ using UnityEngine;
 
 public class PlayerAbility : MonoBehaviour
 {
-    public enum CharacterType { Deer, Snake, Rat } // Punto 1: Enum per il tipo di personaggio
-    public CharacterType characterType;
+    // Enum to define character type
+    public enum CharacterType { Deer, Snake, Rat } 
+    public CharacterType characterType; // Selected character type
 
-    // Abilità
+    // Dash ability variables
     [Header("Dash")]
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.5f;
-    private bool isDashing = false;
-    public TrailRenderer trailRenderer;
-    public GameObject dashSparkle;
-    public AudioSource dashSound;
+    public float dashSpeed = 20f; // Speed of the dash
+    public float dashDuration = 0.5f; // Duration of the dash
+    private bool isDashing = false; // Is the player currently dashing?
+    public TrailRenderer trailRenderer; // Trail effect during the dash
+    public GameObject dashSparkle; // Visual effect for the dash
+    public AudioSource dashSound; // Sound effect for the dash
 
+    // Venom spray ability variables
     [Header("Venom Spray")]
-    public GameObject venomSprayPrefab;
-    public GameObject venomCloudPrefab;
-    public Transform venomSpawnPoint;
-    public float sprayDuration = 0.5f;
-    public float sprayCooldown = 5f;
-    public AudioSource spraySound;
+    public GameObject venomSprayPrefab; // Prefab for venom spray
+    public GameObject venomCloudPrefab; // Prefab for venom cloud
+    public Transform venomSpawnPoint; // Position where venom is spawned
+    public float sprayDuration = 0.5f; // Duration of the venom spray
+    public float sprayCooldown = 5f; // Cooldown for venom spray
+    public AudioSource spraySound; // Sound effect for venom spray
 
+    // Mega jump ability variables
     [Header("Mega Jump")]
-    public GameObject megaJumpParticles;
-    public AudioSource jumpSound;
+    public GameObject megaJumpParticles; // Particle effect for mega jump
+    public AudioSource jumpSound; // Sound effect for mega jump
 
-    // Cooldown e gestione abilità
-    public float abilityTime = 3.0f;
-    private float abilityCooldown = 0;
+    // Ability cooldown variables
+    public float abilityTime = 3.0f; // General cooldown time for abilities
+    private float abilityCooldown = 0; // Current cooldown time remaining
 
-    // Riferimenti
-    private CanvasManager _canvas;
-    private Movement _movement;
+    // References to other components
+    private CanvasManager _canvas; // Reference to UI manager
+    private Movement _movement; // Reference to player movement script
 
     private void Start()
     {
-        // Punto 7: Migliore gestione delle dipendenze
+        // Initialize references to dependent components
         _canvas = FindObjectOfType<CanvasManager>();
         _movement = GetComponent<Movement>();
 
+        // Ensure trail is initially disabled
         if (trailRenderer != null)
             trailRenderer.emitting = false;
     }
 
     private void Update()
     {
-        HandleCooldown();
+        HandleCooldown(); // Update the cooldown timer
 
+        // Activate ability when the 'R' key is pressed and cooldown is ready
         if (Input.GetKeyDown(KeyCode.R) && abilityCooldown <= 0)
         {
             ActivateAbility();
         }
     }
 
-    // Punto 4: Gestione uniforme del cooldown
+    // Manage the cooldown timer
     private void HandleCooldown()
     {
+        // Reduce cooldown over time, ensuring it doesn't go below zero
         abilityCooldown = Mathf.Max(0, abilityCooldown - Time.deltaTime);
+
+        // Update UI with the current cooldown state
         _canvas.UpdateAbilityCooldown(abilityCooldown, abilityTime);
-        _canvas.isAbiliting = abilityCooldown > 0;
+        _canvas.isAbiliting = abilityCooldown > 0; // Update UI state
     }
 
+    // Activate the appropriate ability based on character type
     private void ActivateAbility()
     {
         switch (characterType)
         {
             case CharacterType.Deer:
                 if (!isDashing)
-                    StartCoroutine(PerformDash());
+                    StartCoroutine(PerformDash()); // Dash if Deer
                 break;
 
             case CharacterType.Snake:
                 if (abilityCooldown <= 0)
-                    StartCoroutine(PerformVenomSpray());
+                    StartCoroutine(PerformVenomSpray()); // VenomSpray if Snake
                 break;
 
             case CharacterType.Rat:
                 if (abilityCooldown <= 0)
-                    StartCoroutine(PerformMegaJump());
+                    StartCoroutine(PerformMegaJump()); // MegaJump if Rat
                 break;
         }
     }
 
+    // Perform the dash ability
     private IEnumerator PerformDash()
     {
         isDashing = true;
         abilityCooldown = abilityTime;
 
+        // Enable trail effect
         ToggleTrail(true);
 
         float dashTime = 0f;
         while (dashTime < dashDuration)
         {
             dashTime += Time.deltaTime;
-            dashSound.Play();
-            transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime);
-            InstantiateAndDestroy(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation, 1f);
+            dashSound.Play(); // Play dash sound
+            transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime); // Move forward
+            InstantiateAndDestroy(dashSparkle, venomSpawnPoint.position, venomSpawnPoint.rotation, 1f); // Create visual effect
             yield return null;
         }
 
+        // Disable trail effect
         ToggleTrail(false);
         isDashing = false;
     }
 
+    // Perform the venom spray ability
     private IEnumerator PerformVenomSpray()
     {
         abilityCooldown = sprayCooldown;
-        InstantiateAndDestroy(venomSprayPrefab, venomSpawnPoint.position, venomSpawnPoint.rotation, sprayDuration);
-        spraySound.Play();
 
+        // Create venom spray effect
+        InstantiateAndDestroy(venomSprayPrefab, venomSpawnPoint.position, venomSpawnPoint.rotation, sprayDuration);
+        spraySound.Play(); // Play spray sound
+
+        // Wait for the spray duration
         yield return new WaitForSeconds(sprayDuration);
 
+        // Create venom cloud effect
         Vector3 cloudSpawnPosition = venomSpawnPoint.position + venomSpawnPoint.forward * 8;
         Instantiate(venomCloudPrefab, cloudSpawnPosition, venomSpawnPoint.rotation);
     }
 
+    // Perform the mega jump ability
     private IEnumerator PerformMegaJump()
     {
         abilityCooldown = abilityTime;
 
+        // Create jump particles and play sound
         InstantiateAndDestroy(megaJumpParticles, venomSpawnPoint.position, venomSpawnPoint.rotation, abilityTime);
         jumpSound.Play();
-        _movement.megaJump = true;
+        _movement.megaJump = true; // Enable mega jump in movement script
 
         yield return new WaitForSeconds(0.5f);
 
+        // Execute the mega jump
         _movement.PerformMegaJump();
     }
 
-    // Helper per attivare/disattivare il TrailRenderer
+    // Helper method to toggle the trail renderer state
     private void ToggleTrail(bool state)
     {
         if (trailRenderer != null)
             trailRenderer.emitting = state;
     }
 
-    // Helper per creare e distruggere oggetti temporanei
+    // Helper method to instantiate and destroy temporary objects
     private void InstantiateAndDestroy(GameObject prefab, Vector3 position, Quaternion rotation, float destroyTime)
     {
         GameObject instance = Instantiate(prefab, position, rotation);
-        Destroy(instance, destroyTime);
+        Destroy(instance, destroyTime); // Destroy after specified time
     }
 }
