@@ -19,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     // Status flags
     public bool heated;        // Indicates if the player is in a "heated" state (e.g., fire effect)
     public bool healing;       // Indicates if the player is in a "healing" state
+    public bool invincible;       // Indicates if the player is in a "invincible" state
 
     // Reference to the CanvasManager for updating the UI
     private CanvasManager _canvas;
@@ -81,9 +82,13 @@ public class PlayerStats : MonoBehaviour
     {
         if (_health <= 0) return; // Ignore if health is already 0
         
-        _health -= amount;       // Subtract health
-        _canvas?.UpdateHearts(); // Update the hearts UI
-        StartCoroutine(_canvas?.FlashRed()); // Flash red effect on damage
+        // If player is not invincible
+        if (!invincible)
+        {
+            _health -= amount;       // Subtract health
+            _canvas?.UpdateHearts(); // Update the hearts UI
+            StartCoroutine(_canvas?.FlashRed()); // Flash red effect on damage
+        }
     }
 
     // Add one health point, if under the maximum

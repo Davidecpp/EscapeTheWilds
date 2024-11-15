@@ -247,7 +247,7 @@ public class Movement : MonoBehaviour
     // Show active effects based on game manager's state
     private void ShowEffects()
     {
-        Effect(GameManager.Instance.invincible, ref invincibleEffectActive, ref invincibleParticlesObject, invincibleParticles);
+        Effect(_playerStats.invincible, ref invincibleEffectActive, ref invincibleParticlesObject, invincibleParticles);
         Effect(_playerStats.healing, ref healEffectActive,ref healParticlesObject, healParticles);
     }
         

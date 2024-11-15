@@ -31,11 +31,10 @@ public class Star : MonoBehaviour, IInteractible
 
     private IEnumerator MakeInvincibleForSeconds(float seconds)
     {
-        GameManager.Instance.invincible = true;
-        Debug.Log("Invincibility started");
+        var player = FindObjectOfType<PlayerStats>();
+        player.invincible = true;
         yield return new WaitForSeconds(seconds); 
-        GameManager.Instance.invincible = false;
-        Debug.Log("Invincibility ended");
+        player.invincible = false;
     }
 
 }

@@ -9,9 +9,6 @@ public class GameManager : MonoBehaviour
     // Reference to the main canvas for UI elements
     public Canvas mainCanvas;
     
-    // Conditions
-    public bool invincible = false;
-    
     // Game state variables
     public bool inGame; // Tracks if the game is currently in progress
     public bool gameEnded;  // Tracks if the game has ended 
