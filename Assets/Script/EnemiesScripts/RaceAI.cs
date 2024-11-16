@@ -60,8 +60,6 @@ public class RaceAI : MonoBehaviour
         {
             SwitchGoal(); 
         }
-
-        CheckForNavMeshObstacle(); // Controlla se ci sono ostacoli e salta
     }
 
     // Cambia l'obiettivo al prossimo della lista (ciclo tra 3)
@@ -69,51 +67,6 @@ public class RaceAI : MonoBehaviour
     {
         currentGoalIndex = (currentGoalIndex + 1) % goals.Length; 
         agent.SetDestination(goals[currentGoalIndex].position);
-        Debug.Log("Switched goal to: " + goals[currentGoalIndex].name);
-    }
-
-    // Verifica la presenza di ostacoli sul percorso
-    void CheckForNavMeshObstacle()
-    {
-        if (isJumping || Time.time - lastJumpTime < jumpCooldown)
-        {
-            return;
-        }
-
-        // Controlla se il NavMeshAgent sta cercando di aggirare un NavMeshObstacle
-        if (agent.hasPath)
-        {
-            NavMeshHit hit;
-            if (NavMesh.Raycast(agent.transform.position, agent.steeringTarget, out hit, NavMesh.AllAreas))
-            {
-                if (hit.distance <= jumpDistance && hit.normal.y < 0.1f) // Se rileva un ostacolo vicino
-                {
-                    Debug.Log("NavMeshObstacle detected. Initiating jump.");
-                    StartCoroutine(Jump());
-                }
-            }
-        }
-    }
-
-    IEnumerator Jump()
-    {
-        isJumping = true;
-        agent.enabled = false;
-        
-        Debug.Log("Jumping");
-        
-        if (animator != null)
-        {
-            animator.SetTrigger("Jump");
-        }
-        
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        
-        yield return new WaitForSeconds(jumpCooldown);
-
-        agent.enabled = true;
-        isJumping = false;
-        lastJumpTime = Time.time;
     }
 
     void OnDrawGizmos()

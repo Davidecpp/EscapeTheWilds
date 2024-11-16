@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 2840588619825452575}
   - component: {fileID: 4198706327261149438}
   - component: {fileID: 7283686295784303256}
-  - component: {fileID: 6618767916925899652}
   - component: {fileID: 8898681018854491395}
   - component: {fileID: 2871477435519793548}
   - component: {fileID: 7703030629317474310}
@@ -283,21 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
---- !u!114 &6618767916925899652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574624791572059178}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 852086459afc3e04cb046c5369dadb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lapTimeText: {fileID: 0}
-  bestLapTimeText: {fileID: 0}
-  lastLapTimeText: {fileID: 0}
 --- !u!114 &8898681018854491395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +308,11 @@ MonoBehaviour:
   spraySound: {fileID: 0}
   megaJumpParticles: {fileID: 8547867254204328264, guid: cf378989e15716e40a61692dcd97e628, type: 3}
   jumpSound: {fileID: 2871477435519793548}
+  bananaPrefab: {fileID: 0}
+  bananaSpawnPoint: {fileID: 0}
+  bananaCount: 10
+  bananaInterval: 0.2
+  bananaSound: {fileID: 0}
   abilityTime: 5
 --- !u!82 &2871477435519793548
 AudioSource:
