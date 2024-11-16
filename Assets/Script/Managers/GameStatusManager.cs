@@ -9,8 +9,6 @@ public class GameStatusManager : MonoBehaviour
     // Reference to the win UI object
     public GameObject winObj;
 
-    
-
     // Update is called once per frame
     void Update()
     {
@@ -55,10 +53,11 @@ public class GameStatusManager : MonoBehaviour
         GameManager.Instance.RestartGame();
     }
     
+    // Set victory false and go back to Hub
     public void BackToHub()
     {
         GameManager.Instance.victory = false;
-        SceneManager.LoadScene("Scenes/Modes/StoryMode/Hub");
-        GameManager.Instance.ResumeGame();
+        SceneManager.LoadScene("Scenes/Modes/StoryMode/Hub"); // Load Hub scene
+        GameManager.Instance.ResumeGame(); // Resume game after loading scene
     }
 }

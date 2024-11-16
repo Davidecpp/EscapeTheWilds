@@ -567,8 +567,8 @@ MonoBehaviour:
   chaseDistance: 40
   enemyBullet: {fileID: 4011057969295677575, guid: b18ff667a6c498b418970af6939de0db, type: 3}
   spawnPoint: {fileID: 5205140072650912998}
-  bulletSpeed: 20
-  shootInterval: 5
+  bulletSpeed: 30
+  shootInterval: 4
 --- !u!65 &2885491629317819785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
