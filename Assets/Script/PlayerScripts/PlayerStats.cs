@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour
 
         // Check for any initial dialogues to display
         var dialogue = FindObjectOfType<Dialogue>();
-        dialogue.CheckInitialDialogue();
+        dialogue.CheckDialogues();
     }
     
     private void Update()

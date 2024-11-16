@@ -11,7 +11,6 @@ public class MissionUI : MonoBehaviour
     public TextMeshProUGUI expRewardText;             // Text displaying reward (experience points)
     public GameObject rewardPanel;                   // The panel showing the reward UI
     private MissionManager missionManager;            // Reference to the MissionManager for mission details
-    public int _nextScene = 6;                        // The next scene to load after accepting the reward
 
     public AudioSource audioSource;                   // AudioSource for reward sound effect
 
@@ -73,28 +72,6 @@ public class MissionUI : MonoBehaviour
         GameManager.Instance.ResumeGame();  // Resume the game after accepting the reward
 
         // Load the next scene based on the current scene index
-        SceneManager.LoadScene(_nextScene);
-
-        // Display specific dialogues based on the next scene
-        SetNextSceneDialogue();  // Update dialogue based on the scene
-        _nextScene++;            // Increment to the next scene for future use
-    }
-
-    // Sets the dialogues specific to the next scene
-    private void SetNextSceneDialogue()
-    {
-        // Check the next scene number and set the corresponding dialogue
-        switch (_nextScene)
-        {
-            case 6:
-                // If the next scene is 6, set the dialogue to instructions for coin collection
-                FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Collect all the coins.", "Press SPACE to jump." });
-                break;
-            case 7:
-                // If the next scene is 7, set the dialogue for killing enemies
-                FindObjectOfType<Dialogue>().SetDialogue(new string[] { "Kill all the enemies.", "Press LEFT-MOUSE to attack." });
-                break;
-            // Add more cases here for other scenes as needed
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
@@ -16,6 +17,7 @@ public class Dialogue : MonoBehaviour
     private string[] lines;               // Array holding all dialogue lines
     private int index;                    // Index to track the current dialogue line
     public bool isActive;                 // Flag to check if dialogue is active or not
+    private string sceneName;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
+        //CheckDialogues();
         // Check for mouse click or enter key press to show the next dialogue line
         if (isActive && (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame))
         {
@@ -115,13 +118,15 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty; // Clear the text
         GameManager.Instance.ResumeGame();  // Resume the game after dialogue ends
     }
-
-    // Check and display initial dialogue based on the current scene
-    public void CheckInitialDialogue()
+    
+    // Check and display certain dialogue based on active scene
+    public void CheckDialogues()
     {
-        if (GameManager.Instance.currentScene == 4)  // Example: If in scene 4, show this dialogue
-        {
-            SetDialogue(new[] { "Enter the house.", "Press WASD to move." });
-        }
+        sceneName = SceneManager.GetActiveScene().name; // Get active scene name
+        
+        if(sceneName.Equals("Hub")){ SetDialogue(new[] {"Enter the house.", "Press WASD to move."});}
+        if(sceneName.Equals("lvl.2")){ SetDialogue(new[] {"Collect all the coins.", "Press SPACE to jump."});}
+        if(sceneName.Equals("lvl.3")){ SetDialogue(new[] {"Kill all the enemies.", "Press LEFT-MOUSE to attack and F to shoot."});}
+        if(sceneName.Equals("lvl.4")){ SetDialogue(new[] {"Complete the parkour and reach the top of the mountain."});}
     }
 }

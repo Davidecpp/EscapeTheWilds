@@ -120,7 +120,6 @@ public class MenuManager : MonoBehaviour
         }
         
         _missionManager.ResetMissionStatus();  // Reset the mission status
-        _missionUI._nextScene = 6;  // Set the next scene 
     }
 
     // Load player stats from PlayerPrefs or another system
