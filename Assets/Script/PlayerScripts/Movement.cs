@@ -378,9 +378,8 @@ public class Movement : MonoBehaviour
         }
         
         // If the player reaches the mountain top, update the mission progress
-        if (other.gameObject.CompareTag("MountainTop"))
+        if (other.gameObject.CompareTag("Destination"))
         {
-            Debug.Log("Destination");
             if (SceneManager.GetActiveScene().name.Equals("lvl.4"))
             {
                 FindObjectOfType<MissionManager>().AddProgress("Mountain", 1);

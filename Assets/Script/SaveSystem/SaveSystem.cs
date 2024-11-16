@@ -66,7 +66,7 @@ public class SaveSystem : MonoBehaviour
 
             // Reset mission-related data using the saved scene index
             var missionManager = FindObjectOfType<MissionManager>();
-            missionManager?.ResetMissionAmount(saveData.sceneIndex - 5); // Adjust mission count based on scene
+            missionManager?.ResetMissionAmount(saveData.sceneIndex - missionManager.indexOffset); // Adjust mission count based on scene
             missionManager?.ResetMissionStatus(); // Reset the mission status
 
             // If the MissionUI object is found, prepare the next scene for mission tracking

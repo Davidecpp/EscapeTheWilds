@@ -126,7 +126,6 @@ public class MainMenuManager : MonoBehaviour
     {
         // Save the selected character's ID for later use (e.g., in PlayerPrefs)
         PlayerPrefs.SetInt("SelectedCharacter", characterID);
-        Debug.Log("Selected: " + characterID);
 
         // Change the active scene based on the previously set scene index
         GameManager.Instance.currentScene = _activeScene;

@@ -6956,7 +6956,7 @@ GameObject:
   - component: {fileID: 1401504386}
   m_Layer: 0
   m_Name: Destination
-  m_TagString: MountainTop
+  m_TagString: Destination
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
