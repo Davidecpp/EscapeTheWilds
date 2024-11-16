@@ -77,7 +77,8 @@ public class GameStatusManager : MonoBehaviour
     // Next race level
     public void NextRaceLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.Instance.victory = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next race scene
         GameManager.Instance.ResumeGame();
     }
 }

@@ -16,6 +16,7 @@ public class SaveSystem : MonoBehaviour
         // Create a PlayerSaveData object, which holds all necessary player stats
         var saveData = new PlayerSaveData
         {
+            selectedCharacter = PlayerPrefs.GetInt("SelectedCharacter", -1), // Save selected character
             health = playerStats.GetHealth(), // Current health of the player
             maxHealth = playerStats.GetMaxHealth(), // Maximum health of the player
             level = (int)playerStats.GetLevel(), // Current level of the player
@@ -46,8 +47,9 @@ public class SaveSystem : MonoBehaviour
 
             // Deserialize the JSON string into a PlayerSaveData object
             var saveData = JsonUtility.FromJson<PlayerSaveData>(json);
-
+            
             // Restore the player's stats using the data from the save file
+            PlayerPrefs.SetInt("SelectedCharacter", saveData.selectedCharacter); // Load selected character
             playerStats.SetHealth(saveData.health); // Set the player's health
             playerStats.SetMaxHealth(saveData.maxHealth); // Set the player's max health
             playerStats.SetLevel(saveData.level); // Set the player's level

@@ -103,6 +103,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadSceneAsync(0);  // Load the main menu scene
         
         _gameManager.arenaMode = false;  // Set the arena mode flag to false
+        _gameManager.raceMode = false;  // Set the race mode flag to false
         menu.SetActive(false);  // Hide the menu
         
         ResetMissionsAfterExit(); // Reset missions when quitting the game

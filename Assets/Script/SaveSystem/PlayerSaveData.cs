@@ -2,6 +2,7 @@
 public class PlayerSaveData
 {
     // Save data
+    public int selectedCharacter;
     public int health;
     public int maxHealth;
     public int level;

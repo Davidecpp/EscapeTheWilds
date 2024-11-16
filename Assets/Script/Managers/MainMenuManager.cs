@@ -110,7 +110,7 @@ public class MainMenuManager : MonoBehaviour
             GameManager.Instance.arenaMode = true;
         }
 
-        if (_activeScene == 3)
+        if (_activeScene == 2)
         {
             GameManager.Instance.raceMode = true;
         }
