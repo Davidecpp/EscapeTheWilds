@@ -22,7 +22,8 @@ public class ArenaManager : MonoBehaviour
         roundTxt.text = "Round " + round; // Update text
         killsTxt.text = "Kills " + kills; // Update text
     }
-
+    
+    // Search for enemy spawner in the scene and get killed amount
     private void Kills()
     {
         var enemy = FindObjectOfType<EnemySpawner>();

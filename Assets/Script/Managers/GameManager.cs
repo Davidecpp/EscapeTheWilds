@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool inGame; // Tracks if the game is currently in progress
     public bool gameEnded;  // Tracks if the game has ended 
     public int currentScene = 0;  // Stores the current scene index
+    public bool victory; // Flag for victory
     
     //Modes
     public bool arenaMode;

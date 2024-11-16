@@ -49,7 +49,7 @@ public class AnimalCage : MonoBehaviour, IInteractible
 
         // Increment the current scene and load the next scene
         GameManager.Instance.currentScene++;
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene("lvl.1");
         
         // Activate mission panel and set dialogue for the new scene
         FindObjectOfType<MissionUI>().missionPanel.SetActive(true);

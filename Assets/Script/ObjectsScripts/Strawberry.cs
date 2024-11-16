@@ -26,6 +26,11 @@ public class Strawberry : MonoBehaviour, IInteractible
             // Add one strawberry to the inventory
             inventory.AddStrawberry(1);
 
+            if (inventory.GetStrawberryCount() == 3)
+            {
+                GameManager.Instance.victory = true;
+            }
+
             // Grant the player 50 experience points
             playerStats.AddExperience(50);
             
