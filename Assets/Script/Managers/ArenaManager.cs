@@ -13,12 +13,23 @@ public class ArenaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        kills = FindObjectOfType<EnemySpawner>().killed;
         // Update round txt
         roundTxt.gameObject.SetActive(GameManager.Instance.arenaMode); // set round txt active if arenaMode is  true
         killsTxt.gameObject.SetActive(GameManager.Instance.arenaMode); // set round txt active if arenaMode is  true
+        
+        Kills();
+        
         roundTxt.text = "Round " + round; // Update text
         killsTxt.text = "Kills " + kills; // Update text
+    }
+
+    private void Kills()
+    {
+        var enemy = FindObjectOfType<EnemySpawner>();
+        if (enemy != null)
+        {
+            kills = enemy.killed;
+        }
         
     }
 }
