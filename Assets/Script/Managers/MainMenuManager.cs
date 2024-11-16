@@ -109,6 +109,11 @@ public class MainMenuManager : MonoBehaviour
         {
             GameManager.Instance.arenaMode = true;
         }
+
+        if (_activeScene == 3)
+        {
+            GameManager.Instance.raceMode = true;
+        }
     }
 
     // Close the character selection menu and return to the game modes menu

@@ -388,7 +388,12 @@ public class Movement : MonoBehaviour
             {
                 FindObjectOfType<MissionManager>().AddProgress("Cannon Run", 1);
             }
-            
+        }
+        
+        // If player reach the goal set victory
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            GameManager.Instance.victory = true;
         }
     }
 }

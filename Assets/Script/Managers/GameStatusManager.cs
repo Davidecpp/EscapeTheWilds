@@ -8,6 +8,9 @@ public class GameStatusManager : MonoBehaviour
 
     // Reference to the win UI object
     public GameObject winObj;
+    
+    // Reference to the race win UI object
+    public GameObject raceWinObj;
 
     // Update is called once per frame
     void Update()
@@ -34,16 +37,25 @@ public class GameStatusManager : MonoBehaviour
     }
     private void ShowWinScreen()
     {
-        // If the game has ended, activate the game over screen
+        // If the player has won activate the victory screen
         if (GameManager.Instance.victory)
         {
-            winObj.SetActive(true);
+            // If in race mode
+            if (GameManager.Instance.raceMode)
+            {
+                raceWinObj.SetActive(true);
+            }
+            else
+            {
+                winObj.SetActive(true);
+            }
             GameManager.Instance.PauseGame();
         }
         else
         {
-            // Otherwise, deactivate the game over screen
+            // Otherwise, deactivate the victory screen
             winObj.SetActive(false);
+            raceWinObj.SetActive(false);
         }
     }
 
@@ -60,5 +72,12 @@ public class GameStatusManager : MonoBehaviour
         GameManager.Instance.victory = false;
         SceneManager.LoadScene("Scenes/Modes/StoryMode/Hub"); // Load Hub scene
         GameManager.Instance.ResumeGame(); // Resume game after loading scene
+    }
+    
+    // Next race level
+    public void NextRaceLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.Instance.ResumeGame();
     }
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     
     //Modes
     public bool arenaMode;
+    public bool raceMode;
     
     private void Awake()
     {
