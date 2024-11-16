@@ -7540,7 +7540,14 @@ MonoBehaviour:
     expReward: 50
     isCompleted: 0
   - title: Desert
-    description: Collect the gold bar behind the door
+    description: Find the key and open the gate
+    goalAmount: 1
+    currentAmount: 0
+    reward: 5
+    expReward: 50
+    isCompleted: 0
+  - title: Cannon Run
+    description: Reach the other side and survive the cannons
     goalAmount: 1
     currentAmount: 0
     reward: 5

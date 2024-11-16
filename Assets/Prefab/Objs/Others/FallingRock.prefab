@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1981993597530764923}
   - component: {fileID: 1186057174654979902}
   m_Layer: 0
-  m_Name: RockBigC
+  m_Name: FallingRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
@@ -379,7 +380,16 @@ public class Movement : MonoBehaviour
         // If the player reaches the mountain top, update the mission progress
         if (other.gameObject.CompareTag("MountainTop"))
         {
-            FindObjectOfType<MissionManager>().AddProgress("Mountain", 1);
+            Debug.Log("Destination");
+            if (SceneManager.GetActiveScene().name.Equals("lvl.4"))
+            {
+                FindObjectOfType<MissionManager>().AddProgress("Mountain", 1);
+            }
+            if (SceneManager.GetActiveScene().name.Equals("lvl.6"))
+            {
+                FindObjectOfType<MissionManager>().AddProgress("Cannon Run", 1);
+            }
+            
         }
     }
 }

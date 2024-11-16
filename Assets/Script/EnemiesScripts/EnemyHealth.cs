@@ -64,7 +64,10 @@ public class EnemyHealth : MonoBehaviour
     {
         // Add experience to the player and update enemy spawn statistics
         _playerStats?.AddExperience(30);
-        _enemySpawner.killed++;
+        if (_enemySpawner != null)
+        {
+            _enemySpawner.killed++;
+        }
         
         // If not in arena add progress to the mission
         if (!GameManager.Instance.arenaMode)
