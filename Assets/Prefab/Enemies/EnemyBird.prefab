@@ -1218,11 +1218,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  currentHealth: 0
-  _slider: {fileID: 6647652907083949926}
+  _healthSlider: {fileID: 6647652907083949926}
   itemsToSpawn:
   - {fileID: 1019089635255735485, guid: e1d957ff82d982b4cbc7cd5373da02fb, type: 3}
   - {fileID: 8747536762318140178, guid: eaac48fc4449ee44f9da33a36859ef20, type: 3}
+  - {fileID: 6852833152077062443, guid: a9009f71ef421d04694cc7fdd3e60cec, type: 3}
   numberOfItemsToSpawn: 1
   spawnHeightOffset: 1
   raycastDistance: 10
@@ -1336,11 +1336,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  chaseDistance: 50
-  timer: 5
+  chaseDistance: 80
   enemyBullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
   spawnPoint: {fileID: 5110183515465715201}
-  bulletSpeed: 100
+  bulletSpeed: 30
+  shootInterval: 5
 --- !u!1 &9060571886447180954
 GameObject:
   m_ObjectHideFlags: 0

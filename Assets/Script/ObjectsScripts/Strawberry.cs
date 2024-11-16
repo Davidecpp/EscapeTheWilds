@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Strawberry : MonoBehaviour, IInteractible
 {
@@ -27,6 +28,12 @@ public class Strawberry : MonoBehaviour, IInteractible
 
             // Grant the player 50 experience points
             playerStats.AddExperience(50);
+            
+            // Update mission progress in a certain scene
+            if (SceneManager.GetActiveScene().name.Equals("lvl.5"))
+            {
+                FindObjectOfType<MissionManager>().AddProgress("Desert", 1);
+            }
 
             // If the strawberry is set to disappear, destroy it from the scene
             if (shouldDisappear)

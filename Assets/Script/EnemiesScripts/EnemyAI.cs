@@ -58,7 +58,7 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Player not found! Make sure the player object has the 'Player' tag.");
+                //Debug.LogError("Player not found! Make sure the player object has the 'Player' tag.");
             }
         }
     }
