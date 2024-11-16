@@ -203,7 +203,7 @@ MonoBehaviour:
   maxHealth: 2
   moveSpeed: 12
   jumpHeight: 25
-  runSpeed: 16
+  runSpeed: 14
   damage: 10
   nextLevelExp: 100
   stamina: 3

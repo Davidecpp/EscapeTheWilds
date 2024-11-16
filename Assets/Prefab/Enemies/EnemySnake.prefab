@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 3961114142717461643, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
+      propertyPath: m_LODs.Array.data[3].screenRelativeHeight
+      value: 0.024529533
+      objectReference: {fileID: 0}
     - target: {fileID: 4462348340439564167, guid: 5b5c678f31981e34f9122b87217da1ac, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0

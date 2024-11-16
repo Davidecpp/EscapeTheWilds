@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,9 +8,6 @@ public class RaceAI : MonoBehaviour
 {
     public Transform[] goals; 
     public float goalReachedThreshold = 1.0f; // Distanza per considerare l'obiettivo raggiunto
-    public float jumpForce = 5f;
-    public float jumpDistance = 2f;
-    public float jumpCooldown = 1f;
 
     private NavMeshAgent agent;
     private Rigidbody rb;
@@ -43,8 +42,6 @@ public class RaceAI : MonoBehaviour
         {
             Debug.LogError("No goals set for RaceAI.");
         }
-
-        lastJumpTime = -jumpCooldown;
     }
 
     void Update()
@@ -83,6 +80,15 @@ public class RaceAI : MonoBehaviour
                 Gizmos.DrawLine(previousCorner, corner);
                 previousCorner = corner;
             }
+        }
+    }
+    
+    // if enemy reach the goal before the player display game over
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Goal")) // If in contact with tag "Goal"
+        {
+            GameManager.Instance.gameEnded = true;
         }
     }
 }

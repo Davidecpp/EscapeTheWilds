@@ -24,6 +24,7 @@ public class GameStatusManager : MonoBehaviour
         if (GameManager.Instance.gameEnded)
         {
             gameOverObj.SetActive(true);
+            GameManager.Instance.PauseGame();
         }
         else
         {

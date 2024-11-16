@@ -10782,7 +10782,7 @@ MonoBehaviour:
   maxHealth: 4
   moveSpeed: 10
   jumpHeight: 15
-  runSpeed: 15
+  runSpeed: 12
   damage: 10
   nextLevelExp: 100
   stamina: 5
@@ -10983,6 +10983,11 @@ MonoBehaviour:
   spraySound: {fileID: 0}
   megaJumpParticles: {fileID: 0}
   jumpSound: {fileID: 0}
+  bananaPrefab: {fileID: 0}
+  bananaSpawnPoint: {fileID: 0}
+  bananaCount: 10
+  bananaInterval: 0.2
+  bananaSound: {fileID: 0}
   abilityTime: 5
 --- !u!82 &5733003744956116366
 AudioSource:

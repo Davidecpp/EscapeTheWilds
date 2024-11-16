@@ -1086,7 +1086,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5787938156389000026}
-  - screenRelativeHeight: 0.05
+  - screenRelativeHeight: 0.023226112
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1137562901386302282}
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   chaseDistance: 80
-  enemyBullet: {fileID: 6723167191133644221, guid: 125044985e5540f42ae7014025070c17, type: 3}
+  enemyBullet: {fileID: 269213418192503001, guid: 8e96512310b69c640a21343656a432de, type: 3}
   spawnPoint: {fileID: 5110183515465715201}
   bulletSpeed: 30
   shootInterval: 5
