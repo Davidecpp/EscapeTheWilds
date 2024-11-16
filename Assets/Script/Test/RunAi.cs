@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,21 +11,35 @@ public class RunAI : MonoBehaviour
 {
     private NavMeshAgent _agent;  
     
-    /// <summary> The target that the AI will move towards.</summary>
+    [Tooltip("The target that the AI will move towards")]
     [SerializeField] private Transform _goal;
 
-    /// <summary> If true, the AI will search an Object in the scene with tag "Goal".</summary>
+    [Tooltip("The 'outside tolerance' for checking if the goal is outside the 'Walkable' mesh. The higher the value, the more the goal can be outside the mesh.")]
+    public float goalCheckTollerance = 1f; 
+
+
+    [Tooltip("If true, the AI will search an Object in the scene with tag 'Goal'.")]
     public bool searchForGoal = false;
 
-    private bool isGoalSet = false;
+    [HideInInspector]
+    public bool isGoalSet = false;
+
+
+    /// <summary> int value of the walkable area for 'mask'. </summary>
+    private int _walkableArea;
+
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _agent.enabled = true;
+
+        _walkableArea = 1 << NavMesh.GetAreaFromName("Walkable");
 
         // Set auto-braking and auto-repath to true
         _agent.autoBraking = true;
         _agent.autoRepath = true;
+        _agent.areaMask = _walkableArea;
 
 
         // GOAL SEARCH
@@ -35,6 +50,7 @@ public class RunAI : MonoBehaviour
             _goal = targetObject.transform;
         }
 
+        // SET DESTINATION
         if (_goal == null)
         {
             Debug.LogError("Goal is null");
@@ -54,75 +70,100 @@ public class RunAI : MonoBehaviour
         
     }
 
-    /// <summary> Smoothness of the AI movement when raycast objects in front. </summary>
-    public float movingSmoothness = 0.5f;
 
-    /// <summary> Distance of the raycast in front of the AI. </summary>
-    public float raycastDistance = 2f;
+    [Tooltip("Max distance of the ray cast in front of the AI.")]
+    public float maxDistance = 10f;
+
+    [Tooltip("The point where the raycast starts.")]
+    public Transform raycastStartPoint;
+
+    [Tooltip("The radius of the sphere cast in front of the AI.")]
+    public float viewRadius = 10f;
+
     void Update()
     {   
-        // AVOID MOVVING ON BORDERS
-        NavMeshHit hitForward;
-        _agent.Raycast(Vector3.forward, out hitForward);
-        
 
-        // if hit something in near front and is outside the navmesh
-        bool hitObstacle = hitForward.hit && hitForward.distance < raycastDistance;
-        if (hitObstacle && IsOutsideNavMesh(hitForward.position)) 
-        {
-            addObstaleTo(hitForward.collider.gameObject);
+        if (!isGoalSet)
+        {   
+            Debug.LogError("Goal is not set");
+            return;
         }
-        
-        
+
+        if (IsOutsideWalkable(_goal.position, goalCheckTollerance))
+        {
+            Debug.LogError("Goal is outside Walkable");
+            return;
+        }
 
 
+        // RaycastHit hitForward;
+        // Physics.SphereCast(raycastStartPoint.position, 0.5f, raycastStartPoint.forward, out hitForward, maxDistance, _walkableArea);
+        // Physics.SphereCast(raycastStartPoint.position, viewRadius, raycastStartPoint.forward, out hitForward, maxDistance);
+        
+        // AVOID MOVING ON BORDERS
+  
         // if hit something in near front of the AI
-        // bool hitObstacle = hitForward.hit && hitForward.distance < raycastDistance;
-        // if (hitObstacle)
-        // {   
-        //     Vector3 newDirection; 
-        //     // if object is on the right move left
-        //     if (hitForward.position.x > transform.position.x)
-        //     {
-        //         newDirection =  Vector3.right;
-        //         // _agent.Move(-newDirection * Time.deltaTime); 
-        //     }
+        // bool hitObstacle = hitForward.point != Vector3.zero;
 
-        //     // if object is on the left move right
-        //     else
-        //     {
-        //         newDirection = Vector3.left;
-        //     }
+        NavMeshHit hitForward;
+        _agent.Raycast(raycastStartPoint.forward, out hitForward);
 
-        //     _agent.Move(newDirection * movingSmoothness * Time.deltaTime); 
-
-        //     Debug.Log("Hit something in front of me");
-        // }
+        bool hitObstacle = hitForward.hit && hitForward.distance < maxDistance;
+        // if (hitObstacle &&  IsOutsideWalkable(hitForward.point, 1f))
+        if (hitObstacle &&  IsOutsideWalkable(hitForward.position, 1f))
+        {   
+            Debug.Log("Obstacle is outside Walkable"+ hitForward.position);
+            // Change direction of the agent
+            ChangeDirectionRelTo(hitForward.position);
+        }
 
     }
 
-    /// <summary> Add obstacle component to the object. </summary>
-    private static void addObstaleTo(GameObject obj)
-    {
-        obj.AddComponent<NavMeshObstacle>();
+    private void OnDrawGizmos()
+    {   // Color red and transparent
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        // Draw raycast
+        Gizmos.DrawRay(raycastStartPoint.position, raycastStartPoint.forward * maxDistance);
+    }
+
+//--STATIC METHODS---------------------------------------------------------------------------------------------------------------------------- 
     
-    }
-
-    public bool IsOutsideNavMesh(Vector3 objPosition)
+   
+    /// <summary>
+    /// Check if a position is outside the 'Walkable' mesh .
+    /// </summary>
+    /// <param name="objPosition">The position to check.</param>
+    /// <param name="checkTollerance">The 'outside tollerance' for checking if a position is outside the 'Walkable' mesh.
+    /// The higher the value, the more the parameter passed to 'IsOutsideWalkable' can be outside the mesh.</param>
+    /// <returns>True if the position is outside the 'Walkable' mesh, false otherwise.</returns>
+    public bool IsOutsideWalkable(Vector3 objPosition, float checkTollerance = 1f)
     {
         NavMeshHit hit;
-        float onMeshThreshold = 3; // adjust this value based on your needs
+        NavMesh.SamplePosition(objPosition, out hit, checkTollerance, _walkableArea);
+        return !hit.hit;
+    }
 
-        if (NavMesh.SamplePosition(objPosition, out hit, onMeshThreshold, NavMesh.AllAreas))
-        {
-            // Check vertical alignment
-            if (Mathf.Approximately(objPosition.x, hit.position.x) && Mathf.Approximately(objPosition.z, hit.position.z))
-            {
-                // Check if object is above the navmesh
-                return objPosition.y > hit.position.y;
-            }
-        }
 
-        return true; // object is outside the navmesh
+  
+
+//--PRIVATE METHODS---------------------------------------------------------------------------------------------------------------------------- 
+    
+    [Tooltip("How much the AI will rotate when it raycasts objects in front.")]
+    public float rotation =  0.5f; 
+    [Tooltip("Smoothness of the AI rotation when it raycasts objects in front.")]
+    public float rotSmoothness = 0.5f;
+    
+    
+    /// <summary>
+    /// Rotate the agent on opposite direction of relativeTo. 
+    /// The rotation is determined by the 'rotation' field.
+    /// The smoothness of the rotation is determined by the 'rotSmoothness' field.
+    /// </summary>
+    /// <param name="relativeTo"></param>
+    private void ChangeDirectionRelTo(Vector3 relativeTo){
+        // Rotate the agent on opposite direction of relativeTo
+        Vector3 direction = (transform.position - relativeTo);
+        Quaternion lookRotation = Quaternion.LookRotation(direction  *rotation);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotSmoothness);
     }
 }
