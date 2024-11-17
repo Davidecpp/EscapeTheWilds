@@ -1,5 +1,6 @@
 Bugs:  
 -puntatore mouse in hub  
+- lvl3 non spawna character, errore Id non trovato
     
 BEHAVIOR:  
 -testo deve bloccare i comandi ( vedere in hub, se ho il testo attivo , e premo 'E' per interagire sul momento non succede nulla ma appena chiudo il testo cambia scena
