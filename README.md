@@ -1,6 +1,5 @@
 Bugs:  
 -puntatore mouse in hub  
-- in arena canvas, doppia scritta in alto
 - lvl3 non spawna character, errore Id non trovato
     
 BEHAVIOR:  
