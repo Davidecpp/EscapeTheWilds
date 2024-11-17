@@ -107,11 +107,13 @@ public class MainMenuManager : MonoBehaviour
         // Set the GameManager's arena mode flag if the selected mode is Arena
         if (_activeScene == 1) // Arena mode
         {
+            GameManager.Instance.raceMode = false;
             GameManager.Instance.arenaMode = true;
         }
 
         if (_activeScene == 2)
-        {
+        {   
+            GameManager.Instance.arenaMode = false;
             GameManager.Instance.raceMode = true;
         }
     }

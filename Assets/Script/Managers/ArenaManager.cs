@@ -15,8 +15,7 @@ public class ArenaManager : MonoBehaviour
     {
         // Update round txt
         roundTxt.gameObject.SetActive(GameManager.Instance.arenaMode); // set round txt active if arenaMode is  true
-        killsTxt.gameObject.SetActive(GameManager.Instance.arenaMode); // set round txt active if arenaMode is  true
-        
+        killsTxt.gameObject.SetActive(GameManager.Instance.arenaMode); // set kills txt active if arenaMode is  true        
         Kills();
         
         roundTxt.text = "Round " + round; // Update text
