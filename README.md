@@ -5,7 +5,7 @@ Bugs:
 
 BEHAVIOR:  
 -testo deve bloccare i comandi ( vedere in hub, se ho il testo attivo , e premo 'E' per interagire sul momento non succede nulla ma appena chiudo il testo cambia scena
-  
+- per le luci in lvl3 ( e se c'è bisongo da altre parti), provare a fare script che disabilita le luci a una certa distanza dal player, non quando escono dal Cam Frustum   
 TODO: 
 rivedere script in test- RunAi, cancellare codice commentato se non serve
 tutti i prefab e script del lvl3 vanno aggiunti alle cartelle  
