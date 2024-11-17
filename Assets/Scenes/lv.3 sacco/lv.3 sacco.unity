@@ -243,15 +243,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_Speed
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_Height
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_Radius
-      value: 1.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_Enabled
@@ -267,11 +267,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_AgentTypeID
-      value: 0
+      value: 1479372276
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_WalkableMask
-      value: 5
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3998226640744305832, guid: 56d96ad36cabd5a44badedfc778055f7, type: 3}
       propertyPath: m_StoppingDistance
@@ -3340,23 +3344,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
+  m_AgentTypeID: 1479372276
   m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 991
-  m_UseGeometry: 1
+  m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 1
+  m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.18333334
-  m_MinRegionArea: 2
+  m_MinRegionArea: 1
   m_NavMeshData: {fileID: 23800000, guid: ec884e4d8a92cf246a170e62eb19a40b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1283911582

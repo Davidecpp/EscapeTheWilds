@@ -9,6 +9,7 @@ using UnityEngine.AI;
 public class RunAI : MonoBehaviour
 {
     private NavMeshAgent _agent;  
+    private int _walkableAreaMask;
     
     /// <summary> The target that the AI will move towards.</summary>
     [SerializeField] private Transform _goal;
@@ -25,6 +26,8 @@ public class RunAI : MonoBehaviour
         // Set auto-braking and auto-repath to true
         _agent.autoBraking = true;
         _agent.autoRepath = true;
+        _agent.updatePosition = false;
+        _walkableAreaMask = NavMesh.GetAreaFromName("Walkable");
 
 
         // GOAL SEARCH
@@ -61,17 +64,45 @@ public class RunAI : MonoBehaviour
     public float raycastDistance = 2f;
     void Update()
     {   
+
+        // if goal is not set, return
+        if (!isGoalSet) return;
+
+    
+
+        // if AI is close to the goal, return
+        if (_agent.remainingDistance < 0.5f) return;
+
+        // if AI is outside the navmesh, return
+        if (IsOnWalkable(transform.position)) return;
+
+        // if AI is not moving, return
+        if (_agent.velocity.magnitude == 0) return;
+        
+
+        // DRAW LINE TO NEXT POSITION
+        Debug.DrawLine(transform.position, _agent.nextPosition, Color.magenta);
+
+        // CHECK IF NEXT POSITION WILL COLLIDE WITH NOT WALKABLE AREA
+        Vector3 nextPosition = transform.position + _agent.velocity.normalized * 0.5f;
+        if (!IsOnWalkable(nextPosition))
+        {
+            Debug.Log("Next position is not walkable");
+            _agent.velocity = Vector3.zero;
+            return;
+        }
+
         // AVOID MOVVING ON BORDERS
-        NavMeshHit hitForward;
-        _agent.Raycast(Vector3.forward, out hitForward);
+        // NavMeshHit hitForward;
+        // _agent.Raycast(Vector3.forward, out hitForward);
         
 
         // if hit something in near front and is outside the navmesh
-        bool hitObstacle = hitForward.hit && hitForward.distance < raycastDistance;
-        if (hitObstacle && IsOutsideNavMesh(hitForward.position)) 
-        {
-            //addObstaleTo(hitForward.collider.gameObject);
-        }
+        // bool hitObstacle = hitForward.hit && hitForward.distance < raycastDistance;
+        // if (hitObstacle && IsOutsideNavMesh(hitForward.position)) 
+        // {
+        //     //addObstaleTo(hitForward.collider.gameObject);
+        // }
         
         
 
@@ -108,21 +139,10 @@ public class RunAI : MonoBehaviour
     
     }
 
-    public bool IsOutsideNavMesh(Vector3 objPosition)
+    public bool IsOnWalkable(Vector3 objPosition, float tollerance = 0.1f)
     {
         NavMeshHit hit;
-        float onMeshThreshold = 3; // adjust this value based on your needs
-
-        if (NavMesh.SamplePosition(objPosition, out hit, onMeshThreshold, NavMesh.AllAreas))
-        {
-            // Check vertical alignment
-            if (Mathf.Approximately(objPosition.x, hit.position.x) && Mathf.Approximately(objPosition.z, hit.position.z))
-            {
-                // Check if object is above the navmesh
-                return objPosition.y > hit.position.y;
-            }
-        }
-
-        return true; // object is outside the navmesh
+        NavMesh.SamplePosition(objPosition, out hit, tollerance, _walkableAreaMask);
+        return hit.hit;
     }
 }

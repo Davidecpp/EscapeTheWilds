@@ -1024,6 +1024,7 @@ GameObject:
   - component: {fileID: 3433580722406559522}
   - component: {fileID: 8633133495747861523}
   - component: {fileID: 834604331876669304}
+  - component: {fileID: 8131793207499562773}
   - component: {fileID: 3060786203407252851}
   - component: {fileID: 3998226640744305832}
   - component: {fileID: 2498969709703180542}
@@ -1109,6 +1110,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &8131793207499562773
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860261052107613234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 0.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!54 &3060786203407252851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1144,7 +1168,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8860261052107613234}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: 1479372276
   m_Radius: 1.27
   m_Speed: 20
   m_Acceleration: 8
