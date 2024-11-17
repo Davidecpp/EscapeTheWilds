@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 2498969709703180542}
   - component: {fileID: 5487008326877609016}
   m_Layer: 10
-  m_Name: EnemyBird-Run
+  m_Name: EnemyBird-Race
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1169,7 +1169,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8860261052107613234}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 1.27
+  m_Radius: 0.35
   m_Speed: 20
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1178,7 +1178,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 0.8
   m_BaseOffset: 0
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4

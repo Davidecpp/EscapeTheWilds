@@ -26,7 +26,7 @@ public class RunAI : MonoBehaviour
         // Set auto-braking and auto-repath to true
         _agent.autoBraking = true;
         _agent.autoRepath = true;
-        _agent.updatePosition = false;
+        // _agent.updatePosition = false;
         _walkableAreaMask = NavMesh.GetAreaFromName("Walkable");
 
 
@@ -81,16 +81,16 @@ public class RunAI : MonoBehaviour
         
 
         // DRAW LINE TO NEXT POSITION
-        Debug.DrawLine(transform.position, _agent.nextPosition, Color.magenta);
+        // Debug.DrawLine(transform.position, _agent.nextPosition, Color.magenta);
 
-        // CHECK IF NEXT POSITION WILL COLLIDE WITH NOT WALKABLE AREA
-        Vector3 nextPosition = transform.position + _agent.velocity.normalized * 0.5f;
-        if (!IsOnWalkable(nextPosition))
-        {
-            Debug.Log("Next position is not walkable");
-            _agent.velocity = Vector3.zero;
-            return;
-        }
+        // // CHECK IF NEXT POSITION WILL COLLIDE WITH NOT WALKABLE AREA
+        // Vector3 nextPosition = transform.position + _agent.velocity.normalized * 0.5f;
+        // if (!IsOnWalkable(nextPosition))
+        // {
+        //     Debug.Log("Next position is not walkable");
+        //     _agent.velocity = Vector3.zero;
+        //     return;
+        // }
 
         // AVOID MOVVING ON BORDERS
         // NavMeshHit hitForward;
