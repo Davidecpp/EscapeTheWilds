@@ -6,17 +6,16 @@ public class MenuManager : MonoBehaviour
 {
     // UI References
     [Header("UI References")]
-    [SerializeField] private GameObject buttons;           // Main menu buttons
-    [SerializeField] private GameObject controls;          // Controls settings menu
-    [SerializeField] private GameObject options;           // Options menu
-    [SerializeField] public GameObject menu;              // Main menu object
-    [SerializeField] private GameObject stats;             // Stats menu
+    [SerializeField] private GameObject buttons;            // Main menu buttons
+    [SerializeField] private GameObject controls;           // Controls settings menu
+    [SerializeField] private GameObject options;            // Options menu
+    public GameObject menu;                                 // Main menu object
+    [SerializeField] private GameObject stats;              // Stats menu
 
     private GameManager _gameManager;                       // Reference to the GameManager instance
     private CanvasManager _canvas;                          // Reference to the CanvasManager
     private MissionManager _missionManager;                 // Reference to the MissionManager 
     private MissionUI _missionUI;                           // Reference to the MissionUI
-
     private bool isMenuActive;                              // Boolean to track if the menu is active
 
     // Start is called before the first frame update
@@ -28,6 +27,15 @@ public class MenuManager : MonoBehaviour
         _canvas = FindObjectOfType<CanvasManager>();   // Find CanvasManager in the scene
         _missionManager = FindObjectOfType<MissionManager>();  // Find MissionManager in the scene
         _missionUI = FindObjectOfType<MissionUI>();  // Find MissionUI in the scene
+
+        // if the current scene is MAIN MENU, hide the canvas
+        if (_gameManager.currentScene == 0){       
+            _canvas.gameObject.SetActive(false);  
+        }
+        // if the current scene is not MAIN MENU, hide the menu
+        else if (_gameManager.currentScene > 0){  
+            menu.SetActive(false);  
+        }
     }
 
     // Update is called once per frame
@@ -47,7 +55,6 @@ public class MenuManager : MonoBehaviour
         // If menu is active, close all open tabs and hide the menu
         if (isMenuActive)
         {
-            
             CloseAllTabs();
         }
         // If menu is not active, show the menu and pause the game

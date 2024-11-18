@@ -54,14 +54,14 @@ public class CanvasManager : MonoBehaviour
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of CanvasManager exists
-        if (Instance == null)
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep the CanvasManager across scenes
-        }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instances
+            DontDestroyOnLoad(gameObject);
         }
     }
     
