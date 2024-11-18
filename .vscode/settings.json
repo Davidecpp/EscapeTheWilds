@@ -51,6 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "FInalVRProj.sln",
+    "dotnet.defaultSolution": "FInalVRProj-2.sln",
     "files.defaultLanguage": "English"
 }
