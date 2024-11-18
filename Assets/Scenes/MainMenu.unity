@@ -575,15 +575,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1219827914788623355, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1304486720003564442, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: title
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2216902636750381026, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2216902636750381026, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2803055616230603151, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2877028106837923521, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
@@ -592,6 +600,14 @@ PrefabInstance:
     - target: {fileID: 2877028106837923521, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_TagString
       value: MenuButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125594616179331915, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125594616179331915, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427417806637828635, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
@@ -613,6 +629,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5451154111253545284, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451154111253545284, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451154111253545284, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5585939619265159490, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -627,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5972701270864018200, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6794111102100593161, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -723,6 +751,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8886695387431099463, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916374644104892098, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916374644104892098, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916374644104892098, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9171557992020188340, guid: 2e2926e54924e4b4ca0881d78ebc795e, type: 3}

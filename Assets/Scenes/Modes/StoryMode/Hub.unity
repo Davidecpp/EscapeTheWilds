@@ -2387,6 +2387,10 @@ PrefabInstance:
       propertyPath: isAttacking
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6434007115306558789, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
+      propertyPath: enableAttack
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7871240336334854776, guid: 8667db1b5ca303b41bdb392faafbf11c, type: 3}
       propertyPath: human
       value: 1

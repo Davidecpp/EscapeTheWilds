@@ -31,28 +31,17 @@ public class Dialogue : MonoBehaviour
         // Check for mouse click or enter key press to show the next dialogue line
         if (isActive && (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame))
         {   
-            // Pause the game while dialogue is active
-            GameManager.Instance.inGame = false;
-            try
+            // If the current line is fully displayed, go to the next line
+            if (textComponent.text == lines[index])
             {
-                // If the current line is fully displayed, go to the next line
-                if (textComponent.text == lines[index])
-                {
-                    NextLine();
-                }
-                else
-                {
-                    // If the current line isn't fully displayed, skip typing and show full text
-                    StopAllCoroutines(); 
-                    textComponent.text = lines[index];
-                }
+                NextLine();
             }
-
-            finally
+            else
             {
-                GameManager.Instance.inGame = true; // Resume the game after dialogue ends
+                // If the current line isn't fully displayed, skip typing and show full text
+                StopAllCoroutines(); 
+                textComponent.text = lines[index];
             }
-            
         }
         HideBox();  // Update visibility of the dialogue box and skip button
     }
