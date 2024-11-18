@@ -28,13 +28,11 @@ public class MenuManager : MonoBehaviour
         _missionManager = FindObjectOfType<MissionManager>();  // Find MissionManager in the scene
         _missionUI = FindObjectOfType<MissionUI>();  // Find MissionUI in the scene
 
-        // if the current scene is MAIN MENU, hide the canvas
-        if (_gameManager.currentScene == 0){       
-            _canvas.gameObject.SetActive(false);  
-        }
-        // if the current scene is not MAIN MENU, hide the menu
-        else if (_gameManager.currentScene > 0){  
-            menu.SetActive(false);  
+
+        if (_gameManager.currentScene > 0)  // Check if the current scene is not the main menu
+        {
+            menu.SetActive(false);  // Hide the menu at the start of the game
+            isMenuActive = false;  // Set menu state to inactive
         }
     }
 
@@ -46,6 +44,7 @@ public class MenuManager : MonoBehaviour
         {
             // Toggle the menu visibility on ESC key press
             ToggleMenu();
+         
         }
     }
 
@@ -112,7 +111,9 @@ public class MenuManager : MonoBehaviour
         _gameManager.arenaMode = false;  // Set the arena mode flag to false
         _gameManager.raceMode = false;  // Set the race mode flag to false
         menu.SetActive(false);  // Hide the menu
-        
+        _canvas.gameObject.SetActive(false);  // Hide the canvas
+
+
         ResetMissionsAfterExit(); // Reset missions when quitting the game
     }
     
