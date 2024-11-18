@@ -1,6 +1,8 @@
 Bugs:  
 - puntatore mouse in hub  
 - parkour ![Screenshot (2)](https://github.com/user-attachments/assets/a0ab199f-629d-40ce-bc27-6dbfad02a1e3)
+- boost rimane aperto da race a arena (perchè non si resetta quando cambia scena) ![Screenshot (3)](https://github.com/user-attachments/assets/83878a56-3f68-4a20-9d4a-3d915a90d4c1)
+
 
 
 BEHAVIOR:  
