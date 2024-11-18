@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 3998226640744305832}
   - component: {fileID: 2498969709703180542}
   - component: {fileID: 5487008326877609016}
+  - component: {fileID: 4146534753694121298}
   m_Layer: 10
   m_Name: EnemyBird-Race
   m_TagString: Enemy
@@ -1189,7 +1190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8860261052107613234}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6b7915c0717ff4cba7fe1035610d3a, type: 3}
   m_Name: 
@@ -1294,6 +1295,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4146534753694121298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860261052107613234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98dd7cd9b3c94934884e2620ef2f5bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goals: []
+  goalReachedThreshold: 1
+  searchForGoal: 1
 --- !u!1 &9060571886447180954
 GameObject:
   m_ObjectHideFlags: 0
