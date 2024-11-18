@@ -55,6 +55,11 @@ public class MainMenuManager : MonoBehaviour
         // Activate the tab and deactivate the main menu buttons
         tab.SetActive(true);
         buttons.SetActive(false);
+
+        if (tab == controls) // Check if the controls tab is opened
+        {
+            options.SetActive(false); // Close the options tab if controls are opened
+        }
     }
     
     // Close a specific menu tab and return to the main menu buttons
