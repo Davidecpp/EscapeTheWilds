@@ -40,4 +40,15 @@ public class MusicManager : MonoBehaviour
     {   
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
     }
+
+    // GETTERS 
+
+    // Get the volume of the music of the parameter
+    public float GetVolume(string parameter)
+    {
+        float value;
+        audioMixer.GetFloat(parameter, out value);
+        // Convert logarithmic decibels to linear value
+        return Mathf.Pow(10, value / 20);
+    }
 }
