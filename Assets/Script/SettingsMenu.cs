@@ -18,8 +18,7 @@ public class SettingsMenu : MonoBehaviour
         // Get all available screen resolutions
         resolutions = Screen.resolutions;
 
-        // Clear any existing options in the dropdown
-        resolutionDropdown.ClearOptions();
+       
 
         // Variable to track the current resolution index (default to 0)
         int currentResolutionIndex = 0;
@@ -42,14 +41,18 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
-        // Add the options to the dropdown
-        resolutionDropdown.AddOptions(options);
+        if (resolutionDropdown != null)
+        {
+            // Clear any existing options in the dropdown
+            resolutionDropdown.ClearOptions();
+            // Add the options to the dropdown
+            resolutionDropdown.AddOptions(options);
+            // Set the dropdown's current value to the current resolution
+            resolutionDropdown.value = currentResolutionIndex;
+            // Refresh the dropdown to reflect the current value
+            resolutionDropdown.RefreshShownValue();
+        }
 
-        // Set the dropdown's current value to the current resolution
-        resolutionDropdown.value = currentResolutionIndex;
-
-        // Refresh the dropdown to reflect the current value
-        resolutionDropdown.RefreshShownValue();
     }
 
     // Method to set the quality of the game (using quality settings defined in Unity)

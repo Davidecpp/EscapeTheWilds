@@ -18,7 +18,7 @@ public class AttackArea : MonoBehaviour
     void Update()
     {
         // Perform the attack if the enemy is in range and the mouse button is clicked
-        if (enemyInRange != null && !isAttacking && Input.GetMouseButtonDown(0))
+        if (enemyInRange != null && !isAttacking && Input.GetMouseButtonDown(0) && GameManager.Instance.inGame)
         {
             StartCoroutine(Attack());
         }
