@@ -11,3 +11,4 @@
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.asset filter=lfs diff=lfs merge=lfs -text
 *.obj filter=lfs diff=lfs merge=lfs -text
+GameDesignDocument[[:space:]](Escape[[:space:]]The[[:space:]]Wilds).pdf filter=lfs diff=lfs merge=lfs -text
