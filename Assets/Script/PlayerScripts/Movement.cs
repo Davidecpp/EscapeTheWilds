@@ -64,6 +64,9 @@ public class Movement : MonoBehaviour
         _camera = GetComponent<Camera>(); // Get the camera controller component
         _inventory = GetComponent<Inventory>(); // Get the Inventory component
 
+        if (walkingSound == null){
+            walkingSound = GetComponent<AudioSource>();
+        }
         if (_playerStats == null)
         {
             Debug.LogError("PlayerStats not found on the player.");

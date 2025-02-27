@@ -2505,6 +2505,7 @@ MonoBehaviour:
   _rotSpeed: 0
   bounceStrenght: 2
   boostSpeedMultiplier: 2
+  isBoosted: 0
   boostAnimation: {fileID: 0}
   timer: 5
   bullet: {fileID: 0}
@@ -2582,6 +2583,10 @@ MonoBehaviour:
   runSpeed: 10
   damage: 10
   nextLevelExp: 100
+  stamina: 5
+  heated: 0
+  healing: 0
+  invincible: 0
 --- !u!114 &6434007115306558789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2636,7 +2641,7 @@ AudioSource:
   m_GameObject: {fileID: 3273193171767997264}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8890564136918513502, guid: 5c03f781c46a06d4fad078af8b88884f, type: 2}
   m_audioClip: {fileID: 8300000, guid: ea30d73ba42296e4fbb62251b63241b2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.15

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonSoundManager : MonoBehaviour
+public class ButtonSound : MonoBehaviour
 {
     public AudioClip clickSound;  // Audio clip to play when a button is clicked
     private AudioSource audioSource;  // AudioSource component to play sounds

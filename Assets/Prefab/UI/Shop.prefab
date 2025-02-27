@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8974740783997266577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -888,7 +888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9661f2b74248c4ab2bf71cdf9e706b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 0
   coinTxt: {fileID: 511945261023196048}
   shopItems:
   - {fileID: 11400000, guid: b33752dfde665974b86f7e1dbf6958ed, type: 2}

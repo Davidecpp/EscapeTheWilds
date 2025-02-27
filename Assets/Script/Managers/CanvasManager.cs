@@ -12,9 +12,9 @@ public class CanvasManager : MonoBehaviour
     private Inventory _inventory;
     
     // Counters for various resources like strawberries, coins, and bullets
-    [SerializeField] public Inventory.ResourceCounter strawberryCounter;
-    [SerializeField] public Inventory.ResourceCounter coinCounter;
-    [SerializeField] public Inventory.ResourceCounter bulletCounter;
+    public Inventory.ResourceCounter strawberryCounter;
+    public Inventory.ResourceCounter coinCounter;
+    public Inventory.ResourceCounter bulletCounter;
     
     // Damage effect setup
     [SerializeField] private RawImage redFlashImage; // Image for the damage flash effect
@@ -34,7 +34,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TMP_Text lapsTxt; // Lap text display
     
     [SerializeField] private Image keyImage; // Image for the key display
-    [SerializeField] public Slider sprintSlider; // Slider to display sprint status
+    public Slider sprintSlider; // Slider to display sprint status
     
     [Header("Ability Images")]
     [SerializeField] private Sprite venomImg; // Sprite for venom ability
@@ -48,20 +48,23 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Slider abilityCooldownSlider; // Slider to display ability cooldown
     
     // Shop UI setup
-    [SerializeField] public GameObject shop; // Shop UI object
+    public GameObject shop; // Shop UI object
+    public GameObject missionCanvas; // Mission UI object, it must be closed when the shop is opened
+
+
     public static CanvasManager Instance { get; private set; } // Singleton instance
 
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of CanvasManager exists
-        if (Instance == null)
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep the CanvasManager across scenes
-        }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instances
+            DontDestroyOnLoad(gameObject);
         }
     }
     
@@ -77,7 +80,7 @@ public class CanvasManager : MonoBehaviour
         }
         
         // Update UI elements
-        TabsOpener(); // Handle opening of tabs
+        OpenShop(); // Handle opening of tabs
         SetAbilityImg(); // Update the ability image based on character
         UpdateLap(); // Update lap text
         SetImageAlpha(keyImage, _inventory.hasKey ? 1f : 0.3f); // Adjust key image visibility
@@ -185,12 +188,20 @@ public class CanvasManager : MonoBehaviour
         SetImageAlpha(currentAbilityImg, isAbiliting ? 0.5f : 1f); // Reduce alpha when ability is in use
     }
         
-    private void TabsOpener()
+    private void OpenShop()
     {
         // Open the shop tab when the 'M' key is pressed
         if (Keyboard.current.mKey.wasPressedThisFrame)
-        {
+        {   
+            if (missionCanvas.activeSelf){
+                missionCanvas.SetActive(false); // Close mission UI when shop is opened
+            }
+            else
+            {
+                missionCanvas.SetActive(true); // Open mission UI when shop is closed
+            }
             OpenTab(shop);
+            
         }
     }
     

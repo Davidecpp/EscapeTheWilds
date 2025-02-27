@@ -22,14 +22,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of GameManager exists
-        if (Instance == null)
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
     
@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     
     // Resume the game and hides the pointer
     public void ResumeGame()
-    {
+    {   
+        Debug.Log("Resuming game");
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor
         Cursor.visible = false; 
         Time.timeScale = 1;

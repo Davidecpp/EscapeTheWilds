@@ -10,6 +10,8 @@ public class AnimalAnimation : MonoBehaviour
     private bool isJumping = false;              // Boolean to track if the animal is jumping
     public bool isAttacking = false;             // Boolean to track if the animal is attacking
 
+    public bool enableAttack = true;             // Enable or disable the attack action
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,7 @@ public class AnimalAnimation : MonoBehaviour
                     StartCoroutine(JumpAnimation(0.5f));  // Start the jump animation with a delay of 0.5 seconds
                 }
 
-                if (attackPressed)  // If the attack key (mouse button) is pressed
+                if (enableAttack && attackPressed)  // If the attack key (mouse button) is pressed
                 {
                     _animator.SetBool("IsIdling", false);  // Set "Idling" to false when attacking
                     StartCoroutine(AttackAnimation(0.5f, 5f));  // Start the attack animation with a delay of 0.5 seconds and a movement speed of 5 units

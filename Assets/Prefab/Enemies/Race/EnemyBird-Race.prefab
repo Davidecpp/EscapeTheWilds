@@ -1029,8 +1029,9 @@ GameObject:
   - component: {fileID: 3998226640744305832}
   - component: {fileID: 2498969709703180542}
   - component: {fileID: 5487008326877609016}
+  - component: {fileID: 4146534753694121298}
   m_Layer: 10
-  m_Name: EnemyBird-Run
+  m_Name: EnemyBird-Race
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1169,7 +1170,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8860261052107613234}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 1.27
+  m_Radius: 0.35
   m_Speed: 20
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1178,7 +1179,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 0.8
   m_BaseOffset: 0
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
@@ -1189,7 +1190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8860261052107613234}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6b7915c0717ff4cba7fe1035610d3a, type: 3}
   m_Name: 
@@ -1207,7 +1208,7 @@ AudioSource:
   m_GameObject: {fileID: 8860261052107613234}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8890564136918513502, guid: 5c03f781c46a06d4fad078af8b88884f, type: 2}
   m_audioClip: {fileID: 8300000, guid: 56c0fa95f911ed242b766ffa76dcbe48, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1294,6 +1295,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4146534753694121298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860261052107613234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98dd7cd9b3c94934884e2620ef2f5bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goals: []
+  goalReachedThreshold: 1
+  searchForGoal: 1
 --- !u!1 &9060571886447180954
 GameObject:
   m_ObjectHideFlags: 0

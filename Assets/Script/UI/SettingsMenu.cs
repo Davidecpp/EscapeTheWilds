@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
-{
-    // Reference to the AudioMixer for adjusting the volume
-    public AudioMixer audioMixer;
-    
+{   
     // Dropdown for selecting resolution from the available options
     public TMP_Dropdown resolutionDropdown;
     
@@ -16,12 +13,12 @@ public class SettingsMenu : MonoBehaviour
 
     // Start is called before the first frame update
     private void Start()
-    {
+    {   
+        
         // Get all available screen resolutions
         resolutions = Screen.resolutions;
 
-        // Clear any existing options in the dropdown
-        resolutionDropdown.ClearOptions();
+       
 
         // Variable to track the current resolution index (default to 0)
         int currentResolutionIndex = 0;
@@ -44,22 +41,18 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
-        // Add the options to the dropdown
-        resolutionDropdown.AddOptions(options);
+        if (resolutionDropdown != null)
+        {
+            // Clear any existing options in the dropdown
+            resolutionDropdown.ClearOptions();
+            // Add the options to the dropdown
+            resolutionDropdown.AddOptions(options);
+            // Set the dropdown's current value to the current resolution
+            resolutionDropdown.value = currentResolutionIndex;
+            // Refresh the dropdown to reflect the current value
+            resolutionDropdown.RefreshShownValue();
+        }
 
-        // Set the dropdown's current value to the current resolution
-        resolutionDropdown.value = currentResolutionIndex;
-
-        // Refresh the dropdown to reflect the current value
-        resolutionDropdown.RefreshShownValue();
-    }
-
-    // Method to set the audio volume through the audio mixer
-    public void SetVolume(float value)
-    {
-        // Set the "volume" parameter in the audio mixer, adjusting the value
-        // Dividing by 3 to match the expected volume range
-        audioMixer.SetFloat("volume", value / 3);
     }
 
     // Method to set the quality of the game (using quality settings defined in Unity)
@@ -84,5 +77,17 @@ public class SettingsMenu : MonoBehaviour
 
         // Apply the selected resolution while keeping the current fullscreen setting
         UnityEngine.Device.Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    // Set the volume of the music
+    public void SetMusicVolume(float value)
+    {   
+        MusicManager.Instance.SetMusicVolume(value); // Call the MusicManager instance to set the music volume
+    }
+
+    // Set the volume of the sound effects
+    public void SetSFXVolume(float value)
+    {   
+        MusicManager.Instance.SetSFXVolume(value); // Call the MusicManager instance to set the SFX volume
     }
 }

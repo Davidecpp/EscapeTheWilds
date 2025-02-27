@@ -30,7 +30,7 @@ public class Dialogue : MonoBehaviour
         //CheckDialogues();
         // Check for mouse click or enter key press to show the next dialogue line
         if (isActive && (Input.GetMouseButtonDown(0) || Keyboard.current.enterKey.wasPressedThisFrame))
-        {
+        {   
             // If the current line is fully displayed, go to the next line
             if (textComponent.text == lines[index])
             {
